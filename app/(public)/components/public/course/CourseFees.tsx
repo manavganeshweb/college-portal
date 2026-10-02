@@ -21,8 +21,8 @@ type CourseFeeCollege = {
       name: string;
     };
     city: {
-      name: string;
-    };
+  name: string;
+} | null;
   };
 };
 
@@ -148,8 +148,8 @@ export default function CourseFees({
                       </Link>
 
                       <p className="mt-1 text-xs text-slate-500">
-                        {item.college.city.name},{" "}
-                        {item.college.state.name}
+                        {item.college.city?.name ?? "City not available"},{" "}
+                        {item.college.state?.name ?? "State not available"}
                       </p>
                     </div>
 

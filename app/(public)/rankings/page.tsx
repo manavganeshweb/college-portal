@@ -398,11 +398,8 @@ export default async function RankingsPage({
                             <span className="inline-flex items-center gap-1">
                               <MapPin className="h-3.5 w-3.5" />
 
-                              {ranking.college.city.name},{" "}
-                              {
-                                ranking.college.city
-                                  .state.name
-                              }
+                              {ranking.college.city?.name ?? "City not available"},{" "}
+                              {ranking.college.city?.state.name ?? "State not available"}
                             </span>
 
                             <span>

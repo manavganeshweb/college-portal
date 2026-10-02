@@ -26,9 +26,9 @@ type TopCollege = {
     name: string;
   };
 
-  city: {
-    name: string;
-  };
+city: {
+  name: string;
+} | null;
 
   courses: {
     fees: number | null;
@@ -151,9 +151,10 @@ export default function TopCollegeCard({
           <div className="mb-4 flex items-center gap-1.5 text-sm text-slate-500">
             <MapPin className="h-4 w-4 text-emerald-600" />
 
-            <span>
-              {college.city.name}, {college.state.name}
-            </span>
+          <span>
+  {college.city?.name ?? "City not available"},{" "}
+  {college.state?.name ?? "State not available"}
+</span>
           </div>
 
           <div className="flex flex-wrap gap-2">

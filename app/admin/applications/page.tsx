@@ -135,8 +135,7 @@ export default async function AdminApplicationsPage() {
                       </Link>
 
                       <p className="mt-0.5 text-xs text-gray-500">
-                        {application.college.city.name},{" "}
-                        {application.college.city.state.name}
+                    {application.college.city?.name ?? "City not available"},{" "}
                       </p>
                     </td>
 

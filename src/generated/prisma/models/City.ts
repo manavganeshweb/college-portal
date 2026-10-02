@@ -352,9 +352,9 @@ export type CityMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
-export type CityScalarRelationFilter = {
-  is?: Prisma.CityWhereInput
-  isNot?: Prisma.CityWhereInput
+export type CityNullableScalarRelationFilter = {
+  is?: Prisma.CityWhereInput | null
+  isNot?: Prisma.CityWhereInput | null
 }
 
 export type CityCreateNestedManyWithoutStateInput = {
@@ -405,10 +405,12 @@ export type CityCreateNestedOneWithoutCollegesInput = {
   connect?: Prisma.CityWhereUniqueInput
 }
 
-export type CityUpdateOneRequiredWithoutCollegesNestedInput = {
+export type CityUpdateOneWithoutCollegesNestedInput = {
   create?: Prisma.XOR<Prisma.CityCreateWithoutCollegesInput, Prisma.CityUncheckedCreateWithoutCollegesInput>
   connectOrCreate?: Prisma.CityCreateOrConnectWithoutCollegesInput
   upsert?: Prisma.CityUpsertWithoutCollegesInput
+  disconnect?: Prisma.CityWhereInput | boolean
+  delete?: Prisma.CityWhereInput | boolean
   connect?: Prisma.CityWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.CityUpdateToOneWithWhereWithoutCollegesInput, Prisma.CityUpdateWithoutCollegesInput>, Prisma.CityUncheckedUpdateWithoutCollegesInput>
 }

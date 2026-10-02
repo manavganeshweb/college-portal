@@ -34,12 +34,12 @@ type Application = {
     verified: boolean;
     status: string;
 
-    city: {
-      name: string;
-      state: {
-        name: string;
-      };
-    };
+   city: {
+  name: string;
+  state: {
+    name: string;
+  };
+} | null;
   };
 };
 
@@ -233,8 +233,8 @@ function ApplicationCard({
               <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-slate-500">
                 <span className="inline-flex items-center gap-1.5">
                   <MapPin className="h-4 w-4" />
-                  {college.city.name},{" "}
-                  {college.city.state.name}
+                  {college.city?.name || "Not specified"},{" "}
+                  {college.city?.state.name || "Not specified"}
                 </span>
 
                 <span>{college.collegeType}</span>

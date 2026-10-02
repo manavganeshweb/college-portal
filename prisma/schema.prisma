@@ -17,6 +17,7 @@ enum CollegeType {
   PUBLIC
   DEEMED
   AUTONOMOUS
+  OTHER
 }
 
 enum CollegeStatus {
@@ -30,6 +31,7 @@ enum CourseLevel {
   DIPLOMA
   PHD
   CERTIFICATE
+  INTEGRATED
 }
 
 enum CourseStatus {
@@ -108,7 +110,6 @@ enum UserApplicationStatus {
   REJECTED
   WITHDRAWN
 }
-
 
 enum UserRole {
   USER
@@ -210,6 +211,7 @@ model College {
   collegeType     CollegeType
   shortlists      UserShortlist[]
   applications    UserApplication[]
+  aisheCode       String?           @unique
 
   website String?
   email   String?
@@ -231,10 +233,10 @@ model College {
   infrastructure Infrastructure?
   photos         CollegePhoto[]
   stateId        String
-  cityId         String
-
-  state State @relation(fields: [stateId], references: [id], onDelete: Restrict)
-  city  City  @relation(fields: [cityId], references: [id], onDelete: Restrict)
+cityId         String?
+fees           Fee[]
+state          State           @relation(fields: [stateId], references: [id], onDelete: Restrict)
+city           City?           @relation(fields: [cityId], references: [id], onDelete: Restrict)
 
   courses  CollegeCourse[]
   cutoffs  CollegeCutoff[]
@@ -275,12 +277,14 @@ model Course {
 
   durationYears Decimal? @db.Decimal(4, 1)
 
-  eligibility String?
-  averageFees Decimal? @db.Decimal(12, 2)
+  eligibility    String?
+  averageFees    Decimal? @db.Decimal(12, 2)
+  sourceCourseId String?  @unique
 
   careerOptions String?
 
   navigationItems CourseNavigationItem[]
+  fees            Fee[]
 
   categoryId String
   category   Category @relation(fields: [categoryId], references: [id], onDelete: Restrict)
@@ -322,6 +326,44 @@ model CollegeCourse {
   @@unique([collegeId, courseId])
   @@index([collegeId])
   @@index([courseId])
+}
+
+// ============================================================
+// FEE
+// ============================================================
+
+model Fee {
+  id String @id @default(uuid())
+
+  sourceFeeId String @unique
+
+  collegeId String
+  college   College @relation(fields: [collegeId], references: [id], onDelete: Cascade)
+
+  courseId String?
+  course   Course? @relation(fields: [courseId], references: [id], onDelete: SetNull)
+
+  programName String?
+  feeType     String
+  label       String?
+
+  amount Decimal @db.Decimal(12, 2)
+
+  currency     String  @default("INR")
+  frequency    String?
+  isRefundable Boolean @default(false)
+
+  academicYear String?
+  sourceUrl    String?
+  observedAt   DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([collegeId])
+  @@index([courseId])
+  @@index([feeType])
+  @@index([academicYear])
 }
 
 // ============================================================
@@ -504,7 +546,7 @@ model NewsArticle {
   sourceUrl  String?
 
   authorId String?
-  author   User? @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  author   User?   @relation(fields: [authorId], references: [id], onDelete: SetNull)
 
   publishedAt DateTime?
 
@@ -517,7 +559,7 @@ model NewsArticle {
 
   seoTitle       String?
   seoDescription String?
-  seoKeywords   String?
+  seoKeywords    String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -917,6 +959,7 @@ model User {
   @@index([email])
   @@index([role])
 }
+
 // ============================================================
 // USER SESSION
 // ============================================================
@@ -976,5 +1019,3 @@ model UserApplication {
   @@index([collegeId])
   @@index([status])
 }
-
-

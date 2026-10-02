@@ -326,8 +326,8 @@ export default async function ExamDetailPage({
                               <div className="mt-1 flex items-center gap-1 text-xs text-slate-500">
                                 <MapPin size={12} />
 
-                                {cutoff.college.city.name},{" "}
-                                {cutoff.college.state.name}
+                                {cutoff.college.city?.name ?? "City not available"},{" "}
+                                {cutoff.college.state?.name ?? "State not available"}
                               </div>
 
                               {cutoff.college.verified && (

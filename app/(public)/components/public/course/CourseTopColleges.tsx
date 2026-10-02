@@ -25,9 +25,9 @@ type CourseCollege = {
     state: {
       name: string;
     };
-    city: {
-      name: string;
-    };
+   city: {
+  name: string;
+} | null;
   };
 };
 
@@ -156,7 +156,8 @@ export default function CourseTopColleges({
                     <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-500">
                       <span className="inline-flex items-center gap-1">
                         <MapPin size={13} />
-                        {college.city.name}, {college.state.name}
+                        {college.city?.name ?? "City not available"},{" "}
+                        {college.state?.name ?? "State not available"}
                       </span>
 
                       <span>

@@ -404,6 +404,7 @@ export const ModelName = {
   College: 'College',
   Course: 'Course',
   CollegeCourse: 'CollegeCourse',
+  Fee: 'Fee',
   Exam: 'Exam',
   CollegeCutoff: 'CollegeCutoff',
   Review: 'Review',
@@ -442,7 +443,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "state" | "city" | "navigationItem" | "category" | "college" | "course" | "collegeCourse" | "exam" | "collegeCutoff" | "review" | "collegeRanking" | "boardExam" | "newsArticle" | "studyAbroadDestination" | "newsletterSubscriber" | "collegeDepartment" | "faculty" | "collegePlacement" | "placementRecruiter" | "collegePlacementRecruiter" | "collegeQuestion" | "collegeAnswer" | "infrastructure" | "infrastructureFacility" | "collegePhoto" | "courseNavigationItem" | "user" | "userSession" | "userShortlist" | "userApplication"
+    modelProps: "state" | "city" | "navigationItem" | "category" | "college" | "course" | "collegeCourse" | "fee" | "exam" | "collegeCutoff" | "review" | "collegeRanking" | "boardExam" | "newsArticle" | "studyAbroadDestination" | "newsletterSubscriber" | "collegeDepartment" | "faculty" | "collegePlacement" | "placementRecruiter" | "collegePlacementRecruiter" | "collegeQuestion" | "collegeAnswer" | "infrastructure" | "infrastructureFacility" | "collegePhoto" | "courseNavigationItem" | "user" | "userSession" | "userShortlist" | "userApplication"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -961,6 +962,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.CollegeCourseCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.CollegeCourseCountAggregateOutputType> | number
+        }
+      }
+    }
+    Fee: {
+      payload: Prisma.$FeePayload<ExtArgs>
+      fields: Prisma.FeeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FeeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FeeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeePayload>
+        }
+        findFirst: {
+          args: Prisma.FeeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FeeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeePayload>
+        }
+        findMany: {
+          args: Prisma.FeeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeePayload>[]
+        }
+        create: {
+          args: Prisma.FeeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeePayload>
+        }
+        createMany: {
+          args: Prisma.FeeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FeeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeePayload>[]
+        }
+        delete: {
+          args: Prisma.FeeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeePayload>
+        }
+        update: {
+          args: Prisma.FeeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeePayload>
+        }
+        deleteMany: {
+          args: Prisma.FeeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FeeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FeeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeePayload>[]
+        }
+        upsert: {
+          args: Prisma.FeeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeePayload>
+        }
+        aggregate: {
+          args: Prisma.FeeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFee>
+        }
+        groupBy: {
+          args: Prisma.FeeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FeeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FeeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FeeCountAggregateOutputType> | number
         }
       }
     }
@@ -2765,6 +2840,7 @@ export const CollegeScalarFieldEnum = {
   description: 'description',
   establishedYear: 'establishedYear',
   collegeType: 'collegeType',
+  aisheCode: 'aisheCode',
   website: 'website',
   email: 'email',
   phone: 'phone',
@@ -2800,6 +2876,7 @@ export const CourseScalarFieldEnum = {
   durationYears: 'durationYears',
   eligibility: 'eligibility',
   averageFees: 'averageFees',
+  sourceCourseId: 'sourceCourseId',
   careerOptions: 'careerOptions',
   categoryId: 'categoryId',
   status: 'status',
@@ -2822,6 +2899,28 @@ export const CollegeCourseScalarFieldEnum = {
 } as const
 
 export type CollegeCourseScalarFieldEnum = (typeof CollegeCourseScalarFieldEnum)[keyof typeof CollegeCourseScalarFieldEnum]
+
+
+export const FeeScalarFieldEnum = {
+  id: 'id',
+  sourceFeeId: 'sourceFeeId',
+  collegeId: 'collegeId',
+  courseId: 'courseId',
+  programName: 'programName',
+  feeType: 'feeType',
+  label: 'label',
+  amount: 'amount',
+  currency: 'currency',
+  frequency: 'frequency',
+  isRefundable: 'isRefundable',
+  academicYear: 'academicYear',
+  sourceUrl: 'sourceUrl',
+  observedAt: 'observedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FeeScalarFieldEnum = (typeof FeeScalarFieldEnum)[keyof typeof FeeScalarFieldEnum]
 
 
 export const ExamScalarFieldEnum = {
@@ -3691,6 +3790,7 @@ export type GlobalOmitConfig = {
   college?: Prisma.CollegeOmit
   course?: Prisma.CourseOmit
   collegeCourse?: Prisma.CollegeCourseOmit
+  fee?: Prisma.FeeOmit
   exam?: Prisma.ExamOmit
   collegeCutoff?: Prisma.CollegeCutoffOmit
   review?: Prisma.ReviewOmit

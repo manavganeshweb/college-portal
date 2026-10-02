@@ -417,13 +417,14 @@ export async function PUT(
       );
     }
 
-    const validCollegeTypes = [
-      "GOVERNMENT",
-      "PRIVATE",
-      "PUBLIC",
-      "DEEMED",
-      "AUTONOMOUS",
-    ];
+const validCollegeTypes = [
+  "GOVERNMENT",
+  "PRIVATE",
+  "PUBLIC",
+  "DEEMED",
+  "AUTONOMOUS",
+  "OTHER",
+];
 
     if (!validCollegeTypes.includes(collegeType)) {
       return Response.json(

@@ -18,41 +18,56 @@ type CoursePageProps = {
 };
 
 async function getCourse(id: string) {
-  const course = await prisma.course.findUnique({
-    where: {
-      id,
-    },
-    include: {
-      category: {
-        select: {
-          id: true,
-          name: true,
-          slug: true,
-        },
+const course = await prisma.course.findUnique({
+  where: {
+    id,
+  },
+  include: {
+    category: {
+      select: {
+        id: true,
+        name: true,
+        slug: true,
       },
-      colleges: {
-        include: {
-          college: {
-            select: {
-              id: true,
-              name: true,
-              slug: true,
-              shortName: true,
-              logo: true,
-            },
+    },
+
+    navigationItems: {
+      orderBy: {
+        sortOrder: "asc",
+      },
+      select: {
+        id: true,
+        title: true,
+        slug: true,
+        sortOrder: true,
+        isActive: true,
+      },
+    },
+
+    colleges: {
+      include: {
+        college: {
+          select: {
+            id: true,
+            name: true,
+            slug: true,
+            shortName: true,
+            logo: true,
           },
         },
-        orderBy: {
-          createdAt: "desc",
-        },
       },
-      _count: {
-        select: {
-          colleges: true,
-        },
+      orderBy: {
+        createdAt: "desc",
       },
     },
-  });
+
+    _count: {
+      select: {
+        colleges: true,
+      },
+    },
+  },
+});
 
   if (!course) {
     return null;
@@ -273,23 +288,24 @@ export default async function CourseDetailPage({
         <div className="grid gap-6 lg:grid-cols-[1fr_360px]">
           {/* Edit */}
           <CourseEditForm
-            course={{
-              id: course.id,
-              name: course.name,
-              shortName: course.shortName,
-              slug: course.slug,
-              degree: course.degree,
-              level: course.level,
-              description: course.description,
-              durationYears: course.durationYears,
-              eligibility: course.eligibility,
-              averageFees: course.averageFees,
-              careerOptions: course.careerOptions,
-              categoryId: course.categoryId,
-              status: course.status,
-            }}
-            categories={categories}
-          />
+  course={{
+    id: course.id,
+    name: course.name,
+    shortName: course.shortName,
+    slug: course.slug,
+    degree: course.degree,
+    level: course.level,
+    description: course.description,
+    durationYears: course.durationYears,
+    eligibility: course.eligibility,
+    averageFees: course.averageFees,
+    careerOptions: course.careerOptions,
+    categoryId: course.categoryId,
+    status: course.status,
+  }}
+  categories={categories}
+  navigationItems={course.navigationItems}
+/>
 
           {/* Sidebar */}
           <aside className="space-y-6">

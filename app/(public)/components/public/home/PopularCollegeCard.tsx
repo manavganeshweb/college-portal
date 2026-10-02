@@ -25,9 +25,9 @@ type PopularCollege = {
     name: string;
   };
 
-  city: {
-    name: string;
-  };
+city: {
+  name: string;
+} | null;
 
   courses: {
     fees: unknown;
@@ -153,8 +153,8 @@ export default function PopularCollegeCard({
             />
 
             <span className="truncate">
-              {college.city.name},{" "}
-              {college.state.name}
+              {college.city?.name ?? "City not available"},{" "}
+              {college.state?.name ?? "State not available"}
             </span>
           </div>
         </div>

@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import InfrastructureEditor from "./InfrastructureEditor";
 import CollegePhotosEditor from "./CollegePhotosEditor";
-
+import { CollegeType } from "@/src/generated/prisma/enums";
 type City = {
   id: string;
   name: string;
@@ -43,12 +43,7 @@ type College = {
   description: string | null;
 
   establishedYear: number | null;
-  collegeType:
-    | "GOVERNMENT"
-    | "PRIVATE"
-    | "PUBLIC"
-    | "DEEMED"
-    | "AUTONOMOUS";
+  collegeType: CollegeType;
 
   website: string | null;
   email: string | null;
@@ -56,7 +51,7 @@ type College = {
   address: string | null;
 
   stateId: string;
-  cityId: string;
+  cityId: string | null;
 
   logo: string | null;
   coverImage: string | null;
@@ -181,7 +176,7 @@ export default function CollegeEditForm({
     address: college.address ?? "",
 
     stateId: college.stateId,
-    cityId: college.cityId,
+    cityId: college.cityId ?? "",
 
     logo: college.logo ?? "",
     coverImage: college.coverImage ?? "",
@@ -967,7 +962,7 @@ export default function CollegeEditForm({
                 </label>
 
                 <select
-                  value={form.cityId}
+                  value={form.cityId ?? ""}
                   onChange={(event) =>
                     updateField(
                       "cityId",
@@ -984,7 +979,7 @@ export default function CollegeEditForm({
                   {cities.map((city) => (
                     <option
                       key={city.id}
-                      value={city.id}
+                      value={city.id ?? ""}
                     >
                       {city.name}
                     </option>

@@ -26,8 +26,8 @@ type CollegeCardProps = {
       name: string;
     };
     city: {
-      name: string;
-    };
+  name: string;
+} | null;
   };
 };
 
@@ -96,7 +96,10 @@ export default function CollegeCard({ college }: CollegeCardProps) {
 
           <div className="mt-3 flex items-center gap-1.5 text-sm text-slate-500">
             <MapPin className="h-4 w-4 text-emerald-600" />
-            {college.city.name}, {college.state.name}
+           <span>
+  {college.city?.name ?? "City not available"},{" "}
+  {college.state?.name ?? "State not available"}
+</span>
           </div>
 
           <div className="mt-4 flex items-center justify-between border-t border-slate-100 pt-4">

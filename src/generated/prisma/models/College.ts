@@ -44,6 +44,7 @@ export type CollegeMinAggregateOutputType = {
   description: string | null
   establishedYear: number | null
   collegeType: $Enums.CollegeType | null
+  aisheCode: string | null
   website: string | null
   email: string | null
   phone: string | null
@@ -74,6 +75,7 @@ export type CollegeMaxAggregateOutputType = {
   description: string | null
   establishedYear: number | null
   collegeType: $Enums.CollegeType | null
+  aisheCode: string | null
   website: string | null
   email: string | null
   phone: string | null
@@ -104,6 +106,7 @@ export type CollegeCountAggregateOutputType = {
   description: number
   establishedYear: number
   collegeType: number
+  aisheCode: number
   website: number
   email: number
   phone: number
@@ -144,6 +147,7 @@ export type CollegeMinAggregateInputType = {
   description?: true
   establishedYear?: true
   collegeType?: true
+  aisheCode?: true
   website?: true
   email?: true
   phone?: true
@@ -174,6 +178,7 @@ export type CollegeMaxAggregateInputType = {
   description?: true
   establishedYear?: true
   collegeType?: true
+  aisheCode?: true
   website?: true
   email?: true
   phone?: true
@@ -204,6 +209,7 @@ export type CollegeCountAggregateInputType = {
   description?: true
   establishedYear?: true
   collegeType?: true
+  aisheCode?: true
   website?: true
   email?: true
   phone?: true
@@ -321,6 +327,7 @@ export type CollegeGroupByOutputType = {
   description: string | null
   establishedYear: number | null
   collegeType: $Enums.CollegeType
+  aisheCode: string | null
   website: string | null
   email: string | null
   phone: string | null
@@ -336,7 +343,7 @@ export type CollegeGroupByOutputType = {
   ogDescription: string | null
   ogImage: string | null
   stateId: string
-  cityId: string
+  cityId: string | null
   createdAt: Date
   updatedAt: Date
   _count: CollegeCountAggregateOutputType | null
@@ -374,6 +381,7 @@ export type CollegeWhereInput = {
   description?: Prisma.StringNullableFilter<"College"> | string | null
   establishedYear?: Prisma.IntNullableFilter<"College"> | number | null
   collegeType?: Prisma.EnumCollegeTypeFilter<"College"> | $Enums.CollegeType
+  aisheCode?: Prisma.StringNullableFilter<"College"> | string | null
   website?: Prisma.StringNullableFilter<"College"> | string | null
   email?: Prisma.StringNullableFilter<"College"> | string | null
   phone?: Prisma.StringNullableFilter<"College"> | string | null
@@ -389,7 +397,7 @@ export type CollegeWhereInput = {
   ogDescription?: Prisma.StringNullableFilter<"College"> | string | null
   ogImage?: Prisma.StringNullableFilter<"College"> | string | null
   stateId?: Prisma.StringFilter<"College"> | string
-  cityId?: Prisma.StringFilter<"College"> | string
+  cityId?: Prisma.StringNullableFilter<"College"> | string | null
   createdAt?: Prisma.DateTimeFilter<"College"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"College"> | Date | string
   navigationItems?: Prisma.NavigationItemListRelationFilter
@@ -397,8 +405,9 @@ export type CollegeWhereInput = {
   applications?: Prisma.UserApplicationListRelationFilter
   infrastructure?: Prisma.XOR<Prisma.InfrastructureNullableScalarRelationFilter, Prisma.InfrastructureWhereInput> | null
   photos?: Prisma.CollegePhotoListRelationFilter
+  fees?: Prisma.FeeListRelationFilter
   state?: Prisma.XOR<Prisma.StateScalarRelationFilter, Prisma.StateWhereInput>
-  city?: Prisma.XOR<Prisma.CityScalarRelationFilter, Prisma.CityWhereInput>
+  city?: Prisma.XOR<Prisma.CityNullableScalarRelationFilter, Prisma.CityWhereInput> | null
   courses?: Prisma.CollegeCourseListRelationFilter
   cutoffs?: Prisma.CollegeCutoffListRelationFilter
   reviews?: Prisma.ReviewListRelationFilter
@@ -418,6 +427,7 @@ export type CollegeOrderByWithRelationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   establishedYear?: Prisma.SortOrderInput | Prisma.SortOrder
   collegeType?: Prisma.SortOrder
+  aisheCode?: Prisma.SortOrderInput | Prisma.SortOrder
   website?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -433,7 +443,7 @@ export type CollegeOrderByWithRelationInput = {
   ogDescription?: Prisma.SortOrderInput | Prisma.SortOrder
   ogImage?: Prisma.SortOrderInput | Prisma.SortOrder
   stateId?: Prisma.SortOrder
-  cityId?: Prisma.SortOrder
+  cityId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   navigationItems?: Prisma.NavigationItemOrderByRelationAggregateInput
@@ -441,6 +451,7 @@ export type CollegeOrderByWithRelationInput = {
   applications?: Prisma.UserApplicationOrderByRelationAggregateInput
   infrastructure?: Prisma.InfrastructureOrderByWithRelationInput
   photos?: Prisma.CollegePhotoOrderByRelationAggregateInput
+  fees?: Prisma.FeeOrderByRelationAggregateInput
   state?: Prisma.StateOrderByWithRelationInput
   city?: Prisma.CityOrderByWithRelationInput
   courses?: Prisma.CollegeCourseOrderByRelationAggregateInput
@@ -455,6 +466,7 @@ export type CollegeOrderByWithRelationInput = {
 export type CollegeWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   slug?: string
+  aisheCode?: string
   AND?: Prisma.CollegeWhereInput | Prisma.CollegeWhereInput[]
   OR?: Prisma.CollegeWhereInput[]
   NOT?: Prisma.CollegeWhereInput | Prisma.CollegeWhereInput[]
@@ -480,7 +492,7 @@ export type CollegeWhereUniqueInput = Prisma.AtLeast<{
   ogDescription?: Prisma.StringNullableFilter<"College"> | string | null
   ogImage?: Prisma.StringNullableFilter<"College"> | string | null
   stateId?: Prisma.StringFilter<"College"> | string
-  cityId?: Prisma.StringFilter<"College"> | string
+  cityId?: Prisma.StringNullableFilter<"College"> | string | null
   createdAt?: Prisma.DateTimeFilter<"College"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"College"> | Date | string
   navigationItems?: Prisma.NavigationItemListRelationFilter
@@ -488,8 +500,9 @@ export type CollegeWhereUniqueInput = Prisma.AtLeast<{
   applications?: Prisma.UserApplicationListRelationFilter
   infrastructure?: Prisma.XOR<Prisma.InfrastructureNullableScalarRelationFilter, Prisma.InfrastructureWhereInput> | null
   photos?: Prisma.CollegePhotoListRelationFilter
+  fees?: Prisma.FeeListRelationFilter
   state?: Prisma.XOR<Prisma.StateScalarRelationFilter, Prisma.StateWhereInput>
-  city?: Prisma.XOR<Prisma.CityScalarRelationFilter, Prisma.CityWhereInput>
+  city?: Prisma.XOR<Prisma.CityNullableScalarRelationFilter, Prisma.CityWhereInput> | null
   courses?: Prisma.CollegeCourseListRelationFilter
   cutoffs?: Prisma.CollegeCutoffListRelationFilter
   reviews?: Prisma.ReviewListRelationFilter
@@ -497,7 +510,7 @@ export type CollegeWhereUniqueInput = Prisma.AtLeast<{
   departments?: Prisma.CollegeDepartmentListRelationFilter
   questions?: Prisma.CollegeQuestionListRelationFilter
   placements?: Prisma.CollegePlacementListRelationFilter
-}, "id" | "slug">
+}, "id" | "slug" | "aisheCode">
 
 export type CollegeOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -509,6 +522,7 @@ export type CollegeOrderByWithAggregationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   establishedYear?: Prisma.SortOrderInput | Prisma.SortOrder
   collegeType?: Prisma.SortOrder
+  aisheCode?: Prisma.SortOrderInput | Prisma.SortOrder
   website?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -524,7 +538,7 @@ export type CollegeOrderByWithAggregationInput = {
   ogDescription?: Prisma.SortOrderInput | Prisma.SortOrder
   ogImage?: Prisma.SortOrderInput | Prisma.SortOrder
   stateId?: Prisma.SortOrder
-  cityId?: Prisma.SortOrder
+  cityId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.CollegeCountOrderByAggregateInput
@@ -547,6 +561,7 @@ export type CollegeScalarWhereWithAggregatesInput = {
   description?: Prisma.StringNullableWithAggregatesFilter<"College"> | string | null
   establishedYear?: Prisma.IntNullableWithAggregatesFilter<"College"> | number | null
   collegeType?: Prisma.EnumCollegeTypeWithAggregatesFilter<"College"> | $Enums.CollegeType
+  aisheCode?: Prisma.StringNullableWithAggregatesFilter<"College"> | string | null
   website?: Prisma.StringNullableWithAggregatesFilter<"College"> | string | null
   email?: Prisma.StringNullableWithAggregatesFilter<"College"> | string | null
   phone?: Prisma.StringNullableWithAggregatesFilter<"College"> | string | null
@@ -562,7 +577,7 @@ export type CollegeScalarWhereWithAggregatesInput = {
   ogDescription?: Prisma.StringNullableWithAggregatesFilter<"College"> | string | null
   ogImage?: Prisma.StringNullableWithAggregatesFilter<"College"> | string | null
   stateId?: Prisma.StringWithAggregatesFilter<"College"> | string
-  cityId?: Prisma.StringWithAggregatesFilter<"College"> | string
+  cityId?: Prisma.StringNullableWithAggregatesFilter<"College"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"College"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"College"> | Date | string
 }
@@ -577,6 +592,7 @@ export type CollegeCreateInput = {
   description?: string | null
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
+  aisheCode?: string | null
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -598,8 +614,9 @@ export type CollegeCreateInput = {
   applications?: Prisma.UserApplicationCreateNestedManyWithoutCollegeInput
   infrastructure?: Prisma.InfrastructureCreateNestedOneWithoutCollegeInput
   photos?: Prisma.CollegePhotoCreateNestedManyWithoutCollegeInput
+  fees?: Prisma.FeeCreateNestedManyWithoutCollegeInput
   state: Prisma.StateCreateNestedOneWithoutCollegesInput
-  city: Prisma.CityCreateNestedOneWithoutCollegesInput
+  city?: Prisma.CityCreateNestedOneWithoutCollegesInput
   courses?: Prisma.CollegeCourseCreateNestedManyWithoutCollegeInput
   cutoffs?: Prisma.CollegeCutoffCreateNestedManyWithoutCollegeInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutCollegeInput
@@ -619,6 +636,7 @@ export type CollegeUncheckedCreateInput = {
   description?: string | null
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
+  aisheCode?: string | null
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -634,7 +652,7 @@ export type CollegeUncheckedCreateInput = {
   ogDescription?: string | null
   ogImage?: string | null
   stateId: string
-  cityId: string
+  cityId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   navigationItems?: Prisma.NavigationItemUncheckedCreateNestedManyWithoutCollegeInput
@@ -642,6 +660,7 @@ export type CollegeUncheckedCreateInput = {
   applications?: Prisma.UserApplicationUncheckedCreateNestedManyWithoutCollegeInput
   infrastructure?: Prisma.InfrastructureUncheckedCreateNestedOneWithoutCollegeInput
   photos?: Prisma.CollegePhotoUncheckedCreateNestedManyWithoutCollegeInput
+  fees?: Prisma.FeeUncheckedCreateNestedManyWithoutCollegeInput
   courses?: Prisma.CollegeCourseUncheckedCreateNestedManyWithoutCollegeInput
   cutoffs?: Prisma.CollegeCutoffUncheckedCreateNestedManyWithoutCollegeInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutCollegeInput
@@ -661,6 +680,7 @@ export type CollegeUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
+  aisheCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -682,8 +702,9 @@ export type CollegeUpdateInput = {
   applications?: Prisma.UserApplicationUpdateManyWithoutCollegeNestedInput
   infrastructure?: Prisma.InfrastructureUpdateOneWithoutCollegeNestedInput
   photos?: Prisma.CollegePhotoUpdateManyWithoutCollegeNestedInput
+  fees?: Prisma.FeeUpdateManyWithoutCollegeNestedInput
   state?: Prisma.StateUpdateOneRequiredWithoutCollegesNestedInput
-  city?: Prisma.CityUpdateOneRequiredWithoutCollegesNestedInput
+  city?: Prisma.CityUpdateOneWithoutCollegesNestedInput
   courses?: Prisma.CollegeCourseUpdateManyWithoutCollegeNestedInput
   cutoffs?: Prisma.CollegeCutoffUpdateManyWithoutCollegeNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutCollegeNestedInput
@@ -703,6 +724,7 @@ export type CollegeUncheckedUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
+  aisheCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -718,7 +740,7 @@ export type CollegeUncheckedUpdateInput = {
   ogDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ogImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stateId?: Prisma.StringFieldUpdateOperationsInput | string
-  cityId?: Prisma.StringFieldUpdateOperationsInput | string
+  cityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   navigationItems?: Prisma.NavigationItemUncheckedUpdateManyWithoutCollegeNestedInput
@@ -726,6 +748,7 @@ export type CollegeUncheckedUpdateInput = {
   applications?: Prisma.UserApplicationUncheckedUpdateManyWithoutCollegeNestedInput
   infrastructure?: Prisma.InfrastructureUncheckedUpdateOneWithoutCollegeNestedInput
   photos?: Prisma.CollegePhotoUncheckedUpdateManyWithoutCollegeNestedInput
+  fees?: Prisma.FeeUncheckedUpdateManyWithoutCollegeNestedInput
   courses?: Prisma.CollegeCourseUncheckedUpdateManyWithoutCollegeNestedInput
   cutoffs?: Prisma.CollegeCutoffUncheckedUpdateManyWithoutCollegeNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutCollegeNestedInput
@@ -745,6 +768,7 @@ export type CollegeCreateManyInput = {
   description?: string | null
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
+  aisheCode?: string | null
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -760,7 +784,7 @@ export type CollegeCreateManyInput = {
   ogDescription?: string | null
   ogImage?: string | null
   stateId: string
-  cityId: string
+  cityId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -775,6 +799,7 @@ export type CollegeUpdateManyMutationInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
+  aisheCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -803,6 +828,7 @@ export type CollegeUncheckedUpdateManyInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
+  aisheCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -818,7 +844,7 @@ export type CollegeUncheckedUpdateManyInput = {
   ogDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ogImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stateId?: Prisma.StringFieldUpdateOperationsInput | string
-  cityId?: Prisma.StringFieldUpdateOperationsInput | string
+  cityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -848,6 +874,7 @@ export type CollegeCountOrderByAggregateInput = {
   description?: Prisma.SortOrder
   establishedYear?: Prisma.SortOrder
   collegeType?: Prisma.SortOrder
+  aisheCode?: Prisma.SortOrder
   website?: Prisma.SortOrder
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
@@ -882,6 +909,7 @@ export type CollegeMaxOrderByAggregateInput = {
   description?: Prisma.SortOrder
   establishedYear?: Prisma.SortOrder
   collegeType?: Prisma.SortOrder
+  aisheCode?: Prisma.SortOrder
   website?: Prisma.SortOrder
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
@@ -912,6 +940,7 @@ export type CollegeMinOrderByAggregateInput = {
   description?: Prisma.SortOrder
   establishedYear?: Prisma.SortOrder
   collegeType?: Prisma.SortOrder
+  aisheCode?: Prisma.SortOrder
   website?: Prisma.SortOrder
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
@@ -1064,6 +1093,20 @@ export type CollegeUpdateOneRequiredWithoutCoursesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CollegeUpdateToOneWithWhereWithoutCoursesInput, Prisma.CollegeUpdateWithoutCoursesInput>, Prisma.CollegeUncheckedUpdateWithoutCoursesInput>
 }
 
+export type CollegeCreateNestedOneWithoutFeesInput = {
+  create?: Prisma.XOR<Prisma.CollegeCreateWithoutFeesInput, Prisma.CollegeUncheckedCreateWithoutFeesInput>
+  connectOrCreate?: Prisma.CollegeCreateOrConnectWithoutFeesInput
+  connect?: Prisma.CollegeWhereUniqueInput
+}
+
+export type CollegeUpdateOneRequiredWithoutFeesNestedInput = {
+  create?: Prisma.XOR<Prisma.CollegeCreateWithoutFeesInput, Prisma.CollegeUncheckedCreateWithoutFeesInput>
+  connectOrCreate?: Prisma.CollegeCreateOrConnectWithoutFeesInput
+  upsert?: Prisma.CollegeUpsertWithoutFeesInput
+  connect?: Prisma.CollegeWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CollegeUpdateToOneWithWhereWithoutFeesInput, Prisma.CollegeUpdateWithoutFeesInput>, Prisma.CollegeUncheckedUpdateWithoutFeesInput>
+}
+
 export type CollegeCreateNestedOneWithoutCutoffsInput = {
   create?: Prisma.XOR<Prisma.CollegeCreateWithoutCutoffsInput, Prisma.CollegeUncheckedCreateWithoutCutoffsInput>
   connectOrCreate?: Prisma.CollegeCreateOrConnectWithoutCutoffsInput
@@ -1214,6 +1257,7 @@ export type CollegeCreateWithoutStateInput = {
   description?: string | null
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
+  aisheCode?: string | null
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -1235,7 +1279,8 @@ export type CollegeCreateWithoutStateInput = {
   applications?: Prisma.UserApplicationCreateNestedManyWithoutCollegeInput
   infrastructure?: Prisma.InfrastructureCreateNestedOneWithoutCollegeInput
   photos?: Prisma.CollegePhotoCreateNestedManyWithoutCollegeInput
-  city: Prisma.CityCreateNestedOneWithoutCollegesInput
+  fees?: Prisma.FeeCreateNestedManyWithoutCollegeInput
+  city?: Prisma.CityCreateNestedOneWithoutCollegesInput
   courses?: Prisma.CollegeCourseCreateNestedManyWithoutCollegeInput
   cutoffs?: Prisma.CollegeCutoffCreateNestedManyWithoutCollegeInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutCollegeInput
@@ -1255,6 +1300,7 @@ export type CollegeUncheckedCreateWithoutStateInput = {
   description?: string | null
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
+  aisheCode?: string | null
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -1269,7 +1315,7 @@ export type CollegeUncheckedCreateWithoutStateInput = {
   ogTitle?: string | null
   ogDescription?: string | null
   ogImage?: string | null
-  cityId: string
+  cityId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   navigationItems?: Prisma.NavigationItemUncheckedCreateNestedManyWithoutCollegeInput
@@ -1277,6 +1323,7 @@ export type CollegeUncheckedCreateWithoutStateInput = {
   applications?: Prisma.UserApplicationUncheckedCreateNestedManyWithoutCollegeInput
   infrastructure?: Prisma.InfrastructureUncheckedCreateNestedOneWithoutCollegeInput
   photos?: Prisma.CollegePhotoUncheckedCreateNestedManyWithoutCollegeInput
+  fees?: Prisma.FeeUncheckedCreateNestedManyWithoutCollegeInput
   courses?: Prisma.CollegeCourseUncheckedCreateNestedManyWithoutCollegeInput
   cutoffs?: Prisma.CollegeCutoffUncheckedCreateNestedManyWithoutCollegeInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutCollegeInput
@@ -1325,6 +1372,7 @@ export type CollegeScalarWhereInput = {
   description?: Prisma.StringNullableFilter<"College"> | string | null
   establishedYear?: Prisma.IntNullableFilter<"College"> | number | null
   collegeType?: Prisma.EnumCollegeTypeFilter<"College"> | $Enums.CollegeType
+  aisheCode?: Prisma.StringNullableFilter<"College"> | string | null
   website?: Prisma.StringNullableFilter<"College"> | string | null
   email?: Prisma.StringNullableFilter<"College"> | string | null
   phone?: Prisma.StringNullableFilter<"College"> | string | null
@@ -1340,7 +1388,7 @@ export type CollegeScalarWhereInput = {
   ogDescription?: Prisma.StringNullableFilter<"College"> | string | null
   ogImage?: Prisma.StringNullableFilter<"College"> | string | null
   stateId?: Prisma.StringFilter<"College"> | string
-  cityId?: Prisma.StringFilter<"College"> | string
+  cityId?: Prisma.StringNullableFilter<"College"> | string | null
   createdAt?: Prisma.DateTimeFilter<"College"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"College"> | Date | string
 }
@@ -1355,6 +1403,7 @@ export type CollegeCreateWithoutCityInput = {
   description?: string | null
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
+  aisheCode?: string | null
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -1376,6 +1425,7 @@ export type CollegeCreateWithoutCityInput = {
   applications?: Prisma.UserApplicationCreateNestedManyWithoutCollegeInput
   infrastructure?: Prisma.InfrastructureCreateNestedOneWithoutCollegeInput
   photos?: Prisma.CollegePhotoCreateNestedManyWithoutCollegeInput
+  fees?: Prisma.FeeCreateNestedManyWithoutCollegeInput
   state: Prisma.StateCreateNestedOneWithoutCollegesInput
   courses?: Prisma.CollegeCourseCreateNestedManyWithoutCollegeInput
   cutoffs?: Prisma.CollegeCutoffCreateNestedManyWithoutCollegeInput
@@ -1396,6 +1446,7 @@ export type CollegeUncheckedCreateWithoutCityInput = {
   description?: string | null
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
+  aisheCode?: string | null
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -1418,6 +1469,7 @@ export type CollegeUncheckedCreateWithoutCityInput = {
   applications?: Prisma.UserApplicationUncheckedCreateNestedManyWithoutCollegeInput
   infrastructure?: Prisma.InfrastructureUncheckedCreateNestedOneWithoutCollegeInput
   photos?: Prisma.CollegePhotoUncheckedCreateNestedManyWithoutCollegeInput
+  fees?: Prisma.FeeUncheckedCreateNestedManyWithoutCollegeInput
   courses?: Prisma.CollegeCourseUncheckedCreateNestedManyWithoutCollegeInput
   cutoffs?: Prisma.CollegeCutoffUncheckedCreateNestedManyWithoutCollegeInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutCollegeInput
@@ -1463,6 +1515,7 @@ export type CollegeCreateWithoutNavigationItemsInput = {
   description?: string | null
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
+  aisheCode?: string | null
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -1483,8 +1536,9 @@ export type CollegeCreateWithoutNavigationItemsInput = {
   applications?: Prisma.UserApplicationCreateNestedManyWithoutCollegeInput
   infrastructure?: Prisma.InfrastructureCreateNestedOneWithoutCollegeInput
   photos?: Prisma.CollegePhotoCreateNestedManyWithoutCollegeInput
+  fees?: Prisma.FeeCreateNestedManyWithoutCollegeInput
   state: Prisma.StateCreateNestedOneWithoutCollegesInput
-  city: Prisma.CityCreateNestedOneWithoutCollegesInput
+  city?: Prisma.CityCreateNestedOneWithoutCollegesInput
   courses?: Prisma.CollegeCourseCreateNestedManyWithoutCollegeInput
   cutoffs?: Prisma.CollegeCutoffCreateNestedManyWithoutCollegeInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutCollegeInput
@@ -1504,6 +1558,7 @@ export type CollegeUncheckedCreateWithoutNavigationItemsInput = {
   description?: string | null
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
+  aisheCode?: string | null
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -1519,13 +1574,14 @@ export type CollegeUncheckedCreateWithoutNavigationItemsInput = {
   ogDescription?: string | null
   ogImage?: string | null
   stateId: string
-  cityId: string
+  cityId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   shortlists?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutCollegeInput
   applications?: Prisma.UserApplicationUncheckedCreateNestedManyWithoutCollegeInput
   infrastructure?: Prisma.InfrastructureUncheckedCreateNestedOneWithoutCollegeInput
   photos?: Prisma.CollegePhotoUncheckedCreateNestedManyWithoutCollegeInput
+  fees?: Prisma.FeeUncheckedCreateNestedManyWithoutCollegeInput
   courses?: Prisma.CollegeCourseUncheckedCreateNestedManyWithoutCollegeInput
   cutoffs?: Prisma.CollegeCutoffUncheckedCreateNestedManyWithoutCollegeInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutCollegeInput
@@ -1561,6 +1617,7 @@ export type CollegeUpdateWithoutNavigationItemsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
+  aisheCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1581,8 +1638,9 @@ export type CollegeUpdateWithoutNavigationItemsInput = {
   applications?: Prisma.UserApplicationUpdateManyWithoutCollegeNestedInput
   infrastructure?: Prisma.InfrastructureUpdateOneWithoutCollegeNestedInput
   photos?: Prisma.CollegePhotoUpdateManyWithoutCollegeNestedInput
+  fees?: Prisma.FeeUpdateManyWithoutCollegeNestedInput
   state?: Prisma.StateUpdateOneRequiredWithoutCollegesNestedInput
-  city?: Prisma.CityUpdateOneRequiredWithoutCollegesNestedInput
+  city?: Prisma.CityUpdateOneWithoutCollegesNestedInput
   courses?: Prisma.CollegeCourseUpdateManyWithoutCollegeNestedInput
   cutoffs?: Prisma.CollegeCutoffUpdateManyWithoutCollegeNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutCollegeNestedInput
@@ -1602,6 +1660,7 @@ export type CollegeUncheckedUpdateWithoutNavigationItemsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
+  aisheCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1617,13 +1676,14 @@ export type CollegeUncheckedUpdateWithoutNavigationItemsInput = {
   ogDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ogImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stateId?: Prisma.StringFieldUpdateOperationsInput | string
-  cityId?: Prisma.StringFieldUpdateOperationsInput | string
+  cityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   shortlists?: Prisma.UserShortlistUncheckedUpdateManyWithoutCollegeNestedInput
   applications?: Prisma.UserApplicationUncheckedUpdateManyWithoutCollegeNestedInput
   infrastructure?: Prisma.InfrastructureUncheckedUpdateOneWithoutCollegeNestedInput
   photos?: Prisma.CollegePhotoUncheckedUpdateManyWithoutCollegeNestedInput
+  fees?: Prisma.FeeUncheckedUpdateManyWithoutCollegeNestedInput
   courses?: Prisma.CollegeCourseUncheckedUpdateManyWithoutCollegeNestedInput
   cutoffs?: Prisma.CollegeCutoffUncheckedUpdateManyWithoutCollegeNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutCollegeNestedInput
@@ -1643,6 +1703,7 @@ export type CollegeCreateWithoutCoursesInput = {
   description?: string | null
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
+  aisheCode?: string | null
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -1664,8 +1725,9 @@ export type CollegeCreateWithoutCoursesInput = {
   applications?: Prisma.UserApplicationCreateNestedManyWithoutCollegeInput
   infrastructure?: Prisma.InfrastructureCreateNestedOneWithoutCollegeInput
   photos?: Prisma.CollegePhotoCreateNestedManyWithoutCollegeInput
+  fees?: Prisma.FeeCreateNestedManyWithoutCollegeInput
   state: Prisma.StateCreateNestedOneWithoutCollegesInput
-  city: Prisma.CityCreateNestedOneWithoutCollegesInput
+  city?: Prisma.CityCreateNestedOneWithoutCollegesInput
   cutoffs?: Prisma.CollegeCutoffCreateNestedManyWithoutCollegeInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutCollegeInput
   rankings?: Prisma.CollegeRankingCreateNestedManyWithoutCollegeInput
@@ -1684,6 +1746,7 @@ export type CollegeUncheckedCreateWithoutCoursesInput = {
   description?: string | null
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
+  aisheCode?: string | null
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -1699,7 +1762,7 @@ export type CollegeUncheckedCreateWithoutCoursesInput = {
   ogDescription?: string | null
   ogImage?: string | null
   stateId: string
-  cityId: string
+  cityId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   navigationItems?: Prisma.NavigationItemUncheckedCreateNestedManyWithoutCollegeInput
@@ -1707,6 +1770,7 @@ export type CollegeUncheckedCreateWithoutCoursesInput = {
   applications?: Prisma.UserApplicationUncheckedCreateNestedManyWithoutCollegeInput
   infrastructure?: Prisma.InfrastructureUncheckedCreateNestedOneWithoutCollegeInput
   photos?: Prisma.CollegePhotoUncheckedCreateNestedManyWithoutCollegeInput
+  fees?: Prisma.FeeUncheckedCreateNestedManyWithoutCollegeInput
   cutoffs?: Prisma.CollegeCutoffUncheckedCreateNestedManyWithoutCollegeInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutCollegeInput
   rankings?: Prisma.CollegeRankingUncheckedCreateNestedManyWithoutCollegeInput
@@ -1741,6 +1805,7 @@ export type CollegeUpdateWithoutCoursesInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
+  aisheCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1762,8 +1827,9 @@ export type CollegeUpdateWithoutCoursesInput = {
   applications?: Prisma.UserApplicationUpdateManyWithoutCollegeNestedInput
   infrastructure?: Prisma.InfrastructureUpdateOneWithoutCollegeNestedInput
   photos?: Prisma.CollegePhotoUpdateManyWithoutCollegeNestedInput
+  fees?: Prisma.FeeUpdateManyWithoutCollegeNestedInput
   state?: Prisma.StateUpdateOneRequiredWithoutCollegesNestedInput
-  city?: Prisma.CityUpdateOneRequiredWithoutCollegesNestedInput
+  city?: Prisma.CityUpdateOneWithoutCollegesNestedInput
   cutoffs?: Prisma.CollegeCutoffUpdateManyWithoutCollegeNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutCollegeNestedInput
   rankings?: Prisma.CollegeRankingUpdateManyWithoutCollegeNestedInput
@@ -1782,6 +1848,7 @@ export type CollegeUncheckedUpdateWithoutCoursesInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
+  aisheCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1797,7 +1864,7 @@ export type CollegeUncheckedUpdateWithoutCoursesInput = {
   ogDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ogImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stateId?: Prisma.StringFieldUpdateOperationsInput | string
-  cityId?: Prisma.StringFieldUpdateOperationsInput | string
+  cityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   navigationItems?: Prisma.NavigationItemUncheckedUpdateManyWithoutCollegeNestedInput
@@ -1805,6 +1872,7 @@ export type CollegeUncheckedUpdateWithoutCoursesInput = {
   applications?: Prisma.UserApplicationUncheckedUpdateManyWithoutCollegeNestedInput
   infrastructure?: Prisma.InfrastructureUncheckedUpdateOneWithoutCollegeNestedInput
   photos?: Prisma.CollegePhotoUncheckedUpdateManyWithoutCollegeNestedInput
+  fees?: Prisma.FeeUncheckedUpdateManyWithoutCollegeNestedInput
   cutoffs?: Prisma.CollegeCutoffUncheckedUpdateManyWithoutCollegeNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutCollegeNestedInput
   rankings?: Prisma.CollegeRankingUncheckedUpdateManyWithoutCollegeNestedInput
@@ -1813,7 +1881,7 @@ export type CollegeUncheckedUpdateWithoutCoursesInput = {
   placements?: Prisma.CollegePlacementUncheckedUpdateManyWithoutCollegeNestedInput
 }
 
-export type CollegeCreateWithoutCutoffsInput = {
+export type CollegeCreateWithoutFeesInput = {
   id?: string
   name: string
   slug: string
@@ -1823,6 +1891,7 @@ export type CollegeCreateWithoutCutoffsInput = {
   description?: string | null
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
+  aisheCode?: string | null
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -1845,7 +1914,196 @@ export type CollegeCreateWithoutCutoffsInput = {
   infrastructure?: Prisma.InfrastructureCreateNestedOneWithoutCollegeInput
   photos?: Prisma.CollegePhotoCreateNestedManyWithoutCollegeInput
   state: Prisma.StateCreateNestedOneWithoutCollegesInput
-  city: Prisma.CityCreateNestedOneWithoutCollegesInput
+  city?: Prisma.CityCreateNestedOneWithoutCollegesInput
+  courses?: Prisma.CollegeCourseCreateNestedManyWithoutCollegeInput
+  cutoffs?: Prisma.CollegeCutoffCreateNestedManyWithoutCollegeInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutCollegeInput
+  rankings?: Prisma.CollegeRankingCreateNestedManyWithoutCollegeInput
+  departments?: Prisma.CollegeDepartmentCreateNestedManyWithoutCollegeInput
+  questions?: Prisma.CollegeQuestionCreateNestedManyWithoutCollegeInput
+  placements?: Prisma.CollegePlacementCreateNestedManyWithoutCollegeInput
+}
+
+export type CollegeUncheckedCreateWithoutFeesInput = {
+  id?: string
+  name: string
+  slug: string
+  shortName?: string | null
+  logo?: string | null
+  coverImage?: string | null
+  description?: string | null
+  establishedYear?: number | null
+  collegeType: $Enums.CollegeType
+  aisheCode?: string | null
+  website?: string | null
+  email?: string | null
+  phone?: string | null
+  address?: string | null
+  verified?: boolean
+  status?: $Enums.CollegeStatus
+  lastUpdated?: Date | string
+  seoTitle?: string | null
+  seoDescription?: string | null
+  seoKeywords?: string | null
+  canonicalUrl?: string | null
+  ogTitle?: string | null
+  ogDescription?: string | null
+  ogImage?: string | null
+  stateId: string
+  cityId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  navigationItems?: Prisma.NavigationItemUncheckedCreateNestedManyWithoutCollegeInput
+  shortlists?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutCollegeInput
+  applications?: Prisma.UserApplicationUncheckedCreateNestedManyWithoutCollegeInput
+  infrastructure?: Prisma.InfrastructureUncheckedCreateNestedOneWithoutCollegeInput
+  photos?: Prisma.CollegePhotoUncheckedCreateNestedManyWithoutCollegeInput
+  courses?: Prisma.CollegeCourseUncheckedCreateNestedManyWithoutCollegeInput
+  cutoffs?: Prisma.CollegeCutoffUncheckedCreateNestedManyWithoutCollegeInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutCollegeInput
+  rankings?: Prisma.CollegeRankingUncheckedCreateNestedManyWithoutCollegeInput
+  departments?: Prisma.CollegeDepartmentUncheckedCreateNestedManyWithoutCollegeInput
+  questions?: Prisma.CollegeQuestionUncheckedCreateNestedManyWithoutCollegeInput
+  placements?: Prisma.CollegePlacementUncheckedCreateNestedManyWithoutCollegeInput
+}
+
+export type CollegeCreateOrConnectWithoutFeesInput = {
+  where: Prisma.CollegeWhereUniqueInput
+  create: Prisma.XOR<Prisma.CollegeCreateWithoutFeesInput, Prisma.CollegeUncheckedCreateWithoutFeesInput>
+}
+
+export type CollegeUpsertWithoutFeesInput = {
+  update: Prisma.XOR<Prisma.CollegeUpdateWithoutFeesInput, Prisma.CollegeUncheckedUpdateWithoutFeesInput>
+  create: Prisma.XOR<Prisma.CollegeCreateWithoutFeesInput, Prisma.CollegeUncheckedCreateWithoutFeesInput>
+  where?: Prisma.CollegeWhereInput
+}
+
+export type CollegeUpdateToOneWithWhereWithoutFeesInput = {
+  where?: Prisma.CollegeWhereInput
+  data: Prisma.XOR<Prisma.CollegeUpdateWithoutFeesInput, Prisma.CollegeUncheckedUpdateWithoutFeesInput>
+}
+
+export type CollegeUpdateWithoutFeesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
+  aisheCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumCollegeStatusFieldUpdateOperationsInput | $Enums.CollegeStatus
+  lastUpdated?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  seoTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seoDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seoKeywords?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  canonicalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ogTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ogDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ogImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  navigationItems?: Prisma.NavigationItemUpdateManyWithoutCollegeNestedInput
+  shortlists?: Prisma.UserShortlistUpdateManyWithoutCollegeNestedInput
+  applications?: Prisma.UserApplicationUpdateManyWithoutCollegeNestedInput
+  infrastructure?: Prisma.InfrastructureUpdateOneWithoutCollegeNestedInput
+  photos?: Prisma.CollegePhotoUpdateManyWithoutCollegeNestedInput
+  state?: Prisma.StateUpdateOneRequiredWithoutCollegesNestedInput
+  city?: Prisma.CityUpdateOneWithoutCollegesNestedInput
+  courses?: Prisma.CollegeCourseUpdateManyWithoutCollegeNestedInput
+  cutoffs?: Prisma.CollegeCutoffUpdateManyWithoutCollegeNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutCollegeNestedInput
+  rankings?: Prisma.CollegeRankingUpdateManyWithoutCollegeNestedInput
+  departments?: Prisma.CollegeDepartmentUpdateManyWithoutCollegeNestedInput
+  questions?: Prisma.CollegeQuestionUpdateManyWithoutCollegeNestedInput
+  placements?: Prisma.CollegePlacementUpdateManyWithoutCollegeNestedInput
+}
+
+export type CollegeUncheckedUpdateWithoutFeesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
+  aisheCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumCollegeStatusFieldUpdateOperationsInput | $Enums.CollegeStatus
+  lastUpdated?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  seoTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seoDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seoKeywords?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  canonicalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ogTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ogDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ogImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stateId?: Prisma.StringFieldUpdateOperationsInput | string
+  cityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  navigationItems?: Prisma.NavigationItemUncheckedUpdateManyWithoutCollegeNestedInput
+  shortlists?: Prisma.UserShortlistUncheckedUpdateManyWithoutCollegeNestedInput
+  applications?: Prisma.UserApplicationUncheckedUpdateManyWithoutCollegeNestedInput
+  infrastructure?: Prisma.InfrastructureUncheckedUpdateOneWithoutCollegeNestedInput
+  photos?: Prisma.CollegePhotoUncheckedUpdateManyWithoutCollegeNestedInput
+  courses?: Prisma.CollegeCourseUncheckedUpdateManyWithoutCollegeNestedInput
+  cutoffs?: Prisma.CollegeCutoffUncheckedUpdateManyWithoutCollegeNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutCollegeNestedInput
+  rankings?: Prisma.CollegeRankingUncheckedUpdateManyWithoutCollegeNestedInput
+  departments?: Prisma.CollegeDepartmentUncheckedUpdateManyWithoutCollegeNestedInput
+  questions?: Prisma.CollegeQuestionUncheckedUpdateManyWithoutCollegeNestedInput
+  placements?: Prisma.CollegePlacementUncheckedUpdateManyWithoutCollegeNestedInput
+}
+
+export type CollegeCreateWithoutCutoffsInput = {
+  id?: string
+  name: string
+  slug: string
+  shortName?: string | null
+  logo?: string | null
+  coverImage?: string | null
+  description?: string | null
+  establishedYear?: number | null
+  collegeType: $Enums.CollegeType
+  aisheCode?: string | null
+  website?: string | null
+  email?: string | null
+  phone?: string | null
+  address?: string | null
+  verified?: boolean
+  status?: $Enums.CollegeStatus
+  lastUpdated?: Date | string
+  seoTitle?: string | null
+  seoDescription?: string | null
+  seoKeywords?: string | null
+  canonicalUrl?: string | null
+  ogTitle?: string | null
+  ogDescription?: string | null
+  ogImage?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  navigationItems?: Prisma.NavigationItemCreateNestedManyWithoutCollegeInput
+  shortlists?: Prisma.UserShortlistCreateNestedManyWithoutCollegeInput
+  applications?: Prisma.UserApplicationCreateNestedManyWithoutCollegeInput
+  infrastructure?: Prisma.InfrastructureCreateNestedOneWithoutCollegeInput
+  photos?: Prisma.CollegePhotoCreateNestedManyWithoutCollegeInput
+  fees?: Prisma.FeeCreateNestedManyWithoutCollegeInput
+  state: Prisma.StateCreateNestedOneWithoutCollegesInput
+  city?: Prisma.CityCreateNestedOneWithoutCollegesInput
   courses?: Prisma.CollegeCourseCreateNestedManyWithoutCollegeInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutCollegeInput
   rankings?: Prisma.CollegeRankingCreateNestedManyWithoutCollegeInput
@@ -1864,6 +2122,7 @@ export type CollegeUncheckedCreateWithoutCutoffsInput = {
   description?: string | null
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
+  aisheCode?: string | null
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -1879,7 +2138,7 @@ export type CollegeUncheckedCreateWithoutCutoffsInput = {
   ogDescription?: string | null
   ogImage?: string | null
   stateId: string
-  cityId: string
+  cityId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   navigationItems?: Prisma.NavigationItemUncheckedCreateNestedManyWithoutCollegeInput
@@ -1887,6 +2146,7 @@ export type CollegeUncheckedCreateWithoutCutoffsInput = {
   applications?: Prisma.UserApplicationUncheckedCreateNestedManyWithoutCollegeInput
   infrastructure?: Prisma.InfrastructureUncheckedCreateNestedOneWithoutCollegeInput
   photos?: Prisma.CollegePhotoUncheckedCreateNestedManyWithoutCollegeInput
+  fees?: Prisma.FeeUncheckedCreateNestedManyWithoutCollegeInput
   courses?: Prisma.CollegeCourseUncheckedCreateNestedManyWithoutCollegeInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutCollegeInput
   rankings?: Prisma.CollegeRankingUncheckedCreateNestedManyWithoutCollegeInput
@@ -1921,6 +2181,7 @@ export type CollegeUpdateWithoutCutoffsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
+  aisheCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1942,8 +2203,9 @@ export type CollegeUpdateWithoutCutoffsInput = {
   applications?: Prisma.UserApplicationUpdateManyWithoutCollegeNestedInput
   infrastructure?: Prisma.InfrastructureUpdateOneWithoutCollegeNestedInput
   photos?: Prisma.CollegePhotoUpdateManyWithoutCollegeNestedInput
+  fees?: Prisma.FeeUpdateManyWithoutCollegeNestedInput
   state?: Prisma.StateUpdateOneRequiredWithoutCollegesNestedInput
-  city?: Prisma.CityUpdateOneRequiredWithoutCollegesNestedInput
+  city?: Prisma.CityUpdateOneWithoutCollegesNestedInput
   courses?: Prisma.CollegeCourseUpdateManyWithoutCollegeNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutCollegeNestedInput
   rankings?: Prisma.CollegeRankingUpdateManyWithoutCollegeNestedInput
@@ -1962,6 +2224,7 @@ export type CollegeUncheckedUpdateWithoutCutoffsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
+  aisheCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1977,7 +2240,7 @@ export type CollegeUncheckedUpdateWithoutCutoffsInput = {
   ogDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ogImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stateId?: Prisma.StringFieldUpdateOperationsInput | string
-  cityId?: Prisma.StringFieldUpdateOperationsInput | string
+  cityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   navigationItems?: Prisma.NavigationItemUncheckedUpdateManyWithoutCollegeNestedInput
@@ -1985,6 +2248,7 @@ export type CollegeUncheckedUpdateWithoutCutoffsInput = {
   applications?: Prisma.UserApplicationUncheckedUpdateManyWithoutCollegeNestedInput
   infrastructure?: Prisma.InfrastructureUncheckedUpdateOneWithoutCollegeNestedInput
   photos?: Prisma.CollegePhotoUncheckedUpdateManyWithoutCollegeNestedInput
+  fees?: Prisma.FeeUncheckedUpdateManyWithoutCollegeNestedInput
   courses?: Prisma.CollegeCourseUncheckedUpdateManyWithoutCollegeNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutCollegeNestedInput
   rankings?: Prisma.CollegeRankingUncheckedUpdateManyWithoutCollegeNestedInput
@@ -2003,6 +2267,7 @@ export type CollegeCreateWithoutReviewsInput = {
   description?: string | null
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
+  aisheCode?: string | null
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -2024,8 +2289,9 @@ export type CollegeCreateWithoutReviewsInput = {
   applications?: Prisma.UserApplicationCreateNestedManyWithoutCollegeInput
   infrastructure?: Prisma.InfrastructureCreateNestedOneWithoutCollegeInput
   photos?: Prisma.CollegePhotoCreateNestedManyWithoutCollegeInput
+  fees?: Prisma.FeeCreateNestedManyWithoutCollegeInput
   state: Prisma.StateCreateNestedOneWithoutCollegesInput
-  city: Prisma.CityCreateNestedOneWithoutCollegesInput
+  city?: Prisma.CityCreateNestedOneWithoutCollegesInput
   courses?: Prisma.CollegeCourseCreateNestedManyWithoutCollegeInput
   cutoffs?: Prisma.CollegeCutoffCreateNestedManyWithoutCollegeInput
   rankings?: Prisma.CollegeRankingCreateNestedManyWithoutCollegeInput
@@ -2044,6 +2310,7 @@ export type CollegeUncheckedCreateWithoutReviewsInput = {
   description?: string | null
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
+  aisheCode?: string | null
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -2059,7 +2326,7 @@ export type CollegeUncheckedCreateWithoutReviewsInput = {
   ogDescription?: string | null
   ogImage?: string | null
   stateId: string
-  cityId: string
+  cityId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   navigationItems?: Prisma.NavigationItemUncheckedCreateNestedManyWithoutCollegeInput
@@ -2067,6 +2334,7 @@ export type CollegeUncheckedCreateWithoutReviewsInput = {
   applications?: Prisma.UserApplicationUncheckedCreateNestedManyWithoutCollegeInput
   infrastructure?: Prisma.InfrastructureUncheckedCreateNestedOneWithoutCollegeInput
   photos?: Prisma.CollegePhotoUncheckedCreateNestedManyWithoutCollegeInput
+  fees?: Prisma.FeeUncheckedCreateNestedManyWithoutCollegeInput
   courses?: Prisma.CollegeCourseUncheckedCreateNestedManyWithoutCollegeInput
   cutoffs?: Prisma.CollegeCutoffUncheckedCreateNestedManyWithoutCollegeInput
   rankings?: Prisma.CollegeRankingUncheckedCreateNestedManyWithoutCollegeInput
@@ -2101,6 +2369,7 @@ export type CollegeUpdateWithoutReviewsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
+  aisheCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2122,8 +2391,9 @@ export type CollegeUpdateWithoutReviewsInput = {
   applications?: Prisma.UserApplicationUpdateManyWithoutCollegeNestedInput
   infrastructure?: Prisma.InfrastructureUpdateOneWithoutCollegeNestedInput
   photos?: Prisma.CollegePhotoUpdateManyWithoutCollegeNestedInput
+  fees?: Prisma.FeeUpdateManyWithoutCollegeNestedInput
   state?: Prisma.StateUpdateOneRequiredWithoutCollegesNestedInput
-  city?: Prisma.CityUpdateOneRequiredWithoutCollegesNestedInput
+  city?: Prisma.CityUpdateOneWithoutCollegesNestedInput
   courses?: Prisma.CollegeCourseUpdateManyWithoutCollegeNestedInput
   cutoffs?: Prisma.CollegeCutoffUpdateManyWithoutCollegeNestedInput
   rankings?: Prisma.CollegeRankingUpdateManyWithoutCollegeNestedInput
@@ -2142,6 +2412,7 @@ export type CollegeUncheckedUpdateWithoutReviewsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
+  aisheCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2157,7 +2428,7 @@ export type CollegeUncheckedUpdateWithoutReviewsInput = {
   ogDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ogImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stateId?: Prisma.StringFieldUpdateOperationsInput | string
-  cityId?: Prisma.StringFieldUpdateOperationsInput | string
+  cityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   navigationItems?: Prisma.NavigationItemUncheckedUpdateManyWithoutCollegeNestedInput
@@ -2165,6 +2436,7 @@ export type CollegeUncheckedUpdateWithoutReviewsInput = {
   applications?: Prisma.UserApplicationUncheckedUpdateManyWithoutCollegeNestedInput
   infrastructure?: Prisma.InfrastructureUncheckedUpdateOneWithoutCollegeNestedInput
   photos?: Prisma.CollegePhotoUncheckedUpdateManyWithoutCollegeNestedInput
+  fees?: Prisma.FeeUncheckedUpdateManyWithoutCollegeNestedInput
   courses?: Prisma.CollegeCourseUncheckedUpdateManyWithoutCollegeNestedInput
   cutoffs?: Prisma.CollegeCutoffUncheckedUpdateManyWithoutCollegeNestedInput
   rankings?: Prisma.CollegeRankingUncheckedUpdateManyWithoutCollegeNestedInput
@@ -2183,6 +2455,7 @@ export type CollegeCreateWithoutRankingsInput = {
   description?: string | null
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
+  aisheCode?: string | null
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -2204,8 +2477,9 @@ export type CollegeCreateWithoutRankingsInput = {
   applications?: Prisma.UserApplicationCreateNestedManyWithoutCollegeInput
   infrastructure?: Prisma.InfrastructureCreateNestedOneWithoutCollegeInput
   photos?: Prisma.CollegePhotoCreateNestedManyWithoutCollegeInput
+  fees?: Prisma.FeeCreateNestedManyWithoutCollegeInput
   state: Prisma.StateCreateNestedOneWithoutCollegesInput
-  city: Prisma.CityCreateNestedOneWithoutCollegesInput
+  city?: Prisma.CityCreateNestedOneWithoutCollegesInput
   courses?: Prisma.CollegeCourseCreateNestedManyWithoutCollegeInput
   cutoffs?: Prisma.CollegeCutoffCreateNestedManyWithoutCollegeInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutCollegeInput
@@ -2224,6 +2498,7 @@ export type CollegeUncheckedCreateWithoutRankingsInput = {
   description?: string | null
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
+  aisheCode?: string | null
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -2239,7 +2514,7 @@ export type CollegeUncheckedCreateWithoutRankingsInput = {
   ogDescription?: string | null
   ogImage?: string | null
   stateId: string
-  cityId: string
+  cityId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   navigationItems?: Prisma.NavigationItemUncheckedCreateNestedManyWithoutCollegeInput
@@ -2247,6 +2522,7 @@ export type CollegeUncheckedCreateWithoutRankingsInput = {
   applications?: Prisma.UserApplicationUncheckedCreateNestedManyWithoutCollegeInput
   infrastructure?: Prisma.InfrastructureUncheckedCreateNestedOneWithoutCollegeInput
   photos?: Prisma.CollegePhotoUncheckedCreateNestedManyWithoutCollegeInput
+  fees?: Prisma.FeeUncheckedCreateNestedManyWithoutCollegeInput
   courses?: Prisma.CollegeCourseUncheckedCreateNestedManyWithoutCollegeInput
   cutoffs?: Prisma.CollegeCutoffUncheckedCreateNestedManyWithoutCollegeInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutCollegeInput
@@ -2281,6 +2557,7 @@ export type CollegeUpdateWithoutRankingsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
+  aisheCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2302,8 +2579,9 @@ export type CollegeUpdateWithoutRankingsInput = {
   applications?: Prisma.UserApplicationUpdateManyWithoutCollegeNestedInput
   infrastructure?: Prisma.InfrastructureUpdateOneWithoutCollegeNestedInput
   photos?: Prisma.CollegePhotoUpdateManyWithoutCollegeNestedInput
+  fees?: Prisma.FeeUpdateManyWithoutCollegeNestedInput
   state?: Prisma.StateUpdateOneRequiredWithoutCollegesNestedInput
-  city?: Prisma.CityUpdateOneRequiredWithoutCollegesNestedInput
+  city?: Prisma.CityUpdateOneWithoutCollegesNestedInput
   courses?: Prisma.CollegeCourseUpdateManyWithoutCollegeNestedInput
   cutoffs?: Prisma.CollegeCutoffUpdateManyWithoutCollegeNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutCollegeNestedInput
@@ -2322,6 +2600,7 @@ export type CollegeUncheckedUpdateWithoutRankingsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
+  aisheCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2337,7 +2616,7 @@ export type CollegeUncheckedUpdateWithoutRankingsInput = {
   ogDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ogImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stateId?: Prisma.StringFieldUpdateOperationsInput | string
-  cityId?: Prisma.StringFieldUpdateOperationsInput | string
+  cityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   navigationItems?: Prisma.NavigationItemUncheckedUpdateManyWithoutCollegeNestedInput
@@ -2345,6 +2624,7 @@ export type CollegeUncheckedUpdateWithoutRankingsInput = {
   applications?: Prisma.UserApplicationUncheckedUpdateManyWithoutCollegeNestedInput
   infrastructure?: Prisma.InfrastructureUncheckedUpdateOneWithoutCollegeNestedInput
   photos?: Prisma.CollegePhotoUncheckedUpdateManyWithoutCollegeNestedInput
+  fees?: Prisma.FeeUncheckedUpdateManyWithoutCollegeNestedInput
   courses?: Prisma.CollegeCourseUncheckedUpdateManyWithoutCollegeNestedInput
   cutoffs?: Prisma.CollegeCutoffUncheckedUpdateManyWithoutCollegeNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutCollegeNestedInput
@@ -2363,6 +2643,7 @@ export type CollegeCreateWithoutDepartmentsInput = {
   description?: string | null
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
+  aisheCode?: string | null
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -2384,8 +2665,9 @@ export type CollegeCreateWithoutDepartmentsInput = {
   applications?: Prisma.UserApplicationCreateNestedManyWithoutCollegeInput
   infrastructure?: Prisma.InfrastructureCreateNestedOneWithoutCollegeInput
   photos?: Prisma.CollegePhotoCreateNestedManyWithoutCollegeInput
+  fees?: Prisma.FeeCreateNestedManyWithoutCollegeInput
   state: Prisma.StateCreateNestedOneWithoutCollegesInput
-  city: Prisma.CityCreateNestedOneWithoutCollegesInput
+  city?: Prisma.CityCreateNestedOneWithoutCollegesInput
   courses?: Prisma.CollegeCourseCreateNestedManyWithoutCollegeInput
   cutoffs?: Prisma.CollegeCutoffCreateNestedManyWithoutCollegeInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutCollegeInput
@@ -2404,6 +2686,7 @@ export type CollegeUncheckedCreateWithoutDepartmentsInput = {
   description?: string | null
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
+  aisheCode?: string | null
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -2419,7 +2702,7 @@ export type CollegeUncheckedCreateWithoutDepartmentsInput = {
   ogDescription?: string | null
   ogImage?: string | null
   stateId: string
-  cityId: string
+  cityId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   navigationItems?: Prisma.NavigationItemUncheckedCreateNestedManyWithoutCollegeInput
@@ -2427,6 +2710,7 @@ export type CollegeUncheckedCreateWithoutDepartmentsInput = {
   applications?: Prisma.UserApplicationUncheckedCreateNestedManyWithoutCollegeInput
   infrastructure?: Prisma.InfrastructureUncheckedCreateNestedOneWithoutCollegeInput
   photos?: Prisma.CollegePhotoUncheckedCreateNestedManyWithoutCollegeInput
+  fees?: Prisma.FeeUncheckedCreateNestedManyWithoutCollegeInput
   courses?: Prisma.CollegeCourseUncheckedCreateNestedManyWithoutCollegeInput
   cutoffs?: Prisma.CollegeCutoffUncheckedCreateNestedManyWithoutCollegeInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutCollegeInput
@@ -2461,6 +2745,7 @@ export type CollegeUpdateWithoutDepartmentsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
+  aisheCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2482,8 +2767,9 @@ export type CollegeUpdateWithoutDepartmentsInput = {
   applications?: Prisma.UserApplicationUpdateManyWithoutCollegeNestedInput
   infrastructure?: Prisma.InfrastructureUpdateOneWithoutCollegeNestedInput
   photos?: Prisma.CollegePhotoUpdateManyWithoutCollegeNestedInput
+  fees?: Prisma.FeeUpdateManyWithoutCollegeNestedInput
   state?: Prisma.StateUpdateOneRequiredWithoutCollegesNestedInput
-  city?: Prisma.CityUpdateOneRequiredWithoutCollegesNestedInput
+  city?: Prisma.CityUpdateOneWithoutCollegesNestedInput
   courses?: Prisma.CollegeCourseUpdateManyWithoutCollegeNestedInput
   cutoffs?: Prisma.CollegeCutoffUpdateManyWithoutCollegeNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutCollegeNestedInput
@@ -2502,6 +2788,7 @@ export type CollegeUncheckedUpdateWithoutDepartmentsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
+  aisheCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2517,7 +2804,7 @@ export type CollegeUncheckedUpdateWithoutDepartmentsInput = {
   ogDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ogImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stateId?: Prisma.StringFieldUpdateOperationsInput | string
-  cityId?: Prisma.StringFieldUpdateOperationsInput | string
+  cityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   navigationItems?: Prisma.NavigationItemUncheckedUpdateManyWithoutCollegeNestedInput
@@ -2525,6 +2812,7 @@ export type CollegeUncheckedUpdateWithoutDepartmentsInput = {
   applications?: Prisma.UserApplicationUncheckedUpdateManyWithoutCollegeNestedInput
   infrastructure?: Prisma.InfrastructureUncheckedUpdateOneWithoutCollegeNestedInput
   photos?: Prisma.CollegePhotoUncheckedUpdateManyWithoutCollegeNestedInput
+  fees?: Prisma.FeeUncheckedUpdateManyWithoutCollegeNestedInput
   courses?: Prisma.CollegeCourseUncheckedUpdateManyWithoutCollegeNestedInput
   cutoffs?: Prisma.CollegeCutoffUncheckedUpdateManyWithoutCollegeNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutCollegeNestedInput
@@ -2543,6 +2831,7 @@ export type CollegeCreateWithoutPlacementsInput = {
   description?: string | null
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
+  aisheCode?: string | null
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -2564,8 +2853,9 @@ export type CollegeCreateWithoutPlacementsInput = {
   applications?: Prisma.UserApplicationCreateNestedManyWithoutCollegeInput
   infrastructure?: Prisma.InfrastructureCreateNestedOneWithoutCollegeInput
   photos?: Prisma.CollegePhotoCreateNestedManyWithoutCollegeInput
+  fees?: Prisma.FeeCreateNestedManyWithoutCollegeInput
   state: Prisma.StateCreateNestedOneWithoutCollegesInput
-  city: Prisma.CityCreateNestedOneWithoutCollegesInput
+  city?: Prisma.CityCreateNestedOneWithoutCollegesInput
   courses?: Prisma.CollegeCourseCreateNestedManyWithoutCollegeInput
   cutoffs?: Prisma.CollegeCutoffCreateNestedManyWithoutCollegeInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutCollegeInput
@@ -2584,6 +2874,7 @@ export type CollegeUncheckedCreateWithoutPlacementsInput = {
   description?: string | null
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
+  aisheCode?: string | null
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -2599,7 +2890,7 @@ export type CollegeUncheckedCreateWithoutPlacementsInput = {
   ogDescription?: string | null
   ogImage?: string | null
   stateId: string
-  cityId: string
+  cityId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   navigationItems?: Prisma.NavigationItemUncheckedCreateNestedManyWithoutCollegeInput
@@ -2607,6 +2898,7 @@ export type CollegeUncheckedCreateWithoutPlacementsInput = {
   applications?: Prisma.UserApplicationUncheckedCreateNestedManyWithoutCollegeInput
   infrastructure?: Prisma.InfrastructureUncheckedCreateNestedOneWithoutCollegeInput
   photos?: Prisma.CollegePhotoUncheckedCreateNestedManyWithoutCollegeInput
+  fees?: Prisma.FeeUncheckedCreateNestedManyWithoutCollegeInput
   courses?: Prisma.CollegeCourseUncheckedCreateNestedManyWithoutCollegeInput
   cutoffs?: Prisma.CollegeCutoffUncheckedCreateNestedManyWithoutCollegeInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutCollegeInput
@@ -2641,6 +2933,7 @@ export type CollegeUpdateWithoutPlacementsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
+  aisheCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2662,8 +2955,9 @@ export type CollegeUpdateWithoutPlacementsInput = {
   applications?: Prisma.UserApplicationUpdateManyWithoutCollegeNestedInput
   infrastructure?: Prisma.InfrastructureUpdateOneWithoutCollegeNestedInput
   photos?: Prisma.CollegePhotoUpdateManyWithoutCollegeNestedInput
+  fees?: Prisma.FeeUpdateManyWithoutCollegeNestedInput
   state?: Prisma.StateUpdateOneRequiredWithoutCollegesNestedInput
-  city?: Prisma.CityUpdateOneRequiredWithoutCollegesNestedInput
+  city?: Prisma.CityUpdateOneWithoutCollegesNestedInput
   courses?: Prisma.CollegeCourseUpdateManyWithoutCollegeNestedInput
   cutoffs?: Prisma.CollegeCutoffUpdateManyWithoutCollegeNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutCollegeNestedInput
@@ -2682,6 +2976,7 @@ export type CollegeUncheckedUpdateWithoutPlacementsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
+  aisheCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2697,7 +2992,7 @@ export type CollegeUncheckedUpdateWithoutPlacementsInput = {
   ogDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ogImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stateId?: Prisma.StringFieldUpdateOperationsInput | string
-  cityId?: Prisma.StringFieldUpdateOperationsInput | string
+  cityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   navigationItems?: Prisma.NavigationItemUncheckedUpdateManyWithoutCollegeNestedInput
@@ -2705,6 +3000,7 @@ export type CollegeUncheckedUpdateWithoutPlacementsInput = {
   applications?: Prisma.UserApplicationUncheckedUpdateManyWithoutCollegeNestedInput
   infrastructure?: Prisma.InfrastructureUncheckedUpdateOneWithoutCollegeNestedInput
   photos?: Prisma.CollegePhotoUncheckedUpdateManyWithoutCollegeNestedInput
+  fees?: Prisma.FeeUncheckedUpdateManyWithoutCollegeNestedInput
   courses?: Prisma.CollegeCourseUncheckedUpdateManyWithoutCollegeNestedInput
   cutoffs?: Prisma.CollegeCutoffUncheckedUpdateManyWithoutCollegeNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutCollegeNestedInput
@@ -2723,6 +3019,7 @@ export type CollegeCreateWithoutQuestionsInput = {
   description?: string | null
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
+  aisheCode?: string | null
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -2744,8 +3041,9 @@ export type CollegeCreateWithoutQuestionsInput = {
   applications?: Prisma.UserApplicationCreateNestedManyWithoutCollegeInput
   infrastructure?: Prisma.InfrastructureCreateNestedOneWithoutCollegeInput
   photos?: Prisma.CollegePhotoCreateNestedManyWithoutCollegeInput
+  fees?: Prisma.FeeCreateNestedManyWithoutCollegeInput
   state: Prisma.StateCreateNestedOneWithoutCollegesInput
-  city: Prisma.CityCreateNestedOneWithoutCollegesInput
+  city?: Prisma.CityCreateNestedOneWithoutCollegesInput
   courses?: Prisma.CollegeCourseCreateNestedManyWithoutCollegeInput
   cutoffs?: Prisma.CollegeCutoffCreateNestedManyWithoutCollegeInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutCollegeInput
@@ -2764,6 +3062,7 @@ export type CollegeUncheckedCreateWithoutQuestionsInput = {
   description?: string | null
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
+  aisheCode?: string | null
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -2779,7 +3078,7 @@ export type CollegeUncheckedCreateWithoutQuestionsInput = {
   ogDescription?: string | null
   ogImage?: string | null
   stateId: string
-  cityId: string
+  cityId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   navigationItems?: Prisma.NavigationItemUncheckedCreateNestedManyWithoutCollegeInput
@@ -2787,6 +3086,7 @@ export type CollegeUncheckedCreateWithoutQuestionsInput = {
   applications?: Prisma.UserApplicationUncheckedCreateNestedManyWithoutCollegeInput
   infrastructure?: Prisma.InfrastructureUncheckedCreateNestedOneWithoutCollegeInput
   photos?: Prisma.CollegePhotoUncheckedCreateNestedManyWithoutCollegeInput
+  fees?: Prisma.FeeUncheckedCreateNestedManyWithoutCollegeInput
   courses?: Prisma.CollegeCourseUncheckedCreateNestedManyWithoutCollegeInput
   cutoffs?: Prisma.CollegeCutoffUncheckedCreateNestedManyWithoutCollegeInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutCollegeInput
@@ -2821,6 +3121,7 @@ export type CollegeUpdateWithoutQuestionsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
+  aisheCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2842,8 +3143,9 @@ export type CollegeUpdateWithoutQuestionsInput = {
   applications?: Prisma.UserApplicationUpdateManyWithoutCollegeNestedInput
   infrastructure?: Prisma.InfrastructureUpdateOneWithoutCollegeNestedInput
   photos?: Prisma.CollegePhotoUpdateManyWithoutCollegeNestedInput
+  fees?: Prisma.FeeUpdateManyWithoutCollegeNestedInput
   state?: Prisma.StateUpdateOneRequiredWithoutCollegesNestedInput
-  city?: Prisma.CityUpdateOneRequiredWithoutCollegesNestedInput
+  city?: Prisma.CityUpdateOneWithoutCollegesNestedInput
   courses?: Prisma.CollegeCourseUpdateManyWithoutCollegeNestedInput
   cutoffs?: Prisma.CollegeCutoffUpdateManyWithoutCollegeNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutCollegeNestedInput
@@ -2862,6 +3164,7 @@ export type CollegeUncheckedUpdateWithoutQuestionsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
+  aisheCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2877,7 +3180,7 @@ export type CollegeUncheckedUpdateWithoutQuestionsInput = {
   ogDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ogImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stateId?: Prisma.StringFieldUpdateOperationsInput | string
-  cityId?: Prisma.StringFieldUpdateOperationsInput | string
+  cityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   navigationItems?: Prisma.NavigationItemUncheckedUpdateManyWithoutCollegeNestedInput
@@ -2885,6 +3188,7 @@ export type CollegeUncheckedUpdateWithoutQuestionsInput = {
   applications?: Prisma.UserApplicationUncheckedUpdateManyWithoutCollegeNestedInput
   infrastructure?: Prisma.InfrastructureUncheckedUpdateOneWithoutCollegeNestedInput
   photos?: Prisma.CollegePhotoUncheckedUpdateManyWithoutCollegeNestedInput
+  fees?: Prisma.FeeUncheckedUpdateManyWithoutCollegeNestedInput
   courses?: Prisma.CollegeCourseUncheckedUpdateManyWithoutCollegeNestedInput
   cutoffs?: Prisma.CollegeCutoffUncheckedUpdateManyWithoutCollegeNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutCollegeNestedInput
@@ -2903,6 +3207,7 @@ export type CollegeCreateWithoutInfrastructureInput = {
   description?: string | null
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
+  aisheCode?: string | null
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -2923,8 +3228,9 @@ export type CollegeCreateWithoutInfrastructureInput = {
   shortlists?: Prisma.UserShortlistCreateNestedManyWithoutCollegeInput
   applications?: Prisma.UserApplicationCreateNestedManyWithoutCollegeInput
   photos?: Prisma.CollegePhotoCreateNestedManyWithoutCollegeInput
+  fees?: Prisma.FeeCreateNestedManyWithoutCollegeInput
   state: Prisma.StateCreateNestedOneWithoutCollegesInput
-  city: Prisma.CityCreateNestedOneWithoutCollegesInput
+  city?: Prisma.CityCreateNestedOneWithoutCollegesInput
   courses?: Prisma.CollegeCourseCreateNestedManyWithoutCollegeInput
   cutoffs?: Prisma.CollegeCutoffCreateNestedManyWithoutCollegeInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutCollegeInput
@@ -2944,6 +3250,7 @@ export type CollegeUncheckedCreateWithoutInfrastructureInput = {
   description?: string | null
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
+  aisheCode?: string | null
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -2959,13 +3266,14 @@ export type CollegeUncheckedCreateWithoutInfrastructureInput = {
   ogDescription?: string | null
   ogImage?: string | null
   stateId: string
-  cityId: string
+  cityId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   navigationItems?: Prisma.NavigationItemUncheckedCreateNestedManyWithoutCollegeInput
   shortlists?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutCollegeInput
   applications?: Prisma.UserApplicationUncheckedCreateNestedManyWithoutCollegeInput
   photos?: Prisma.CollegePhotoUncheckedCreateNestedManyWithoutCollegeInput
+  fees?: Prisma.FeeUncheckedCreateNestedManyWithoutCollegeInput
   courses?: Prisma.CollegeCourseUncheckedCreateNestedManyWithoutCollegeInput
   cutoffs?: Prisma.CollegeCutoffUncheckedCreateNestedManyWithoutCollegeInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutCollegeInput
@@ -3001,6 +3309,7 @@ export type CollegeUpdateWithoutInfrastructureInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
+  aisheCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3021,8 +3330,9 @@ export type CollegeUpdateWithoutInfrastructureInput = {
   shortlists?: Prisma.UserShortlistUpdateManyWithoutCollegeNestedInput
   applications?: Prisma.UserApplicationUpdateManyWithoutCollegeNestedInput
   photos?: Prisma.CollegePhotoUpdateManyWithoutCollegeNestedInput
+  fees?: Prisma.FeeUpdateManyWithoutCollegeNestedInput
   state?: Prisma.StateUpdateOneRequiredWithoutCollegesNestedInput
-  city?: Prisma.CityUpdateOneRequiredWithoutCollegesNestedInput
+  city?: Prisma.CityUpdateOneWithoutCollegesNestedInput
   courses?: Prisma.CollegeCourseUpdateManyWithoutCollegeNestedInput
   cutoffs?: Prisma.CollegeCutoffUpdateManyWithoutCollegeNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutCollegeNestedInput
@@ -3042,6 +3352,7 @@ export type CollegeUncheckedUpdateWithoutInfrastructureInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
+  aisheCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3057,13 +3368,14 @@ export type CollegeUncheckedUpdateWithoutInfrastructureInput = {
   ogDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ogImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stateId?: Prisma.StringFieldUpdateOperationsInput | string
-  cityId?: Prisma.StringFieldUpdateOperationsInput | string
+  cityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   navigationItems?: Prisma.NavigationItemUncheckedUpdateManyWithoutCollegeNestedInput
   shortlists?: Prisma.UserShortlistUncheckedUpdateManyWithoutCollegeNestedInput
   applications?: Prisma.UserApplicationUncheckedUpdateManyWithoutCollegeNestedInput
   photos?: Prisma.CollegePhotoUncheckedUpdateManyWithoutCollegeNestedInput
+  fees?: Prisma.FeeUncheckedUpdateManyWithoutCollegeNestedInput
   courses?: Prisma.CollegeCourseUncheckedUpdateManyWithoutCollegeNestedInput
   cutoffs?: Prisma.CollegeCutoffUncheckedUpdateManyWithoutCollegeNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutCollegeNestedInput
@@ -3083,6 +3395,7 @@ export type CollegeCreateWithoutPhotosInput = {
   description?: string | null
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
+  aisheCode?: string | null
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -3103,8 +3416,9 @@ export type CollegeCreateWithoutPhotosInput = {
   shortlists?: Prisma.UserShortlistCreateNestedManyWithoutCollegeInput
   applications?: Prisma.UserApplicationCreateNestedManyWithoutCollegeInput
   infrastructure?: Prisma.InfrastructureCreateNestedOneWithoutCollegeInput
+  fees?: Prisma.FeeCreateNestedManyWithoutCollegeInput
   state: Prisma.StateCreateNestedOneWithoutCollegesInput
-  city: Prisma.CityCreateNestedOneWithoutCollegesInput
+  city?: Prisma.CityCreateNestedOneWithoutCollegesInput
   courses?: Prisma.CollegeCourseCreateNestedManyWithoutCollegeInput
   cutoffs?: Prisma.CollegeCutoffCreateNestedManyWithoutCollegeInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutCollegeInput
@@ -3124,6 +3438,7 @@ export type CollegeUncheckedCreateWithoutPhotosInput = {
   description?: string | null
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
+  aisheCode?: string | null
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -3139,13 +3454,14 @@ export type CollegeUncheckedCreateWithoutPhotosInput = {
   ogDescription?: string | null
   ogImage?: string | null
   stateId: string
-  cityId: string
+  cityId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   navigationItems?: Prisma.NavigationItemUncheckedCreateNestedManyWithoutCollegeInput
   shortlists?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutCollegeInput
   applications?: Prisma.UserApplicationUncheckedCreateNestedManyWithoutCollegeInput
   infrastructure?: Prisma.InfrastructureUncheckedCreateNestedOneWithoutCollegeInput
+  fees?: Prisma.FeeUncheckedCreateNestedManyWithoutCollegeInput
   courses?: Prisma.CollegeCourseUncheckedCreateNestedManyWithoutCollegeInput
   cutoffs?: Prisma.CollegeCutoffUncheckedCreateNestedManyWithoutCollegeInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutCollegeInput
@@ -3181,6 +3497,7 @@ export type CollegeUpdateWithoutPhotosInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
+  aisheCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3201,8 +3518,9 @@ export type CollegeUpdateWithoutPhotosInput = {
   shortlists?: Prisma.UserShortlistUpdateManyWithoutCollegeNestedInput
   applications?: Prisma.UserApplicationUpdateManyWithoutCollegeNestedInput
   infrastructure?: Prisma.InfrastructureUpdateOneWithoutCollegeNestedInput
+  fees?: Prisma.FeeUpdateManyWithoutCollegeNestedInput
   state?: Prisma.StateUpdateOneRequiredWithoutCollegesNestedInput
-  city?: Prisma.CityUpdateOneRequiredWithoutCollegesNestedInput
+  city?: Prisma.CityUpdateOneWithoutCollegesNestedInput
   courses?: Prisma.CollegeCourseUpdateManyWithoutCollegeNestedInput
   cutoffs?: Prisma.CollegeCutoffUpdateManyWithoutCollegeNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutCollegeNestedInput
@@ -3222,6 +3540,7 @@ export type CollegeUncheckedUpdateWithoutPhotosInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
+  aisheCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3237,13 +3556,14 @@ export type CollegeUncheckedUpdateWithoutPhotosInput = {
   ogDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ogImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stateId?: Prisma.StringFieldUpdateOperationsInput | string
-  cityId?: Prisma.StringFieldUpdateOperationsInput | string
+  cityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   navigationItems?: Prisma.NavigationItemUncheckedUpdateManyWithoutCollegeNestedInput
   shortlists?: Prisma.UserShortlistUncheckedUpdateManyWithoutCollegeNestedInput
   applications?: Prisma.UserApplicationUncheckedUpdateManyWithoutCollegeNestedInput
   infrastructure?: Prisma.InfrastructureUncheckedUpdateOneWithoutCollegeNestedInput
+  fees?: Prisma.FeeUncheckedUpdateManyWithoutCollegeNestedInput
   courses?: Prisma.CollegeCourseUncheckedUpdateManyWithoutCollegeNestedInput
   cutoffs?: Prisma.CollegeCutoffUncheckedUpdateManyWithoutCollegeNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutCollegeNestedInput
@@ -3263,6 +3583,7 @@ export type CollegeCreateWithoutShortlistsInput = {
   description?: string | null
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
+  aisheCode?: string | null
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -3283,8 +3604,9 @@ export type CollegeCreateWithoutShortlistsInput = {
   applications?: Prisma.UserApplicationCreateNestedManyWithoutCollegeInput
   infrastructure?: Prisma.InfrastructureCreateNestedOneWithoutCollegeInput
   photos?: Prisma.CollegePhotoCreateNestedManyWithoutCollegeInput
+  fees?: Prisma.FeeCreateNestedManyWithoutCollegeInput
   state: Prisma.StateCreateNestedOneWithoutCollegesInput
-  city: Prisma.CityCreateNestedOneWithoutCollegesInput
+  city?: Prisma.CityCreateNestedOneWithoutCollegesInput
   courses?: Prisma.CollegeCourseCreateNestedManyWithoutCollegeInput
   cutoffs?: Prisma.CollegeCutoffCreateNestedManyWithoutCollegeInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutCollegeInput
@@ -3304,6 +3626,7 @@ export type CollegeUncheckedCreateWithoutShortlistsInput = {
   description?: string | null
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
+  aisheCode?: string | null
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -3319,13 +3642,14 @@ export type CollegeUncheckedCreateWithoutShortlistsInput = {
   ogDescription?: string | null
   ogImage?: string | null
   stateId: string
-  cityId: string
+  cityId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   navigationItems?: Prisma.NavigationItemUncheckedCreateNestedManyWithoutCollegeInput
   applications?: Prisma.UserApplicationUncheckedCreateNestedManyWithoutCollegeInput
   infrastructure?: Prisma.InfrastructureUncheckedCreateNestedOneWithoutCollegeInput
   photos?: Prisma.CollegePhotoUncheckedCreateNestedManyWithoutCollegeInput
+  fees?: Prisma.FeeUncheckedCreateNestedManyWithoutCollegeInput
   courses?: Prisma.CollegeCourseUncheckedCreateNestedManyWithoutCollegeInput
   cutoffs?: Prisma.CollegeCutoffUncheckedCreateNestedManyWithoutCollegeInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutCollegeInput
@@ -3361,6 +3685,7 @@ export type CollegeUpdateWithoutShortlistsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
+  aisheCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3381,8 +3706,9 @@ export type CollegeUpdateWithoutShortlistsInput = {
   applications?: Prisma.UserApplicationUpdateManyWithoutCollegeNestedInput
   infrastructure?: Prisma.InfrastructureUpdateOneWithoutCollegeNestedInput
   photos?: Prisma.CollegePhotoUpdateManyWithoutCollegeNestedInput
+  fees?: Prisma.FeeUpdateManyWithoutCollegeNestedInput
   state?: Prisma.StateUpdateOneRequiredWithoutCollegesNestedInput
-  city?: Prisma.CityUpdateOneRequiredWithoutCollegesNestedInput
+  city?: Prisma.CityUpdateOneWithoutCollegesNestedInput
   courses?: Prisma.CollegeCourseUpdateManyWithoutCollegeNestedInput
   cutoffs?: Prisma.CollegeCutoffUpdateManyWithoutCollegeNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutCollegeNestedInput
@@ -3402,6 +3728,7 @@ export type CollegeUncheckedUpdateWithoutShortlistsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
+  aisheCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3417,13 +3744,14 @@ export type CollegeUncheckedUpdateWithoutShortlistsInput = {
   ogDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ogImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stateId?: Prisma.StringFieldUpdateOperationsInput | string
-  cityId?: Prisma.StringFieldUpdateOperationsInput | string
+  cityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   navigationItems?: Prisma.NavigationItemUncheckedUpdateManyWithoutCollegeNestedInput
   applications?: Prisma.UserApplicationUncheckedUpdateManyWithoutCollegeNestedInput
   infrastructure?: Prisma.InfrastructureUncheckedUpdateOneWithoutCollegeNestedInput
   photos?: Prisma.CollegePhotoUncheckedUpdateManyWithoutCollegeNestedInput
+  fees?: Prisma.FeeUncheckedUpdateManyWithoutCollegeNestedInput
   courses?: Prisma.CollegeCourseUncheckedUpdateManyWithoutCollegeNestedInput
   cutoffs?: Prisma.CollegeCutoffUncheckedUpdateManyWithoutCollegeNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutCollegeNestedInput
@@ -3443,6 +3771,7 @@ export type CollegeCreateWithoutApplicationsInput = {
   description?: string | null
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
+  aisheCode?: string | null
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -3463,8 +3792,9 @@ export type CollegeCreateWithoutApplicationsInput = {
   shortlists?: Prisma.UserShortlistCreateNestedManyWithoutCollegeInput
   infrastructure?: Prisma.InfrastructureCreateNestedOneWithoutCollegeInput
   photos?: Prisma.CollegePhotoCreateNestedManyWithoutCollegeInput
+  fees?: Prisma.FeeCreateNestedManyWithoutCollegeInput
   state: Prisma.StateCreateNestedOneWithoutCollegesInput
-  city: Prisma.CityCreateNestedOneWithoutCollegesInput
+  city?: Prisma.CityCreateNestedOneWithoutCollegesInput
   courses?: Prisma.CollegeCourseCreateNestedManyWithoutCollegeInput
   cutoffs?: Prisma.CollegeCutoffCreateNestedManyWithoutCollegeInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutCollegeInput
@@ -3484,6 +3814,7 @@ export type CollegeUncheckedCreateWithoutApplicationsInput = {
   description?: string | null
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
+  aisheCode?: string | null
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -3499,13 +3830,14 @@ export type CollegeUncheckedCreateWithoutApplicationsInput = {
   ogDescription?: string | null
   ogImage?: string | null
   stateId: string
-  cityId: string
+  cityId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   navigationItems?: Prisma.NavigationItemUncheckedCreateNestedManyWithoutCollegeInput
   shortlists?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutCollegeInput
   infrastructure?: Prisma.InfrastructureUncheckedCreateNestedOneWithoutCollegeInput
   photos?: Prisma.CollegePhotoUncheckedCreateNestedManyWithoutCollegeInput
+  fees?: Prisma.FeeUncheckedCreateNestedManyWithoutCollegeInput
   courses?: Prisma.CollegeCourseUncheckedCreateNestedManyWithoutCollegeInput
   cutoffs?: Prisma.CollegeCutoffUncheckedCreateNestedManyWithoutCollegeInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutCollegeInput
@@ -3541,6 +3873,7 @@ export type CollegeUpdateWithoutApplicationsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
+  aisheCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3561,8 +3894,9 @@ export type CollegeUpdateWithoutApplicationsInput = {
   shortlists?: Prisma.UserShortlistUpdateManyWithoutCollegeNestedInput
   infrastructure?: Prisma.InfrastructureUpdateOneWithoutCollegeNestedInput
   photos?: Prisma.CollegePhotoUpdateManyWithoutCollegeNestedInput
+  fees?: Prisma.FeeUpdateManyWithoutCollegeNestedInput
   state?: Prisma.StateUpdateOneRequiredWithoutCollegesNestedInput
-  city?: Prisma.CityUpdateOneRequiredWithoutCollegesNestedInput
+  city?: Prisma.CityUpdateOneWithoutCollegesNestedInput
   courses?: Prisma.CollegeCourseUpdateManyWithoutCollegeNestedInput
   cutoffs?: Prisma.CollegeCutoffUpdateManyWithoutCollegeNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutCollegeNestedInput
@@ -3582,6 +3916,7 @@ export type CollegeUncheckedUpdateWithoutApplicationsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
+  aisheCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3597,13 +3932,14 @@ export type CollegeUncheckedUpdateWithoutApplicationsInput = {
   ogDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ogImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stateId?: Prisma.StringFieldUpdateOperationsInput | string
-  cityId?: Prisma.StringFieldUpdateOperationsInput | string
+  cityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   navigationItems?: Prisma.NavigationItemUncheckedUpdateManyWithoutCollegeNestedInput
   shortlists?: Prisma.UserShortlistUncheckedUpdateManyWithoutCollegeNestedInput
   infrastructure?: Prisma.InfrastructureUncheckedUpdateOneWithoutCollegeNestedInput
   photos?: Prisma.CollegePhotoUncheckedUpdateManyWithoutCollegeNestedInput
+  fees?: Prisma.FeeUncheckedUpdateManyWithoutCollegeNestedInput
   courses?: Prisma.CollegeCourseUncheckedUpdateManyWithoutCollegeNestedInput
   cutoffs?: Prisma.CollegeCutoffUncheckedUpdateManyWithoutCollegeNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutCollegeNestedInput
@@ -3623,6 +3959,7 @@ export type CollegeCreateManyStateInput = {
   description?: string | null
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
+  aisheCode?: string | null
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -3637,7 +3974,7 @@ export type CollegeCreateManyStateInput = {
   ogTitle?: string | null
   ogDescription?: string | null
   ogImage?: string | null
-  cityId: string
+  cityId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -3652,6 +3989,7 @@ export type CollegeUpdateWithoutStateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
+  aisheCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3673,7 +4011,8 @@ export type CollegeUpdateWithoutStateInput = {
   applications?: Prisma.UserApplicationUpdateManyWithoutCollegeNestedInput
   infrastructure?: Prisma.InfrastructureUpdateOneWithoutCollegeNestedInput
   photos?: Prisma.CollegePhotoUpdateManyWithoutCollegeNestedInput
-  city?: Prisma.CityUpdateOneRequiredWithoutCollegesNestedInput
+  fees?: Prisma.FeeUpdateManyWithoutCollegeNestedInput
+  city?: Prisma.CityUpdateOneWithoutCollegesNestedInput
   courses?: Prisma.CollegeCourseUpdateManyWithoutCollegeNestedInput
   cutoffs?: Prisma.CollegeCutoffUpdateManyWithoutCollegeNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutCollegeNestedInput
@@ -3693,6 +4032,7 @@ export type CollegeUncheckedUpdateWithoutStateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
+  aisheCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3707,7 +4047,7 @@ export type CollegeUncheckedUpdateWithoutStateInput = {
   ogTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ogDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ogImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  cityId?: Prisma.StringFieldUpdateOperationsInput | string
+  cityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   navigationItems?: Prisma.NavigationItemUncheckedUpdateManyWithoutCollegeNestedInput
@@ -3715,6 +4055,7 @@ export type CollegeUncheckedUpdateWithoutStateInput = {
   applications?: Prisma.UserApplicationUncheckedUpdateManyWithoutCollegeNestedInput
   infrastructure?: Prisma.InfrastructureUncheckedUpdateOneWithoutCollegeNestedInput
   photos?: Prisma.CollegePhotoUncheckedUpdateManyWithoutCollegeNestedInput
+  fees?: Prisma.FeeUncheckedUpdateManyWithoutCollegeNestedInput
   courses?: Prisma.CollegeCourseUncheckedUpdateManyWithoutCollegeNestedInput
   cutoffs?: Prisma.CollegeCutoffUncheckedUpdateManyWithoutCollegeNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutCollegeNestedInput
@@ -3734,6 +4075,7 @@ export type CollegeUncheckedUpdateManyWithoutStateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
+  aisheCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3748,7 +4090,7 @@ export type CollegeUncheckedUpdateManyWithoutStateInput = {
   ogTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ogDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ogImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  cityId?: Prisma.StringFieldUpdateOperationsInput | string
+  cityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -3763,6 +4105,7 @@ export type CollegeCreateManyCityInput = {
   description?: string | null
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
+  aisheCode?: string | null
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -3792,6 +4135,7 @@ export type CollegeUpdateWithoutCityInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
+  aisheCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3813,6 +4157,7 @@ export type CollegeUpdateWithoutCityInput = {
   applications?: Prisma.UserApplicationUpdateManyWithoutCollegeNestedInput
   infrastructure?: Prisma.InfrastructureUpdateOneWithoutCollegeNestedInput
   photos?: Prisma.CollegePhotoUpdateManyWithoutCollegeNestedInput
+  fees?: Prisma.FeeUpdateManyWithoutCollegeNestedInput
   state?: Prisma.StateUpdateOneRequiredWithoutCollegesNestedInput
   courses?: Prisma.CollegeCourseUpdateManyWithoutCollegeNestedInput
   cutoffs?: Prisma.CollegeCutoffUpdateManyWithoutCollegeNestedInput
@@ -3833,6 +4178,7 @@ export type CollegeUncheckedUpdateWithoutCityInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
+  aisheCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3855,6 +4201,7 @@ export type CollegeUncheckedUpdateWithoutCityInput = {
   applications?: Prisma.UserApplicationUncheckedUpdateManyWithoutCollegeNestedInput
   infrastructure?: Prisma.InfrastructureUncheckedUpdateOneWithoutCollegeNestedInput
   photos?: Prisma.CollegePhotoUncheckedUpdateManyWithoutCollegeNestedInput
+  fees?: Prisma.FeeUncheckedUpdateManyWithoutCollegeNestedInput
   courses?: Prisma.CollegeCourseUncheckedUpdateManyWithoutCollegeNestedInput
   cutoffs?: Prisma.CollegeCutoffUncheckedUpdateManyWithoutCollegeNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutCollegeNestedInput
@@ -3874,6 +4221,7 @@ export type CollegeUncheckedUpdateManyWithoutCityInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
+  aisheCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3903,6 +4251,7 @@ export type CollegeCountOutputType = {
   shortlists: number
   applications: number
   photos: number
+  fees: number
   courses: number
   cutoffs: number
   reviews: number
@@ -3917,6 +4266,7 @@ export type CollegeCountOutputTypeSelect<ExtArgs extends runtime.Types.Extension
   shortlists?: boolean | CollegeCountOutputTypeCountShortlistsArgs
   applications?: boolean | CollegeCountOutputTypeCountApplicationsArgs
   photos?: boolean | CollegeCountOutputTypeCountPhotosArgs
+  fees?: boolean | CollegeCountOutputTypeCountFeesArgs
   courses?: boolean | CollegeCountOutputTypeCountCoursesArgs
   cutoffs?: boolean | CollegeCountOutputTypeCountCutoffsArgs
   reviews?: boolean | CollegeCountOutputTypeCountReviewsArgs
@@ -3962,6 +4312,13 @@ export type CollegeCountOutputTypeCountApplicationsArgs<ExtArgs extends runtime.
  */
 export type CollegeCountOutputTypeCountPhotosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.CollegePhotoWhereInput
+}
+
+/**
+ * CollegeCountOutputType without action
+ */
+export type CollegeCountOutputTypeCountFeesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FeeWhereInput
 }
 
 /**
@@ -4024,6 +4381,7 @@ export type CollegeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   description?: boolean
   establishedYear?: boolean
   collegeType?: boolean
+  aisheCode?: boolean
   website?: boolean
   email?: boolean
   phone?: boolean
@@ -4047,8 +4405,9 @@ export type CollegeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   applications?: boolean | Prisma.College$applicationsArgs<ExtArgs>
   infrastructure?: boolean | Prisma.College$infrastructureArgs<ExtArgs>
   photos?: boolean | Prisma.College$photosArgs<ExtArgs>
+  fees?: boolean | Prisma.College$feesArgs<ExtArgs>
   state?: boolean | Prisma.StateDefaultArgs<ExtArgs>
-  city?: boolean | Prisma.CityDefaultArgs<ExtArgs>
+  city?: boolean | Prisma.College$cityArgs<ExtArgs>
   courses?: boolean | Prisma.College$coursesArgs<ExtArgs>
   cutoffs?: boolean | Prisma.College$cutoffsArgs<ExtArgs>
   reviews?: boolean | Prisma.College$reviewsArgs<ExtArgs>
@@ -4069,6 +4428,7 @@ export type CollegeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   description?: boolean
   establishedYear?: boolean
   collegeType?: boolean
+  aisheCode?: boolean
   website?: boolean
   email?: boolean
   phone?: boolean
@@ -4088,7 +4448,7 @@ export type CollegeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   createdAt?: boolean
   updatedAt?: boolean
   state?: boolean | Prisma.StateDefaultArgs<ExtArgs>
-  city?: boolean | Prisma.CityDefaultArgs<ExtArgs>
+  city?: boolean | Prisma.College$cityArgs<ExtArgs>
 }, ExtArgs["result"]["college"]>
 
 export type CollegeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -4101,6 +4461,7 @@ export type CollegeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   description?: boolean
   establishedYear?: boolean
   collegeType?: boolean
+  aisheCode?: boolean
   website?: boolean
   email?: boolean
   phone?: boolean
@@ -4120,7 +4481,7 @@ export type CollegeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   createdAt?: boolean
   updatedAt?: boolean
   state?: boolean | Prisma.StateDefaultArgs<ExtArgs>
-  city?: boolean | Prisma.CityDefaultArgs<ExtArgs>
+  city?: boolean | Prisma.College$cityArgs<ExtArgs>
 }, ExtArgs["result"]["college"]>
 
 export type CollegeSelectScalar = {
@@ -4133,6 +4494,7 @@ export type CollegeSelectScalar = {
   description?: boolean
   establishedYear?: boolean
   collegeType?: boolean
+  aisheCode?: boolean
   website?: boolean
   email?: boolean
   phone?: boolean
@@ -4153,15 +4515,16 @@ export type CollegeSelectScalar = {
   updatedAt?: boolean
 }
 
-export type CollegeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "slug" | "shortName" | "logo" | "coverImage" | "description" | "establishedYear" | "collegeType" | "website" | "email" | "phone" | "address" | "verified" | "status" | "lastUpdated" | "seoTitle" | "seoDescription" | "seoKeywords" | "canonicalUrl" | "ogTitle" | "ogDescription" | "ogImage" | "stateId" | "cityId" | "createdAt" | "updatedAt", ExtArgs["result"]["college"]>
+export type CollegeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "slug" | "shortName" | "logo" | "coverImage" | "description" | "establishedYear" | "collegeType" | "aisheCode" | "website" | "email" | "phone" | "address" | "verified" | "status" | "lastUpdated" | "seoTitle" | "seoDescription" | "seoKeywords" | "canonicalUrl" | "ogTitle" | "ogDescription" | "ogImage" | "stateId" | "cityId" | "createdAt" | "updatedAt", ExtArgs["result"]["college"]>
 export type CollegeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   navigationItems?: boolean | Prisma.College$navigationItemsArgs<ExtArgs>
   shortlists?: boolean | Prisma.College$shortlistsArgs<ExtArgs>
   applications?: boolean | Prisma.College$applicationsArgs<ExtArgs>
   infrastructure?: boolean | Prisma.College$infrastructureArgs<ExtArgs>
   photos?: boolean | Prisma.College$photosArgs<ExtArgs>
+  fees?: boolean | Prisma.College$feesArgs<ExtArgs>
   state?: boolean | Prisma.StateDefaultArgs<ExtArgs>
-  city?: boolean | Prisma.CityDefaultArgs<ExtArgs>
+  city?: boolean | Prisma.College$cityArgs<ExtArgs>
   courses?: boolean | Prisma.College$coursesArgs<ExtArgs>
   cutoffs?: boolean | Prisma.College$cutoffsArgs<ExtArgs>
   reviews?: boolean | Prisma.College$reviewsArgs<ExtArgs>
@@ -4173,11 +4536,11 @@ export type CollegeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
 }
 export type CollegeIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   state?: boolean | Prisma.StateDefaultArgs<ExtArgs>
-  city?: boolean | Prisma.CityDefaultArgs<ExtArgs>
+  city?: boolean | Prisma.College$cityArgs<ExtArgs>
 }
 export type CollegeIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   state?: boolean | Prisma.StateDefaultArgs<ExtArgs>
-  city?: boolean | Prisma.CityDefaultArgs<ExtArgs>
+  city?: boolean | Prisma.College$cityArgs<ExtArgs>
 }
 
 export type $CollegePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -4188,8 +4551,9 @@ export type $CollegePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     applications: Prisma.$UserApplicationPayload<ExtArgs>[]
     infrastructure: Prisma.$InfrastructurePayload<ExtArgs> | null
     photos: Prisma.$CollegePhotoPayload<ExtArgs>[]
+    fees: Prisma.$FeePayload<ExtArgs>[]
     state: Prisma.$StatePayload<ExtArgs>
-    city: Prisma.$CityPayload<ExtArgs>
+    city: Prisma.$CityPayload<ExtArgs> | null
     courses: Prisma.$CollegeCoursePayload<ExtArgs>[]
     cutoffs: Prisma.$CollegeCutoffPayload<ExtArgs>[]
     reviews: Prisma.$ReviewPayload<ExtArgs>[]
@@ -4208,6 +4572,7 @@ export type $CollegePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     description: string | null
     establishedYear: number | null
     collegeType: $Enums.CollegeType
+    aisheCode: string | null
     website: string | null
     email: string | null
     phone: string | null
@@ -4223,7 +4588,7 @@ export type $CollegePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     ogDescription: string | null
     ogImage: string | null
     stateId: string
-    cityId: string
+    cityId: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["college"]>
@@ -4625,8 +4990,9 @@ export interface Prisma__CollegeClient<T, Null = never, ExtArgs extends runtime.
   applications<T extends Prisma.College$applicationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.College$applicationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserApplicationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   infrastructure<T extends Prisma.College$infrastructureArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.College$infrastructureArgs<ExtArgs>>): Prisma.Prisma__InfrastructureClient<runtime.Types.Result.GetResult<Prisma.$InfrastructurePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   photos<T extends Prisma.College$photosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.College$photosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CollegePhotoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  fees<T extends Prisma.College$feesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.College$feesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   state<T extends Prisma.StateDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StateDefaultArgs<ExtArgs>>): Prisma.Prisma__StateClient<runtime.Types.Result.GetResult<Prisma.$StatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  city<T extends Prisma.CityDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CityDefaultArgs<ExtArgs>>): Prisma.Prisma__CityClient<runtime.Types.Result.GetResult<Prisma.$CityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  city<T extends Prisma.College$cityArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.College$cityArgs<ExtArgs>>): Prisma.Prisma__CityClient<runtime.Types.Result.GetResult<Prisma.$CityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   courses<T extends Prisma.College$coursesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.College$coursesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CollegeCoursePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   cutoffs<T extends Prisma.College$cutoffsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.College$cutoffsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CollegeCutoffPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reviews<T extends Prisma.College$reviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.College$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -4672,6 +5038,7 @@ export interface CollegeFieldRefs {
   readonly description: Prisma.FieldRef<"College", 'String'>
   readonly establishedYear: Prisma.FieldRef<"College", 'Int'>
   readonly collegeType: Prisma.FieldRef<"College", 'CollegeType'>
+  readonly aisheCode: Prisma.FieldRef<"College", 'String'>
   readonly website: Prisma.FieldRef<"College", 'String'>
   readonly email: Prisma.FieldRef<"College", 'String'>
   readonly phone: Prisma.FieldRef<"College", 'String'>
@@ -5203,6 +5570,49 @@ export type College$photosArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.CollegePhotoScalarFieldEnum | Prisma.CollegePhotoScalarFieldEnum[]
+}
+
+/**
+ * College.fees
+ */
+export type College$feesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Fee
+   */
+  select?: Prisma.FeeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Fee
+   */
+  omit?: Prisma.FeeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FeeInclude<ExtArgs> | null
+  where?: Prisma.FeeWhereInput
+  orderBy?: Prisma.FeeOrderByWithRelationInput | Prisma.FeeOrderByWithRelationInput[]
+  cursor?: Prisma.FeeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FeeScalarFieldEnum | Prisma.FeeScalarFieldEnum[]
+}
+
+/**
+ * College.city
+ */
+export type College$cityArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the City
+   */
+  select?: Prisma.CitySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the City
+   */
+  omit?: Prisma.CityOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CityInclude<ExtArgs> | null
+  where?: Prisma.CityWhereInput
 }
 
 /**

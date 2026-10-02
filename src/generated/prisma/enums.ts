@@ -14,7 +14,8 @@ export const CollegeType = {
   PRIVATE: 'PRIVATE',
   PUBLIC: 'PUBLIC',
   DEEMED: 'DEEMED',
-  AUTONOMOUS: 'AUTONOMOUS'
+  AUTONOMOUS: 'AUTONOMOUS',
+  OTHER: 'OTHER'
 } as const
 
 export type CollegeType = (typeof CollegeType)[keyof typeof CollegeType]
@@ -33,7 +34,8 @@ export const CourseLevel = {
   PG: 'PG',
   DIPLOMA: 'DIPLOMA',
   PHD: 'PHD',
-  CERTIFICATE: 'CERTIFICATE'
+  CERTIFICATE: 'CERTIFICATE',
+  INTEGRATED: 'INTEGRATED'
 } as const
 
 export type CourseLevel = (typeof CourseLevel)[keyof typeof CourseLevel]

@@ -331,7 +331,7 @@ export default async function AdminCollegeDetailPage({
               <div className="mt-3 flex flex-wrap items-center gap-3 text-xs text-gray-500">
                 <span className="inline-flex items-center gap-1.5">
                   <MapPin size={14} />
-                  {college.city.name},{" "}
+                  {college.city?.name},{" "}
                   {college.state.name}
                 </span>
 

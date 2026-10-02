@@ -30,7 +30,7 @@ type CollegeRanking = {
 
     city: {
       name: string;
-    };
+    } | null;
 
     state: {
       name: string;
@@ -177,8 +177,8 @@ export default async function CollegeRankingSection() {
                     <MapPin className="h-4 w-4 shrink-0 text-emerald-600" />
 
                     <span>
-                      {ranking.college.city.name},{" "}
-                      {ranking.college.state.name}
+                      {ranking.college.city?.name ?? "City not available"},{" "}
+                      {ranking.college.state.name ?? "State not available"}
                     </span>
                   </div>
 

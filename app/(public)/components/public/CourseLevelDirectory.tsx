@@ -12,14 +12,7 @@ import {
   Microscope,
   School,
 } from "lucide-react";
-
-type CourseLevel =
-  | "UG"
-  | "PG"
-  | "DIPLOMA"
-  | "PHD"
-  | "CERTIFICATE";
-
+import { CourseLevel } from "@/src/generated/prisma/enums";
 type CourseItem = {
   id: string;
   name: string;

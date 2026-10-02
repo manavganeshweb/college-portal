@@ -397,7 +397,10 @@ export default async function AdminCollegesPage({
                     {/* Location */}
                     <td className="px-5 py-4">
                       <p className="text-sm font-medium text-gray-700">
-                        {college.city.name}
+                       <span>
+  {college.city?.name ?? "City not available"},{" "}
+  {college.state?.name ?? "State not available"}
+</span>
                       </p>
 
                       <p className="mt-0.5 text-xs text-gray-400">

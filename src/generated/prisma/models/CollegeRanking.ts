@@ -605,10 +605,6 @@ export type CollegeRankingUncheckedUpdateManyWithoutCollegeNestedInput = {
   deleteMany?: Prisma.CollegeRankingScalarWhereInput | Prisma.CollegeRankingScalarWhereInput[]
 }
 
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
-}
-
 export type EnumRankingStatusFieldUpdateOperationsInput = {
   set?: $Enums.RankingStatus
 }

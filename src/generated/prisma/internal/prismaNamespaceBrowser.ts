@@ -58,6 +58,7 @@ export const ModelName = {
   College: 'College',
   Course: 'Course',
   CollegeCourse: 'CollegeCourse',
+  Fee: 'Fee',
   Exam: 'Exam',
   CollegeCutoff: 'CollegeCutoff',
   Review: 'Review',
@@ -159,6 +160,7 @@ export const CollegeScalarFieldEnum = {
   description: 'description',
   establishedYear: 'establishedYear',
   collegeType: 'collegeType',
+  aisheCode: 'aisheCode',
   website: 'website',
   email: 'email',
   phone: 'phone',
@@ -194,6 +196,7 @@ export const CourseScalarFieldEnum = {
   durationYears: 'durationYears',
   eligibility: 'eligibility',
   averageFees: 'averageFees',
+  sourceCourseId: 'sourceCourseId',
   careerOptions: 'careerOptions',
   categoryId: 'categoryId',
   status: 'status',
@@ -216,6 +219,28 @@ export const CollegeCourseScalarFieldEnum = {
 } as const
 
 export type CollegeCourseScalarFieldEnum = (typeof CollegeCourseScalarFieldEnum)[keyof typeof CollegeCourseScalarFieldEnum]
+
+
+export const FeeScalarFieldEnum = {
+  id: 'id',
+  sourceFeeId: 'sourceFeeId',
+  collegeId: 'collegeId',
+  courseId: 'courseId',
+  programName: 'programName',
+  feeType: 'feeType',
+  label: 'label',
+  amount: 'amount',
+  currency: 'currency',
+  frequency: 'frequency',
+  isRefundable: 'isRefundable',
+  academicYear: 'academicYear',
+  sourceUrl: 'sourceUrl',
+  observedAt: 'observedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FeeScalarFieldEnum = (typeof FeeScalarFieldEnum)[keyof typeof FeeScalarFieldEnum]
 
 
 export const ExamScalarFieldEnum = {
