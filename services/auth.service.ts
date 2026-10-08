@@ -87,6 +87,16 @@ export async function loginUser(input: LoginInput) {
     where: {
       email,
     },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      phone: true,
+      avatar: true,
+      role: true,
+      passwordHash: true,
+      createdAt: true,
+    },
   });
 
   if (!user) {
@@ -111,21 +121,77 @@ export async function loginUser(input: LoginInput) {
       expiresAt: getSessionExpiry(),
     },
   });
-return {
- user: {
-  select: {
-    id: true,
-    name: true,
-    email: true,
-    phone: true,
-    avatar: true,
-    role: true,
-    createdAt: true,
-  },
-},
-  token,
-};
+
+  return {
+    user: {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      phone: user.phone,
+      avatar: user.avatar,
+      role: user.role,
+      createdAt: user.createdAt,
+    },
+    token,
+  };
 }
+
+export async function loginAdmin(input: LoginInput) {
+  const email = input.email.trim().toLowerCase();
+
+  const user = await prisma.user.findUnique({
+    where: {
+      email,
+    },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      phone: true,
+      avatar: true,
+      role: true,
+      passwordHash: true,
+      createdAt: true,
+    },
+  });
+
+  if (!user || user.role !== "ADMIN") {
+    throw new Error("Invalid admin credentials.");
+  }
+
+  const passwordValid = await verifyPassword(
+    input.password,
+    user.passwordHash,
+  );
+
+  if (!passwordValid) {
+    throw new Error("Invalid admin credentials.");
+  }
+
+  const token = generateSessionToken();
+
+  await prisma.userSession.create({
+    data: {
+      userId: user.id,
+      tokenHash: hashSessionToken(token),
+      expiresAt: getSessionExpiry(),
+    },
+  });
+
+  return {
+    user: {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      phone: user.phone,
+      avatar: user.avatar,
+      role: user.role,
+      createdAt: user.createdAt,
+    },
+    token,
+  };
+}
+
 
 export async function getUserBySessionToken(token: string) {
   const tokenHash = hashSessionToken(token);

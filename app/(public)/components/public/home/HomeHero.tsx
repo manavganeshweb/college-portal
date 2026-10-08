@@ -583,8 +583,8 @@ export default function HomeHero() {
     gap-2
     rounded-xl
     bg-[#15945c]
-    px-5
-    py-2.5
+    px-6
+    py-3
     text-sm
     font-bold
     text-white

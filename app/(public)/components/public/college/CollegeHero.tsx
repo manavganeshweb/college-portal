@@ -10,9 +10,12 @@ import {
   CalendarDays,
   ExternalLink,
   MapPin,
+  Maximize2,
   Star,
+  X,
 } from "lucide-react";
 import Breadcrumbs from "../shared/Breadcrumbs";
+import { useState } from "react";
 
 type CollegeHeroProps = {
   college: {
@@ -50,6 +53,7 @@ export default function CollegeHero({
     .join(", ");
 
   const reviewCount = college.reviews.length;
+  const [isImageOpen, setIsImageOpen] = useState(false);
 
   return (
     <section className="relative overflow-hidden bg-[#087a49] text-white">
@@ -65,7 +69,33 @@ export default function CollegeHero({
             className="object-cover"
           />
 
-          <div className="absolute inset-0 bg-gradient-to-r from-[#087a49] via-[#087a49]/90 to-[#087a49]/45" />
+<div className="absolute inset-0 bg-gradient-to-r from-[#087a49] via-[#087a49]/65 to-[#087a49]/15" />
+{college.coverImage && (
+  <div className="absolute inset-0">
+    <Image
+      src={college.coverImage}
+      alt=""
+      fill
+      priority
+      sizes="100vw"
+      className="object-cover"
+    />
+
+    <div className="absolute inset-0 bg-gradient-to-r from-[#087a49] via-[#087a49]/70 to-transparent" />
+<button
+  type="button"
+  onClick={() => setIsImageOpen(true)}
+  aria-label="View image"
+className="absolute bottom-4 right-4 z-20 inline-flex items-center justify-center gap-2 rounded-lg border border-white/30 bg-black/40 p-2.5 text-white shadow-lg backdrop-blur-md transition hover:bg-black/50 active:scale-95 sm:bottom-5 sm:right-5 sm:px-3.5 sm:py-2"
+    >
+  <Maximize2 className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+
+  <span className="hidden text-xs font-semibold sm:inline">
+    View Image
+  </span>
+</button>
+  </div>
+)}
         </div>
       )}
 
@@ -188,6 +218,41 @@ export default function CollegeHero({
           </div>
         </div>
       </div>
+{isImageOpen && college.coverImage && (
+  <div
+    className="fixed inset-0 z-[100] flex items-center justify-center bg-black/75 p-4"
+    role="dialog"
+    aria-modal="true"
+    aria-label={`${college.name} cover image`}
+    onClick={() => setIsImageOpen(false)}
+  >
+    {/* Close button */}
+    <button
+      type="button"
+      onClick={() => setIsImageOpen(false)}
+      aria-label="Close image viewer"
+      className="absolute right-5 top-5 z-20 flex size-10 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20"
+    >
+      <X className="h-5 w-5" />
+    </button>
+
+    {/* Clear original image */}
+      <div
+      className="relative h-[75vh] w-full max-w-7xl sm:h-[88vh]"
+      onClick={(event) => event.stopPropagation()}
+    >
+      <Image
+        src={college.coverImage}
+        alt={`${college.name} cover image`}
+        fill
+        sizes="100vw"
+        quality={100}
+        priority
+        className="object-contain"
+      />
+    </div>
+  </div>
+)}
     </section>
   );
 }

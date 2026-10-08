@@ -740,18 +740,38 @@ export default function CollegeEditForm({
                   Description
                 </label>
 
-                <textarea
-                  value={form.description}
-                  onChange={(event) =>
-                    updateField(
-                      "description",
-                      event.target.value
-                    )
-                  }
-                  rows={6}
-                  placeholder="Enter college description"
-                  className="w-full resize-y rounded-xl border border-gray-200 px-4 py-3 text-sm leading-6 outline-none transition placeholder:text-gray-400 focus:border-[#15945c] focus:ring-4 focus:ring-[#15945c]/10"
-                />
+           <textarea
+  value={form.description}
+  onChange={(event) =>
+    updateField("description", event.target.value)
+  }
+  onPaste={(event) => {
+    event.preventDefault();
+
+    const textarea = event.currentTarget;
+    const pastedText = event.clipboardData.getData("text/plain");
+
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+
+    const nextValue =
+      form.description.slice(0, start) +
+      pastedText +
+      form.description.slice(end);
+
+    updateField("description", nextValue);
+
+    requestAnimationFrame(() => {
+      const cursorPosition = start + pastedText.length;
+      textarea.selectionStart = cursorPosition;
+      textarea.selectionEnd = cursorPosition;
+    });
+  }}
+  rows={12}
+  spellCheck
+  placeholder="Enter college description"
+  className="min-h-[280px] w-full resize-y rounded-xl border border-gray-200 px-4 py-3 text-sm leading-6 outline-none transition placeholder:text-gray-400 focus:border-[#15945c] focus:ring-4 focus:ring-[#15945c]/10"
+/>
               </div>
 
               {/* Established Year */}

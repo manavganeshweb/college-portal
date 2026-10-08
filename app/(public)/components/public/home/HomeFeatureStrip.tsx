@@ -606,7 +606,7 @@ function ExploreCard({
       >
         {/* Header */}
 
-        <div className="relative min-h-[132px] overflow-hidden bg-[#f3fcf5] px-5 py-5 sm:px-7">
+        <div className="relative min-h-[132px] overflow-hidden bg-[#f3fcf5] px-4 py-3 sm:px-3">
           <div className="relative z-10 max-w-[64%]">
             <h3 className="text-[21px] font-bold tracking-[-0.5px] text-[#26354d] sm:text-[24px]">
               {card.title}
@@ -624,7 +624,7 @@ function ExploreCard({
 
         {/* Body */}
 
-        <div className="px-5 pb-5 pt-3">
+        <div className="px-6 pb-5 pt-3">
           <ExploreCardContent card={card} />
 
           <Link

@@ -365,7 +365,7 @@ const [
     categoryId: params.categoryId,
     level: params.level,
     page,
-    limit: 12,
+    limit: 6,
   }),
   getCategories(),
   getLevelDirectoryCourses(),

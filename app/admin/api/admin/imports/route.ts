@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { parse } from "csv-parse/sync";
 import { getAdminUser } from "@/lib/admin-auth";
 import { prisma } from "@/lib/prisma";
-
+import { isR2Url } from "@/lib/r2";
 export const runtime = "nodejs";
 export const maxDuration = 300;
 
@@ -202,7 +202,20 @@ function isNonAcademicCourse(courseName: string): boolean {
 
   return noisePatterns.some((pattern) => value.includes(pattern));
 }
+function isValidImageUrl(value: string | null) {
+  if (!value) return false;
 
+  try {
+    const url = new URL(value);
+
+    return (
+      (url.protocol === "http:" || url.protocol === "https:") &&
+      /\.(jpg|jpeg|png|webp|gif|svg|avif|bmp)(\?.*)?$/i.test(url.pathname)
+    );
+  } catch {
+    return false;
+  }
+}
 function validateInstitutions(
   rows: Record<string, unknown>[],
 ): InstitutionValidationResult {
@@ -1025,18 +1038,19 @@ async function importInstitutions(
    * AISHE code is the stable source identifier.
    * Existing slugs are intentionally preserved.
    */
-  const existingColleges = await prisma.college.findMany({
-    where: {
-      aisheCode: {
-        not: null,
-      },
+const existingColleges = await prisma.college.findMany({
+  where: {
+    aisheCode: {
+      not: null,
     },
-    select: {
-      id: true,
-      aisheCode: true,
-      slug: true,
-    },
-  });
+  },
+  select: {
+    id: true,
+    aisheCode: true,
+    slug: true,
+    logo: true,
+  },
+});
 
   const collegeByAishe = new Map(
     existingColleges
@@ -1147,25 +1161,26 @@ async function importInstitutions(
 
       cityId = city.id;
     }
+const existingCollege = collegeByAishe.get(aisheCode);
 
-    const existingCollege = collegeByAishe.get(aisheCode);
+let slug: string;
 
-    let slug = existingCollege?.slug;
+if (existingCollege) {
+  // Existing AISHE code → always preserve the existing slug.
+  slug = existingCollege.slug;
+} else {
+  // New college → generate a unique slug.
+  const collegeName = String(row.name ?? "institution");
+  const baseSlug = slugify(collegeName);
 
-    if (!slug) {
-      const sourceSlug =
-        emptyToNull(row.slug) ??
-        `${slugify(String(row.name ?? "institution"))}-${slugify(aisheCode)}`;
+  slug = baseSlug || `institution-${slugify(aisheCode)}`;
 
-      slug = sourceSlug;
+  if (usedSlugs.has(slug)) {
+    slug = `${slug}-${slugify(aisheCode)}`;
+  }
 
-      if (usedSlugs.has(slug)) {
-        slug = `${sourceSlug}-${slugify(aisheCode)}`;
-      }
-
-      usedSlugs.add(slug);
-    }
-
+  usedSlugs.add(slug);
+}
     preparedRows.push({
       row,
       aisheCode,
@@ -1206,84 +1221,90 @@ async function importInstitutions(
         emptyToNull(row.search_summary) ??
         emptyToNull(row.about);
 
-      const data = {
-        name,
-        slug: item.slug,
-        collegeType: item.collegeType,
-        aisheCode: item.aisheCode,
 
-        website: emptyToNull(row.website),
-        email: emptyToNull(row.email),
-        phone: emptyToNull(row.phone),
-        address: emptyToNull(row.address),
+const existing = collegeByAishe.get(item.aisheCode);
 
-        establishedYear: parseOptionalInt(
-          row.established_year,
-        ),
+const rawCsvLogo = emptyToNull(row.logo_url);
+const csvLogo = isValidImageUrl(rawCsvLogo) ? rawCsvLogo : null;
+const logo = existing
+  ? isR2Url(existing.logo)
+    ? existing.logo
+    : csvLogo ?? existing.logo
+  : csvLogo;
 
-        description,
+const data = {
+  name,
+  slug: item.slug,
+  collegeType: item.collegeType,
+  aisheCode: item.aisheCode,
 
-        stateId: item.stateId,
-        cityId: item.cityId,
+  logo,
 
-        lastUpdated:
-          parseOptionalDate(row.last_updated) ??
-          new Date(),
-      };
+  website: emptyToNull(row.website),
+  email: emptyToNull(row.email),
+  phone: emptyToNull(row.phone),
+  address: emptyToNull(row.address),
 
-      const existing = collegeByAishe.get(item.aisheCode);
+  establishedYear: parseOptionalInt(
+    row.established_year,
+  ),
+
+  description:
+    emptyToNull(row.short_description) ??
+    emptyToNull(row.search_summary) ??
+    emptyToNull(row.about),
+
+  stateId: item.stateId,
+  cityId: item.cityId,
+
+  lastUpdated:
+    parseOptionalDate(row.last_updated) ??
+    new Date(),
+};
 
       if (existing) {
-        await prisma.college.update({
-          where: {
-            id: existing.id,
-          },
-          data: {
-            name: data.name,
-            collegeType: data.collegeType,
-            aisheCode: data.aisheCode,
-            website: data.website,
-            email: data.email,
-            phone: data.phone,
-            address: data.address,
-            establishedYear: data.establishedYear,
-            description: data.description,
-            stateId: data.stateId,
-            cityId: data.cityId,
-            lastUpdated: data.lastUpdated,
-          },
-        });
+       await prisma.college.update({
+  where: { id: existing.id },
+  data: {
+    name: data.name,
+    slug: data.slug,
+    logo: data.logo,
+    collegeType: data.collegeType,
+    aisheCode: data.aisheCode,
+    website: data.website,
+    email: data.email,
+    phone: data.phone,
+    address: data.address,
+    establishedYear: data.establishedYear,
+    description: data.description,
+    stateId: data.stateId,
+    cityId: data.cityId,
+    lastUpdated: data.lastUpdated,
+  },
+});
 
         updated += 1;
       } else {
-        const createdCollege = await prisma.college.create({
-          data: {
-            name: data.name,
-            slug: data.slug,
-            collegeType: data.collegeType,
-            aisheCode: data.aisheCode,
-
-            website: data.website,
-            email: data.email,
-            phone: data.phone,
-            address: data.address,
-
-            establishedYear: data.establishedYear,
-            description: data.description,
-
-            stateId: data.stateId,
-            cityId: data.cityId,
-
-            verified: false,
-            status: "ACTIVE",
-            lastUpdated: data.lastUpdated,
-          },
-          select: {
-            id: true,
-            aisheCode: true,
-            slug: true,
-          },
-        });
+       const createdCollege = await prisma.college.create({
+  data: {
+    name: data.name,
+    slug: data.slug,
+    logo: data.logo,
+    collegeType: data.collegeType,
+    aisheCode: data.aisheCode,
+    website: data.website,
+    email: data.email,
+    phone: data.phone,
+    address: data.address,
+    establishedYear: data.establishedYear,
+    description: data.description,
+    stateId: data.stateId,
+    cityId: data.cityId,
+    verified: false,
+    status: "ACTIVE",
+    lastUpdated: data.lastUpdated,
+  },
+});
 
         collegeByAishe.set(item.aisheCode, createdCollege);
 

@@ -44,7 +44,7 @@ const levelCards: LevelCard[] = [
     title: "After 10th Courses",
     description:
       "Explore diploma, certificate and skill-based courses after Class 10.",
-    image: "/images/courses/after-10th.jpg",
+    image: "https://pub-f7b5b8d16796440fb4b5c3adf55c4ab4.r2.dev/courses/level/level.jpg",
     href: "/courses/levels/after-10th",
     icon: School,
   },
@@ -53,7 +53,7 @@ const levelCards: LevelCard[] = [
     title: "After 12th Courses",
     description:
       "Explore undergraduate and professional courses after Class 12.",
-    image: "/images/courses/after-12th.jpg",
+    image: "https://pub-f7b5b8d16796440fb4b5c3adf55c4ab4.r2.dev/courses/level/level.jpg",
     href: "/courses/levels/after-12th",
     icon: GraduationCap,
   },
@@ -62,7 +62,7 @@ const levelCards: LevelCard[] = [
     title: "After Diploma Courses",
     description:
       "Explore degree and advanced study options after completing a diploma.",
-    image: "/images/courses/after-diploma.jpg",
+    image: "https://pub-f7b5b8d16796440fb4b5c3adf55c4ab4.r2.dev/courses/level/level.jpg",
     href: "/courses/levels/after-diploma",
     icon: BriefcaseBusiness,
   },
@@ -71,7 +71,7 @@ const levelCards: LevelCard[] = [
     title: "Undergraduate Courses",
     description:
       "Explore bachelor's degree and undergraduate programs across fields.",
-    image: "/images/courses/undergraduate.jpg",
+    image: "https://pub-f7b5b8d16796440fb4b5c3adf55c4ab4.r2.dev/courses/level/level.jpg",
     href: "/courses/levels/undergraduate",
     icon: BookOpen,
   },
@@ -80,7 +80,7 @@ const levelCards: LevelCard[] = [
     title: "Postgraduate Courses",
     description:
       "Explore master's degree and postgraduate programs for career growth.",
-    image: "/images/courses/postgraduate.jpg",
+    image: "https://pub-f7b5b8d16796440fb4b5c3adf55c4ab4.r2.dev/courses/level/level.jpg",
     href: "/courses/levels/postgraduate",
     icon: Award,
   },
@@ -89,7 +89,7 @@ const levelCards: LevelCard[] = [
     title: "Ph.D & Research Courses",
     description:
       "Explore doctoral and research-oriented academic programs.",
-    image: "/images/courses/phd.jpg",
+    image: "https://pub-f7b5b8d16796440fb4b5c3adf55c4ab4.r2.dev/courses/level/level.jpg",
     href: "/courses/levels/phd",
     icon: Microscope,
   },

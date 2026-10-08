@@ -7,9 +7,9 @@ import {
   Upload,
 } from "lucide-react";
 
-import AdminStatCard from "./components/AdminStatCard";
-import AdminQuickAction from "./components/AdminQuickAction";
-import RecentActivity from "./components/RecentActivity";
+import AdminStatCard from "../components/AdminStatCard";
+import AdminQuickAction from "../components/AdminQuickAction";
+import RecentActivity from "../components/RecentActivity";
 
 import { prisma } from "@/lib/prisma";
 

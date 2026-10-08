@@ -69,11 +69,8 @@ function getPageTitle(
     case "qna":
       return `${college.name} Q&A`;
 
-    default:
-      return (
-        college.seoTitle ||
-        `${college.name}: Admission 2026, Fees, Courses, Cutoff, Ranking, Placement`
-      );
+   default:
+  return college.name;
   }
 }
 
