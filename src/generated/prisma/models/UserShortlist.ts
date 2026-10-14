@@ -174,8 +174,8 @@ export type UserShortlistWhereInput = {
   userId?: Prisma.StringFilter<"UserShortlist"> | string
   collegeId?: Prisma.StringFilter<"UserShortlist"> | string
   createdAt?: Prisma.DateTimeFilter<"UserShortlist"> | Date | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   college?: Prisma.XOR<Prisma.CollegeScalarRelationFilter, Prisma.CollegeWhereInput>
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
 export type UserShortlistOrderByWithRelationInput = {
@@ -183,8 +183,8 @@ export type UserShortlistOrderByWithRelationInput = {
   userId?: Prisma.SortOrder
   collegeId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  user?: Prisma.UserOrderByWithRelationInput
   college?: Prisma.CollegeOrderByWithRelationInput
+  user?: Prisma.UserOrderByWithRelationInput
 }
 
 export type UserShortlistWhereUniqueInput = Prisma.AtLeast<{
@@ -196,8 +196,8 @@ export type UserShortlistWhereUniqueInput = Prisma.AtLeast<{
   userId?: Prisma.StringFilter<"UserShortlist"> | string
   collegeId?: Prisma.StringFilter<"UserShortlist"> | string
   createdAt?: Prisma.DateTimeFilter<"UserShortlist"> | Date | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   college?: Prisma.XOR<Prisma.CollegeScalarRelationFilter, Prisma.CollegeWhereInput>
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id" | "userId_collegeId">
 
 export type UserShortlistOrderByWithAggregationInput = {
@@ -223,8 +223,8 @@ export type UserShortlistScalarWhereWithAggregatesInput = {
 export type UserShortlistCreateInput = {
   id?: string
   createdAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutShortlistsInput
   college: Prisma.CollegeCreateNestedOneWithoutShortlistsInput
+  user: Prisma.UserCreateNestedOneWithoutShortlistsInput
 }
 
 export type UserShortlistUncheckedCreateInput = {
@@ -237,8 +237,8 @@ export type UserShortlistUncheckedCreateInput = {
 export type UserShortlistUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutShortlistsNestedInput
   college?: Prisma.CollegeUpdateOneRequiredWithoutShortlistsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutShortlistsNestedInput
 }
 
 export type UserShortlistUncheckedUpdateInput = {
@@ -528,8 +528,8 @@ export type UserShortlistSelect<ExtArgs extends runtime.Types.Extensions.Interna
   userId?: boolean
   collegeId?: boolean
   createdAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   college?: boolean | Prisma.CollegeDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userShortlist"]>
 
 export type UserShortlistSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -537,8 +537,8 @@ export type UserShortlistSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   userId?: boolean
   collegeId?: boolean
   createdAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   college?: boolean | Prisma.CollegeDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userShortlist"]>
 
 export type UserShortlistSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -546,8 +546,8 @@ export type UserShortlistSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   userId?: boolean
   collegeId?: boolean
   createdAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   college?: boolean | Prisma.CollegeDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userShortlist"]>
 
 export type UserShortlistSelectScalar = {
@@ -559,23 +559,23 @@ export type UserShortlistSelectScalar = {
 
 export type UserShortlistOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "collegeId" | "createdAt", ExtArgs["result"]["userShortlist"]>
 export type UserShortlistInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   college?: boolean | Prisma.CollegeDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type UserShortlistIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   college?: boolean | Prisma.CollegeDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type UserShortlistIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   college?: boolean | Prisma.CollegeDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
 export type $UserShortlistPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "UserShortlist"
   objects: {
-    user: Prisma.$UserPayload<ExtArgs>
     college: Prisma.$CollegePayload<ExtArgs>
+    user: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -976,8 +976,8 @@ readonly fields: UserShortlistFieldRefs;
  */
 export interface Prisma__UserShortlistClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   college<T extends Prisma.CollegeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CollegeDefaultArgs<ExtArgs>>): Prisma.Prisma__CollegeClient<runtime.Types.Result.GetResult<Prisma.$CollegePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

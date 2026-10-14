@@ -40,14 +40,14 @@ export type BoardExamMinAggregateOutputType = {
   slug: string | null
   board: string | null
   className: string | null
-  examYear: number | null
-  examDate: Date | null
-  resultDate: Date | null
   description: string | null
-  officialUrl: string | null
+  resultDate: Date | null
   status: $Enums.ContentStatus | null
   createdAt: Date | null
   updatedAt: Date | null
+  examDate: Date | null
+  examYear: number | null
+  officialUrl: string | null
 }
 
 export type BoardExamMaxAggregateOutputType = {
@@ -56,14 +56,14 @@ export type BoardExamMaxAggregateOutputType = {
   slug: string | null
   board: string | null
   className: string | null
-  examYear: number | null
-  examDate: Date | null
-  resultDate: Date | null
   description: string | null
-  officialUrl: string | null
+  resultDate: Date | null
   status: $Enums.ContentStatus | null
   createdAt: Date | null
   updatedAt: Date | null
+  examDate: Date | null
+  examYear: number | null
+  officialUrl: string | null
 }
 
 export type BoardExamCountAggregateOutputType = {
@@ -72,14 +72,14 @@ export type BoardExamCountAggregateOutputType = {
   slug: number
   board: number
   className: number
-  examYear: number
-  examDate: number
-  resultDate: number
   description: number
-  officialUrl: number
+  resultDate: number
   status: number
   createdAt: number
   updatedAt: number
+  examDate: number
+  examYear: number
+  officialUrl: number
   _all: number
 }
 
@@ -98,14 +98,14 @@ export type BoardExamMinAggregateInputType = {
   slug?: true
   board?: true
   className?: true
-  examYear?: true
-  examDate?: true
-  resultDate?: true
   description?: true
-  officialUrl?: true
+  resultDate?: true
   status?: true
   createdAt?: true
   updatedAt?: true
+  examDate?: true
+  examYear?: true
+  officialUrl?: true
 }
 
 export type BoardExamMaxAggregateInputType = {
@@ -114,14 +114,14 @@ export type BoardExamMaxAggregateInputType = {
   slug?: true
   board?: true
   className?: true
-  examYear?: true
-  examDate?: true
-  resultDate?: true
   description?: true
-  officialUrl?: true
+  resultDate?: true
   status?: true
   createdAt?: true
   updatedAt?: true
+  examDate?: true
+  examYear?: true
+  officialUrl?: true
 }
 
 export type BoardExamCountAggregateInputType = {
@@ -130,14 +130,14 @@ export type BoardExamCountAggregateInputType = {
   slug?: true
   board?: true
   className?: true
-  examYear?: true
-  examDate?: true
-  resultDate?: true
   description?: true
-  officialUrl?: true
+  resultDate?: true
   status?: true
   createdAt?: true
   updatedAt?: true
+  examDate?: true
+  examYear?: true
+  officialUrl?: true
   _all?: true
 }
 
@@ -233,14 +233,14 @@ export type BoardExamGroupByOutputType = {
   slug: string
   board: string | null
   className: string | null
-  examYear: number | null
-  examDate: Date | null
-  resultDate: Date | null
   description: string | null
-  officialUrl: string | null
+  resultDate: Date | null
   status: $Enums.ContentStatus
   createdAt: Date
   updatedAt: Date
+  examDate: Date | null
+  examYear: number | null
+  officialUrl: string | null
   _count: BoardExamCountAggregateOutputType | null
   _avg: BoardExamAvgAggregateOutputType | null
   _sum: BoardExamSumAggregateOutputType | null
@@ -272,14 +272,14 @@ export type BoardExamWhereInput = {
   slug?: Prisma.StringFilter<"BoardExam"> | string
   board?: Prisma.StringNullableFilter<"BoardExam"> | string | null
   className?: Prisma.StringNullableFilter<"BoardExam"> | string | null
-  examYear?: Prisma.IntNullableFilter<"BoardExam"> | number | null
-  examDate?: Prisma.DateTimeNullableFilter<"BoardExam"> | Date | string | null
-  resultDate?: Prisma.DateTimeNullableFilter<"BoardExam"> | Date | string | null
   description?: Prisma.StringNullableFilter<"BoardExam"> | string | null
-  officialUrl?: Prisma.StringNullableFilter<"BoardExam"> | string | null
+  resultDate?: Prisma.DateTimeNullableFilter<"BoardExam"> | Date | string | null
   status?: Prisma.EnumContentStatusFilter<"BoardExam"> | $Enums.ContentStatus
   createdAt?: Prisma.DateTimeFilter<"BoardExam"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"BoardExam"> | Date | string
+  examDate?: Prisma.DateTimeNullableFilter<"BoardExam"> | Date | string | null
+  examYear?: Prisma.IntNullableFilter<"BoardExam"> | number | null
+  officialUrl?: Prisma.StringNullableFilter<"BoardExam"> | string | null
 }
 
 export type BoardExamOrderByWithRelationInput = {
@@ -288,14 +288,14 @@ export type BoardExamOrderByWithRelationInput = {
   slug?: Prisma.SortOrder
   board?: Prisma.SortOrderInput | Prisma.SortOrder
   className?: Prisma.SortOrderInput | Prisma.SortOrder
-  examYear?: Prisma.SortOrderInput | Prisma.SortOrder
-  examDate?: Prisma.SortOrderInput | Prisma.SortOrder
-  resultDate?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
-  officialUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  resultDate?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  examDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  examYear?: Prisma.SortOrderInput | Prisma.SortOrder
+  officialUrl?: Prisma.SortOrderInput | Prisma.SortOrder
 }
 
 export type BoardExamWhereUniqueInput = Prisma.AtLeast<{
@@ -307,14 +307,14 @@ export type BoardExamWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"BoardExam"> | string
   board?: Prisma.StringNullableFilter<"BoardExam"> | string | null
   className?: Prisma.StringNullableFilter<"BoardExam"> | string | null
-  examYear?: Prisma.IntNullableFilter<"BoardExam"> | number | null
-  examDate?: Prisma.DateTimeNullableFilter<"BoardExam"> | Date | string | null
-  resultDate?: Prisma.DateTimeNullableFilter<"BoardExam"> | Date | string | null
   description?: Prisma.StringNullableFilter<"BoardExam"> | string | null
-  officialUrl?: Prisma.StringNullableFilter<"BoardExam"> | string | null
+  resultDate?: Prisma.DateTimeNullableFilter<"BoardExam"> | Date | string | null
   status?: Prisma.EnumContentStatusFilter<"BoardExam"> | $Enums.ContentStatus
   createdAt?: Prisma.DateTimeFilter<"BoardExam"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"BoardExam"> | Date | string
+  examDate?: Prisma.DateTimeNullableFilter<"BoardExam"> | Date | string | null
+  examYear?: Prisma.IntNullableFilter<"BoardExam"> | number | null
+  officialUrl?: Prisma.StringNullableFilter<"BoardExam"> | string | null
 }, "id" | "slug">
 
 export type BoardExamOrderByWithAggregationInput = {
@@ -323,14 +323,14 @@ export type BoardExamOrderByWithAggregationInput = {
   slug?: Prisma.SortOrder
   board?: Prisma.SortOrderInput | Prisma.SortOrder
   className?: Prisma.SortOrderInput | Prisma.SortOrder
-  examYear?: Prisma.SortOrderInput | Prisma.SortOrder
-  examDate?: Prisma.SortOrderInput | Prisma.SortOrder
-  resultDate?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
-  officialUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  resultDate?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  examDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  examYear?: Prisma.SortOrderInput | Prisma.SortOrder
+  officialUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.BoardExamCountOrderByAggregateInput
   _avg?: Prisma.BoardExamAvgOrderByAggregateInput
   _max?: Prisma.BoardExamMaxOrderByAggregateInput
@@ -347,14 +347,14 @@ export type BoardExamScalarWhereWithAggregatesInput = {
   slug?: Prisma.StringWithAggregatesFilter<"BoardExam"> | string
   board?: Prisma.StringNullableWithAggregatesFilter<"BoardExam"> | string | null
   className?: Prisma.StringNullableWithAggregatesFilter<"BoardExam"> | string | null
-  examYear?: Prisma.IntNullableWithAggregatesFilter<"BoardExam"> | number | null
-  examDate?: Prisma.DateTimeNullableWithAggregatesFilter<"BoardExam"> | Date | string | null
-  resultDate?: Prisma.DateTimeNullableWithAggregatesFilter<"BoardExam"> | Date | string | null
   description?: Prisma.StringNullableWithAggregatesFilter<"BoardExam"> | string | null
-  officialUrl?: Prisma.StringNullableWithAggregatesFilter<"BoardExam"> | string | null
+  resultDate?: Prisma.DateTimeNullableWithAggregatesFilter<"BoardExam"> | Date | string | null
   status?: Prisma.EnumContentStatusWithAggregatesFilter<"BoardExam"> | $Enums.ContentStatus
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"BoardExam"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"BoardExam"> | Date | string
+  examDate?: Prisma.DateTimeNullableWithAggregatesFilter<"BoardExam"> | Date | string | null
+  examYear?: Prisma.IntNullableWithAggregatesFilter<"BoardExam"> | number | null
+  officialUrl?: Prisma.StringNullableWithAggregatesFilter<"BoardExam"> | string | null
 }
 
 export type BoardExamCreateInput = {
@@ -363,14 +363,14 @@ export type BoardExamCreateInput = {
   slug: string
   board?: string | null
   className?: string | null
-  examYear?: number | null
-  examDate?: Date | string | null
-  resultDate?: Date | string | null
   description?: string | null
-  officialUrl?: string | null
+  resultDate?: Date | string | null
   status?: $Enums.ContentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
+  examDate?: Date | string | null
+  examYear?: number | null
+  officialUrl?: string | null
 }
 
 export type BoardExamUncheckedCreateInput = {
@@ -379,14 +379,14 @@ export type BoardExamUncheckedCreateInput = {
   slug: string
   board?: string | null
   className?: string | null
-  examYear?: number | null
-  examDate?: Date | string | null
-  resultDate?: Date | string | null
   description?: string | null
-  officialUrl?: string | null
+  resultDate?: Date | string | null
   status?: $Enums.ContentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
+  examDate?: Date | string | null
+  examYear?: number | null
+  officialUrl?: string | null
 }
 
 export type BoardExamUpdateInput = {
@@ -395,14 +395,14 @@ export type BoardExamUpdateInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   board?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   className?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  examYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  examDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  resultDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  officialUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resultDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  examDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  examYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  officialUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type BoardExamUncheckedUpdateInput = {
@@ -411,14 +411,14 @@ export type BoardExamUncheckedUpdateInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   board?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   className?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  examYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  examDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  resultDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  officialUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resultDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  examDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  examYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  officialUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type BoardExamCreateManyInput = {
@@ -427,14 +427,14 @@ export type BoardExamCreateManyInput = {
   slug: string
   board?: string | null
   className?: string | null
-  examYear?: number | null
-  examDate?: Date | string | null
-  resultDate?: Date | string | null
   description?: string | null
-  officialUrl?: string | null
+  resultDate?: Date | string | null
   status?: $Enums.ContentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
+  examDate?: Date | string | null
+  examYear?: number | null
+  officialUrl?: string | null
 }
 
 export type BoardExamUpdateManyMutationInput = {
@@ -443,14 +443,14 @@ export type BoardExamUpdateManyMutationInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   board?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   className?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  examYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  examDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  resultDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  officialUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resultDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  examDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  examYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  officialUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type BoardExamUncheckedUpdateManyInput = {
@@ -459,14 +459,14 @@ export type BoardExamUncheckedUpdateManyInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   board?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   className?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  examYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  examDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  resultDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  officialUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resultDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  examDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  examYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  officialUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type BoardExamCountOrderByAggregateInput = {
@@ -475,14 +475,14 @@ export type BoardExamCountOrderByAggregateInput = {
   slug?: Prisma.SortOrder
   board?: Prisma.SortOrder
   className?: Prisma.SortOrder
-  examYear?: Prisma.SortOrder
-  examDate?: Prisma.SortOrder
-  resultDate?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  officialUrl?: Prisma.SortOrder
+  resultDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  examDate?: Prisma.SortOrder
+  examYear?: Prisma.SortOrder
+  officialUrl?: Prisma.SortOrder
 }
 
 export type BoardExamAvgOrderByAggregateInput = {
@@ -495,14 +495,14 @@ export type BoardExamMaxOrderByAggregateInput = {
   slug?: Prisma.SortOrder
   board?: Prisma.SortOrder
   className?: Prisma.SortOrder
-  examYear?: Prisma.SortOrder
-  examDate?: Prisma.SortOrder
-  resultDate?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  officialUrl?: Prisma.SortOrder
+  resultDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  examDate?: Prisma.SortOrder
+  examYear?: Prisma.SortOrder
+  officialUrl?: Prisma.SortOrder
 }
 
 export type BoardExamMinOrderByAggregateInput = {
@@ -511,14 +511,14 @@ export type BoardExamMinOrderByAggregateInput = {
   slug?: Prisma.SortOrder
   board?: Prisma.SortOrder
   className?: Prisma.SortOrder
-  examYear?: Prisma.SortOrder
-  examDate?: Prisma.SortOrder
-  resultDate?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  officialUrl?: Prisma.SortOrder
+  resultDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  examDate?: Prisma.SortOrder
+  examYear?: Prisma.SortOrder
+  officialUrl?: Prisma.SortOrder
 }
 
 export type BoardExamSumOrderByAggregateInput = {
@@ -537,14 +537,14 @@ export type BoardExamSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   slug?: boolean
   board?: boolean
   className?: boolean
-  examYear?: boolean
-  examDate?: boolean
-  resultDate?: boolean
   description?: boolean
-  officialUrl?: boolean
+  resultDate?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  examDate?: boolean
+  examYear?: boolean
+  officialUrl?: boolean
 }, ExtArgs["result"]["boardExam"]>
 
 export type BoardExamSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -553,14 +553,14 @@ export type BoardExamSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   slug?: boolean
   board?: boolean
   className?: boolean
-  examYear?: boolean
-  examDate?: boolean
-  resultDate?: boolean
   description?: boolean
-  officialUrl?: boolean
+  resultDate?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  examDate?: boolean
+  examYear?: boolean
+  officialUrl?: boolean
 }, ExtArgs["result"]["boardExam"]>
 
 export type BoardExamSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -569,14 +569,14 @@ export type BoardExamSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   slug?: boolean
   board?: boolean
   className?: boolean
-  examYear?: boolean
-  examDate?: boolean
-  resultDate?: boolean
   description?: boolean
-  officialUrl?: boolean
+  resultDate?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  examDate?: boolean
+  examYear?: boolean
+  officialUrl?: boolean
 }, ExtArgs["result"]["boardExam"]>
 
 export type BoardExamSelectScalar = {
@@ -585,17 +585,17 @@ export type BoardExamSelectScalar = {
   slug?: boolean
   board?: boolean
   className?: boolean
-  examYear?: boolean
-  examDate?: boolean
-  resultDate?: boolean
   description?: boolean
-  officialUrl?: boolean
+  resultDate?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  examDate?: boolean
+  examYear?: boolean
+  officialUrl?: boolean
 }
 
-export type BoardExamOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "slug" | "board" | "className" | "examYear" | "examDate" | "resultDate" | "description" | "officialUrl" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["boardExam"]>
+export type BoardExamOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "slug" | "board" | "className" | "description" | "resultDate" | "status" | "createdAt" | "updatedAt" | "examDate" | "examYear" | "officialUrl", ExtArgs["result"]["boardExam"]>
 
 export type $BoardExamPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "BoardExam"
@@ -606,14 +606,14 @@ export type $BoardExamPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     slug: string
     board: string | null
     className: string | null
-    examYear: number | null
-    examDate: Date | null
-    resultDate: Date | null
     description: string | null
-    officialUrl: string | null
+    resultDate: Date | null
     status: $Enums.ContentStatus
     createdAt: Date
     updatedAt: Date
+    examDate: Date | null
+    examYear: number | null
+    officialUrl: string | null
   }, ExtArgs["result"]["boardExam"]>
   composites: {}
 }
@@ -1042,14 +1042,14 @@ export interface BoardExamFieldRefs {
   readonly slug: Prisma.FieldRef<"BoardExam", 'String'>
   readonly board: Prisma.FieldRef<"BoardExam", 'String'>
   readonly className: Prisma.FieldRef<"BoardExam", 'String'>
-  readonly examYear: Prisma.FieldRef<"BoardExam", 'Int'>
-  readonly examDate: Prisma.FieldRef<"BoardExam", 'DateTime'>
-  readonly resultDate: Prisma.FieldRef<"BoardExam", 'DateTime'>
   readonly description: Prisma.FieldRef<"BoardExam", 'String'>
-  readonly officialUrl: Prisma.FieldRef<"BoardExam", 'String'>
+  readonly resultDate: Prisma.FieldRef<"BoardExam", 'DateTime'>
   readonly status: Prisma.FieldRef<"BoardExam", 'ContentStatus'>
   readonly createdAt: Prisma.FieldRef<"BoardExam", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"BoardExam", 'DateTime'>
+  readonly examDate: Prisma.FieldRef<"BoardExam", 'DateTime'>
+  readonly examYear: Prisma.FieldRef<"BoardExam", 'Int'>
+  readonly officialUrl: Prisma.FieldRef<"BoardExam", 'String'>
 }
     
 

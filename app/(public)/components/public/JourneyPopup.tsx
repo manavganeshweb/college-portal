@@ -5,6 +5,7 @@ import { FormEvent, useEffect, useState } from "react";
 import {
   ArrowRight,
   BookOpen,
+  Check,
   ChevronDown,
   Eye,
   EyeOff,
@@ -44,6 +45,14 @@ type JourneyPopupProps = {
   isAuthenticated: boolean;
 };
 
+const FIELD_CLASS =
+  "h-10 w-full rounded-md border border-slate-300 bg-white pl-10 pr-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 hover:border-slate-400 focus:border-[#15945c] focus:ring-2 focus:ring-[#15945c]/10 disabled:cursor-not-allowed disabled:opacity-60";
+
+const ICON_CLASS =
+  "pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500";
+
+const LABEL_CLASS = "mb-1 block text-xs font-medium text-slate-700";
+
 export default function JourneyPopup({
   isAuthenticated,
 }: JourneyPopupProps) {
@@ -56,7 +65,7 @@ export default function JourneyPopup({
   const [coursesLoading, setCoursesLoading] = useState(true);
   const [coursesExpanded, setCoursesExpanded] = useState(false);
 
-  const [authMode, setAuthMode] = useState<AuthMode>("login");
+  const [authMode, setAuthMode] = useState<AuthMode>("register");
 
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -66,6 +75,8 @@ export default function JourneyPopup({
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const [acceptedTerms, setAcceptedTerms] = useState(true);
 
   const [authLoading, setAuthLoading] = useState(false);
   const [authError, setAuthError] = useState("");
@@ -82,154 +93,132 @@ export default function JourneyPopup({
       : null;
 
   // --------------------------------------------------
-  // Fetch college
+  // Fetch college information
   // --------------------------------------------------
 
- useEffect(() => {
-  if (!collegeSlug) {
-    setCollege(null);
-    return;
-  }
+  useEffect(() => {
+    if (!collegeSlug) {
+      setCollege(null);
+      return;
+    }
 
-  let cancelled = false;
+    let cancelled = false;
 
-  async function fetchCollege() {
-    try {
-      const response = await fetch(
-        `/api/colleges/${collegeSlug}`,
-        {
+    async function fetchCollege() {
+      try {
+        const response = await fetch(`/api/colleges/${collegeSlug}`, {
           method: "GET",
           credentials: "include",
           cache: "no-store",
-        }
-      );
-
-      if (!response.ok) {
-        if (!cancelled) {
-          setCollege(null);
-        }
-        return;
-      }
-
-      const data = await response.json();
-
-      // Support both:
-      // { id, name, logo, shortName }
-      // and:
-      // { college: { id, name, logo, shortName } }
-      const collegeData = data?.college ?? data?.data ?? data;
-
-      if (!collegeData?.name) {
-        if (!cancelled) {
-          setCollege(null);
-        }
-        return;
-      }
-
-      if (!cancelled) {
-        setCollege({
-          id: collegeData.id,
-          name: collegeData.name,
-          logo: collegeData.logo ?? null,
-          shortName: collegeData.shortName ?? null,
         });
-      }
-    } catch (error) {
-      console.error("Failed to fetch college:", error);
 
-      if (!cancelled) {
-        setCollege(null);
+        if (!response.ok) {
+          if (!cancelled) {
+            setCollege(null);
+          }
+          return;
+        }
+
+        const data = await response.json();
+        const collegeData = data?.college ?? data?.data ?? data;
+
+        if (!collegeData?.name) {
+          if (!cancelled) {
+            setCollege(null);
+          }
+          return;
+        }
+
+        if (!cancelled) {
+          setCollege({
+            id: collegeData.id,
+            name: collegeData.name,
+            logo: collegeData.logo ?? null,
+            shortName: collegeData.shortName ?? null,
+          });
+        }
+      } catch (error) {
+        console.error("Failed to fetch college:", error);
+
+        if (!cancelled) {
+          setCollege(null);
+        }
       }
     }
-  }
 
-  fetchCollege();
+    void fetchCollege();
 
-  return () => {
-    cancelled = true;
-  };
-}, [collegeSlug]);
+    return () => {
+      cancelled = true;
+    };
+  }, [collegeSlug]);
+
   // --------------------------------------------------
   // Fetch popular courses
   // --------------------------------------------------
 
-useEffect(() => {
-  let cancelled = false;
+  useEffect(() => {
+    let cancelled = false;
 
-  async function fetchCourses() {
-    setCoursesLoading(true);
+    async function fetchCourses() {
+      setCoursesLoading(true);
 
-    try {
-      const response = await fetch("/api/courses/popular", {
-        method: "GET",
-        credentials: "include",
-        cache: "no-store",
-      });
+      try {
+        const response = await fetch("/api/courses/popular", {
+          method: "GET",
+          credentials: "include",
+          cache: "no-store",
+        });
 
-      if (!response.ok) {
-        console.error(
-          "Popular courses API failed:",
-          response.status
-        );
+        if (!response.ok) {
+          console.error("Popular courses API failed:", response.status);
+
+          if (!cancelled) {
+            setCourses([]);
+          }
+
+          return;
+        }
+
+        const data = await response.json();
+
+        let courseList: CourseData[] = [];
+
+        if (Array.isArray(data)) {
+          courseList = data;
+        } else if (Array.isArray(data?.courses)) {
+          courseList = data.courses;
+        } else if (Array.isArray(data?.data)) {
+          courseList = data.data;
+        } else if (Array.isArray(data?.data?.courses)) {
+          courseList = data.data.courses;
+        }
+
+        if (!cancelled) {
+          setCourses(courseList);
+        }
+      } catch (error) {
+        console.error("Failed to fetch popular courses:", error);
 
         if (!cancelled) {
           setCourses([]);
         }
-
-        return;
-      }
-
-      const data = await response.json();
-
-     
-
-      /*
-       * Support different API response structures:
-       *
-       * 1. [ ...courses ]
-       * 2. { courses: [ ...courses ] }
-       * 3. { data: [ ...courses ] }
-       * 4. { data: { courses: [ ...courses ] } }
-       */
-      let courseList: CourseData[] = [];
-
-      if (Array.isArray(data)) {
-        courseList = data;
-      } else if (Array.isArray(data?.courses)) {
-        courseList = data.courses;
-      } else if (Array.isArray(data?.data)) {
-        courseList = data.data;
-      } else if (Array.isArray(data?.data?.courses)) {
-        courseList = data.data.courses;
-      }
-
-      if (!cancelled) {
-        setCourses(courseList);
-      }
-    } catch (error) {
-      console.error(
-        "Failed to fetch popular courses:",
-        error
-      );
-
-      if (!cancelled) {
-        setCourses([]);
-      }
-    } finally {
-      if (!cancelled) {
-        setCoursesLoading(false);
+      } finally {
+        if (!cancelled) {
+          setCoursesLoading(false);
+        }
       }
     }
-  }
 
-  fetchCourses();
+    void fetchCourses();
 
-  return () => {
-    cancelled = true;
-  };
-}, []);
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   // --------------------------------------------------
-  // Show popup every 60 seconds for logged-out users
+  // Automatically show popup for logged-out users
   // --------------------------------------------------
 
   useEffect(() => {
@@ -263,7 +252,6 @@ useEffect(() => {
 
   useEffect(() => {
     if (!isOpen) {
-      document.body.style.overflow = "";
       return;
     }
 
@@ -276,22 +264,26 @@ useEffect(() => {
     };
   }, [isOpen]);
 
+  // --------------------------------------------------
+  // Listen for custom open event
+  // --------------------------------------------------
+
   useEffect(() => {
-  const openJourneyPopup = () => {
-    if (!isAuthenticated) {
-      setIsOpen(true);
+    function openJourneyPopup() {
+      if (!isAuthenticated) {
+        setIsOpen(true);
+      }
     }
-  };
 
-  window.addEventListener("open-journey-popup", openJourneyPopup);
+    window.addEventListener("open-journey-popup", openJourneyPopup);
 
-  return () => {
-    window.removeEventListener("open-journey-popup", openJourneyPopup);
-  };
-}, [isAuthenticated]);
+    return () => {
+      window.removeEventListener("open-journey-popup", openJourneyPopup);
+    };
+  }, [isAuthenticated]);
 
   // --------------------------------------------------
-  // Close
+  // Close popup
   // --------------------------------------------------
 
   function closePopup() {
@@ -300,7 +292,7 @@ useEffect(() => {
   }
 
   // --------------------------------------------------
-  // Auth mode
+  // Switch authentication mode
   // --------------------------------------------------
 
   function switchAuthMode(mode: AuthMode) {
@@ -312,11 +304,8 @@ useEffect(() => {
   // Login / Register
   // --------------------------------------------------
 
-  async function handleAuthSubmit(
-    event: FormEvent<HTMLFormElement>
-  ) {
+  async function handleAuthSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
     setAuthError("");
 
     const trimmedName = name.trim();
@@ -340,14 +329,17 @@ useEffect(() => {
       }
 
       if (password.length < 8) {
-        setAuthError(
-          "Password must be at least 8 characters long."
-        );
+        setAuthError("Password must be at least 8 characters long.");
         return;
       }
 
       if (password !== confirmPassword) {
         setAuthError("Passwords do not match.");
+        return;
+      }
+
+      if (!acceptedTerms) {
+        setAuthError("Please accept the Terms of Use to continue.");
         return;
       }
     }
@@ -366,9 +358,7 @@ useEffect(() => {
 
     try {
       const endpoint =
-        authMode === "login"
-          ? "/api/auth/login"
-          : "/api/auth/register";
+        authMode === "login" ? "/api/auth/login" : "/api/auth/register";
 
       const body =
         authMode === "login"
@@ -411,40 +401,49 @@ useEffect(() => {
 
       window.location.href = "/";
     } catch {
-      setAuthError(
-        "Something went wrong. Please try again."
-      );
+      setAuthError("Something went wrong. Please try again.");
     } finally {
       setAuthLoading(false);
     }
   }
 
   // --------------------------------------------------
-  // Content
+  // Dynamic content
   // --------------------------------------------------
 
-const title = college?.name
-  ? `Continue your journey with ${college.name}`
-  : "Start your education journey with College Aadhar";
+  const title = college?.name
+    ? `Continue your journey with ${college.name}`
+    : "Start Your Education Journey Today!";
 
- const subtitle = college?.name
-  ? `Explore courses, fees, admission, placements and more at ${college.name}.`
-  : "Discover colleges, courses and opportunities that match your future goals.";
+  const subtitle = college?.name
+    ? `Explore courses, fees, admission, placements and more at ${college.name}.`
+    : "Discover colleges, courses and opportunities that match your future goals.";
+
   if (isAuthenticated) {
     return null;
   }
+
+  // --------------------------------------------------
+  // Popup
+  // --------------------------------------------------
 
   return (
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-[100] flex h-[100dvh] w-full items-center justify-center overflow-hidden bg-slate-950/65 px-3 py-3 backdrop-blur-md sm:px-5 sm:py-5"
+          className="fixed inset-0 z-[100] flex h-[100dvh] w-full items-center justify-center overflow-hidden bg-slate-950/60 p-2 backdrop-blur-sm sm:p-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) {
+              closePopup();
+            }
+          }}
         >
           {/* Ambient background */}
+
           <div className="pointer-events-none absolute inset-0 overflow-hidden">
             <motion.div
               className="absolute -left-20 top-10 h-64 w-64 rounded-full bg-[#15945c]/20 blur-3xl"
@@ -473,21 +472,17 @@ const title = college?.name
             />
           </div>
 
-          {/* 
-            IMPORTANT:
-            The popup is fixed inside a 100dvh flex container.
-            This keeps it centered relative to the viewport,
-            even when the page behind it was scrolled.
-          */}
+          {/* Main modal */}
+
           <motion.div
             role="dialog"
             aria-modal="true"
             aria-labelledby="journey-popup-title"
-            className="relative flex max-h-[94dvh] w-full max-w-[520px] flex-col overflow-hidden rounded-[24px] bg-white shadow-[0_30px_100px_rgba(0,0,0,0.28)] sm:max-h-[92dvh] sm:rounded-[28px]"
+            className="relative flex max-h-[76dvh] w-full max-w-[480px] flex-col overflow-hidden rounded-xl bg-white shadow-[0_24px_80px_rgba(0,0,0,0.24)] sm:rounded-2xl"
             initial={{
               opacity: 0,
-              scale: 0.94,
-              y: 20,
+              scale: 0.96,
+              y: 16,
             }}
             animate={{
               opacity: 1,
@@ -496,17 +491,18 @@ const title = college?.name
             }}
             exit={{
               opacity: 0,
-              scale: 0.96,
+              scale: 0.97,
               y: 10,
             }}
             transition={{
-              duration: 0.28,
+              duration: 0.25,
               ease: [0.22, 1, 0.36, 1],
             }}
           >
-            {/* Progress bar */}
+            {/* Top progress line */}
+
             <motion.div
-              className="absolute left-0 right-0 top-0 z-30 h-1 origin-left bg-[#15945c]"
+              className="absolute left-0 right-0 top-0 z-30 h-0.5 origin-left bg-[#15945c]"
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{
@@ -515,128 +511,133 @@ const title = college?.name
               }}
             />
 
-            {/* Scrollable popup content */}
+            {/* Scrollable content */}
+
             <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
               {/* Header */}
-              <div className="flex items-center justify-between px-4 pb-2 pt-5 sm:px-7 sm:pt-6">
-                {/* College Aadhar logo */}
-                <div className="flex items-center gap-2.5">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#15945c] text-white shadow-sm">
+
+              <header className="flex items-center justify-between gap-2 px-3 pb-2 pt-4 sm:px-4">
+                <Link
+                  href="/"
+                  onClick={closePopup}
+                  className="group flex min-w-0 items-center gap-2"
+                  aria-label="College Aadhar home"
+                >
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#15945c] text-white shadow-sm">
                     <GraduationCap className="h-5 w-5" />
                   </div>
 
-                  <div>
-                    <p className="text-sm font-bold tracking-tight text-slate-900">
+                  <div className="min-w-0">
+                    <p className="text-base font-extrabold tracking-tight text-slate-900">
                       College Aadhar
                     </p>
+
                     <p className="text-[10px] font-medium text-slate-500">
                       Your education journey
                     </p>
                   </div>
-                </div>
+                </Link>
 
-                {/* Close */}
                 <button
                   type="button"
                   onClick={closePopup}
-                  aria-label="Close"
-                  className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 text-slate-500 transition hover:bg-slate-200 hover:text-slate-900"
+                  aria-label="Close popup"
+                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-slate-500 transition hover:bg-slate-100 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#15945c]"
                 >
-                  <X className="h-4 w-4" />
+                  <X className="h-5 w-5" />
                 </button>
-              </div>
+              </header>
 
-              {/* Hero */}
-              <div className="relative overflow-hidden px-4 pb-5 pt-3 sm:px-7 sm:pb-6">
-                <div className="absolute -right-20 -top-24 h-48 w-48 rounded-full border-[24px] border-[#15945c]/5" />
+              {/* College information and hero */}
 
-                <div className="absolute -bottom-24 -left-16 h-44 w-44 rounded-full bg-[#15945c]/5 blur-2xl" />
+              <section className="relative overflow-hidden bg-gradient-to-b from-emerald-50/80 via-white to-white px-3 pb-3 pt-1 sm:px-4">
+                <div className="pointer-events-none absolute -right-12 -top-16 h-36 w-36 rounded-full border-[18px] border-[#15945c]/5" />
 
-                {/* College identity */}
                 {college && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 5 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="mb-4 inline-flex max-w-full items-center gap-2 rounded-full border border-emerald-100 bg-emerald-50 px-2.5 py-1.5"
-                  >
-                    <div className="flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white">
+                  <div className="relative mb-3 flex items-center gap-2">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-slate-100 bg-white p-1.5 shadow-sm">
                       {college.logo ? (
                         <img
                           src={college.logo}
-                          alt={college.name}
+                          alt={`${college.name} logo`}
                           className="h-full w-full object-contain"
                         />
                       ) : (
-                        <GraduationCap className="h-4 w-4 text-[#15945c]" />
+                        <GraduationCap className="h-6 w-6 text-[#15945c]" />
                       )}
                     </div>
 
-                    <span className="max-w-[260px] truncate text-xs font-semibold text-[#15945c]">
-                      {college.shortName || college.name}
-                    </span>
-                  </motion.div>
+                    <div className="min-w-0">
+                      <h3 className="text-sm font-bold leading-snug text-slate-800">
+                        {college.shortName || college.name}
+                      </h3>
+
+                      <p className="mt-0.5 text-[11px] text-slate-600">
+                        Explore admissions and courses
+                      </p>
+                    </div>
+                  </div>
                 )}
 
-                {/* Sparkles */}
-                <div className="mb-3 flex items-center gap-2 text-[#15945c]">
-                  <Sparkles className="h-4 w-4" />
+                <div className="relative">
+                  <h2
+                    id="journey-popup-title"
+                    className="max-w-full text-xl font-extrabold leading-tight tracking-tight text-slate-950"
+                  >
+                    {title}
+                  </h2>
 
-                  <span className="text-[11px] font-bold uppercase tracking-[0.16em]">
-                    Your next step starts here
-                  </span>
-                </div>
+                  <p className="mt-1.5 text-xs leading-5 text-slate-600">
+                    {subtitle}
+                  </p>
 
-                <h2
-                  id="journey-popup-title"
-                  className="relative max-w-[470px] text-[25px] font-extrabold leading-[1.12] tracking-tight text-slate-950 sm:text-[30px]"
-                >
-                  {title}
-                </h2>
-
-                <p className="relative mt-3 max-w-[460px] text-sm leading-6 text-slate-600 sm:text-[14px]">
-                  {subtitle}
-                </p>
-              </div>
-
-              {/* Auth */}
-              <div className="px-4 pb-4 sm:px-7">
-                {/* Auth tabs */}
-                <div className="rounded-xl bg-slate-100 p-1">
-                  <div className="grid grid-cols-2 gap-1">
-                    <button
-                      type="button"
-                      onClick={() => switchAuthMode("login")}
-                      className={`rounded-lg px-3 py-2 text-sm font-semibold transition ${
-                        authMode === "login"
-                          ? "bg-white text-[#15945c] shadow-sm"
-                          : "text-slate-500 hover:text-slate-900"
-                      }`}
-                    >
-                      Login
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() => switchAuthMode("register")}
-                      className={`rounded-lg px-3 py-2 text-sm font-semibold transition ${
-                        authMode === "register"
-                          ? "bg-white text-[#15945c] shadow-sm"
-                          : "text-slate-500 hover:text-slate-900"
-                      }`}
-                    >
-                      Register
-                    </button>
+                  <div className="mt-2 flex items-center justify-center gap-1.5 text-center text-sm font-bold text-[#15945c]">
+                    <Sparkles className="h-4 w-4 shrink-0" />
+                    <span>Guidance at Every Step</span>
                   </div>
                 </div>
+              </section>
 
-                {/* Animated forms */}
+              {/* Authentication panel */}
+
+              <section className="rounded-t-xl border-t border-slate-100 bg-white px-3 pb-4 sm:rounded-t-2xl sm:px-4">
+                {/* Register / Login tabs */}
+
+                <div className="grid grid-cols-2 border-b border-slate-200">
+                  {(["register", "login"] as const).map((mode) => (
+                    <button
+                      key={mode}
+                      type="button"
+                      onClick={() => switchAuthMode(mode)}
+                      aria-pressed={authMode === mode}
+                      className={`relative flex min-h-10 items-center justify-center px-2 py-2 text-sm font-medium transition ${
+                        authMode === mode
+                          ? "text-[#15945c]"
+                          : "text-slate-500 hover:text-slate-800"
+                      }`}
+                    >
+                      {mode === "register" ? "Register" : "Login"}
+
+                      {authMode === mode && (
+                        <motion.span
+                          layoutId="journey-auth-tab"
+                          className="absolute inset-x-0 bottom-[-1px] h-0.5 rounded-full bg-[#15945c]"
+                          transition={{ duration: 0.2 }}
+                        />
+                      )}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Animated authentication forms */}
+
                 <AnimatePresence mode="wait" initial={false}>
                   <motion.form
                     key={authMode}
                     onSubmit={handleAuthSubmit}
                     initial={{
                       opacity: 0,
-                      x: authMode === "login" ? -12 : 12,
+                      x: authMode === "login" ? -10 : 10,
                     }}
                     animate={{
                       opacity: 1,
@@ -644,191 +645,278 @@ const title = college?.name
                     }}
                     exit={{
                       opacity: 0,
-                      x: authMode === "login" ? 12 : -12,
+                      x: authMode === "login" ? 10 : -10,
                     }}
                     transition={{ duration: 0.18 }}
                     className="mt-3 space-y-2.5"
                   >
-                    {/* Register name */}
-                    {authMode === "register" && (
-                      <div className="relative">
-                        <User className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                    {/* Full name */}
 
-                        <input
-                          type="text"
-                          value={name}
-                          onChange={(event) =>
-                            setName(event.target.value)
-                          }
-                          placeholder="Full name"
-                          autoComplete="name"
-                          disabled={authLoading}
-                          className="h-11 w-full rounded-xl border border-slate-200 bg-slate-50 pl-10 pr-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-[#15945c] focus:bg-white focus:ring-2 focus:ring-[#15945c]/10 disabled:opacity-60"
-                        />
+                    {authMode === "register" && (
+                      <div>
+                        <label
+                          htmlFor="journey-name"
+                          className={LABEL_CLASS}
+                        >
+                          Full Name <span className="text-red-500">*</span>
+                        </label>
+
+                        <div className="relative">
+                          <User className={ICON_CLASS} />
+
+                          <input
+                            id="journey-name"
+                            type="text"
+                            value={name}
+                            onChange={(event) => setName(event.target.value)}
+                            placeholder="Enter your full name"
+                            autoComplete="name"
+                            required
+                            disabled={authLoading}
+                            className={FIELD_CLASS}
+                          />
+                        </div>
                       </div>
                     )}
+{/* Email Address + Mobile Number */}
+{/* Email + Mobile Number */}
+{authMode === "register" ? (
+  <div className="grid grid-cols-2 gap-2">
+    {/* Email — half width in Register */}
+    <div className="min-w-0">
+      <label htmlFor="journey-email" className={LABEL_CLASS}>
+        Email <span className="text-red-500">*</span>
+      </label>
 
-                    {/* Register phone */}
-                    {authMode === "register" && (
-                      <div className="relative">
-                        <Phone className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+      <div className="relative">
+        <Mail className={ICON_CLASS} />
 
-                        <input
-                          type="tel"
-                          value={phone}
-                          onChange={(event) =>
-                            setPhone(event.target.value)
-                          }
-                          placeholder="Phone number"
-                          autoComplete="tel"
-                          inputMode="tel"
-                          disabled={authLoading}
-                          className="h-11 w-full rounded-xl border border-slate-200 bg-slate-50 pl-10 pr-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-[#15945c] focus:bg-white focus:ring-2 focus:ring-[#15945c]/10 disabled:opacity-60"
-                        />
-                      </div>
-                    )}
+        <input
+          id="journey-email"
+          type="email"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+          placeholder="Email address"
+          autoComplete="email"
+          required
+          disabled={authLoading}
+          className={FIELD_CLASS}
+        />
+      </div>
+    </div>
 
-                    {/* Email */}
-                    <div className="relative">
-                      <Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+    {/* Mobile — half width in Register */}
+    <div className="min-w-0">
+      <label htmlFor="journey-phone" className={LABEL_CLASS}>
+        Mobile Number <span className="text-red-500">*</span>
+      </label>
 
-                      <input
-                        type="email"
-                        value={email}
-                        onChange={(event) =>
-                          setEmail(event.target.value)
-                        }
-                        placeholder="Email address"
-                        autoComplete="email"
-                        disabled={authLoading}
-                        className="h-11 w-full rounded-xl border border-slate-200 bg-slate-50 pl-10 pr-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-[#15945c] focus:bg-white focus:ring-2 focus:ring-[#15945c]/10 disabled:opacity-60"
-                      />
-                    </div>
+      <div className="relative">
+        <Phone className={ICON_CLASS} />
 
+        <input
+          id="journey-phone"
+          type="tel"
+          value={phone}
+          onChange={(event) => setPhone(event.target.value)}
+          placeholder="Mobile number"
+          autoComplete="tel"
+          inputMode="tel"
+          required
+          disabled={authLoading}
+          className={FIELD_CLASS}
+        />
+      </div>
+    </div>
+  </div>
+) : (
+  /* Email — full width in Login */
+  <div className="w-full min-w-0">
+    <label htmlFor="journey-email" className={LABEL_CLASS}>
+      Email Address <span className="text-red-500">*</span>
+    </label>
+
+    <div className="relative">
+      <Mail className={ICON_CLASS} />
+
+      <input
+        id="journey-email"
+        type="email"
+        value={email}
+        onChange={(event) => setEmail(event.target.value)}
+        placeholder="Enter your email address"
+        autoComplete="email"
+        required
+        disabled={authLoading}
+        className={FIELD_CLASS}
+      />
+    </div>
+  </div>
+)}
                     {/* Password */}
-                    <div className="relative">
-                      <Lock className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
 
-                      <input
-                        type={
-                          showPassword ? "text" : "password"
-                        }
-                        value={password}
-                        onChange={(event) =>
-                          setPassword(event.target.value)
-                        }
-                        placeholder="Password"
-                        autoComplete={
-                          authMode === "login"
-                            ? "current-password"
-                            : "new-password"
-                        }
-                        disabled={authLoading}
-                        className="h-11 w-full rounded-xl border border-slate-200 bg-slate-50 pl-10 pr-11 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-[#15945c] focus:bg-white focus:ring-2 focus:ring-[#15945c]/10 disabled:opacity-60"
-                      />
-
-                      <button
-                        type="button"
-                        onClick={() =>
-                          setShowPassword((value) => !value)
-                        }
-                        tabIndex={-1}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 transition hover:text-slate-700"
-                        aria-label={
-                          showPassword
-                            ? "Hide password"
-                            : "Show password"
-                        }
+                    <div>
+                      <label
+                        htmlFor="journey-password"
+                        className={LABEL_CLASS}
                       >
-                        {showPassword ? (
-                          <EyeOff className="h-4 w-4" />
-                        ) : (
-                          <Eye className="h-4 w-4" />
-                        )}
-                      </button>
-                    </div>
+                        Password <span className="text-red-500">*</span>
+                      </label>
 
-                    {/* Confirm password */}
-                    {authMode === "register" && (
                       <div className="relative">
-                        <Lock className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                        <Lock className={ICON_CLASS} />
 
                         <input
-                          type={
-                            showConfirmPassword
-                              ? "text"
-                              : "password"
-                          }
-                          value={confirmPassword}
+                          id="journey-password"
+                          type={showPassword ? "text" : "password"}
+                          value={password}
                           onChange={(event) =>
-                            setConfirmPassword(
-                              event.target.value
-                            )
+                            setPassword(event.target.value)
                           }
-                          placeholder="Confirm password"
-                          autoComplete="new-password"
+                          placeholder="Enter your password"
+                          autoComplete={
+                            authMode === "login"
+                              ? "current-password"
+                              : "new-password"
+                          }
+                          minLength={authMode === "register" ? 8 : undefined}
+                          required
                           disabled={authLoading}
-                          className="h-11 w-full rounded-xl border border-slate-200 bg-slate-50 pl-10 pr-11 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-[#15945c] focus:bg-white focus:ring-2 focus:ring-[#15945c]/10 disabled:opacity-60"
+                          className={`${FIELD_CLASS} pr-10`}
                         />
 
                         <button
                           type="button"
-                          onClick={() =>
-                            setShowConfirmPassword(
-                              (value) => !value
-                            )
-                          }
-                          tabIndex={-1}
-                          className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 transition hover:text-slate-700"
+                          onClick={() => setShowPassword((value) => !value)}
+                          className="absolute right-1.5 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-md text-slate-500 transition hover:bg-slate-100 hover:text-slate-800"
                           aria-label={
-                            showConfirmPassword
-                              ? "Hide confirm password"
-                              : "Show confirm password"
+                            showPassword ? "Hide password" : "Show password"
                           }
                         >
-                          {showConfirmPassword ? (
+                          {showPassword ? (
                             <EyeOff className="h-4 w-4" />
                           ) : (
                             <Eye className="h-4 w-4" />
                           )}
                         </button>
                       </div>
+                    </div>
+
+                    {/* Confirm password */}
+
+                    {authMode === "register" && (
+                      <div>
+                        <label
+                          htmlFor="journey-confirm-password"
+                          className={LABEL_CLASS}
+                        >
+                          Confirm Password{" "}
+                          <span className="text-red-500">*</span>
+                        </label>
+
+                        <div className="relative">
+                          <Lock className={ICON_CLASS} />
+
+                          <input
+                            id="journey-confirm-password"
+                            type={
+                              showConfirmPassword ? "text" : "password"
+                            }
+                            value={confirmPassword}
+                            onChange={(event) =>
+                              setConfirmPassword(event.target.value)
+                            }
+                            placeholder="Confirm your password"
+                            autoComplete="new-password"
+                            minLength={8}
+                            required
+                            disabled={authLoading}
+                            className={`${FIELD_CLASS} pr-10`}
+                          />
+
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setShowConfirmPassword((value) => !value)
+                            }
+                            className="absolute right-1.5 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-md text-slate-500 transition hover:bg-slate-100 hover:text-slate-800"
+                            aria-label={
+                              showConfirmPassword
+                                ? "Hide confirm password"
+                                : "Show confirm password"
+                            }
+                          >
+                            {showConfirmPassword ? (
+                              <EyeOff className="h-4 w-4" />
+                            ) : (
+                              <Eye className="h-4 w-4" />
+                            )}
+                          </button>
+                        </div>
+                      </div>
                     )}
 
-                    {/* Error */}
+                    {/* Terms and conditions */}
+
+                    {authMode === "register" && (
+                      <label className="flex cursor-pointer items-start gap-2 pt-1 text-xs leading-5 text-slate-600">
+                        <input
+                          type="checkbox"
+                          checked={acceptedTerms}
+                          onChange={(event) =>
+                            setAcceptedTerms(event.target.checked)
+                          }
+                          className="peer sr-only"
+                        />
+
+                        <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded border border-slate-300 bg-white text-transparent transition peer-focus-visible:ring-2 peer-focus-visible:ring-[#15945c] peer-checked:border-[#15945c] peer-checked:bg-[#15945c] peer-checked:text-white">
+                          <Check className="h-3 w-3" />
+                        </span>
+
+                        <span>
+                          By submitting this form, you accept and agree to our{" "}
+                          <Link
+                            href="/terms"
+                            onClick={closePopup}
+                            className="font-medium text-[#15945c] underline-offset-2 hover:underline"
+                          >
+                            Terms of Use
+                          </Link>
+                          .
+                        </span>
+                      </label>
+                    )}
+
+                    {/* Authentication errors */}
+
                     <AnimatePresence initial={false}>
                       {authError && (
                         <motion.div
-                          initial={{
-                            opacity: 0,
-                            height: 0,
-                          }}
-                          animate={{
-                            opacity: 1,
-                            height: "auto",
-                          }}
-                          exit={{
-                            opacity: 0,
-                            height: 0,
-                          }}
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
                           className="overflow-hidden"
+                          role="alert"
+                          aria-live="polite"
                         >
-                          <p className="rounded-lg border border-red-100 bg-red-50 px-3 py-2 text-xs font-medium leading-5 text-red-600">
+                          <p className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-xs font-medium leading-5 text-red-600">
                             {authError}
                           </p>
                         </motion.div>
                       )}
                     </AnimatePresence>
 
-                    {/* Submit */}
+                    {/* Submit button */}
+
                     <button
                       type="submit"
                       disabled={authLoading}
-                      className="group flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-[#15945c] px-4 text-sm font-bold text-white shadow-sm shadow-[#15945c]/20 transition hover:bg-[#117c4d] disabled:cursor-not-allowed disabled:opacity-60"
+                      className="group flex min-h-10 w-full items-center justify-center gap-2 rounded-md bg-[#15945c] px-3 py-2 text-sm font-bold text-white shadow-sm transition hover:bg-[#117c4d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#15945c] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
                     >
                       {authLoading ? (
                         <>
                           <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+
                           {authMode === "login"
                             ? "Logging in..."
                             : "Creating account..."}
@@ -836,27 +924,26 @@ const title = college?.name
                       ) : (
                         <>
                           {authMode === "login"
-                            ? "Login to continue"
-                            : "Create account"}
+                            ? "LOGIN"
+                            : "CREATE ACCOUNT"}
 
-                          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                         </>
                       )}
                     </button>
 
-                    {/* Mode switch */}
-                    <p className="text-center text-[11px] text-slate-500">
+                    {/* Alternative authentication mode */}
+
+                    <p className="text-center text-xs text-slate-500">
                       {authMode === "login" ? (
                         <>
-                          Don't have an account?{" "}
+                          Don&apos;t have an account?{" "}
                           <button
                             type="button"
-                            onClick={() =>
-                              switchAuthMode("register")
-                            }
+                            onClick={() => switchAuthMode("register")}
                             className="font-bold text-[#15945c] hover:underline"
                           >
-                            Create one
+                            Register
                           </button>
                         </>
                       ) : (
@@ -864,9 +951,7 @@ const title = college?.name
                           Already have an account?{" "}
                           <button
                             type="button"
-                            onClick={() =>
-                              switchAuthMode("login")
-                            }
+                            onClick={() => switchAuthMode("login")}
                             className="font-bold text-[#15945c] hover:underline"
                           >
                             Login
@@ -876,30 +961,23 @@ const title = college?.name
                     </p>
                   </motion.form>
                 </AnimatePresence>
-              </div>
+              </section>
 
-              {/* Popular Courses */}
-              <div
-                className="border-t border-slate-100 bg-slate-50/70 px-4 py-3 sm:px-7 sm:py-4"
-                onMouseEnter={() =>
-                  setCoursesExpanded(true)
-                }
-                onMouseLeave={() =>
-                  setCoursesExpanded(false)
-                }
+              {/* Popular courses */}
+
+              <section
+                className="border-t border-slate-100 bg-slate-50/70 px-3 py-3 sm:px-4"
+                onMouseEnter={() => setCoursesExpanded(true)}
+                onMouseLeave={() => setCoursesExpanded(false)}
               >
-                {/* Single compact row */}
                 <button
                   type="button"
-                  onClick={() =>
-                    setCoursesExpanded(
-                      (value) => !value
-                    )
-                  }
-                  className="group flex w-full items-center justify-between rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-left transition hover:border-emerald-200 hover:shadow-sm"
+                  onClick={() => setCoursesExpanded((value) => !value)}
+                  aria-expanded={coursesExpanded}
+                  className="group flex w-full items-center justify-between gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-left transition hover:border-emerald-200 hover:shadow-sm"
                 >
-                  <div className="flex min-w-0 items-center gap-2.5">
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-emerald-50 text-[#15945c]">
+                  <div className="flex min-w-0 items-center gap-2">
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-emerald-50 text-[#15945c]">
                       <BookOpen className="h-4 w-4" />
                     </div>
 
@@ -912,22 +990,19 @@ const title = college?.name
                         {coursesLoading
                           ? "Loading courses..."
                           : courses.length
-                            ? `${courses.length} courses · Hover or tap to explore`
+                            ? `${courses.length} courses · Tap to explore`
                             : "Explore popular courses"}
                       </p>
                     </div>
                   </div>
 
                   <ChevronDown
-                    className={`ml-2 h-4 w-4 shrink-0 text-slate-400 transition-transform duration-200 ${
-                      coursesExpanded
-                        ? "rotate-180 text-[#15945c]"
-                        : ""
+                    className={`h-4 w-4 shrink-0 text-slate-400 transition-transform duration-200 ${
+                      coursesExpanded ? "rotate-180 text-[#15945c]" : ""
                     }`}
                   />
                 </button>
 
-                {/* Course list */}
                 <AnimatePresence initial={false}>
                   {coursesExpanded && (
                     <motion.div
@@ -946,40 +1021,35 @@ const title = college?.name
                         height: 0,
                         y: -5,
                       }}
-                      transition={{
-                        duration: 0.2,
-                      }}
+                      transition={{ duration: 0.2 }}
                       className="overflow-hidden"
                     >
-                      <div className="mt-2 rounded-xl border border-slate-200 bg-white p-2.5">
+                      <div className="mt-2 rounded-lg border border-slate-200 bg-white p-2">
                         {coursesLoading ? (
-                          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-                            {[1, 2, 3, 4].map(
-                              (item) => (
-                                <div
-                                  key={item}
-                                  className="h-12 animate-pulse rounded-lg bg-slate-100"
-                                />
-                              )
-                            )}
+                          <div className="grid grid-cols-1 gap-2">
+                            {[1, 2, 3, 4].map((item) => (
+                              <div
+                                key={item}
+                                className="h-10 animate-pulse rounded-md bg-slate-100"
+                              />
+                            ))}
                           </div>
                         ) : courses.length > 0 ? (
                           <>
-                            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                            <div className="grid grid-cols-1 gap-2">
                               {courses.map((course) => (
                                 <Link
                                   key={course.id}
                                   href={`/courses/${course.category.slug}/${course.slug}`}
                                   onClick={closePopup}
-                                  className="group flex items-center justify-between gap-2 rounded-lg border border-slate-100 px-2.5 py-2 transition hover:border-emerald-100 hover:bg-emerald-50/50"
+                                  className="group flex min-w-0 items-center justify-between gap-2 rounded-md border border-slate-100 px-2.5 py-2 transition hover:border-emerald-200 hover:bg-emerald-50/50"
                                 >
                                   <div className="min-w-0">
-                                    <p className="truncate text-[11px] font-bold text-slate-800 transition group-hover:text-[#15945c]">
-                                      {course.shortName ||
-                                        course.name}
+                                    <p className="truncate text-xs font-semibold text-slate-800 transition group-hover:text-[#15945c]">
+                                      {course.shortName || course.name}
                                     </p>
 
-                                    <p className="mt-0.5 text-[9px] text-slate-400">
+                                    <p className="mt-0.5 text-[10px] text-slate-400">
                                       {course.level}
                                     </p>
                                   </div>
@@ -992,10 +1062,10 @@ const title = college?.name
                             <Link
                               href="/courses"
                               onClick={closePopup}
-                              className="mt-2 flex items-center justify-center gap-1 rounded-lg bg-emerald-50 py-2 text-[11px] font-bold text-[#15945c] transition hover:bg-emerald-100"
+                              className="mt-2 flex items-center justify-center gap-1.5 rounded-md bg-emerald-50 py-2 text-xs font-bold text-[#15945c] transition hover:bg-emerald-100"
                             >
                               View all courses
-                              <ArrowRight className="h-3 w-3" />
+                              <ArrowRight className="h-3.5 w-3.5" />
                             </Link>
                           </>
                         ) : (
@@ -1007,7 +1077,7 @@ const title = college?.name
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </div>
+              </section>
             </div>
           </motion.div>
         </motion.div>

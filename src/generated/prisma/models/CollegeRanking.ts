@@ -49,9 +49,9 @@ export type CollegeRankingMinAggregateOutputType = {
   rankingBody: string | null
   score: runtime.Decimal | null
   totalColleges: number | null
+  status: $Enums.RankingStatus | null
   sourceUrl: string | null
   publishedAt: Date | null
-  status: $Enums.RankingStatus | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -65,9 +65,9 @@ export type CollegeRankingMaxAggregateOutputType = {
   rankingBody: string | null
   score: runtime.Decimal | null
   totalColleges: number | null
+  status: $Enums.RankingStatus | null
   sourceUrl: string | null
   publishedAt: Date | null
-  status: $Enums.RankingStatus | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -81,9 +81,9 @@ export type CollegeRankingCountAggregateOutputType = {
   rankingBody: number
   score: number
   totalColleges: number
+  status: number
   sourceUrl: number
   publishedAt: number
-  status: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -113,9 +113,9 @@ export type CollegeRankingMinAggregateInputType = {
   rankingBody?: true
   score?: true
   totalColleges?: true
+  status?: true
   sourceUrl?: true
   publishedAt?: true
-  status?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -129,9 +129,9 @@ export type CollegeRankingMaxAggregateInputType = {
   rankingBody?: true
   score?: true
   totalColleges?: true
+  status?: true
   sourceUrl?: true
   publishedAt?: true
-  status?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -145,9 +145,9 @@ export type CollegeRankingCountAggregateInputType = {
   rankingBody?: true
   score?: true
   totalColleges?: true
+  status?: true
   sourceUrl?: true
   publishedAt?: true
-  status?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -248,9 +248,9 @@ export type CollegeRankingGroupByOutputType = {
   rankingBody: string
   score: runtime.Decimal | null
   totalColleges: number | null
+  status: $Enums.RankingStatus
   sourceUrl: string | null
   publishedAt: Date | null
-  status: $Enums.RankingStatus
   createdAt: Date
   updatedAt: Date
   _count: CollegeRankingCountAggregateOutputType | null
@@ -287,9 +287,9 @@ export type CollegeRankingWhereInput = {
   rankingBody?: Prisma.StringFilter<"CollegeRanking"> | string
   score?: Prisma.DecimalNullableFilter<"CollegeRanking"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalColleges?: Prisma.IntNullableFilter<"CollegeRanking"> | number | null
+  status?: Prisma.EnumRankingStatusFilter<"CollegeRanking"> | $Enums.RankingStatus
   sourceUrl?: Prisma.StringNullableFilter<"CollegeRanking"> | string | null
   publishedAt?: Prisma.DateTimeNullableFilter<"CollegeRanking"> | Date | string | null
-  status?: Prisma.EnumRankingStatusFilter<"CollegeRanking"> | $Enums.RankingStatus
   createdAt?: Prisma.DateTimeFilter<"CollegeRanking"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CollegeRanking"> | Date | string
   college?: Prisma.XOR<Prisma.CollegeScalarRelationFilter, Prisma.CollegeWhereInput>
@@ -304,9 +304,9 @@ export type CollegeRankingOrderByWithRelationInput = {
   rankingBody?: Prisma.SortOrder
   score?: Prisma.SortOrderInput | Prisma.SortOrder
   totalColleges?: Prisma.SortOrderInput | Prisma.SortOrder
+  status?: Prisma.SortOrder
   sourceUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   publishedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   college?: Prisma.CollegeOrderByWithRelationInput
@@ -325,9 +325,9 @@ export type CollegeRankingWhereUniqueInput = Prisma.AtLeast<{
   rankingBody?: Prisma.StringFilter<"CollegeRanking"> | string
   score?: Prisma.DecimalNullableFilter<"CollegeRanking"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalColleges?: Prisma.IntNullableFilter<"CollegeRanking"> | number | null
+  status?: Prisma.EnumRankingStatusFilter<"CollegeRanking"> | $Enums.RankingStatus
   sourceUrl?: Prisma.StringNullableFilter<"CollegeRanking"> | string | null
   publishedAt?: Prisma.DateTimeNullableFilter<"CollegeRanking"> | Date | string | null
-  status?: Prisma.EnumRankingStatusFilter<"CollegeRanking"> | $Enums.RankingStatus
   createdAt?: Prisma.DateTimeFilter<"CollegeRanking"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CollegeRanking"> | Date | string
   college?: Prisma.XOR<Prisma.CollegeScalarRelationFilter, Prisma.CollegeWhereInput>
@@ -342,9 +342,9 @@ export type CollegeRankingOrderByWithAggregationInput = {
   rankingBody?: Prisma.SortOrder
   score?: Prisma.SortOrderInput | Prisma.SortOrder
   totalColleges?: Prisma.SortOrderInput | Prisma.SortOrder
+  status?: Prisma.SortOrder
   sourceUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   publishedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.CollegeRankingCountOrderByAggregateInput
@@ -366,9 +366,9 @@ export type CollegeRankingScalarWhereWithAggregatesInput = {
   rankingBody?: Prisma.StringWithAggregatesFilter<"CollegeRanking"> | string
   score?: Prisma.DecimalNullableWithAggregatesFilter<"CollegeRanking"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalColleges?: Prisma.IntNullableWithAggregatesFilter<"CollegeRanking"> | number | null
+  status?: Prisma.EnumRankingStatusWithAggregatesFilter<"CollegeRanking"> | $Enums.RankingStatus
   sourceUrl?: Prisma.StringNullableWithAggregatesFilter<"CollegeRanking"> | string | null
   publishedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"CollegeRanking"> | Date | string | null
-  status?: Prisma.EnumRankingStatusWithAggregatesFilter<"CollegeRanking"> | $Enums.RankingStatus
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"CollegeRanking"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"CollegeRanking"> | Date | string
 }
@@ -381,9 +381,9 @@ export type CollegeRankingCreateInput = {
   rankingBody: string
   score?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalColleges?: number | null
+  status?: $Enums.RankingStatus
   sourceUrl?: string | null
   publishedAt?: Date | string | null
-  status?: $Enums.RankingStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   college: Prisma.CollegeCreateNestedOneWithoutRankingsInput
@@ -398,9 +398,9 @@ export type CollegeRankingUncheckedCreateInput = {
   rankingBody: string
   score?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalColleges?: number | null
+  status?: $Enums.RankingStatus
   sourceUrl?: string | null
   publishedAt?: Date | string | null
-  status?: $Enums.RankingStatus
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -413,9 +413,9 @@ export type CollegeRankingUpdateInput = {
   rankingBody?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalColleges?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.EnumRankingStatusFieldUpdateOperationsInput | $Enums.RankingStatus
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  status?: Prisma.EnumRankingStatusFieldUpdateOperationsInput | $Enums.RankingStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   college?: Prisma.CollegeUpdateOneRequiredWithoutRankingsNestedInput
@@ -430,9 +430,9 @@ export type CollegeRankingUncheckedUpdateInput = {
   rankingBody?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalColleges?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.EnumRankingStatusFieldUpdateOperationsInput | $Enums.RankingStatus
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  status?: Prisma.EnumRankingStatusFieldUpdateOperationsInput | $Enums.RankingStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -446,9 +446,9 @@ export type CollegeRankingCreateManyInput = {
   rankingBody: string
   score?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalColleges?: number | null
+  status?: $Enums.RankingStatus
   sourceUrl?: string | null
   publishedAt?: Date | string | null
-  status?: $Enums.RankingStatus
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -461,9 +461,9 @@ export type CollegeRankingUpdateManyMutationInput = {
   rankingBody?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalColleges?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.EnumRankingStatusFieldUpdateOperationsInput | $Enums.RankingStatus
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  status?: Prisma.EnumRankingStatusFieldUpdateOperationsInput | $Enums.RankingStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -477,9 +477,9 @@ export type CollegeRankingUncheckedUpdateManyInput = {
   rankingBody?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalColleges?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.EnumRankingStatusFieldUpdateOperationsInput | $Enums.RankingStatus
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  status?: Prisma.EnumRankingStatusFieldUpdateOperationsInput | $Enums.RankingStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -510,9 +510,9 @@ export type CollegeRankingCountOrderByAggregateInput = {
   rankingBody?: Prisma.SortOrder
   score?: Prisma.SortOrder
   totalColleges?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   sourceUrl?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrder
-  status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -533,9 +533,9 @@ export type CollegeRankingMaxOrderByAggregateInput = {
   rankingBody?: Prisma.SortOrder
   score?: Prisma.SortOrder
   totalColleges?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   sourceUrl?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrder
-  status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -549,9 +549,9 @@ export type CollegeRankingMinOrderByAggregateInput = {
   rankingBody?: Prisma.SortOrder
   score?: Prisma.SortOrder
   totalColleges?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   sourceUrl?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrder
-  status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -617,9 +617,9 @@ export type CollegeRankingCreateWithoutCollegeInput = {
   rankingBody: string
   score?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalColleges?: number | null
+  status?: $Enums.RankingStatus
   sourceUrl?: string | null
   publishedAt?: Date | string | null
-  status?: $Enums.RankingStatus
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -632,9 +632,9 @@ export type CollegeRankingUncheckedCreateWithoutCollegeInput = {
   rankingBody: string
   score?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalColleges?: number | null
+  status?: $Enums.RankingStatus
   sourceUrl?: string | null
   publishedAt?: Date | string | null
-  status?: $Enums.RankingStatus
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -677,9 +677,9 @@ export type CollegeRankingScalarWhereInput = {
   rankingBody?: Prisma.StringFilter<"CollegeRanking"> | string
   score?: Prisma.DecimalNullableFilter<"CollegeRanking"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalColleges?: Prisma.IntNullableFilter<"CollegeRanking"> | number | null
+  status?: Prisma.EnumRankingStatusFilter<"CollegeRanking"> | $Enums.RankingStatus
   sourceUrl?: Prisma.StringNullableFilter<"CollegeRanking"> | string | null
   publishedAt?: Prisma.DateTimeNullableFilter<"CollegeRanking"> | Date | string | null
-  status?: Prisma.EnumRankingStatusFilter<"CollegeRanking"> | $Enums.RankingStatus
   createdAt?: Prisma.DateTimeFilter<"CollegeRanking"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CollegeRanking"> | Date | string
 }
@@ -692,9 +692,9 @@ export type CollegeRankingCreateManyCollegeInput = {
   rankingBody: string
   score?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalColleges?: number | null
+  status?: $Enums.RankingStatus
   sourceUrl?: string | null
   publishedAt?: Date | string | null
-  status?: $Enums.RankingStatus
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -707,9 +707,9 @@ export type CollegeRankingUpdateWithoutCollegeInput = {
   rankingBody?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalColleges?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.EnumRankingStatusFieldUpdateOperationsInput | $Enums.RankingStatus
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  status?: Prisma.EnumRankingStatusFieldUpdateOperationsInput | $Enums.RankingStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -722,9 +722,9 @@ export type CollegeRankingUncheckedUpdateWithoutCollegeInput = {
   rankingBody?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalColleges?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.EnumRankingStatusFieldUpdateOperationsInput | $Enums.RankingStatus
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  status?: Prisma.EnumRankingStatusFieldUpdateOperationsInput | $Enums.RankingStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -737,9 +737,9 @@ export type CollegeRankingUncheckedUpdateManyWithoutCollegeInput = {
   rankingBody?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalColleges?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.EnumRankingStatusFieldUpdateOperationsInput | $Enums.RankingStatus
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  status?: Prisma.EnumRankingStatusFieldUpdateOperationsInput | $Enums.RankingStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -755,9 +755,9 @@ export type CollegeRankingSelect<ExtArgs extends runtime.Types.Extensions.Intern
   rankingBody?: boolean
   score?: boolean
   totalColleges?: boolean
+  status?: boolean
   sourceUrl?: boolean
   publishedAt?: boolean
-  status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   college?: boolean | Prisma.CollegeDefaultArgs<ExtArgs>
@@ -772,9 +772,9 @@ export type CollegeRankingSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   rankingBody?: boolean
   score?: boolean
   totalColleges?: boolean
+  status?: boolean
   sourceUrl?: boolean
   publishedAt?: boolean
-  status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   college?: boolean | Prisma.CollegeDefaultArgs<ExtArgs>
@@ -789,9 +789,9 @@ export type CollegeRankingSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   rankingBody?: boolean
   score?: boolean
   totalColleges?: boolean
+  status?: boolean
   sourceUrl?: boolean
   publishedAt?: boolean
-  status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   college?: boolean | Prisma.CollegeDefaultArgs<ExtArgs>
@@ -806,14 +806,14 @@ export type CollegeRankingSelectScalar = {
   rankingBody?: boolean
   score?: boolean
   totalColleges?: boolean
+  status?: boolean
   sourceUrl?: boolean
   publishedAt?: boolean
-  status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type CollegeRankingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "collegeId" | "year" | "rank" | "category" | "rankingBody" | "score" | "totalColleges" | "sourceUrl" | "publishedAt" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["collegeRanking"]>
+export type CollegeRankingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "collegeId" | "year" | "rank" | "category" | "rankingBody" | "score" | "totalColleges" | "status" | "sourceUrl" | "publishedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["collegeRanking"]>
 export type CollegeRankingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   college?: boolean | Prisma.CollegeDefaultArgs<ExtArgs>
 }
@@ -838,9 +838,9 @@ export type $CollegeRankingPayload<ExtArgs extends runtime.Types.Extensions.Inte
     rankingBody: string
     score: runtime.Decimal | null
     totalColleges: number | null
+    status: $Enums.RankingStatus
     sourceUrl: string | null
     publishedAt: Date | null
-    status: $Enums.RankingStatus
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["collegeRanking"]>
@@ -1275,9 +1275,9 @@ export interface CollegeRankingFieldRefs {
   readonly rankingBody: Prisma.FieldRef<"CollegeRanking", 'String'>
   readonly score: Prisma.FieldRef<"CollegeRanking", 'Decimal'>
   readonly totalColleges: Prisma.FieldRef<"CollegeRanking", 'Int'>
+  readonly status: Prisma.FieldRef<"CollegeRanking", 'RankingStatus'>
   readonly sourceUrl: Prisma.FieldRef<"CollegeRanking", 'String'>
   readonly publishedAt: Prisma.FieldRef<"CollegeRanking", 'DateTime'>
-  readonly status: Prisma.FieldRef<"CollegeRanking", 'RankingStatus'>
   readonly createdAt: Prisma.FieldRef<"CollegeRanking", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"CollegeRanking", 'DateTime'>
 }

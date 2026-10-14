@@ -160,25 +160,25 @@ export const CollegeScalarFieldEnum = {
   description: 'description',
   establishedYear: 'establishedYear',
   collegeType: 'collegeType',
-  aisheCode: 'aisheCode',
+  status: 'status',
   website: 'website',
   email: 'email',
   phone: 'phone',
   address: 'address',
+  stateId: 'stateId',
+  cityId: 'cityId',
   verified: 'verified',
-  status: 'status',
   lastUpdated: 'lastUpdated',
   seoTitle: 'seoTitle',
   seoDescription: 'seoDescription',
-  seoKeywords: 'seoKeywords',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
   canonicalUrl: 'canonicalUrl',
-  ogTitle: 'ogTitle',
   ogDescription: 'ogDescription',
   ogImage: 'ogImage',
-  stateId: 'stateId',
-  cityId: 'cityId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  ogTitle: 'ogTitle',
+  seoKeywords: 'seoKeywords',
+  aisheCode: 'aisheCode'
 } as const
 
 export type CollegeScalarFieldEnum = (typeof CollegeScalarFieldEnum)[keyof typeof CollegeScalarFieldEnum]
@@ -191,17 +191,17 @@ export const CourseScalarFieldEnum = {
   shortName: 'shortName',
   degree: 'degree',
   level: 'level',
-  entryLevel: 'entryLevel',
   description: 'description',
   durationYears: 'durationYears',
   eligibility: 'eligibility',
   averageFees: 'averageFees',
-  sourceCourseId: 'sourceCourseId',
   careerOptions: 'careerOptions',
-  categoryId: 'categoryId',
   status: 'status',
+  categoryId: 'categoryId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  entryLevel: 'entryLevel',
+  sourceCourseId: 'sourceCourseId'
 } as const
 
 export type CourseScalarFieldEnum = (typeof CourseScalarFieldEnum)[keyof typeof CourseScalarFieldEnum]
@@ -213,9 +213,9 @@ export const CollegeCourseScalarFieldEnum = {
   courseId: 'courseId',
   fees: 'fees',
   seats: 'seats',
-  duration: 'duration',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  duration: 'duration'
 } as const
 
 export type CollegeCourseScalarFieldEnum = (typeof CollegeCourseScalarFieldEnum)[keyof typeof CollegeCourseScalarFieldEnum]
@@ -248,14 +248,14 @@ export const ExamScalarFieldEnum = {
   name: 'name',
   slug: 'slug',
   shortName: 'shortName',
-  description: 'description',
   conductingBody: 'conductingBody',
-  examType: 'examType',
+  description: 'description',
   eligibility: 'eligibility',
-  applicationFee: 'applicationFee',
-  website: 'website',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  applicationFee: 'applicationFee',
+  examType: 'examType',
+  website: 'website'
 } as const
 
 export type ExamScalarFieldEnum = (typeof ExamScalarFieldEnum)[keyof typeof ExamScalarFieldEnum]
@@ -286,9 +286,9 @@ export const ReviewScalarFieldEnum = {
   content: 'content',
   isVerifiedStudent: 'isVerifiedStudent',
   isPublished: 'isPublished',
-  userId: 'userId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  userId: 'userId'
 } as const
 
 export type ReviewScalarFieldEnum = (typeof ReviewScalarFieldEnum)[keyof typeof ReviewScalarFieldEnum]
@@ -303,9 +303,9 @@ export const CollegeRankingScalarFieldEnum = {
   rankingBody: 'rankingBody',
   score: 'score',
   totalColleges: 'totalColleges',
+  status: 'status',
   sourceUrl: 'sourceUrl',
   publishedAt: 'publishedAt',
-  status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -319,14 +319,14 @@ export const BoardExamScalarFieldEnum = {
   slug: 'slug',
   board: 'board',
   className: 'className',
-  examYear: 'examYear',
-  examDate: 'examDate',
-  resultDate: 'resultDate',
   description: 'description',
-  officialUrl: 'officialUrl',
+  resultDate: 'resultDate',
   status: 'status',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  examDate: 'examDate',
+  examYear: 'examYear',
+  officialUrl: 'officialUrl'
 } as const
 
 export type BoardExamScalarFieldEnum = (typeof BoardExamScalarFieldEnum)[keyof typeof BoardExamScalarFieldEnum]
@@ -340,19 +340,19 @@ export const NewsArticleScalarFieldEnum = {
   content: 'content',
   coverImage: 'coverImage',
   type: 'type',
+  status: 'status',
   sourceName: 'sourceName',
   sourceUrl: 'sourceUrl',
-  authorId: 'authorId',
   publishedAt: 'publishedAt',
-  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  authorId: 'authorId',
   isFeatured: 'isFeatured',
   isTrending: 'isTrending',
-  views: 'views',
-  seoTitle: 'seoTitle',
   seoDescription: 'seoDescription',
   seoKeywords: 'seoKeywords',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  seoTitle: 'seoTitle',
+  views: 'views'
 } as const
 
 export type NewsArticleScalarFieldEnum = (typeof NewsArticleScalarFieldEnum)[keyof typeof NewsArticleScalarFieldEnum]
@@ -362,19 +362,19 @@ export const StudyAbroadDestinationScalarFieldEnum = {
   id: 'id',
   country: 'country',
   slug: 'slug',
-  shortName: 'shortName',
   description: 'description',
   coverImage: 'coverImage',
-  popularCourses: 'popularCourses',
-  averageTuition: 'averageTuition',
-  livingCost: 'livingCost',
   currency: 'currency',
-  visaInfo: 'visaInfo',
-  admissionInfo: 'admissionInfo',
-  officialUrl: 'officialUrl',
+  averageTuition: 'averageTuition',
+  popularCourses: 'popularCourses',
   status: 'status',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  admissionInfo: 'admissionInfo',
+  livingCost: 'livingCost',
+  officialUrl: 'officialUrl',
+  shortName: 'shortName',
+  visaInfo: 'visaInfo'
 } as const
 
 export type StudyAbroadDestinationScalarFieldEnum = (typeof StudyAbroadDestinationScalarFieldEnum)[keyof typeof StudyAbroadDestinationScalarFieldEnum]
@@ -574,12 +574,12 @@ export const UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
   email: 'email',
-  phone: 'phone',
   passwordHash: 'passwordHash',
   avatar: 'avatar',
-  role: 'role',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  phone: 'phone',
+  role: 'role'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -610,13 +610,13 @@ export const UserApplicationScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   collegeId: 'collegeId',
-  phoneNumber: 'phoneNumber',
   status: 'status',
   courseName: 'courseName',
   notes: 'notes',
   appliedAt: 'appliedAt',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  phoneNumber: 'phoneNumber'
 } as const
 
 export type UserApplicationScalarFieldEnum = (typeof UserApplicationScalarFieldEnum)[keyof typeof UserApplicationScalarFieldEnum]

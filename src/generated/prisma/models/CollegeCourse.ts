@@ -44,9 +44,9 @@ export type CollegeCourseMinAggregateOutputType = {
   courseId: string | null
   fees: runtime.Decimal | null
   seats: number | null
-  duration: runtime.Decimal | null
   createdAt: Date | null
   updatedAt: Date | null
+  duration: runtime.Decimal | null
 }
 
 export type CollegeCourseMaxAggregateOutputType = {
@@ -55,9 +55,9 @@ export type CollegeCourseMaxAggregateOutputType = {
   courseId: string | null
   fees: runtime.Decimal | null
   seats: number | null
-  duration: runtime.Decimal | null
   createdAt: Date | null
   updatedAt: Date | null
+  duration: runtime.Decimal | null
 }
 
 export type CollegeCourseCountAggregateOutputType = {
@@ -66,9 +66,9 @@ export type CollegeCourseCountAggregateOutputType = {
   courseId: number
   fees: number
   seats: number
-  duration: number
   createdAt: number
   updatedAt: number
+  duration: number
   _all: number
 }
 
@@ -91,9 +91,9 @@ export type CollegeCourseMinAggregateInputType = {
   courseId?: true
   fees?: true
   seats?: true
-  duration?: true
   createdAt?: true
   updatedAt?: true
+  duration?: true
 }
 
 export type CollegeCourseMaxAggregateInputType = {
@@ -102,9 +102,9 @@ export type CollegeCourseMaxAggregateInputType = {
   courseId?: true
   fees?: true
   seats?: true
-  duration?: true
   createdAt?: true
   updatedAt?: true
+  duration?: true
 }
 
 export type CollegeCourseCountAggregateInputType = {
@@ -113,9 +113,9 @@ export type CollegeCourseCountAggregateInputType = {
   courseId?: true
   fees?: true
   seats?: true
-  duration?: true
   createdAt?: true
   updatedAt?: true
+  duration?: true
   _all?: true
 }
 
@@ -211,9 +211,9 @@ export type CollegeCourseGroupByOutputType = {
   courseId: string
   fees: runtime.Decimal | null
   seats: number | null
-  duration: runtime.Decimal | null
   createdAt: Date
   updatedAt: Date
+  duration: runtime.Decimal | null
   _count: CollegeCourseCountAggregateOutputType | null
   _avg: CollegeCourseAvgAggregateOutputType | null
   _sum: CollegeCourseSumAggregateOutputType | null
@@ -245,9 +245,9 @@ export type CollegeCourseWhereInput = {
   courseId?: Prisma.StringFilter<"CollegeCourse"> | string
   fees?: Prisma.DecimalNullableFilter<"CollegeCourse"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   seats?: Prisma.IntNullableFilter<"CollegeCourse"> | number | null
-  duration?: Prisma.DecimalNullableFilter<"CollegeCourse"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFilter<"CollegeCourse"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CollegeCourse"> | Date | string
+  duration?: Prisma.DecimalNullableFilter<"CollegeCourse"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   college?: Prisma.XOR<Prisma.CollegeScalarRelationFilter, Prisma.CollegeWhereInput>
   course?: Prisma.XOR<Prisma.CourseScalarRelationFilter, Prisma.CourseWhereInput>
 }
@@ -258,9 +258,9 @@ export type CollegeCourseOrderByWithRelationInput = {
   courseId?: Prisma.SortOrder
   fees?: Prisma.SortOrderInput | Prisma.SortOrder
   seats?: Prisma.SortOrderInput | Prisma.SortOrder
-  duration?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  duration?: Prisma.SortOrderInput | Prisma.SortOrder
   college?: Prisma.CollegeOrderByWithRelationInput
   course?: Prisma.CourseOrderByWithRelationInput
 }
@@ -275,9 +275,9 @@ export type CollegeCourseWhereUniqueInput = Prisma.AtLeast<{
   courseId?: Prisma.StringFilter<"CollegeCourse"> | string
   fees?: Prisma.DecimalNullableFilter<"CollegeCourse"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   seats?: Prisma.IntNullableFilter<"CollegeCourse"> | number | null
-  duration?: Prisma.DecimalNullableFilter<"CollegeCourse"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFilter<"CollegeCourse"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CollegeCourse"> | Date | string
+  duration?: Prisma.DecimalNullableFilter<"CollegeCourse"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   college?: Prisma.XOR<Prisma.CollegeScalarRelationFilter, Prisma.CollegeWhereInput>
   course?: Prisma.XOR<Prisma.CourseScalarRelationFilter, Prisma.CourseWhereInput>
 }, "id" | "collegeId_courseId">
@@ -288,9 +288,9 @@ export type CollegeCourseOrderByWithAggregationInput = {
   courseId?: Prisma.SortOrder
   fees?: Prisma.SortOrderInput | Prisma.SortOrder
   seats?: Prisma.SortOrderInput | Prisma.SortOrder
-  duration?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  duration?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.CollegeCourseCountOrderByAggregateInput
   _avg?: Prisma.CollegeCourseAvgOrderByAggregateInput
   _max?: Prisma.CollegeCourseMaxOrderByAggregateInput
@@ -307,18 +307,18 @@ export type CollegeCourseScalarWhereWithAggregatesInput = {
   courseId?: Prisma.StringWithAggregatesFilter<"CollegeCourse"> | string
   fees?: Prisma.DecimalNullableWithAggregatesFilter<"CollegeCourse"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   seats?: Prisma.IntNullableWithAggregatesFilter<"CollegeCourse"> | number | null
-  duration?: Prisma.DecimalNullableWithAggregatesFilter<"CollegeCourse"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"CollegeCourse"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"CollegeCourse"> | Date | string
+  duration?: Prisma.DecimalNullableWithAggregatesFilter<"CollegeCourse"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type CollegeCourseCreateInput = {
   id?: string
   fees?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   seats?: number | null
-  duration?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  duration?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   college: Prisma.CollegeCreateNestedOneWithoutCoursesInput
   course: Prisma.CourseCreateNestedOneWithoutCollegesInput
 }
@@ -329,18 +329,18 @@ export type CollegeCourseUncheckedCreateInput = {
   courseId: string
   fees?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   seats?: number | null
-  duration?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  duration?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type CollegeCourseUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   fees?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   seats?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  duration?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  duration?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   college?: Prisma.CollegeUpdateOneRequiredWithoutCoursesNestedInput
   course?: Prisma.CourseUpdateOneRequiredWithoutCollegesNestedInput
 }
@@ -351,9 +351,9 @@ export type CollegeCourseUncheckedUpdateInput = {
   courseId?: Prisma.StringFieldUpdateOperationsInput | string
   fees?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   seats?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  duration?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  duration?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type CollegeCourseCreateManyInput = {
@@ -362,18 +362,18 @@ export type CollegeCourseCreateManyInput = {
   courseId: string
   fees?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   seats?: number | null
-  duration?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  duration?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type CollegeCourseUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   fees?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   seats?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  duration?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  duration?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type CollegeCourseUncheckedUpdateManyInput = {
@@ -382,9 +382,9 @@ export type CollegeCourseUncheckedUpdateManyInput = {
   courseId?: Prisma.StringFieldUpdateOperationsInput | string
   fees?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   seats?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  duration?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  duration?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type CollegeCourseListRelationFilter = {
@@ -408,9 +408,9 @@ export type CollegeCourseCountOrderByAggregateInput = {
   courseId?: Prisma.SortOrder
   fees?: Prisma.SortOrder
   seats?: Prisma.SortOrder
-  duration?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  duration?: Prisma.SortOrder
 }
 
 export type CollegeCourseAvgOrderByAggregateInput = {
@@ -425,9 +425,9 @@ export type CollegeCourseMaxOrderByAggregateInput = {
   courseId?: Prisma.SortOrder
   fees?: Prisma.SortOrder
   seats?: Prisma.SortOrder
-  duration?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  duration?: Prisma.SortOrder
 }
 
 export type CollegeCourseMinOrderByAggregateInput = {
@@ -436,9 +436,9 @@ export type CollegeCourseMinOrderByAggregateInput = {
   courseId?: Prisma.SortOrder
   fees?: Prisma.SortOrder
   seats?: Prisma.SortOrder
-  duration?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  duration?: Prisma.SortOrder
 }
 
 export type CollegeCourseSumOrderByAggregateInput = {
@@ -535,9 +535,9 @@ export type CollegeCourseCreateWithoutCollegeInput = {
   id?: string
   fees?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   seats?: number | null
-  duration?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  duration?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   course: Prisma.CourseCreateNestedOneWithoutCollegesInput
 }
 
@@ -546,9 +546,9 @@ export type CollegeCourseUncheckedCreateWithoutCollegeInput = {
   courseId: string
   fees?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   seats?: number | null
-  duration?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  duration?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type CollegeCourseCreateOrConnectWithoutCollegeInput = {
@@ -586,18 +586,18 @@ export type CollegeCourseScalarWhereInput = {
   courseId?: Prisma.StringFilter<"CollegeCourse"> | string
   fees?: Prisma.DecimalNullableFilter<"CollegeCourse"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   seats?: Prisma.IntNullableFilter<"CollegeCourse"> | number | null
-  duration?: Prisma.DecimalNullableFilter<"CollegeCourse"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFilter<"CollegeCourse"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CollegeCourse"> | Date | string
+  duration?: Prisma.DecimalNullableFilter<"CollegeCourse"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type CollegeCourseCreateWithoutCourseInput = {
   id?: string
   fees?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   seats?: number | null
-  duration?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  duration?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   college: Prisma.CollegeCreateNestedOneWithoutCoursesInput
 }
 
@@ -606,9 +606,9 @@ export type CollegeCourseUncheckedCreateWithoutCourseInput = {
   collegeId: string
   fees?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   seats?: number | null
-  duration?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  duration?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type CollegeCourseCreateOrConnectWithoutCourseInput = {
@@ -642,18 +642,18 @@ export type CollegeCourseCreateManyCollegeInput = {
   courseId: string
   fees?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   seats?: number | null
-  duration?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  duration?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type CollegeCourseUpdateWithoutCollegeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   fees?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   seats?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  duration?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  duration?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   course?: Prisma.CourseUpdateOneRequiredWithoutCollegesNestedInput
 }
 
@@ -662,9 +662,9 @@ export type CollegeCourseUncheckedUpdateWithoutCollegeInput = {
   courseId?: Prisma.StringFieldUpdateOperationsInput | string
   fees?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   seats?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  duration?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  duration?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type CollegeCourseUncheckedUpdateManyWithoutCollegeInput = {
@@ -672,9 +672,9 @@ export type CollegeCourseUncheckedUpdateManyWithoutCollegeInput = {
   courseId?: Prisma.StringFieldUpdateOperationsInput | string
   fees?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   seats?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  duration?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  duration?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type CollegeCourseCreateManyCourseInput = {
@@ -682,18 +682,18 @@ export type CollegeCourseCreateManyCourseInput = {
   collegeId: string
   fees?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   seats?: number | null
-  duration?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  duration?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type CollegeCourseUpdateWithoutCourseInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   fees?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   seats?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  duration?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  duration?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   college?: Prisma.CollegeUpdateOneRequiredWithoutCoursesNestedInput
 }
 
@@ -702,9 +702,9 @@ export type CollegeCourseUncheckedUpdateWithoutCourseInput = {
   collegeId?: Prisma.StringFieldUpdateOperationsInput | string
   fees?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   seats?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  duration?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  duration?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type CollegeCourseUncheckedUpdateManyWithoutCourseInput = {
@@ -712,9 +712,9 @@ export type CollegeCourseUncheckedUpdateManyWithoutCourseInput = {
   collegeId?: Prisma.StringFieldUpdateOperationsInput | string
   fees?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   seats?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  duration?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  duration?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 
@@ -725,9 +725,9 @@ export type CollegeCourseSelect<ExtArgs extends runtime.Types.Extensions.Interna
   courseId?: boolean
   fees?: boolean
   seats?: boolean
-  duration?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  duration?: boolean
   college?: boolean | Prisma.CollegeDefaultArgs<ExtArgs>
   course?: boolean | Prisma.CourseDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["collegeCourse"]>
@@ -738,9 +738,9 @@ export type CollegeCourseSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   courseId?: boolean
   fees?: boolean
   seats?: boolean
-  duration?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  duration?: boolean
   college?: boolean | Prisma.CollegeDefaultArgs<ExtArgs>
   course?: boolean | Prisma.CourseDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["collegeCourse"]>
@@ -751,9 +751,9 @@ export type CollegeCourseSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   courseId?: boolean
   fees?: boolean
   seats?: boolean
-  duration?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  duration?: boolean
   college?: boolean | Prisma.CollegeDefaultArgs<ExtArgs>
   course?: boolean | Prisma.CourseDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["collegeCourse"]>
@@ -764,12 +764,12 @@ export type CollegeCourseSelectScalar = {
   courseId?: boolean
   fees?: boolean
   seats?: boolean
-  duration?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  duration?: boolean
 }
 
-export type CollegeCourseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "collegeId" | "courseId" | "fees" | "seats" | "duration" | "createdAt" | "updatedAt", ExtArgs["result"]["collegeCourse"]>
+export type CollegeCourseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "collegeId" | "courseId" | "fees" | "seats" | "createdAt" | "updatedAt" | "duration", ExtArgs["result"]["collegeCourse"]>
 export type CollegeCourseInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   college?: boolean | Prisma.CollegeDefaultArgs<ExtArgs>
   course?: boolean | Prisma.CourseDefaultArgs<ExtArgs>
@@ -795,9 +795,9 @@ export type $CollegeCoursePayload<ExtArgs extends runtime.Types.Extensions.Inter
     courseId: string
     fees: runtime.Decimal | null
     seats: number | null
-    duration: runtime.Decimal | null
     createdAt: Date
     updatedAt: Date
+    duration: runtime.Decimal | null
   }, ExtArgs["result"]["collegeCourse"]>
   composites: {}
 }
@@ -1228,9 +1228,9 @@ export interface CollegeCourseFieldRefs {
   readonly courseId: Prisma.FieldRef<"CollegeCourse", 'String'>
   readonly fees: Prisma.FieldRef<"CollegeCourse", 'Decimal'>
   readonly seats: Prisma.FieldRef<"CollegeCourse", 'Int'>
-  readonly duration: Prisma.FieldRef<"CollegeCourse", 'Decimal'>
   readonly createdAt: Prisma.FieldRef<"CollegeCourse", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"CollegeCourse", 'DateTime'>
+  readonly duration: Prisma.FieldRef<"CollegeCourse", 'Decimal'>
 }
     
 

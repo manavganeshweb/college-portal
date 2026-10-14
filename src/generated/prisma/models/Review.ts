@@ -42,9 +42,9 @@ export type ReviewMinAggregateOutputType = {
   content: string | null
   isVerifiedStudent: boolean | null
   isPublished: boolean | null
-  userId: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  userId: string | null
 }
 
 export type ReviewMaxAggregateOutputType = {
@@ -55,9 +55,9 @@ export type ReviewMaxAggregateOutputType = {
   content: string | null
   isVerifiedStudent: boolean | null
   isPublished: boolean | null
-  userId: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  userId: string | null
 }
 
 export type ReviewCountAggregateOutputType = {
@@ -68,9 +68,9 @@ export type ReviewCountAggregateOutputType = {
   content: number
   isVerifiedStudent: number
   isPublished: number
-  userId: number
   createdAt: number
   updatedAt: number
+  userId: number
   _all: number
 }
 
@@ -91,9 +91,9 @@ export type ReviewMinAggregateInputType = {
   content?: true
   isVerifiedStudent?: true
   isPublished?: true
-  userId?: true
   createdAt?: true
   updatedAt?: true
+  userId?: true
 }
 
 export type ReviewMaxAggregateInputType = {
@@ -104,9 +104,9 @@ export type ReviewMaxAggregateInputType = {
   content?: true
   isVerifiedStudent?: true
   isPublished?: true
-  userId?: true
   createdAt?: true
   updatedAt?: true
+  userId?: true
 }
 
 export type ReviewCountAggregateInputType = {
@@ -117,9 +117,9 @@ export type ReviewCountAggregateInputType = {
   content?: true
   isVerifiedStudent?: true
   isPublished?: true
-  userId?: true
   createdAt?: true
   updatedAt?: true
+  userId?: true
   _all?: true
 }
 
@@ -217,9 +217,9 @@ export type ReviewGroupByOutputType = {
   content: string
   isVerifiedStudent: boolean
   isPublished: boolean
-  userId: string | null
   createdAt: Date
   updatedAt: Date
+  userId: string | null
   _count: ReviewCountAggregateOutputType | null
   _avg: ReviewAvgAggregateOutputType | null
   _sum: ReviewSumAggregateOutputType | null
@@ -253,11 +253,11 @@ export type ReviewWhereInput = {
   content?: Prisma.StringFilter<"Review"> | string
   isVerifiedStudent?: Prisma.BoolFilter<"Review"> | boolean
   isPublished?: Prisma.BoolFilter<"Review"> | boolean
-  userId?: Prisma.StringNullableFilter<"Review"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Review"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Review"> | Date | string
-  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  userId?: Prisma.StringNullableFilter<"Review"> | string | null
   college?: Prisma.XOR<Prisma.CollegeScalarRelationFilter, Prisma.CollegeWhereInput>
+  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
 export type ReviewOrderByWithRelationInput = {
@@ -268,11 +268,11 @@ export type ReviewOrderByWithRelationInput = {
   content?: Prisma.SortOrder
   isVerifiedStudent?: Prisma.SortOrder
   isPublished?: Prisma.SortOrder
-  userId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  user?: Prisma.UserOrderByWithRelationInput
+  userId?: Prisma.SortOrderInput | Prisma.SortOrder
   college?: Prisma.CollegeOrderByWithRelationInput
+  user?: Prisma.UserOrderByWithRelationInput
 }
 
 export type ReviewWhereUniqueInput = Prisma.AtLeast<{
@@ -286,11 +286,11 @@ export type ReviewWhereUniqueInput = Prisma.AtLeast<{
   content?: Prisma.StringFilter<"Review"> | string
   isVerifiedStudent?: Prisma.BoolFilter<"Review"> | boolean
   isPublished?: Prisma.BoolFilter<"Review"> | boolean
-  userId?: Prisma.StringNullableFilter<"Review"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Review"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Review"> | Date | string
-  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  userId?: Prisma.StringNullableFilter<"Review"> | string | null
   college?: Prisma.XOR<Prisma.CollegeScalarRelationFilter, Prisma.CollegeWhereInput>
+  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }, "id">
 
 export type ReviewOrderByWithAggregationInput = {
@@ -301,9 +301,9 @@ export type ReviewOrderByWithAggregationInput = {
   content?: Prisma.SortOrder
   isVerifiedStudent?: Prisma.SortOrder
   isPublished?: Prisma.SortOrder
-  userId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ReviewCountOrderByAggregateInput
   _avg?: Prisma.ReviewAvgOrderByAggregateInput
   _max?: Prisma.ReviewMaxOrderByAggregateInput
@@ -322,9 +322,9 @@ export type ReviewScalarWhereWithAggregatesInput = {
   content?: Prisma.StringWithAggregatesFilter<"Review"> | string
   isVerifiedStudent?: Prisma.BoolWithAggregatesFilter<"Review"> | boolean
   isPublished?: Prisma.BoolWithAggregatesFilter<"Review"> | boolean
-  userId?: Prisma.StringNullableWithAggregatesFilter<"Review"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Review"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Review"> | Date | string
+  userId?: Prisma.StringNullableWithAggregatesFilter<"Review"> | string | null
 }
 
 export type ReviewCreateInput = {
@@ -336,8 +336,8 @@ export type ReviewCreateInput = {
   isPublished?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  user?: Prisma.UserCreateNestedOneWithoutReviewsInput
   college: Prisma.CollegeCreateNestedOneWithoutReviewsInput
+  user?: Prisma.UserCreateNestedOneWithoutReviewsInput
 }
 
 export type ReviewUncheckedCreateInput = {
@@ -348,9 +348,9 @@ export type ReviewUncheckedCreateInput = {
   content: string
   isVerifiedStudent?: boolean
   isPublished?: boolean
-  userId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  userId?: string | null
 }
 
 export type ReviewUpdateInput = {
@@ -362,8 +362,8 @@ export type ReviewUpdateInput = {
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneWithoutReviewsNestedInput
   college?: Prisma.CollegeUpdateOneRequiredWithoutReviewsNestedInput
+  user?: Prisma.UserUpdateOneWithoutReviewsNestedInput
 }
 
 export type ReviewUncheckedUpdateInput = {
@@ -374,9 +374,9 @@ export type ReviewUncheckedUpdateInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   isVerifiedStudent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ReviewCreateManyInput = {
@@ -387,9 +387,9 @@ export type ReviewCreateManyInput = {
   content: string
   isVerifiedStudent?: boolean
   isPublished?: boolean
-  userId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  userId?: string | null
 }
 
 export type ReviewUpdateManyMutationInput = {
@@ -411,9 +411,9 @@ export type ReviewUncheckedUpdateManyInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   isVerifiedStudent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ReviewListRelationFilter = {
@@ -434,9 +434,9 @@ export type ReviewCountOrderByAggregateInput = {
   content?: Prisma.SortOrder
   isVerifiedStudent?: Prisma.SortOrder
   isPublished?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
 }
 
 export type ReviewAvgOrderByAggregateInput = {
@@ -451,9 +451,9 @@ export type ReviewMaxOrderByAggregateInput = {
   content?: Prisma.SortOrder
   isVerifiedStudent?: Prisma.SortOrder
   isPublished?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
 }
 
 export type ReviewMinOrderByAggregateInput = {
@@ -464,9 +464,9 @@ export type ReviewMinOrderByAggregateInput = {
   content?: Prisma.SortOrder
   isVerifiedStudent?: Prisma.SortOrder
   isPublished?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
 }
 
 export type ReviewSumOrderByAggregateInput = {
@@ -576,9 +576,9 @@ export type ReviewUncheckedCreateWithoutCollegeInput = {
   content: string
   isVerifiedStudent?: boolean
   isPublished?: boolean
-  userId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  userId?: string | null
 }
 
 export type ReviewCreateOrConnectWithoutCollegeInput = {
@@ -618,9 +618,9 @@ export type ReviewScalarWhereInput = {
   content?: Prisma.StringFilter<"Review"> | string
   isVerifiedStudent?: Prisma.BoolFilter<"Review"> | boolean
   isPublished?: Prisma.BoolFilter<"Review"> | boolean
-  userId?: Prisma.StringNullableFilter<"Review"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Review"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Review"> | Date | string
+  userId?: Prisma.StringNullableFilter<"Review"> | string | null
 }
 
 export type ReviewCreateWithoutUserInput = {
@@ -680,9 +680,9 @@ export type ReviewCreateManyCollegeInput = {
   content: string
   isVerifiedStudent?: boolean
   isPublished?: boolean
-  userId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  userId?: string | null
 }
 
 export type ReviewUpdateWithoutCollegeInput = {
@@ -704,9 +704,9 @@ export type ReviewUncheckedUpdateWithoutCollegeInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   isVerifiedStudent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ReviewUncheckedUpdateManyWithoutCollegeInput = {
@@ -716,9 +716,9 @@ export type ReviewUncheckedUpdateManyWithoutCollegeInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   isVerifiedStudent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ReviewCreateManyUserInput = {
@@ -779,11 +779,11 @@ export type ReviewSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   content?: boolean
   isVerifiedStudent?: boolean
   isPublished?: boolean
-  userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  user?: boolean | Prisma.Review$userArgs<ExtArgs>
+  userId?: boolean
   college?: boolean | Prisma.CollegeDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.Review$userArgs<ExtArgs>
 }, ExtArgs["result"]["review"]>
 
 export type ReviewSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -794,11 +794,11 @@ export type ReviewSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   content?: boolean
   isVerifiedStudent?: boolean
   isPublished?: boolean
-  userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  user?: boolean | Prisma.Review$userArgs<ExtArgs>
+  userId?: boolean
   college?: boolean | Prisma.CollegeDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.Review$userArgs<ExtArgs>
 }, ExtArgs["result"]["review"]>
 
 export type ReviewSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -809,11 +809,11 @@ export type ReviewSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   content?: boolean
   isVerifiedStudent?: boolean
   isPublished?: boolean
-  userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  user?: boolean | Prisma.Review$userArgs<ExtArgs>
+  userId?: boolean
   college?: boolean | Prisma.CollegeDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.Review$userArgs<ExtArgs>
 }, ExtArgs["result"]["review"]>
 
 export type ReviewSelectScalar = {
@@ -824,30 +824,30 @@ export type ReviewSelectScalar = {
   content?: boolean
   isVerifiedStudent?: boolean
   isPublished?: boolean
-  userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  userId?: boolean
 }
 
-export type ReviewOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "collegeId" | "rating" | "title" | "content" | "isVerifiedStudent" | "isPublished" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["review"]>
+export type ReviewOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "collegeId" | "rating" | "title" | "content" | "isVerifiedStudent" | "isPublished" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["review"]>
 export type ReviewInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.Review$userArgs<ExtArgs>
   college?: boolean | Prisma.CollegeDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.Review$userArgs<ExtArgs>
 }
 export type ReviewIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.Review$userArgs<ExtArgs>
   college?: boolean | Prisma.CollegeDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.Review$userArgs<ExtArgs>
 }
 export type ReviewIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.Review$userArgs<ExtArgs>
   college?: boolean | Prisma.CollegeDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.Review$userArgs<ExtArgs>
 }
 
 export type $ReviewPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Review"
   objects: {
-    user: Prisma.$UserPayload<ExtArgs> | null
     college: Prisma.$CollegePayload<ExtArgs>
+    user: Prisma.$UserPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -857,9 +857,9 @@ export type $ReviewPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     content: string
     isVerifiedStudent: boolean
     isPublished: boolean
-    userId: string | null
     createdAt: Date
     updatedAt: Date
+    userId: string | null
   }, ExtArgs["result"]["review"]>
   composites: {}
 }
@@ -1254,8 +1254,8 @@ readonly fields: ReviewFieldRefs;
  */
 export interface Prisma__ReviewClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  user<T extends Prisma.Review$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Review$userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   college<T extends Prisma.CollegeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CollegeDefaultArgs<ExtArgs>>): Prisma.Prisma__CollegeClient<runtime.Types.Result.GetResult<Prisma.$CollegePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  user<T extends Prisma.Review$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Review$userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1292,9 +1292,9 @@ export interface ReviewFieldRefs {
   readonly content: Prisma.FieldRef<"Review", 'String'>
   readonly isVerifiedStudent: Prisma.FieldRef<"Review", 'Boolean'>
   readonly isPublished: Prisma.FieldRef<"Review", 'Boolean'>
-  readonly userId: Prisma.FieldRef<"Review", 'String'>
   readonly createdAt: Prisma.FieldRef<"Review", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Review", 'DateTime'>
+  readonly userId: Prisma.FieldRef<"Review", 'String'>
 }
     
 

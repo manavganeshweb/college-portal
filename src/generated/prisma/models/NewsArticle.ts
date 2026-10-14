@@ -42,19 +42,19 @@ export type NewsArticleMinAggregateOutputType = {
   content: string | null
   coverImage: string | null
   type: $Enums.NewsType | null
+  status: $Enums.ContentStatus | null
   sourceName: string | null
   sourceUrl: string | null
-  authorId: string | null
   publishedAt: Date | null
-  status: $Enums.ContentStatus | null
-  isFeatured: boolean | null
-  isTrending: boolean | null
-  views: number | null
-  seoTitle: string | null
-  seoDescription: string | null
-  seoKeywords: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  authorId: string | null
+  isFeatured: boolean | null
+  isTrending: boolean | null
+  seoDescription: string | null
+  seoKeywords: string | null
+  seoTitle: string | null
+  views: number | null
 }
 
 export type NewsArticleMaxAggregateOutputType = {
@@ -65,19 +65,19 @@ export type NewsArticleMaxAggregateOutputType = {
   content: string | null
   coverImage: string | null
   type: $Enums.NewsType | null
+  status: $Enums.ContentStatus | null
   sourceName: string | null
   sourceUrl: string | null
-  authorId: string | null
   publishedAt: Date | null
-  status: $Enums.ContentStatus | null
-  isFeatured: boolean | null
-  isTrending: boolean | null
-  views: number | null
-  seoTitle: string | null
-  seoDescription: string | null
-  seoKeywords: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  authorId: string | null
+  isFeatured: boolean | null
+  isTrending: boolean | null
+  seoDescription: string | null
+  seoKeywords: string | null
+  seoTitle: string | null
+  views: number | null
 }
 
 export type NewsArticleCountAggregateOutputType = {
@@ -88,19 +88,19 @@ export type NewsArticleCountAggregateOutputType = {
   content: number
   coverImage: number
   type: number
+  status: number
   sourceName: number
   sourceUrl: number
-  authorId: number
   publishedAt: number
-  status: number
-  isFeatured: number
-  isTrending: number
-  views: number
-  seoTitle: number
-  seoDescription: number
-  seoKeywords: number
   createdAt: number
   updatedAt: number
+  authorId: number
+  isFeatured: number
+  isTrending: number
+  seoDescription: number
+  seoKeywords: number
+  seoTitle: number
+  views: number
   _all: number
 }
 
@@ -121,19 +121,19 @@ export type NewsArticleMinAggregateInputType = {
   content?: true
   coverImage?: true
   type?: true
+  status?: true
   sourceName?: true
   sourceUrl?: true
-  authorId?: true
   publishedAt?: true
-  status?: true
-  isFeatured?: true
-  isTrending?: true
-  views?: true
-  seoTitle?: true
-  seoDescription?: true
-  seoKeywords?: true
   createdAt?: true
   updatedAt?: true
+  authorId?: true
+  isFeatured?: true
+  isTrending?: true
+  seoDescription?: true
+  seoKeywords?: true
+  seoTitle?: true
+  views?: true
 }
 
 export type NewsArticleMaxAggregateInputType = {
@@ -144,19 +144,19 @@ export type NewsArticleMaxAggregateInputType = {
   content?: true
   coverImage?: true
   type?: true
+  status?: true
   sourceName?: true
   sourceUrl?: true
-  authorId?: true
   publishedAt?: true
-  status?: true
-  isFeatured?: true
-  isTrending?: true
-  views?: true
-  seoTitle?: true
-  seoDescription?: true
-  seoKeywords?: true
   createdAt?: true
   updatedAt?: true
+  authorId?: true
+  isFeatured?: true
+  isTrending?: true
+  seoDescription?: true
+  seoKeywords?: true
+  seoTitle?: true
+  views?: true
 }
 
 export type NewsArticleCountAggregateInputType = {
@@ -167,19 +167,19 @@ export type NewsArticleCountAggregateInputType = {
   content?: true
   coverImage?: true
   type?: true
+  status?: true
   sourceName?: true
   sourceUrl?: true
-  authorId?: true
   publishedAt?: true
-  status?: true
-  isFeatured?: true
-  isTrending?: true
-  views?: true
-  seoTitle?: true
-  seoDescription?: true
-  seoKeywords?: true
   createdAt?: true
   updatedAt?: true
+  authorId?: true
+  isFeatured?: true
+  isTrending?: true
+  seoDescription?: true
+  seoKeywords?: true
+  seoTitle?: true
+  views?: true
   _all?: true
 }
 
@@ -277,19 +277,19 @@ export type NewsArticleGroupByOutputType = {
   content: string
   coverImage: string | null
   type: $Enums.NewsType
+  status: $Enums.ContentStatus
   sourceName: string | null
   sourceUrl: string | null
-  authorId: string | null
   publishedAt: Date | null
-  status: $Enums.ContentStatus
-  isFeatured: boolean
-  isTrending: boolean
-  views: number
-  seoTitle: string | null
-  seoDescription: string | null
-  seoKeywords: string | null
   createdAt: Date
   updatedAt: Date
+  authorId: string | null
+  isFeatured: boolean
+  isTrending: boolean
+  seoDescription: string | null
+  seoKeywords: string | null
+  seoTitle: string | null
+  views: number
   _count: NewsArticleCountAggregateOutputType | null
   _avg: NewsArticleAvgAggregateOutputType | null
   _sum: NewsArticleSumAggregateOutputType | null
@@ -323,19 +323,19 @@ export type NewsArticleWhereInput = {
   content?: Prisma.StringFilter<"NewsArticle"> | string
   coverImage?: Prisma.StringNullableFilter<"NewsArticle"> | string | null
   type?: Prisma.EnumNewsTypeFilter<"NewsArticle"> | $Enums.NewsType
+  status?: Prisma.EnumContentStatusFilter<"NewsArticle"> | $Enums.ContentStatus
   sourceName?: Prisma.StringNullableFilter<"NewsArticle"> | string | null
   sourceUrl?: Prisma.StringNullableFilter<"NewsArticle"> | string | null
-  authorId?: Prisma.StringNullableFilter<"NewsArticle"> | string | null
   publishedAt?: Prisma.DateTimeNullableFilter<"NewsArticle"> | Date | string | null
-  status?: Prisma.EnumContentStatusFilter<"NewsArticle"> | $Enums.ContentStatus
-  isFeatured?: Prisma.BoolFilter<"NewsArticle"> | boolean
-  isTrending?: Prisma.BoolFilter<"NewsArticle"> | boolean
-  views?: Prisma.IntFilter<"NewsArticle"> | number
-  seoTitle?: Prisma.StringNullableFilter<"NewsArticle"> | string | null
-  seoDescription?: Prisma.StringNullableFilter<"NewsArticle"> | string | null
-  seoKeywords?: Prisma.StringNullableFilter<"NewsArticle"> | string | null
   createdAt?: Prisma.DateTimeFilter<"NewsArticle"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"NewsArticle"> | Date | string
+  authorId?: Prisma.StringNullableFilter<"NewsArticle"> | string | null
+  isFeatured?: Prisma.BoolFilter<"NewsArticle"> | boolean
+  isTrending?: Prisma.BoolFilter<"NewsArticle"> | boolean
+  seoDescription?: Prisma.StringNullableFilter<"NewsArticle"> | string | null
+  seoKeywords?: Prisma.StringNullableFilter<"NewsArticle"> | string | null
+  seoTitle?: Prisma.StringNullableFilter<"NewsArticle"> | string | null
+  views?: Prisma.IntFilter<"NewsArticle"> | number
   author?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
@@ -347,19 +347,19 @@ export type NewsArticleOrderByWithRelationInput = {
   content?: Prisma.SortOrder
   coverImage?: Prisma.SortOrderInput | Prisma.SortOrder
   type?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   sourceName?: Prisma.SortOrderInput | Prisma.SortOrder
   sourceUrl?: Prisma.SortOrderInput | Prisma.SortOrder
-  authorId?: Prisma.SortOrderInput | Prisma.SortOrder
   publishedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  status?: Prisma.SortOrder
-  isFeatured?: Prisma.SortOrder
-  isTrending?: Prisma.SortOrder
-  views?: Prisma.SortOrder
-  seoTitle?: Prisma.SortOrderInput | Prisma.SortOrder
-  seoDescription?: Prisma.SortOrderInput | Prisma.SortOrder
-  seoKeywords?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  authorId?: Prisma.SortOrderInput | Prisma.SortOrder
+  isFeatured?: Prisma.SortOrder
+  isTrending?: Prisma.SortOrder
+  seoDescription?: Prisma.SortOrderInput | Prisma.SortOrder
+  seoKeywords?: Prisma.SortOrderInput | Prisma.SortOrder
+  seoTitle?: Prisma.SortOrderInput | Prisma.SortOrder
+  views?: Prisma.SortOrder
   author?: Prisma.UserOrderByWithRelationInput
 }
 
@@ -374,19 +374,19 @@ export type NewsArticleWhereUniqueInput = Prisma.AtLeast<{
   content?: Prisma.StringFilter<"NewsArticle"> | string
   coverImage?: Prisma.StringNullableFilter<"NewsArticle"> | string | null
   type?: Prisma.EnumNewsTypeFilter<"NewsArticle"> | $Enums.NewsType
+  status?: Prisma.EnumContentStatusFilter<"NewsArticle"> | $Enums.ContentStatus
   sourceName?: Prisma.StringNullableFilter<"NewsArticle"> | string | null
   sourceUrl?: Prisma.StringNullableFilter<"NewsArticle"> | string | null
-  authorId?: Prisma.StringNullableFilter<"NewsArticle"> | string | null
   publishedAt?: Prisma.DateTimeNullableFilter<"NewsArticle"> | Date | string | null
-  status?: Prisma.EnumContentStatusFilter<"NewsArticle"> | $Enums.ContentStatus
-  isFeatured?: Prisma.BoolFilter<"NewsArticle"> | boolean
-  isTrending?: Prisma.BoolFilter<"NewsArticle"> | boolean
-  views?: Prisma.IntFilter<"NewsArticle"> | number
-  seoTitle?: Prisma.StringNullableFilter<"NewsArticle"> | string | null
-  seoDescription?: Prisma.StringNullableFilter<"NewsArticle"> | string | null
-  seoKeywords?: Prisma.StringNullableFilter<"NewsArticle"> | string | null
   createdAt?: Prisma.DateTimeFilter<"NewsArticle"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"NewsArticle"> | Date | string
+  authorId?: Prisma.StringNullableFilter<"NewsArticle"> | string | null
+  isFeatured?: Prisma.BoolFilter<"NewsArticle"> | boolean
+  isTrending?: Prisma.BoolFilter<"NewsArticle"> | boolean
+  seoDescription?: Prisma.StringNullableFilter<"NewsArticle"> | string | null
+  seoKeywords?: Prisma.StringNullableFilter<"NewsArticle"> | string | null
+  seoTitle?: Prisma.StringNullableFilter<"NewsArticle"> | string | null
+  views?: Prisma.IntFilter<"NewsArticle"> | number
   author?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }, "id" | "slug">
 
@@ -398,19 +398,19 @@ export type NewsArticleOrderByWithAggregationInput = {
   content?: Prisma.SortOrder
   coverImage?: Prisma.SortOrderInput | Prisma.SortOrder
   type?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   sourceName?: Prisma.SortOrderInput | Prisma.SortOrder
   sourceUrl?: Prisma.SortOrderInput | Prisma.SortOrder
-  authorId?: Prisma.SortOrderInput | Prisma.SortOrder
   publishedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  status?: Prisma.SortOrder
-  isFeatured?: Prisma.SortOrder
-  isTrending?: Prisma.SortOrder
-  views?: Prisma.SortOrder
-  seoTitle?: Prisma.SortOrderInput | Prisma.SortOrder
-  seoDescription?: Prisma.SortOrderInput | Prisma.SortOrder
-  seoKeywords?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  authorId?: Prisma.SortOrderInput | Prisma.SortOrder
+  isFeatured?: Prisma.SortOrder
+  isTrending?: Prisma.SortOrder
+  seoDescription?: Prisma.SortOrderInput | Prisma.SortOrder
+  seoKeywords?: Prisma.SortOrderInput | Prisma.SortOrder
+  seoTitle?: Prisma.SortOrderInput | Prisma.SortOrder
+  views?: Prisma.SortOrder
   _count?: Prisma.NewsArticleCountOrderByAggregateInput
   _avg?: Prisma.NewsArticleAvgOrderByAggregateInput
   _max?: Prisma.NewsArticleMaxOrderByAggregateInput
@@ -429,19 +429,19 @@ export type NewsArticleScalarWhereWithAggregatesInput = {
   content?: Prisma.StringWithAggregatesFilter<"NewsArticle"> | string
   coverImage?: Prisma.StringNullableWithAggregatesFilter<"NewsArticle"> | string | null
   type?: Prisma.EnumNewsTypeWithAggregatesFilter<"NewsArticle"> | $Enums.NewsType
+  status?: Prisma.EnumContentStatusWithAggregatesFilter<"NewsArticle"> | $Enums.ContentStatus
   sourceName?: Prisma.StringNullableWithAggregatesFilter<"NewsArticle"> | string | null
   sourceUrl?: Prisma.StringNullableWithAggregatesFilter<"NewsArticle"> | string | null
-  authorId?: Prisma.StringNullableWithAggregatesFilter<"NewsArticle"> | string | null
   publishedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"NewsArticle"> | Date | string | null
-  status?: Prisma.EnumContentStatusWithAggregatesFilter<"NewsArticle"> | $Enums.ContentStatus
-  isFeatured?: Prisma.BoolWithAggregatesFilter<"NewsArticle"> | boolean
-  isTrending?: Prisma.BoolWithAggregatesFilter<"NewsArticle"> | boolean
-  views?: Prisma.IntWithAggregatesFilter<"NewsArticle"> | number
-  seoTitle?: Prisma.StringNullableWithAggregatesFilter<"NewsArticle"> | string | null
-  seoDescription?: Prisma.StringNullableWithAggregatesFilter<"NewsArticle"> | string | null
-  seoKeywords?: Prisma.StringNullableWithAggregatesFilter<"NewsArticle"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"NewsArticle"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"NewsArticle"> | Date | string
+  authorId?: Prisma.StringNullableWithAggregatesFilter<"NewsArticle"> | string | null
+  isFeatured?: Prisma.BoolWithAggregatesFilter<"NewsArticle"> | boolean
+  isTrending?: Prisma.BoolWithAggregatesFilter<"NewsArticle"> | boolean
+  seoDescription?: Prisma.StringNullableWithAggregatesFilter<"NewsArticle"> | string | null
+  seoKeywords?: Prisma.StringNullableWithAggregatesFilter<"NewsArticle"> | string | null
+  seoTitle?: Prisma.StringNullableWithAggregatesFilter<"NewsArticle"> | string | null
+  views?: Prisma.IntWithAggregatesFilter<"NewsArticle"> | number
 }
 
 export type NewsArticleCreateInput = {
@@ -452,18 +452,18 @@ export type NewsArticleCreateInput = {
   content: string
   coverImage?: string | null
   type: $Enums.NewsType
+  status?: $Enums.ContentStatus
   sourceName?: string | null
   sourceUrl?: string | null
   publishedAt?: Date | string | null
-  status?: $Enums.ContentStatus
-  isFeatured?: boolean
-  isTrending?: boolean
-  views?: number
-  seoTitle?: string | null
-  seoDescription?: string | null
-  seoKeywords?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  isFeatured?: boolean
+  isTrending?: boolean
+  seoDescription?: string | null
+  seoKeywords?: string | null
+  seoTitle?: string | null
+  views?: number
   author?: Prisma.UserCreateNestedOneWithoutNewsArticlesInput
 }
 
@@ -475,19 +475,19 @@ export type NewsArticleUncheckedCreateInput = {
   content: string
   coverImage?: string | null
   type: $Enums.NewsType
+  status?: $Enums.ContentStatus
   sourceName?: string | null
   sourceUrl?: string | null
-  authorId?: string | null
   publishedAt?: Date | string | null
-  status?: $Enums.ContentStatus
-  isFeatured?: boolean
-  isTrending?: boolean
-  views?: number
-  seoTitle?: string | null
-  seoDescription?: string | null
-  seoKeywords?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  authorId?: string | null
+  isFeatured?: boolean
+  isTrending?: boolean
+  seoDescription?: string | null
+  seoKeywords?: string | null
+  seoTitle?: string | null
+  views?: number
 }
 
 export type NewsArticleUpdateInput = {
@@ -498,18 +498,18 @@ export type NewsArticleUpdateInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumNewsTypeFieldUpdateOperationsInput | $Enums.NewsType
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
   sourceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
-  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isTrending?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  views?: Prisma.IntFieldUpdateOperationsInput | number
-  seoTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  seoDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  seoKeywords?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isTrending?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  seoDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seoKeywords?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seoTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  views?: Prisma.IntFieldUpdateOperationsInput | number
   author?: Prisma.UserUpdateOneWithoutNewsArticlesNestedInput
 }
 
@@ -521,19 +521,19 @@ export type NewsArticleUncheckedUpdateInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumNewsTypeFieldUpdateOperationsInput | $Enums.NewsType
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
   sourceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  authorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
-  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isTrending?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  views?: Prisma.IntFieldUpdateOperationsInput | number
-  seoTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  seoDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  seoKeywords?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  authorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isTrending?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  seoDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seoKeywords?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seoTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  views?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type NewsArticleCreateManyInput = {
@@ -544,19 +544,19 @@ export type NewsArticleCreateManyInput = {
   content: string
   coverImage?: string | null
   type: $Enums.NewsType
+  status?: $Enums.ContentStatus
   sourceName?: string | null
   sourceUrl?: string | null
-  authorId?: string | null
   publishedAt?: Date | string | null
-  status?: $Enums.ContentStatus
-  isFeatured?: boolean
-  isTrending?: boolean
-  views?: number
-  seoTitle?: string | null
-  seoDescription?: string | null
-  seoKeywords?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  authorId?: string | null
+  isFeatured?: boolean
+  isTrending?: boolean
+  seoDescription?: string | null
+  seoKeywords?: string | null
+  seoTitle?: string | null
+  views?: number
 }
 
 export type NewsArticleUpdateManyMutationInput = {
@@ -567,18 +567,18 @@ export type NewsArticleUpdateManyMutationInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumNewsTypeFieldUpdateOperationsInput | $Enums.NewsType
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
   sourceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
-  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isTrending?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  views?: Prisma.IntFieldUpdateOperationsInput | number
-  seoTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  seoDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  seoKeywords?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isTrending?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  seoDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seoKeywords?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seoTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  views?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type NewsArticleUncheckedUpdateManyInput = {
@@ -589,19 +589,19 @@ export type NewsArticleUncheckedUpdateManyInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumNewsTypeFieldUpdateOperationsInput | $Enums.NewsType
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
   sourceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  authorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
-  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isTrending?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  views?: Prisma.IntFieldUpdateOperationsInput | number
-  seoTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  seoDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  seoKeywords?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  authorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isTrending?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  seoDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seoKeywords?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seoTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  views?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type NewsArticleCountOrderByAggregateInput = {
@@ -612,19 +612,19 @@ export type NewsArticleCountOrderByAggregateInput = {
   content?: Prisma.SortOrder
   coverImage?: Prisma.SortOrder
   type?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   sourceName?: Prisma.SortOrder
   sourceUrl?: Prisma.SortOrder
-  authorId?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrder
-  status?: Prisma.SortOrder
-  isFeatured?: Prisma.SortOrder
-  isTrending?: Prisma.SortOrder
-  views?: Prisma.SortOrder
-  seoTitle?: Prisma.SortOrder
-  seoDescription?: Prisma.SortOrder
-  seoKeywords?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  authorId?: Prisma.SortOrder
+  isFeatured?: Prisma.SortOrder
+  isTrending?: Prisma.SortOrder
+  seoDescription?: Prisma.SortOrder
+  seoKeywords?: Prisma.SortOrder
+  seoTitle?: Prisma.SortOrder
+  views?: Prisma.SortOrder
 }
 
 export type NewsArticleAvgOrderByAggregateInput = {
@@ -639,19 +639,19 @@ export type NewsArticleMaxOrderByAggregateInput = {
   content?: Prisma.SortOrder
   coverImage?: Prisma.SortOrder
   type?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   sourceName?: Prisma.SortOrder
   sourceUrl?: Prisma.SortOrder
-  authorId?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrder
-  status?: Prisma.SortOrder
-  isFeatured?: Prisma.SortOrder
-  isTrending?: Prisma.SortOrder
-  views?: Prisma.SortOrder
-  seoTitle?: Prisma.SortOrder
-  seoDescription?: Prisma.SortOrder
-  seoKeywords?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  authorId?: Prisma.SortOrder
+  isFeatured?: Prisma.SortOrder
+  isTrending?: Prisma.SortOrder
+  seoDescription?: Prisma.SortOrder
+  seoKeywords?: Prisma.SortOrder
+  seoTitle?: Prisma.SortOrder
+  views?: Prisma.SortOrder
 }
 
 export type NewsArticleMinOrderByAggregateInput = {
@@ -662,19 +662,19 @@ export type NewsArticleMinOrderByAggregateInput = {
   content?: Prisma.SortOrder
   coverImage?: Prisma.SortOrder
   type?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   sourceName?: Prisma.SortOrder
   sourceUrl?: Prisma.SortOrder
-  authorId?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrder
-  status?: Prisma.SortOrder
-  isFeatured?: Prisma.SortOrder
-  isTrending?: Prisma.SortOrder
-  views?: Prisma.SortOrder
-  seoTitle?: Prisma.SortOrder
-  seoDescription?: Prisma.SortOrder
-  seoKeywords?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  authorId?: Prisma.SortOrder
+  isFeatured?: Prisma.SortOrder
+  isTrending?: Prisma.SortOrder
+  seoDescription?: Prisma.SortOrder
+  seoKeywords?: Prisma.SortOrder
+  seoTitle?: Prisma.SortOrder
+  views?: Prisma.SortOrder
 }
 
 export type NewsArticleSumOrderByAggregateInput = {
@@ -745,18 +745,18 @@ export type NewsArticleCreateWithoutAuthorInput = {
   content: string
   coverImage?: string | null
   type: $Enums.NewsType
+  status?: $Enums.ContentStatus
   sourceName?: string | null
   sourceUrl?: string | null
   publishedAt?: Date | string | null
-  status?: $Enums.ContentStatus
-  isFeatured?: boolean
-  isTrending?: boolean
-  views?: number
-  seoTitle?: string | null
-  seoDescription?: string | null
-  seoKeywords?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  isFeatured?: boolean
+  isTrending?: boolean
+  seoDescription?: string | null
+  seoKeywords?: string | null
+  seoTitle?: string | null
+  views?: number
 }
 
 export type NewsArticleUncheckedCreateWithoutAuthorInput = {
@@ -767,18 +767,18 @@ export type NewsArticleUncheckedCreateWithoutAuthorInput = {
   content: string
   coverImage?: string | null
   type: $Enums.NewsType
+  status?: $Enums.ContentStatus
   sourceName?: string | null
   sourceUrl?: string | null
   publishedAt?: Date | string | null
-  status?: $Enums.ContentStatus
-  isFeatured?: boolean
-  isTrending?: boolean
-  views?: number
-  seoTitle?: string | null
-  seoDescription?: string | null
-  seoKeywords?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  isFeatured?: boolean
+  isTrending?: boolean
+  seoDescription?: string | null
+  seoKeywords?: string | null
+  seoTitle?: string | null
+  views?: number
 }
 
 export type NewsArticleCreateOrConnectWithoutAuthorInput = {
@@ -818,19 +818,19 @@ export type NewsArticleScalarWhereInput = {
   content?: Prisma.StringFilter<"NewsArticle"> | string
   coverImage?: Prisma.StringNullableFilter<"NewsArticle"> | string | null
   type?: Prisma.EnumNewsTypeFilter<"NewsArticle"> | $Enums.NewsType
+  status?: Prisma.EnumContentStatusFilter<"NewsArticle"> | $Enums.ContentStatus
   sourceName?: Prisma.StringNullableFilter<"NewsArticle"> | string | null
   sourceUrl?: Prisma.StringNullableFilter<"NewsArticle"> | string | null
-  authorId?: Prisma.StringNullableFilter<"NewsArticle"> | string | null
   publishedAt?: Prisma.DateTimeNullableFilter<"NewsArticle"> | Date | string | null
-  status?: Prisma.EnumContentStatusFilter<"NewsArticle"> | $Enums.ContentStatus
-  isFeatured?: Prisma.BoolFilter<"NewsArticle"> | boolean
-  isTrending?: Prisma.BoolFilter<"NewsArticle"> | boolean
-  views?: Prisma.IntFilter<"NewsArticle"> | number
-  seoTitle?: Prisma.StringNullableFilter<"NewsArticle"> | string | null
-  seoDescription?: Prisma.StringNullableFilter<"NewsArticle"> | string | null
-  seoKeywords?: Prisma.StringNullableFilter<"NewsArticle"> | string | null
   createdAt?: Prisma.DateTimeFilter<"NewsArticle"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"NewsArticle"> | Date | string
+  authorId?: Prisma.StringNullableFilter<"NewsArticle"> | string | null
+  isFeatured?: Prisma.BoolFilter<"NewsArticle"> | boolean
+  isTrending?: Prisma.BoolFilter<"NewsArticle"> | boolean
+  seoDescription?: Prisma.StringNullableFilter<"NewsArticle"> | string | null
+  seoKeywords?: Prisma.StringNullableFilter<"NewsArticle"> | string | null
+  seoTitle?: Prisma.StringNullableFilter<"NewsArticle"> | string | null
+  views?: Prisma.IntFilter<"NewsArticle"> | number
 }
 
 export type NewsArticleCreateManyAuthorInput = {
@@ -841,18 +841,18 @@ export type NewsArticleCreateManyAuthorInput = {
   content: string
   coverImage?: string | null
   type: $Enums.NewsType
+  status?: $Enums.ContentStatus
   sourceName?: string | null
   sourceUrl?: string | null
   publishedAt?: Date | string | null
-  status?: $Enums.ContentStatus
-  isFeatured?: boolean
-  isTrending?: boolean
-  views?: number
-  seoTitle?: string | null
-  seoDescription?: string | null
-  seoKeywords?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  isFeatured?: boolean
+  isTrending?: boolean
+  seoDescription?: string | null
+  seoKeywords?: string | null
+  seoTitle?: string | null
+  views?: number
 }
 
 export type NewsArticleUpdateWithoutAuthorInput = {
@@ -863,18 +863,18 @@ export type NewsArticleUpdateWithoutAuthorInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumNewsTypeFieldUpdateOperationsInput | $Enums.NewsType
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
   sourceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
-  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isTrending?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  views?: Prisma.IntFieldUpdateOperationsInput | number
-  seoTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  seoDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  seoKeywords?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isTrending?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  seoDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seoKeywords?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seoTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  views?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type NewsArticleUncheckedUpdateWithoutAuthorInput = {
@@ -885,18 +885,18 @@ export type NewsArticleUncheckedUpdateWithoutAuthorInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumNewsTypeFieldUpdateOperationsInput | $Enums.NewsType
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
   sourceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
-  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isTrending?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  views?: Prisma.IntFieldUpdateOperationsInput | number
-  seoTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  seoDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  seoKeywords?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isTrending?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  seoDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seoKeywords?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seoTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  views?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type NewsArticleUncheckedUpdateManyWithoutAuthorInput = {
@@ -907,18 +907,18 @@ export type NewsArticleUncheckedUpdateManyWithoutAuthorInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumNewsTypeFieldUpdateOperationsInput | $Enums.NewsType
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
   sourceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
-  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isTrending?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  views?: Prisma.IntFieldUpdateOperationsInput | number
-  seoTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  seoDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  seoKeywords?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isTrending?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  seoDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seoKeywords?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seoTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  views?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 
@@ -931,19 +931,19 @@ export type NewsArticleSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   content?: boolean
   coverImage?: boolean
   type?: boolean
+  status?: boolean
   sourceName?: boolean
   sourceUrl?: boolean
-  authorId?: boolean
   publishedAt?: boolean
-  status?: boolean
-  isFeatured?: boolean
-  isTrending?: boolean
-  views?: boolean
-  seoTitle?: boolean
-  seoDescription?: boolean
-  seoKeywords?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  authorId?: boolean
+  isFeatured?: boolean
+  isTrending?: boolean
+  seoDescription?: boolean
+  seoKeywords?: boolean
+  seoTitle?: boolean
+  views?: boolean
   author?: boolean | Prisma.NewsArticle$authorArgs<ExtArgs>
 }, ExtArgs["result"]["newsArticle"]>
 
@@ -955,19 +955,19 @@ export type NewsArticleSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   content?: boolean
   coverImage?: boolean
   type?: boolean
+  status?: boolean
   sourceName?: boolean
   sourceUrl?: boolean
-  authorId?: boolean
   publishedAt?: boolean
-  status?: boolean
-  isFeatured?: boolean
-  isTrending?: boolean
-  views?: boolean
-  seoTitle?: boolean
-  seoDescription?: boolean
-  seoKeywords?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  authorId?: boolean
+  isFeatured?: boolean
+  isTrending?: boolean
+  seoDescription?: boolean
+  seoKeywords?: boolean
+  seoTitle?: boolean
+  views?: boolean
   author?: boolean | Prisma.NewsArticle$authorArgs<ExtArgs>
 }, ExtArgs["result"]["newsArticle"]>
 
@@ -979,19 +979,19 @@ export type NewsArticleSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   content?: boolean
   coverImage?: boolean
   type?: boolean
+  status?: boolean
   sourceName?: boolean
   sourceUrl?: boolean
-  authorId?: boolean
   publishedAt?: boolean
-  status?: boolean
-  isFeatured?: boolean
-  isTrending?: boolean
-  views?: boolean
-  seoTitle?: boolean
-  seoDescription?: boolean
-  seoKeywords?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  authorId?: boolean
+  isFeatured?: boolean
+  isTrending?: boolean
+  seoDescription?: boolean
+  seoKeywords?: boolean
+  seoTitle?: boolean
+  views?: boolean
   author?: boolean | Prisma.NewsArticle$authorArgs<ExtArgs>
 }, ExtArgs["result"]["newsArticle"]>
 
@@ -1003,22 +1003,22 @@ export type NewsArticleSelectScalar = {
   content?: boolean
   coverImage?: boolean
   type?: boolean
+  status?: boolean
   sourceName?: boolean
   sourceUrl?: boolean
-  authorId?: boolean
   publishedAt?: boolean
-  status?: boolean
-  isFeatured?: boolean
-  isTrending?: boolean
-  views?: boolean
-  seoTitle?: boolean
-  seoDescription?: boolean
-  seoKeywords?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  authorId?: boolean
+  isFeatured?: boolean
+  isTrending?: boolean
+  seoDescription?: boolean
+  seoKeywords?: boolean
+  seoTitle?: boolean
+  views?: boolean
 }
 
-export type NewsArticleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "excerpt" | "content" | "coverImage" | "type" | "sourceName" | "sourceUrl" | "authorId" | "publishedAt" | "status" | "isFeatured" | "isTrending" | "views" | "seoTitle" | "seoDescription" | "seoKeywords" | "createdAt" | "updatedAt", ExtArgs["result"]["newsArticle"]>
+export type NewsArticleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "excerpt" | "content" | "coverImage" | "type" | "status" | "sourceName" | "sourceUrl" | "publishedAt" | "createdAt" | "updatedAt" | "authorId" | "isFeatured" | "isTrending" | "seoDescription" | "seoKeywords" | "seoTitle" | "views", ExtArgs["result"]["newsArticle"]>
 export type NewsArticleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   author?: boolean | Prisma.NewsArticle$authorArgs<ExtArgs>
 }
@@ -1042,19 +1042,19 @@ export type $NewsArticlePayload<ExtArgs extends runtime.Types.Extensions.Interna
     content: string
     coverImage: string | null
     type: $Enums.NewsType
+    status: $Enums.ContentStatus
     sourceName: string | null
     sourceUrl: string | null
-    authorId: string | null
     publishedAt: Date | null
-    status: $Enums.ContentStatus
-    isFeatured: boolean
-    isTrending: boolean
-    views: number
-    seoTitle: string | null
-    seoDescription: string | null
-    seoKeywords: string | null
     createdAt: Date
     updatedAt: Date
+    authorId: string | null
+    isFeatured: boolean
+    isTrending: boolean
+    seoDescription: string | null
+    seoKeywords: string | null
+    seoTitle: string | null
+    views: number
   }, ExtArgs["result"]["newsArticle"]>
   composites: {}
 }
@@ -1486,19 +1486,19 @@ export interface NewsArticleFieldRefs {
   readonly content: Prisma.FieldRef<"NewsArticle", 'String'>
   readonly coverImage: Prisma.FieldRef<"NewsArticle", 'String'>
   readonly type: Prisma.FieldRef<"NewsArticle", 'NewsType'>
+  readonly status: Prisma.FieldRef<"NewsArticle", 'ContentStatus'>
   readonly sourceName: Prisma.FieldRef<"NewsArticle", 'String'>
   readonly sourceUrl: Prisma.FieldRef<"NewsArticle", 'String'>
-  readonly authorId: Prisma.FieldRef<"NewsArticle", 'String'>
   readonly publishedAt: Prisma.FieldRef<"NewsArticle", 'DateTime'>
-  readonly status: Prisma.FieldRef<"NewsArticle", 'ContentStatus'>
-  readonly isFeatured: Prisma.FieldRef<"NewsArticle", 'Boolean'>
-  readonly isTrending: Prisma.FieldRef<"NewsArticle", 'Boolean'>
-  readonly views: Prisma.FieldRef<"NewsArticle", 'Int'>
-  readonly seoTitle: Prisma.FieldRef<"NewsArticle", 'String'>
-  readonly seoDescription: Prisma.FieldRef<"NewsArticle", 'String'>
-  readonly seoKeywords: Prisma.FieldRef<"NewsArticle", 'String'>
   readonly createdAt: Prisma.FieldRef<"NewsArticle", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"NewsArticle", 'DateTime'>
+  readonly authorId: Prisma.FieldRef<"NewsArticle", 'String'>
+  readonly isFeatured: Prisma.FieldRef<"NewsArticle", 'Boolean'>
+  readonly isTrending: Prisma.FieldRef<"NewsArticle", 'Boolean'>
+  readonly seoDescription: Prisma.FieldRef<"NewsArticle", 'String'>
+  readonly seoKeywords: Prisma.FieldRef<"NewsArticle", 'String'>
+  readonly seoTitle: Prisma.FieldRef<"NewsArticle", 'String'>
+  readonly views: Prisma.FieldRef<"NewsArticle", 'Int'>
 }
     
 

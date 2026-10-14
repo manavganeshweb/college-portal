@@ -28,36 +28,36 @@ export type UserMinAggregateOutputType = {
   id: string | null
   name: string | null
   email: string | null
-  phone: string | null
   passwordHash: string | null
   avatar: string | null
-  role: $Enums.UserRole | null
   createdAt: Date | null
   updatedAt: Date | null
+  phone: string | null
+  role: $Enums.UserRole | null
 }
 
 export type UserMaxAggregateOutputType = {
   id: string | null
   name: string | null
   email: string | null
-  phone: string | null
   passwordHash: string | null
   avatar: string | null
-  role: $Enums.UserRole | null
   createdAt: Date | null
   updatedAt: Date | null
+  phone: string | null
+  role: $Enums.UserRole | null
 }
 
 export type UserCountAggregateOutputType = {
   id: number
   name: number
   email: number
-  phone: number
   passwordHash: number
   avatar: number
-  role: number
   createdAt: number
   updatedAt: number
+  phone: number
+  role: number
   _all: number
 }
 
@@ -66,36 +66,36 @@ export type UserMinAggregateInputType = {
   id?: true
   name?: true
   email?: true
-  phone?: true
   passwordHash?: true
   avatar?: true
-  role?: true
   createdAt?: true
   updatedAt?: true
+  phone?: true
+  role?: true
 }
 
 export type UserMaxAggregateInputType = {
   id?: true
   name?: true
   email?: true
-  phone?: true
   passwordHash?: true
   avatar?: true
-  role?: true
   createdAt?: true
   updatedAt?: true
+  phone?: true
+  role?: true
 }
 
 export type UserCountAggregateInputType = {
   id?: true
   name?: true
   email?: true
-  phone?: true
   passwordHash?: true
   avatar?: true
-  role?: true
   createdAt?: true
   updatedAt?: true
+  phone?: true
+  role?: true
   _all?: true
 }
 
@@ -175,12 +175,12 @@ export type UserGroupByOutputType = {
   id: string
   name: string
   email: string
-  phone: string | null
   passwordHash: string
   avatar: string | null
-  role: $Enums.UserRole
   createdAt: Date
   updatedAt: Date
+  phone: string | null
+  role: $Enums.UserRole
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
@@ -208,34 +208,34 @@ export type UserWhereInput = {
   id?: Prisma.StringFilter<"User"> | string
   name?: Prisma.StringFilter<"User"> | string
   email?: Prisma.StringFilter<"User"> | string
-  phone?: Prisma.StringNullableFilter<"User"> | string | null
   passwordHash?: Prisma.StringFilter<"User"> | string
   avatar?: Prisma.StringNullableFilter<"User"> | string | null
-  role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  phone?: Prisma.StringNullableFilter<"User"> | string | null
+  role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
+  newsArticles?: Prisma.NewsArticleListRelationFilter
+  reviews?: Prisma.ReviewListRelationFilter
+  applications?: Prisma.UserApplicationListRelationFilter
   sessions?: Prisma.UserSessionListRelationFilter
   shortlists?: Prisma.UserShortlistListRelationFilter
-  applications?: Prisma.UserApplicationListRelationFilter
-  reviews?: Prisma.ReviewListRelationFilter
-  newsArticles?: Prisma.NewsArticleListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  phone?: Prisma.SortOrderInput | Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
   avatar?: Prisma.SortOrderInput | Prisma.SortOrder
-  role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  phone?: Prisma.SortOrderInput | Prisma.SortOrder
+  role?: Prisma.SortOrder
+  newsArticles?: Prisma.NewsArticleOrderByRelationAggregateInput
+  reviews?: Prisma.ReviewOrderByRelationAggregateInput
+  applications?: Prisma.UserApplicationOrderByRelationAggregateInput
   sessions?: Prisma.UserSessionOrderByRelationAggregateInput
   shortlists?: Prisma.UserShortlistOrderByRelationAggregateInput
-  applications?: Prisma.UserApplicationOrderByRelationAggregateInput
-  reviews?: Prisma.ReviewOrderByRelationAggregateInput
-  newsArticles?: Prisma.NewsArticleOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -245,29 +245,29 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   name?: Prisma.StringFilter<"User"> | string
-  phone?: Prisma.StringNullableFilter<"User"> | string | null
   passwordHash?: Prisma.StringFilter<"User"> | string
   avatar?: Prisma.StringNullableFilter<"User"> | string | null
-  role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  phone?: Prisma.StringNullableFilter<"User"> | string | null
+  role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
+  newsArticles?: Prisma.NewsArticleListRelationFilter
+  reviews?: Prisma.ReviewListRelationFilter
+  applications?: Prisma.UserApplicationListRelationFilter
   sessions?: Prisma.UserSessionListRelationFilter
   shortlists?: Prisma.UserShortlistListRelationFilter
-  applications?: Prisma.UserApplicationListRelationFilter
-  reviews?: Prisma.ReviewListRelationFilter
-  newsArticles?: Prisma.NewsArticleListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  phone?: Prisma.SortOrderInput | Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
   avatar?: Prisma.SortOrderInput | Prisma.SortOrder
-  role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  phone?: Prisma.SortOrderInput | Prisma.SortOrder
+  role?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
@@ -280,116 +280,116 @@ export type UserScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"User"> | string
   name?: Prisma.StringWithAggregatesFilter<"User"> | string
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
-  phone?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   passwordHash?: Prisma.StringWithAggregatesFilter<"User"> | string
   avatar?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  role?: Prisma.EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
+  phone?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  role?: Prisma.EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
 }
 
 export type UserCreateInput = {
   id?: string
   name: string
   email: string
-  phone?: string | null
   passwordHash: string
   avatar?: string | null
-  role?: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
+  phone?: string | null
+  role?: $Enums.UserRole
+  newsArticles?: Prisma.NewsArticleCreateNestedManyWithoutAuthorInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
+  applications?: Prisma.UserApplicationCreateNestedManyWithoutUserInput
   sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
   shortlists?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
-  applications?: Prisma.UserApplicationCreateNestedManyWithoutUserInput
-  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
-  newsArticles?: Prisma.NewsArticleCreateNestedManyWithoutAuthorInput
 }
 
 export type UserUncheckedCreateInput = {
   id?: string
   name: string
   email: string
-  phone?: string | null
   passwordHash: string
   avatar?: string | null
-  role?: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
+  phone?: string | null
+  role?: $Enums.UserRole
+  newsArticles?: Prisma.NewsArticleUncheckedCreateNestedManyWithoutAuthorInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
+  applications?: Prisma.UserApplicationUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
   shortlists?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
-  applications?: Prisma.UserApplicationUncheckedCreateNestedManyWithoutUserInput
-  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
-  newsArticles?: Prisma.NewsArticleUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type UserUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  newsArticles?: Prisma.NewsArticleUpdateManyWithoutAuthorNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
+  applications?: Prisma.UserApplicationUpdateManyWithoutUserNestedInput
   sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
   shortlists?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
-  applications?: Prisma.UserApplicationUpdateManyWithoutUserNestedInput
-  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
-  newsArticles?: Prisma.NewsArticleUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  newsArticles?: Prisma.NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
+  applications?: Prisma.UserApplicationUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
   shortlists?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
-  applications?: Prisma.UserApplicationUncheckedUpdateManyWithoutUserNestedInput
-  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
-  newsArticles?: Prisma.NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserCreateManyInput = {
   id?: string
   name: string
   email: string
-  phone?: string | null
   passwordHash: string
   avatar?: string | null
-  role?: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
+  phone?: string | null
+  role?: $Enums.UserRole
 }
 
 export type UserUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
 }
 
 export type UserUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
 }
 
 export type UserNullableScalarRelationFilter = {
@@ -401,36 +401,36 @@ export type UserCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  phone?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
   avatar?: Prisma.SortOrder
-  role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  role?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  phone?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
   avatar?: Prisma.SortOrder
-  role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  role?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  phone?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
   avatar?: Prisma.SortOrder
-  role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  role?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
@@ -520,32 +520,32 @@ export type UserCreateWithoutReviewsInput = {
   id?: string
   name: string
   email: string
-  phone?: string | null
   passwordHash: string
   avatar?: string | null
-  role?: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
+  phone?: string | null
+  role?: $Enums.UserRole
+  newsArticles?: Prisma.NewsArticleCreateNestedManyWithoutAuthorInput
+  applications?: Prisma.UserApplicationCreateNestedManyWithoutUserInput
   sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
   shortlists?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
-  applications?: Prisma.UserApplicationCreateNestedManyWithoutUserInput
-  newsArticles?: Prisma.NewsArticleCreateNestedManyWithoutAuthorInput
 }
 
 export type UserUncheckedCreateWithoutReviewsInput = {
   id?: string
   name: string
   email: string
-  phone?: string | null
   passwordHash: string
   avatar?: string | null
-  role?: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
+  phone?: string | null
+  role?: $Enums.UserRole
+  newsArticles?: Prisma.NewsArticleUncheckedCreateNestedManyWithoutAuthorInput
+  applications?: Prisma.UserApplicationUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
   shortlists?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
-  applications?: Prisma.UserApplicationUncheckedCreateNestedManyWithoutUserInput
-  newsArticles?: Prisma.NewsArticleUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type UserCreateOrConnectWithoutReviewsInput = {
@@ -568,64 +568,64 @@ export type UserUpdateWithoutReviewsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  newsArticles?: Prisma.NewsArticleUpdateManyWithoutAuthorNestedInput
+  applications?: Prisma.UserApplicationUpdateManyWithoutUserNestedInput
   sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
   shortlists?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
-  applications?: Prisma.UserApplicationUpdateManyWithoutUserNestedInput
-  newsArticles?: Prisma.NewsArticleUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReviewsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  newsArticles?: Prisma.NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput
+  applications?: Prisma.UserApplicationUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
   shortlists?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
-  applications?: Prisma.UserApplicationUncheckedUpdateManyWithoutUserNestedInput
-  newsArticles?: Prisma.NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserCreateWithoutNewsArticlesInput = {
   id?: string
   name: string
   email: string
-  phone?: string | null
   passwordHash: string
   avatar?: string | null
-  role?: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
+  phone?: string | null
+  role?: $Enums.UserRole
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
+  applications?: Prisma.UserApplicationCreateNestedManyWithoutUserInput
   sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
   shortlists?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
-  applications?: Prisma.UserApplicationCreateNestedManyWithoutUserInput
-  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutNewsArticlesInput = {
   id?: string
   name: string
   email: string
-  phone?: string | null
   passwordHash: string
   avatar?: string | null
-  role?: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
+  phone?: string | null
+  role?: $Enums.UserRole
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
+  applications?: Prisma.UserApplicationUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
   shortlists?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
-  applications?: Prisma.UserApplicationUncheckedCreateNestedManyWithoutUserInput
-  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutNewsArticlesInput = {
@@ -648,64 +648,64 @@ export type UserUpdateWithoutNewsArticlesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
+  applications?: Prisma.UserApplicationUpdateManyWithoutUserNestedInput
   sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
   shortlists?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
-  applications?: Prisma.UserApplicationUpdateManyWithoutUserNestedInput
-  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNewsArticlesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
+  applications?: Prisma.UserApplicationUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
   shortlists?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
-  applications?: Prisma.UserApplicationUncheckedUpdateManyWithoutUserNestedInput
-  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
   id?: string
   name: string
   email: string
-  phone?: string | null
   passwordHash: string
   avatar?: string | null
-  role?: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
-  shortlists?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
-  applications?: Prisma.UserApplicationCreateNestedManyWithoutUserInput
-  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
+  phone?: string | null
+  role?: $Enums.UserRole
   newsArticles?: Prisma.NewsArticleCreateNestedManyWithoutAuthorInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
+  applications?: Prisma.UserApplicationCreateNestedManyWithoutUserInput
+  shortlists?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
   id?: string
   name: string
   email: string
-  phone?: string | null
   passwordHash: string
   avatar?: string | null
-  role?: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
-  shortlists?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
-  applications?: Prisma.UserApplicationUncheckedCreateNestedManyWithoutUserInput
-  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
+  phone?: string | null
+  role?: $Enums.UserRole
   newsArticles?: Prisma.NewsArticleUncheckedCreateNestedManyWithoutAuthorInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
+  applications?: Prisma.UserApplicationUncheckedCreateNestedManyWithoutUserInput
+  shortlists?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -728,64 +728,64 @@ export type UserUpdateWithoutSessionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  shortlists?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
-  applications?: Prisma.UserApplicationUpdateManyWithoutUserNestedInput
-  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   newsArticles?: Prisma.NewsArticleUpdateManyWithoutAuthorNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
+  applications?: Prisma.UserApplicationUpdateManyWithoutUserNestedInput
+  shortlists?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  shortlists?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
-  applications?: Prisma.UserApplicationUncheckedUpdateManyWithoutUserNestedInput
-  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   newsArticles?: Prisma.NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
+  applications?: Prisma.UserApplicationUncheckedUpdateManyWithoutUserNestedInput
+  shortlists?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutShortlistsInput = {
   id?: string
   name: string
   email: string
-  phone?: string | null
   passwordHash: string
   avatar?: string | null
-  role?: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
-  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
-  applications?: Prisma.UserApplicationCreateNestedManyWithoutUserInput
-  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
+  phone?: string | null
+  role?: $Enums.UserRole
   newsArticles?: Prisma.NewsArticleCreateNestedManyWithoutAuthorInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
+  applications?: Prisma.UserApplicationCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutShortlistsInput = {
   id?: string
   name: string
   email: string
-  phone?: string | null
   passwordHash: string
   avatar?: string | null
-  role?: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
-  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
-  applications?: Prisma.UserApplicationUncheckedCreateNestedManyWithoutUserInput
-  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
+  phone?: string | null
+  role?: $Enums.UserRole
   newsArticles?: Prisma.NewsArticleUncheckedCreateNestedManyWithoutAuthorInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
+  applications?: Prisma.UserApplicationUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutShortlistsInput = {
@@ -808,64 +808,64 @@ export type UserUpdateWithoutShortlistsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
-  applications?: Prisma.UserApplicationUpdateManyWithoutUserNestedInput
-  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   newsArticles?: Prisma.NewsArticleUpdateManyWithoutAuthorNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
+  applications?: Prisma.UserApplicationUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutShortlistsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
-  applications?: Prisma.UserApplicationUncheckedUpdateManyWithoutUserNestedInput
-  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   newsArticles?: Prisma.NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
+  applications?: Prisma.UserApplicationUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutApplicationsInput = {
   id?: string
   name: string
   email: string
-  phone?: string | null
   passwordHash: string
   avatar?: string | null
-  role?: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
+  phone?: string | null
+  role?: $Enums.UserRole
+  newsArticles?: Prisma.NewsArticleCreateNestedManyWithoutAuthorInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
   sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
   shortlists?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
-  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
-  newsArticles?: Prisma.NewsArticleCreateNestedManyWithoutAuthorInput
 }
 
 export type UserUncheckedCreateWithoutApplicationsInput = {
   id?: string
   name: string
   email: string
-  phone?: string | null
   passwordHash: string
   avatar?: string | null
-  role?: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
+  phone?: string | null
+  role?: $Enums.UserRole
+  newsArticles?: Prisma.NewsArticleUncheckedCreateNestedManyWithoutAuthorInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
   shortlists?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
-  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
-  newsArticles?: Prisma.NewsArticleUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type UserCreateOrConnectWithoutApplicationsInput = {
@@ -888,32 +888,32 @@ export type UserUpdateWithoutApplicationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  newsArticles?: Prisma.NewsArticleUpdateManyWithoutAuthorNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
   sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
   shortlists?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
-  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
-  newsArticles?: Prisma.NewsArticleUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutApplicationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  newsArticles?: Prisma.NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
   shortlists?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
-  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
-  newsArticles?: Prisma.NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 
@@ -922,19 +922,19 @@ export type UserUncheckedUpdateWithoutApplicationsInput = {
  */
 
 export type UserCountOutputType = {
+  newsArticles: number
+  reviews: number
+  applications: number
   sessions: number
   shortlists: number
-  applications: number
-  reviews: number
-  newsArticles: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  newsArticles?: boolean | UserCountOutputTypeCountNewsArticlesArgs
+  reviews?: boolean | UserCountOutputTypeCountReviewsArgs
+  applications?: boolean | UserCountOutputTypeCountApplicationsArgs
   sessions?: boolean | UserCountOutputTypeCountSessionsArgs
   shortlists?: boolean | UserCountOutputTypeCountShortlistsArgs
-  applications?: boolean | UserCountOutputTypeCountApplicationsArgs
-  reviews?: boolean | UserCountOutputTypeCountReviewsArgs
-  newsArticles?: boolean | UserCountOutputTypeCountNewsArticlesArgs
 }
 
 /**
@@ -945,6 +945,27 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
    * Select specific fields to fetch from the UserCountOutputType
    */
   select?: Prisma.UserCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountNewsArticlesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NewsArticleWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountReviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ReviewWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountApplicationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserApplicationWhereInput
 }
 
 /**
@@ -961,43 +982,22 @@ export type UserCountOutputTypeCountShortlistsArgs<ExtArgs extends runtime.Types
   where?: Prisma.UserShortlistWhereInput
 }
 
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountApplicationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.UserApplicationWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountReviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ReviewWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountNewsArticlesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.NewsArticleWhereInput
-}
-
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
   email?: boolean
-  phone?: boolean
   passwordHash?: boolean
   avatar?: boolean
-  role?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  phone?: boolean
+  role?: boolean
+  newsArticles?: boolean | Prisma.User$newsArticlesArgs<ExtArgs>
+  reviews?: boolean | Prisma.User$reviewsArgs<ExtArgs>
+  applications?: boolean | Prisma.User$applicationsArgs<ExtArgs>
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   shortlists?: boolean | Prisma.User$shortlistsArgs<ExtArgs>
-  applications?: boolean | Prisma.User$applicationsArgs<ExtArgs>
-  reviews?: boolean | Prisma.User$reviewsArgs<ExtArgs>
-  newsArticles?: boolean | Prisma.User$newsArticlesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1005,45 +1005,45 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   id?: boolean
   name?: boolean
   email?: boolean
-  phone?: boolean
   passwordHash?: boolean
   avatar?: boolean
-  role?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  phone?: boolean
+  role?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
   email?: boolean
-  phone?: boolean
   passwordHash?: boolean
   avatar?: boolean
-  role?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  phone?: boolean
+  role?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
   id?: boolean
   name?: boolean
   email?: boolean
-  phone?: boolean
   passwordHash?: boolean
   avatar?: boolean
-  role?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  phone?: boolean
+  role?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "phone" | "passwordHash" | "avatar" | "role" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "passwordHash" | "avatar" | "createdAt" | "updatedAt" | "phone" | "role", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  newsArticles?: boolean | Prisma.User$newsArticlesArgs<ExtArgs>
+  reviews?: boolean | Prisma.User$reviewsArgs<ExtArgs>
+  applications?: boolean | Prisma.User$applicationsArgs<ExtArgs>
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   shortlists?: boolean | Prisma.User$shortlistsArgs<ExtArgs>
-  applications?: boolean | Prisma.User$applicationsArgs<ExtArgs>
-  reviews?: boolean | Prisma.User$reviewsArgs<ExtArgs>
-  newsArticles?: boolean | Prisma.User$newsArticlesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1052,22 +1052,22 @@ export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
+    newsArticles: Prisma.$NewsArticlePayload<ExtArgs>[]
+    reviews: Prisma.$ReviewPayload<ExtArgs>[]
+    applications: Prisma.$UserApplicationPayload<ExtArgs>[]
     sessions: Prisma.$UserSessionPayload<ExtArgs>[]
     shortlists: Prisma.$UserShortlistPayload<ExtArgs>[]
-    applications: Prisma.$UserApplicationPayload<ExtArgs>[]
-    reviews: Prisma.$ReviewPayload<ExtArgs>[]
-    newsArticles: Prisma.$NewsArticlePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
     email: string
-    phone: string | null
     passwordHash: string
     avatar: string | null
-    role: $Enums.UserRole
     createdAt: Date
     updatedAt: Date
+    phone: string | null
+    role: $Enums.UserRole
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -1462,11 +1462,11 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  newsArticles<T extends Prisma.User$newsArticlesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$newsArticlesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NewsArticlePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reviews<T extends Prisma.User$reviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  applications<T extends Prisma.User$applicationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$applicationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserApplicationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   shortlists<T extends Prisma.User$shortlistsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$shortlistsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserShortlistPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  applications<T extends Prisma.User$applicationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$applicationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserApplicationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  reviews<T extends Prisma.User$reviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  newsArticles<T extends Prisma.User$newsArticlesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$newsArticlesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NewsArticlePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1499,12 +1499,12 @@ export interface UserFieldRefs {
   readonly id: Prisma.FieldRef<"User", 'String'>
   readonly name: Prisma.FieldRef<"User", 'String'>
   readonly email: Prisma.FieldRef<"User", 'String'>
-  readonly phone: Prisma.FieldRef<"User", 'String'>
   readonly passwordHash: Prisma.FieldRef<"User", 'String'>
   readonly avatar: Prisma.FieldRef<"User", 'String'>
-  readonly role: Prisma.FieldRef<"User", 'UserRole'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly phone: Prisma.FieldRef<"User", 'String'>
+  readonly role: Prisma.FieldRef<"User", 'UserRole'>
 }
     
 
@@ -1898,6 +1898,78 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
+ * User.newsArticles
+ */
+export type User$newsArticlesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the NewsArticle
+   */
+  select?: Prisma.NewsArticleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the NewsArticle
+   */
+  omit?: Prisma.NewsArticleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NewsArticleInclude<ExtArgs> | null
+  where?: Prisma.NewsArticleWhereInput
+  orderBy?: Prisma.NewsArticleOrderByWithRelationInput | Prisma.NewsArticleOrderByWithRelationInput[]
+  cursor?: Prisma.NewsArticleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NewsArticleScalarFieldEnum | Prisma.NewsArticleScalarFieldEnum[]
+}
+
+/**
+ * User.reviews
+ */
+export type User$reviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Review
+   */
+  select?: Prisma.ReviewSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Review
+   */
+  omit?: Prisma.ReviewOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ReviewInclude<ExtArgs> | null
+  where?: Prisma.ReviewWhereInput
+  orderBy?: Prisma.ReviewOrderByWithRelationInput | Prisma.ReviewOrderByWithRelationInput[]
+  cursor?: Prisma.ReviewWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ReviewScalarFieldEnum | Prisma.ReviewScalarFieldEnum[]
+}
+
+/**
+ * User.applications
+ */
+export type User$applicationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserApplication
+   */
+  select?: Prisma.UserApplicationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserApplication
+   */
+  omit?: Prisma.UserApplicationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserApplicationInclude<ExtArgs> | null
+  where?: Prisma.UserApplicationWhereInput
+  orderBy?: Prisma.UserApplicationOrderByWithRelationInput | Prisma.UserApplicationOrderByWithRelationInput[]
+  cursor?: Prisma.UserApplicationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserApplicationScalarFieldEnum | Prisma.UserApplicationScalarFieldEnum[]
+}
+
+/**
  * User.sessions
  */
 export type User$sessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1943,78 +2015,6 @@ export type User$shortlistsArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.UserShortlistScalarFieldEnum | Prisma.UserShortlistScalarFieldEnum[]
-}
-
-/**
- * User.applications
- */
-export type User$applicationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the UserApplication
-   */
-  select?: Prisma.UserApplicationSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the UserApplication
-   */
-  omit?: Prisma.UserApplicationOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UserApplicationInclude<ExtArgs> | null
-  where?: Prisma.UserApplicationWhereInput
-  orderBy?: Prisma.UserApplicationOrderByWithRelationInput | Prisma.UserApplicationOrderByWithRelationInput[]
-  cursor?: Prisma.UserApplicationWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.UserApplicationScalarFieldEnum | Prisma.UserApplicationScalarFieldEnum[]
-}
-
-/**
- * User.reviews
- */
-export type User$reviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Review
-   */
-  select?: Prisma.ReviewSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Review
-   */
-  omit?: Prisma.ReviewOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ReviewInclude<ExtArgs> | null
-  where?: Prisma.ReviewWhereInput
-  orderBy?: Prisma.ReviewOrderByWithRelationInput | Prisma.ReviewOrderByWithRelationInput[]
-  cursor?: Prisma.ReviewWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ReviewScalarFieldEnum | Prisma.ReviewScalarFieldEnum[]
-}
-
-/**
- * User.newsArticles
- */
-export type User$newsArticlesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the NewsArticle
-   */
-  select?: Prisma.NewsArticleSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the NewsArticle
-   */
-  omit?: Prisma.NewsArticleOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.NewsArticleInclude<ExtArgs> | null
-  where?: Prisma.NewsArticleWhereInput
-  orderBy?: Prisma.NewsArticleOrderByWithRelationInput | Prisma.NewsArticleOrderByWithRelationInput[]
-  cursor?: Prisma.NewsArticleWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.NewsArticleScalarFieldEnum | Prisma.NewsArticleScalarFieldEnum[]
 }
 
 /**

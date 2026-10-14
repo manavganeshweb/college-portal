@@ -39,14 +39,14 @@ export type ExamMinAggregateOutputType = {
   name: string | null
   slug: string | null
   shortName: string | null
-  description: string | null
   conductingBody: string | null
-  examType: string | null
+  description: string | null
   eligibility: string | null
-  applicationFee: runtime.Decimal | null
-  website: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  applicationFee: runtime.Decimal | null
+  examType: string | null
+  website: string | null
 }
 
 export type ExamMaxAggregateOutputType = {
@@ -54,14 +54,14 @@ export type ExamMaxAggregateOutputType = {
   name: string | null
   slug: string | null
   shortName: string | null
-  description: string | null
   conductingBody: string | null
-  examType: string | null
+  description: string | null
   eligibility: string | null
-  applicationFee: runtime.Decimal | null
-  website: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  applicationFee: runtime.Decimal | null
+  examType: string | null
+  website: string | null
 }
 
 export type ExamCountAggregateOutputType = {
@@ -69,14 +69,14 @@ export type ExamCountAggregateOutputType = {
   name: number
   slug: number
   shortName: number
-  description: number
   conductingBody: number
-  examType: number
+  description: number
   eligibility: number
-  applicationFee: number
-  website: number
   createdAt: number
   updatedAt: number
+  applicationFee: number
+  examType: number
+  website: number
   _all: number
 }
 
@@ -94,14 +94,14 @@ export type ExamMinAggregateInputType = {
   name?: true
   slug?: true
   shortName?: true
-  description?: true
   conductingBody?: true
-  examType?: true
+  description?: true
   eligibility?: true
-  applicationFee?: true
-  website?: true
   createdAt?: true
   updatedAt?: true
+  applicationFee?: true
+  examType?: true
+  website?: true
 }
 
 export type ExamMaxAggregateInputType = {
@@ -109,14 +109,14 @@ export type ExamMaxAggregateInputType = {
   name?: true
   slug?: true
   shortName?: true
-  description?: true
   conductingBody?: true
-  examType?: true
+  description?: true
   eligibility?: true
-  applicationFee?: true
-  website?: true
   createdAt?: true
   updatedAt?: true
+  applicationFee?: true
+  examType?: true
+  website?: true
 }
 
 export type ExamCountAggregateInputType = {
@@ -124,14 +124,14 @@ export type ExamCountAggregateInputType = {
   name?: true
   slug?: true
   shortName?: true
-  description?: true
   conductingBody?: true
-  examType?: true
+  description?: true
   eligibility?: true
-  applicationFee?: true
-  website?: true
   createdAt?: true
   updatedAt?: true
+  applicationFee?: true
+  examType?: true
+  website?: true
   _all?: true
 }
 
@@ -226,14 +226,14 @@ export type ExamGroupByOutputType = {
   name: string
   slug: string
   shortName: string | null
-  description: string | null
   conductingBody: string | null
-  examType: string | null
+  description: string | null
   eligibility: string | null
-  applicationFee: runtime.Decimal | null
-  website: string | null
   createdAt: Date
   updatedAt: Date
+  applicationFee: runtime.Decimal | null
+  examType: string | null
+  website: string | null
   _count: ExamCountAggregateOutputType | null
   _avg: ExamAvgAggregateOutputType | null
   _sum: ExamSumAggregateOutputType | null
@@ -264,14 +264,14 @@ export type ExamWhereInput = {
   name?: Prisma.StringFilter<"Exam"> | string
   slug?: Prisma.StringFilter<"Exam"> | string
   shortName?: Prisma.StringNullableFilter<"Exam"> | string | null
-  description?: Prisma.StringNullableFilter<"Exam"> | string | null
   conductingBody?: Prisma.StringNullableFilter<"Exam"> | string | null
-  examType?: Prisma.StringNullableFilter<"Exam"> | string | null
+  description?: Prisma.StringNullableFilter<"Exam"> | string | null
   eligibility?: Prisma.StringNullableFilter<"Exam"> | string | null
-  applicationFee?: Prisma.DecimalNullableFilter<"Exam"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  website?: Prisma.StringNullableFilter<"Exam"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Exam"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Exam"> | Date | string
+  applicationFee?: Prisma.DecimalNullableFilter<"Exam"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  examType?: Prisma.StringNullableFilter<"Exam"> | string | null
+  website?: Prisma.StringNullableFilter<"Exam"> | string | null
   colleges?: Prisma.CollegeCutoffListRelationFilter
 }
 
@@ -280,14 +280,14 @@ export type ExamOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   shortName?: Prisma.SortOrderInput | Prisma.SortOrder
-  description?: Prisma.SortOrderInput | Prisma.SortOrder
   conductingBody?: Prisma.SortOrderInput | Prisma.SortOrder
-  examType?: Prisma.SortOrderInput | Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
   eligibility?: Prisma.SortOrderInput | Prisma.SortOrder
-  applicationFee?: Prisma.SortOrderInput | Prisma.SortOrder
-  website?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  applicationFee?: Prisma.SortOrderInput | Prisma.SortOrder
+  examType?: Prisma.SortOrderInput | Prisma.SortOrder
+  website?: Prisma.SortOrderInput | Prisma.SortOrder
   colleges?: Prisma.CollegeCutoffOrderByRelationAggregateInput
 }
 
@@ -299,14 +299,14 @@ export type ExamWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ExamWhereInput | Prisma.ExamWhereInput[]
   name?: Prisma.StringFilter<"Exam"> | string
   shortName?: Prisma.StringNullableFilter<"Exam"> | string | null
-  description?: Prisma.StringNullableFilter<"Exam"> | string | null
   conductingBody?: Prisma.StringNullableFilter<"Exam"> | string | null
-  examType?: Prisma.StringNullableFilter<"Exam"> | string | null
+  description?: Prisma.StringNullableFilter<"Exam"> | string | null
   eligibility?: Prisma.StringNullableFilter<"Exam"> | string | null
-  applicationFee?: Prisma.DecimalNullableFilter<"Exam"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  website?: Prisma.StringNullableFilter<"Exam"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Exam"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Exam"> | Date | string
+  applicationFee?: Prisma.DecimalNullableFilter<"Exam"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  examType?: Prisma.StringNullableFilter<"Exam"> | string | null
+  website?: Prisma.StringNullableFilter<"Exam"> | string | null
   colleges?: Prisma.CollegeCutoffListRelationFilter
 }, "id" | "slug">
 
@@ -315,14 +315,14 @@ export type ExamOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   shortName?: Prisma.SortOrderInput | Prisma.SortOrder
-  description?: Prisma.SortOrderInput | Prisma.SortOrder
   conductingBody?: Prisma.SortOrderInput | Prisma.SortOrder
-  examType?: Prisma.SortOrderInput | Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
   eligibility?: Prisma.SortOrderInput | Prisma.SortOrder
-  applicationFee?: Prisma.SortOrderInput | Prisma.SortOrder
-  website?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  applicationFee?: Prisma.SortOrderInput | Prisma.SortOrder
+  examType?: Prisma.SortOrderInput | Prisma.SortOrder
+  website?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ExamCountOrderByAggregateInput
   _avg?: Prisma.ExamAvgOrderByAggregateInput
   _max?: Prisma.ExamMaxOrderByAggregateInput
@@ -338,14 +338,14 @@ export type ExamScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"Exam"> | string
   slug?: Prisma.StringWithAggregatesFilter<"Exam"> | string
   shortName?: Prisma.StringNullableWithAggregatesFilter<"Exam"> | string | null
-  description?: Prisma.StringNullableWithAggregatesFilter<"Exam"> | string | null
   conductingBody?: Prisma.StringNullableWithAggregatesFilter<"Exam"> | string | null
-  examType?: Prisma.StringNullableWithAggregatesFilter<"Exam"> | string | null
+  description?: Prisma.StringNullableWithAggregatesFilter<"Exam"> | string | null
   eligibility?: Prisma.StringNullableWithAggregatesFilter<"Exam"> | string | null
-  applicationFee?: Prisma.DecimalNullableWithAggregatesFilter<"Exam"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  website?: Prisma.StringNullableWithAggregatesFilter<"Exam"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Exam"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Exam"> | Date | string
+  applicationFee?: Prisma.DecimalNullableWithAggregatesFilter<"Exam"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  examType?: Prisma.StringNullableWithAggregatesFilter<"Exam"> | string | null
+  website?: Prisma.StringNullableWithAggregatesFilter<"Exam"> | string | null
 }
 
 export type ExamCreateInput = {
@@ -353,14 +353,14 @@ export type ExamCreateInput = {
   name: string
   slug: string
   shortName?: string | null
-  description?: string | null
   conductingBody?: string | null
-  examType?: string | null
+  description?: string | null
   eligibility?: string | null
-  applicationFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  website?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  applicationFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  examType?: string | null
+  website?: string | null
   colleges?: Prisma.CollegeCutoffCreateNestedManyWithoutExamInput
 }
 
@@ -369,14 +369,14 @@ export type ExamUncheckedCreateInput = {
   name: string
   slug: string
   shortName?: string | null
-  description?: string | null
   conductingBody?: string | null
-  examType?: string | null
+  description?: string | null
   eligibility?: string | null
-  applicationFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  website?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  applicationFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  examType?: string | null
+  website?: string | null
   colleges?: Prisma.CollegeCutoffUncheckedCreateNestedManyWithoutExamInput
 }
 
@@ -385,14 +385,14 @@ export type ExamUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   conductingBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  examType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eligibility?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  applicationFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  applicationFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  examType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   colleges?: Prisma.CollegeCutoffUpdateManyWithoutExamNestedInput
 }
 
@@ -401,14 +401,14 @@ export type ExamUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   conductingBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  examType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eligibility?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  applicationFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  applicationFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  examType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   colleges?: Prisma.CollegeCutoffUncheckedUpdateManyWithoutExamNestedInput
 }
 
@@ -417,14 +417,14 @@ export type ExamCreateManyInput = {
   name: string
   slug: string
   shortName?: string | null
-  description?: string | null
   conductingBody?: string | null
-  examType?: string | null
+  description?: string | null
   eligibility?: string | null
-  applicationFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  website?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  applicationFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  examType?: string | null
+  website?: string | null
 }
 
 export type ExamUpdateManyMutationInput = {
@@ -432,14 +432,14 @@ export type ExamUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   conductingBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  examType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eligibility?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  applicationFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  applicationFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  examType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ExamUncheckedUpdateManyInput = {
@@ -447,14 +447,14 @@ export type ExamUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   conductingBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  examType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eligibility?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  applicationFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  applicationFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  examType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ExamCountOrderByAggregateInput = {
@@ -462,14 +462,14 @@ export type ExamCountOrderByAggregateInput = {
   name?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   shortName?: Prisma.SortOrder
-  description?: Prisma.SortOrder
   conductingBody?: Prisma.SortOrder
-  examType?: Prisma.SortOrder
+  description?: Prisma.SortOrder
   eligibility?: Prisma.SortOrder
-  applicationFee?: Prisma.SortOrder
-  website?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  applicationFee?: Prisma.SortOrder
+  examType?: Prisma.SortOrder
+  website?: Prisma.SortOrder
 }
 
 export type ExamAvgOrderByAggregateInput = {
@@ -481,14 +481,14 @@ export type ExamMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   shortName?: Prisma.SortOrder
-  description?: Prisma.SortOrder
   conductingBody?: Prisma.SortOrder
-  examType?: Prisma.SortOrder
+  description?: Prisma.SortOrder
   eligibility?: Prisma.SortOrder
-  applicationFee?: Prisma.SortOrder
-  website?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  applicationFee?: Prisma.SortOrder
+  examType?: Prisma.SortOrder
+  website?: Prisma.SortOrder
 }
 
 export type ExamMinOrderByAggregateInput = {
@@ -496,14 +496,14 @@ export type ExamMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   shortName?: Prisma.SortOrder
-  description?: Prisma.SortOrder
   conductingBody?: Prisma.SortOrder
-  examType?: Prisma.SortOrder
+  description?: Prisma.SortOrder
   eligibility?: Prisma.SortOrder
-  applicationFee?: Prisma.SortOrder
-  website?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  applicationFee?: Prisma.SortOrder
+  examType?: Prisma.SortOrder
+  website?: Prisma.SortOrder
 }
 
 export type ExamSumOrderByAggregateInput = {
@@ -534,14 +534,14 @@ export type ExamCreateWithoutCollegesInput = {
   name: string
   slug: string
   shortName?: string | null
-  description?: string | null
   conductingBody?: string | null
-  examType?: string | null
+  description?: string | null
   eligibility?: string | null
-  applicationFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  website?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  applicationFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  examType?: string | null
+  website?: string | null
 }
 
 export type ExamUncheckedCreateWithoutCollegesInput = {
@@ -549,14 +549,14 @@ export type ExamUncheckedCreateWithoutCollegesInput = {
   name: string
   slug: string
   shortName?: string | null
-  description?: string | null
   conductingBody?: string | null
-  examType?: string | null
+  description?: string | null
   eligibility?: string | null
-  applicationFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  website?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  applicationFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  examType?: string | null
+  website?: string | null
 }
 
 export type ExamCreateOrConnectWithoutCollegesInput = {
@@ -580,14 +580,14 @@ export type ExamUpdateWithoutCollegesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   conductingBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  examType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eligibility?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  applicationFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  applicationFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  examType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ExamUncheckedUpdateWithoutCollegesInput = {
@@ -595,14 +595,14 @@ export type ExamUncheckedUpdateWithoutCollegesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   conductingBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  examType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eligibility?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  applicationFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  applicationFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  examType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -641,14 +641,14 @@ export type ExamSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   name?: boolean
   slug?: boolean
   shortName?: boolean
-  description?: boolean
   conductingBody?: boolean
-  examType?: boolean
+  description?: boolean
   eligibility?: boolean
-  applicationFee?: boolean
-  website?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  applicationFee?: boolean
+  examType?: boolean
+  website?: boolean
   colleges?: boolean | Prisma.Exam$collegesArgs<ExtArgs>
   _count?: boolean | Prisma.ExamCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["exam"]>
@@ -658,14 +658,14 @@ export type ExamSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   name?: boolean
   slug?: boolean
   shortName?: boolean
-  description?: boolean
   conductingBody?: boolean
-  examType?: boolean
+  description?: boolean
   eligibility?: boolean
-  applicationFee?: boolean
-  website?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  applicationFee?: boolean
+  examType?: boolean
+  website?: boolean
 }, ExtArgs["result"]["exam"]>
 
 export type ExamSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -673,14 +673,14 @@ export type ExamSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   name?: boolean
   slug?: boolean
   shortName?: boolean
-  description?: boolean
   conductingBody?: boolean
-  examType?: boolean
+  description?: boolean
   eligibility?: boolean
-  applicationFee?: boolean
-  website?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  applicationFee?: boolean
+  examType?: boolean
+  website?: boolean
 }, ExtArgs["result"]["exam"]>
 
 export type ExamSelectScalar = {
@@ -688,17 +688,17 @@ export type ExamSelectScalar = {
   name?: boolean
   slug?: boolean
   shortName?: boolean
-  description?: boolean
   conductingBody?: boolean
-  examType?: boolean
+  description?: boolean
   eligibility?: boolean
-  applicationFee?: boolean
-  website?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  applicationFee?: boolean
+  examType?: boolean
+  website?: boolean
 }
 
-export type ExamOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "slug" | "shortName" | "description" | "conductingBody" | "examType" | "eligibility" | "applicationFee" | "website" | "createdAt" | "updatedAt", ExtArgs["result"]["exam"]>
+export type ExamOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "slug" | "shortName" | "conductingBody" | "description" | "eligibility" | "createdAt" | "updatedAt" | "applicationFee" | "examType" | "website", ExtArgs["result"]["exam"]>
 export type ExamInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   colleges?: boolean | Prisma.Exam$collegesArgs<ExtArgs>
   _count?: boolean | Prisma.ExamCountOutputTypeDefaultArgs<ExtArgs>
@@ -716,14 +716,14 @@ export type $ExamPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     name: string
     slug: string
     shortName: string | null
-    description: string | null
     conductingBody: string | null
-    examType: string | null
+    description: string | null
     eligibility: string | null
-    applicationFee: runtime.Decimal | null
-    website: string | null
     createdAt: Date
     updatedAt: Date
+    applicationFee: runtime.Decimal | null
+    examType: string | null
+    website: string | null
   }, ExtArgs["result"]["exam"]>
   composites: {}
 }
@@ -1152,14 +1152,14 @@ export interface ExamFieldRefs {
   readonly name: Prisma.FieldRef<"Exam", 'String'>
   readonly slug: Prisma.FieldRef<"Exam", 'String'>
   readonly shortName: Prisma.FieldRef<"Exam", 'String'>
-  readonly description: Prisma.FieldRef<"Exam", 'String'>
   readonly conductingBody: Prisma.FieldRef<"Exam", 'String'>
-  readonly examType: Prisma.FieldRef<"Exam", 'String'>
+  readonly description: Prisma.FieldRef<"Exam", 'String'>
   readonly eligibility: Prisma.FieldRef<"Exam", 'String'>
-  readonly applicationFee: Prisma.FieldRef<"Exam", 'Decimal'>
-  readonly website: Prisma.FieldRef<"Exam", 'String'>
   readonly createdAt: Prisma.FieldRef<"Exam", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Exam", 'DateTime'>
+  readonly applicationFee: Prisma.FieldRef<"Exam", 'Decimal'>
+  readonly examType: Prisma.FieldRef<"Exam", 'String'>
+  readonly website: Prisma.FieldRef<"Exam", 'String'>
 }
     
 

@@ -214,8 +214,8 @@ export type CollegeQuestionWhereInput = {
   status?: Prisma.EnumQuestionStatusFilter<"CollegeQuestion"> | $Enums.QuestionStatus
   createdAt?: Prisma.DateTimeFilter<"CollegeQuestion"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CollegeQuestion"> | Date | string
-  college?: Prisma.XOR<Prisma.CollegeScalarRelationFilter, Prisma.CollegeWhereInput>
   answers?: Prisma.CollegeAnswerListRelationFilter
+  college?: Prisma.XOR<Prisma.CollegeScalarRelationFilter, Prisma.CollegeWhereInput>
 }
 
 export type CollegeQuestionOrderByWithRelationInput = {
@@ -228,8 +228,8 @@ export type CollegeQuestionOrderByWithRelationInput = {
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  college?: Prisma.CollegeOrderByWithRelationInput
   answers?: Prisma.CollegeAnswerOrderByRelationAggregateInput
+  college?: Prisma.CollegeOrderByWithRelationInput
 }
 
 export type CollegeQuestionWhereUniqueInput = Prisma.AtLeast<{
@@ -246,8 +246,8 @@ export type CollegeQuestionWhereUniqueInput = Prisma.AtLeast<{
   status?: Prisma.EnumQuestionStatusFilter<"CollegeQuestion"> | $Enums.QuestionStatus
   createdAt?: Prisma.DateTimeFilter<"CollegeQuestion"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CollegeQuestion"> | Date | string
-  college?: Prisma.XOR<Prisma.CollegeScalarRelationFilter, Prisma.CollegeWhereInput>
   answers?: Prisma.CollegeAnswerListRelationFilter
+  college?: Prisma.XOR<Prisma.CollegeScalarRelationFilter, Prisma.CollegeWhereInput>
 }, "id" | "collegeId_slug">
 
 export type CollegeQuestionOrderByWithAggregationInput = {
@@ -289,8 +289,8 @@ export type CollegeQuestionCreateInput = {
   status?: $Enums.QuestionStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  college: Prisma.CollegeCreateNestedOneWithoutQuestionsInput
   answers?: Prisma.CollegeAnswerCreateNestedManyWithoutQuestionInput
+  college: Prisma.CollegeCreateNestedOneWithoutQuestionsInput
 }
 
 export type CollegeQuestionUncheckedCreateInput = {
@@ -315,8 +315,8 @@ export type CollegeQuestionUpdateInput = {
   status?: Prisma.EnumQuestionStatusFieldUpdateOperationsInput | $Enums.QuestionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  college?: Prisma.CollegeUpdateOneRequiredWithoutQuestionsNestedInput
   answers?: Prisma.CollegeAnswerUpdateManyWithoutQuestionNestedInput
+  college?: Prisma.CollegeUpdateOneRequiredWithoutQuestionsNestedInput
 }
 
 export type CollegeQuestionUncheckedUpdateInput = {
@@ -699,8 +699,8 @@ export type CollegeQuestionSelect<ExtArgs extends runtime.Types.Extensions.Inter
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  college?: boolean | Prisma.CollegeDefaultArgs<ExtArgs>
   answers?: boolean | Prisma.CollegeQuestion$answersArgs<ExtArgs>
+  college?: boolean | Prisma.CollegeDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.CollegeQuestionCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["collegeQuestion"]>
 
@@ -744,8 +744,8 @@ export type CollegeQuestionSelectScalar = {
 
 export type CollegeQuestionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "collegeId" | "question" | "slug" | "askerName" | "askerEmail" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["collegeQuestion"]>
 export type CollegeQuestionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  college?: boolean | Prisma.CollegeDefaultArgs<ExtArgs>
   answers?: boolean | Prisma.CollegeQuestion$answersArgs<ExtArgs>
+  college?: boolean | Prisma.CollegeDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.CollegeQuestionCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CollegeQuestionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -758,8 +758,8 @@ export type CollegeQuestionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Ty
 export type $CollegeQuestionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "CollegeQuestion"
   objects: {
-    college: Prisma.$CollegePayload<ExtArgs>
     answers: Prisma.$CollegeAnswerPayload<ExtArgs>[]
+    college: Prisma.$CollegePayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1165,8 +1165,8 @@ readonly fields: CollegeQuestionFieldRefs;
  */
 export interface Prisma__CollegeQuestionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  college<T extends Prisma.CollegeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CollegeDefaultArgs<ExtArgs>>): Prisma.Prisma__CollegeClient<runtime.Types.Result.GetResult<Prisma.$CollegePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   answers<T extends Prisma.CollegeQuestion$answersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CollegeQuestion$answersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CollegeAnswerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  college<T extends Prisma.CollegeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CollegeDefaultArgs<ExtArgs>>): Prisma.Prisma__CollegeClient<runtime.Types.Result.GetResult<Prisma.$CollegePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

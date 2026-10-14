@@ -28,39 +28,39 @@ export type UserApplicationMinAggregateOutputType = {
   id: string | null
   userId: string | null
   collegeId: string | null
-  phoneNumber: string | null
   status: $Enums.UserApplicationStatus | null
   courseName: string | null
   notes: string | null
   appliedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
+  phoneNumber: string | null
 }
 
 export type UserApplicationMaxAggregateOutputType = {
   id: string | null
   userId: string | null
   collegeId: string | null
-  phoneNumber: string | null
   status: $Enums.UserApplicationStatus | null
   courseName: string | null
   notes: string | null
   appliedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
+  phoneNumber: string | null
 }
 
 export type UserApplicationCountAggregateOutputType = {
   id: number
   userId: number
   collegeId: number
-  phoneNumber: number
   status: number
   courseName: number
   notes: number
   appliedAt: number
   createdAt: number
   updatedAt: number
+  phoneNumber: number
   _all: number
 }
 
@@ -69,39 +69,39 @@ export type UserApplicationMinAggregateInputType = {
   id?: true
   userId?: true
   collegeId?: true
-  phoneNumber?: true
   status?: true
   courseName?: true
   notes?: true
   appliedAt?: true
   createdAt?: true
   updatedAt?: true
+  phoneNumber?: true
 }
 
 export type UserApplicationMaxAggregateInputType = {
   id?: true
   userId?: true
   collegeId?: true
-  phoneNumber?: true
   status?: true
   courseName?: true
   notes?: true
   appliedAt?: true
   createdAt?: true
   updatedAt?: true
+  phoneNumber?: true
 }
 
 export type UserApplicationCountAggregateInputType = {
   id?: true
   userId?: true
   collegeId?: true
-  phoneNumber?: true
   status?: true
   courseName?: true
   notes?: true
   appliedAt?: true
   createdAt?: true
   updatedAt?: true
+  phoneNumber?: true
   _all?: true
 }
 
@@ -181,13 +181,13 @@ export type UserApplicationGroupByOutputType = {
   id: string
   userId: string
   collegeId: string
-  phoneNumber: string
   status: $Enums.UserApplicationStatus
   courseName: string | null
   notes: string | null
   appliedAt: Date | null
   createdAt: Date
   updatedAt: Date
+  phoneNumber: string
   _count: UserApplicationCountAggregateOutputType | null
   _min: UserApplicationMinAggregateOutputType | null
   _max: UserApplicationMaxAggregateOutputType | null
@@ -215,30 +215,30 @@ export type UserApplicationWhereInput = {
   id?: Prisma.StringFilter<"UserApplication"> | string
   userId?: Prisma.StringFilter<"UserApplication"> | string
   collegeId?: Prisma.StringFilter<"UserApplication"> | string
-  phoneNumber?: Prisma.StringFilter<"UserApplication"> | string
   status?: Prisma.EnumUserApplicationStatusFilter<"UserApplication"> | $Enums.UserApplicationStatus
   courseName?: Prisma.StringNullableFilter<"UserApplication"> | string | null
   notes?: Prisma.StringNullableFilter<"UserApplication"> | string | null
   appliedAt?: Prisma.DateTimeNullableFilter<"UserApplication"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"UserApplication"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"UserApplication"> | Date | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  phoneNumber?: Prisma.StringFilter<"UserApplication"> | string
   college?: Prisma.XOR<Prisma.CollegeScalarRelationFilter, Prisma.CollegeWhereInput>
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
 export type UserApplicationOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   collegeId?: Prisma.SortOrder
-  phoneNumber?: Prisma.SortOrder
   status?: Prisma.SortOrder
   courseName?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
   appliedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  user?: Prisma.UserOrderByWithRelationInput
+  phoneNumber?: Prisma.SortOrder
   college?: Prisma.CollegeOrderByWithRelationInput
+  user?: Prisma.UserOrderByWithRelationInput
 }
 
 export type UserApplicationWhereUniqueInput = Prisma.AtLeast<{
@@ -249,28 +249,28 @@ export type UserApplicationWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.UserApplicationWhereInput | Prisma.UserApplicationWhereInput[]
   userId?: Prisma.StringFilter<"UserApplication"> | string
   collegeId?: Prisma.StringFilter<"UserApplication"> | string
-  phoneNumber?: Prisma.StringFilter<"UserApplication"> | string
   status?: Prisma.EnumUserApplicationStatusFilter<"UserApplication"> | $Enums.UserApplicationStatus
   courseName?: Prisma.StringNullableFilter<"UserApplication"> | string | null
   notes?: Prisma.StringNullableFilter<"UserApplication"> | string | null
   appliedAt?: Prisma.DateTimeNullableFilter<"UserApplication"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"UserApplication"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"UserApplication"> | Date | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  phoneNumber?: Prisma.StringFilter<"UserApplication"> | string
   college?: Prisma.XOR<Prisma.CollegeScalarRelationFilter, Prisma.CollegeWhereInput>
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id" | "userId_collegeId">
 
 export type UserApplicationOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   collegeId?: Prisma.SortOrder
-  phoneNumber?: Prisma.SortOrder
   status?: Prisma.SortOrder
   courseName?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
   appliedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  phoneNumber?: Prisma.SortOrder
   _count?: Prisma.UserApplicationCountOrderByAggregateInput
   _max?: Prisma.UserApplicationMaxOrderByAggregateInput
   _min?: Prisma.UserApplicationMinOrderByAggregateInput
@@ -283,102 +283,102 @@ export type UserApplicationScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"UserApplication"> | string
   userId?: Prisma.StringWithAggregatesFilter<"UserApplication"> | string
   collegeId?: Prisma.StringWithAggregatesFilter<"UserApplication"> | string
-  phoneNumber?: Prisma.StringWithAggregatesFilter<"UserApplication"> | string
   status?: Prisma.EnumUserApplicationStatusWithAggregatesFilter<"UserApplication"> | $Enums.UserApplicationStatus
   courseName?: Prisma.StringNullableWithAggregatesFilter<"UserApplication"> | string | null
   notes?: Prisma.StringNullableWithAggregatesFilter<"UserApplication"> | string | null
   appliedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"UserApplication"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"UserApplication"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"UserApplication"> | Date | string
+  phoneNumber?: Prisma.StringWithAggregatesFilter<"UserApplication"> | string
 }
 
 export type UserApplicationCreateInput = {
   id?: string
-  phoneNumber: string
   status?: $Enums.UserApplicationStatus
   courseName?: string | null
   notes?: string | null
   appliedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutApplicationsInput
+  phoneNumber: string
   college: Prisma.CollegeCreateNestedOneWithoutApplicationsInput
+  user: Prisma.UserCreateNestedOneWithoutApplicationsInput
 }
 
 export type UserApplicationUncheckedCreateInput = {
   id?: string
   userId: string
   collegeId: string
-  phoneNumber: string
   status?: $Enums.UserApplicationStatus
   courseName?: string | null
   notes?: string | null
   appliedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  phoneNumber: string
 }
 
 export type UserApplicationUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserApplicationStatusFieldUpdateOperationsInput | $Enums.UserApplicationStatus
   courseName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   appliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutApplicationsNestedInput
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   college?: Prisma.CollegeUpdateOneRequiredWithoutApplicationsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutApplicationsNestedInput
 }
 
 export type UserApplicationUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   collegeId?: Prisma.StringFieldUpdateOperationsInput | string
-  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserApplicationStatusFieldUpdateOperationsInput | $Enums.UserApplicationStatus
   courseName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   appliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type UserApplicationCreateManyInput = {
   id?: string
   userId: string
   collegeId: string
-  phoneNumber: string
   status?: $Enums.UserApplicationStatus
   courseName?: string | null
   notes?: string | null
   appliedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  phoneNumber: string
 }
 
 export type UserApplicationUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserApplicationStatusFieldUpdateOperationsInput | $Enums.UserApplicationStatus
   courseName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   appliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type UserApplicationUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   collegeId?: Prisma.StringFieldUpdateOperationsInput | string
-  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserApplicationStatusFieldUpdateOperationsInput | $Enums.UserApplicationStatus
   courseName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   appliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type UserApplicationListRelationFilter = {
@@ -400,39 +400,39 @@ export type UserApplicationCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   collegeId?: Prisma.SortOrder
-  phoneNumber?: Prisma.SortOrder
   status?: Prisma.SortOrder
   courseName?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   appliedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  phoneNumber?: Prisma.SortOrder
 }
 
 export type UserApplicationMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   collegeId?: Prisma.SortOrder
-  phoneNumber?: Prisma.SortOrder
   status?: Prisma.SortOrder
   courseName?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   appliedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  phoneNumber?: Prisma.SortOrder
 }
 
 export type UserApplicationMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   collegeId?: Prisma.SortOrder
-  phoneNumber?: Prisma.SortOrder
   status?: Prisma.SortOrder
   courseName?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   appliedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  phoneNumber?: Prisma.SortOrder
 }
 
 export type UserApplicationCreateNestedManyWithoutCollegeInput = {
@@ -525,26 +525,26 @@ export type EnumUserApplicationStatusFieldUpdateOperationsInput = {
 
 export type UserApplicationCreateWithoutCollegeInput = {
   id?: string
-  phoneNumber: string
   status?: $Enums.UserApplicationStatus
   courseName?: string | null
   notes?: string | null
   appliedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  phoneNumber: string
   user: Prisma.UserCreateNestedOneWithoutApplicationsInput
 }
 
 export type UserApplicationUncheckedCreateWithoutCollegeInput = {
   id?: string
   userId: string
-  phoneNumber: string
   status?: $Enums.UserApplicationStatus
   courseName?: string | null
   notes?: string | null
   appliedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  phoneNumber: string
 }
 
 export type UserApplicationCreateOrConnectWithoutCollegeInput = {
@@ -580,37 +580,37 @@ export type UserApplicationScalarWhereInput = {
   id?: Prisma.StringFilter<"UserApplication"> | string
   userId?: Prisma.StringFilter<"UserApplication"> | string
   collegeId?: Prisma.StringFilter<"UserApplication"> | string
-  phoneNumber?: Prisma.StringFilter<"UserApplication"> | string
   status?: Prisma.EnumUserApplicationStatusFilter<"UserApplication"> | $Enums.UserApplicationStatus
   courseName?: Prisma.StringNullableFilter<"UserApplication"> | string | null
   notes?: Prisma.StringNullableFilter<"UserApplication"> | string | null
   appliedAt?: Prisma.DateTimeNullableFilter<"UserApplication"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"UserApplication"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"UserApplication"> | Date | string
+  phoneNumber?: Prisma.StringFilter<"UserApplication"> | string
 }
 
 export type UserApplicationCreateWithoutUserInput = {
   id?: string
-  phoneNumber: string
   status?: $Enums.UserApplicationStatus
   courseName?: string | null
   notes?: string | null
   appliedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  phoneNumber: string
   college: Prisma.CollegeCreateNestedOneWithoutApplicationsInput
 }
 
 export type UserApplicationUncheckedCreateWithoutUserInput = {
   id?: string
   collegeId: string
-  phoneNumber: string
   status?: $Enums.UserApplicationStatus
   courseName?: string | null
   notes?: string | null
   appliedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  phoneNumber: string
 }
 
 export type UserApplicationCreateOrConnectWithoutUserInput = {
@@ -642,97 +642,97 @@ export type UserApplicationUpdateManyWithWhereWithoutUserInput = {
 export type UserApplicationCreateManyCollegeInput = {
   id?: string
   userId: string
-  phoneNumber: string
   status?: $Enums.UserApplicationStatus
   courseName?: string | null
   notes?: string | null
   appliedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  phoneNumber: string
 }
 
 export type UserApplicationUpdateWithoutCollegeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserApplicationStatusFieldUpdateOperationsInput | $Enums.UserApplicationStatus
   courseName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   appliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   user?: Prisma.UserUpdateOneRequiredWithoutApplicationsNestedInput
 }
 
 export type UserApplicationUncheckedUpdateWithoutCollegeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserApplicationStatusFieldUpdateOperationsInput | $Enums.UserApplicationStatus
   courseName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   appliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type UserApplicationUncheckedUpdateManyWithoutCollegeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserApplicationStatusFieldUpdateOperationsInput | $Enums.UserApplicationStatus
   courseName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   appliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type UserApplicationCreateManyUserInput = {
   id?: string
   collegeId: string
-  phoneNumber: string
   status?: $Enums.UserApplicationStatus
   courseName?: string | null
   notes?: string | null
   appliedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  phoneNumber: string
 }
 
 export type UserApplicationUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserApplicationStatusFieldUpdateOperationsInput | $Enums.UserApplicationStatus
   courseName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   appliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   college?: Prisma.CollegeUpdateOneRequiredWithoutApplicationsNestedInput
 }
 
 export type UserApplicationUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   collegeId?: Prisma.StringFieldUpdateOperationsInput | string
-  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserApplicationStatusFieldUpdateOperationsInput | $Enums.UserApplicationStatus
   courseName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   appliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type UserApplicationUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   collegeId?: Prisma.StringFieldUpdateOperationsInput | string
-  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserApplicationStatusFieldUpdateOperationsInput | $Enums.UserApplicationStatus
   courseName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   appliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -741,91 +741,91 @@ export type UserApplicationSelect<ExtArgs extends runtime.Types.Extensions.Inter
   id?: boolean
   userId?: boolean
   collegeId?: boolean
-  phoneNumber?: boolean
   status?: boolean
   courseName?: boolean
   notes?: boolean
   appliedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  phoneNumber?: boolean
   college?: boolean | Prisma.CollegeDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userApplication"]>
 
 export type UserApplicationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
   collegeId?: boolean
-  phoneNumber?: boolean
   status?: boolean
   courseName?: boolean
   notes?: boolean
   appliedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  phoneNumber?: boolean
   college?: boolean | Prisma.CollegeDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userApplication"]>
 
 export type UserApplicationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
   collegeId?: boolean
-  phoneNumber?: boolean
   status?: boolean
   courseName?: boolean
   notes?: boolean
   appliedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  phoneNumber?: boolean
   college?: boolean | Prisma.CollegeDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userApplication"]>
 
 export type UserApplicationSelectScalar = {
   id?: boolean
   userId?: boolean
   collegeId?: boolean
-  phoneNumber?: boolean
   status?: boolean
   courseName?: boolean
   notes?: boolean
   appliedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  phoneNumber?: boolean
 }
 
-export type UserApplicationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "collegeId" | "phoneNumber" | "status" | "courseName" | "notes" | "appliedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["userApplication"]>
+export type UserApplicationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "collegeId" | "status" | "courseName" | "notes" | "appliedAt" | "createdAt" | "updatedAt" | "phoneNumber", ExtArgs["result"]["userApplication"]>
 export type UserApplicationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   college?: boolean | Prisma.CollegeDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type UserApplicationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   college?: boolean | Prisma.CollegeDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type UserApplicationIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   college?: boolean | Prisma.CollegeDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
 export type $UserApplicationPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "UserApplication"
   objects: {
-    user: Prisma.$UserPayload<ExtArgs>
     college: Prisma.$CollegePayload<ExtArgs>
+    user: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     userId: string
     collegeId: string
-    phoneNumber: string
     status: $Enums.UserApplicationStatus
     courseName: string | null
     notes: string | null
     appliedAt: Date | null
     createdAt: Date
     updatedAt: Date
+    phoneNumber: string
   }, ExtArgs["result"]["userApplication"]>
   composites: {}
 }
@@ -1220,8 +1220,8 @@ readonly fields: UserApplicationFieldRefs;
  */
 export interface Prisma__UserApplicationClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   college<T extends Prisma.CollegeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CollegeDefaultArgs<ExtArgs>>): Prisma.Prisma__CollegeClient<runtime.Types.Result.GetResult<Prisma.$CollegePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1254,13 +1254,13 @@ export interface UserApplicationFieldRefs {
   readonly id: Prisma.FieldRef<"UserApplication", 'String'>
   readonly userId: Prisma.FieldRef<"UserApplication", 'String'>
   readonly collegeId: Prisma.FieldRef<"UserApplication", 'String'>
-  readonly phoneNumber: Prisma.FieldRef<"UserApplication", 'String'>
   readonly status: Prisma.FieldRef<"UserApplication", 'UserApplicationStatus'>
   readonly courseName: Prisma.FieldRef<"UserApplication", 'String'>
   readonly notes: Prisma.FieldRef<"UserApplication", 'String'>
   readonly appliedAt: Prisma.FieldRef<"UserApplication", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"UserApplication", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"UserApplication", 'DateTime'>
+  readonly phoneNumber: Prisma.FieldRef<"UserApplication", 'String'>
 }
     
 

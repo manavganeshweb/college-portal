@@ -40,57 +40,57 @@ export type StudyAbroadDestinationMinAggregateOutputType = {
   id: string | null
   country: string | null
   slug: string | null
-  shortName: string | null
   description: string | null
   coverImage: string | null
-  popularCourses: string | null
-  averageTuition: runtime.Decimal | null
-  livingCost: runtime.Decimal | null
   currency: string | null
-  visaInfo: string | null
-  admissionInfo: string | null
-  officialUrl: string | null
+  averageTuition: runtime.Decimal | null
+  popularCourses: string | null
   status: $Enums.ContentStatus | null
   createdAt: Date | null
   updatedAt: Date | null
+  admissionInfo: string | null
+  livingCost: runtime.Decimal | null
+  officialUrl: string | null
+  shortName: string | null
+  visaInfo: string | null
 }
 
 export type StudyAbroadDestinationMaxAggregateOutputType = {
   id: string | null
   country: string | null
   slug: string | null
-  shortName: string | null
   description: string | null
   coverImage: string | null
-  popularCourses: string | null
-  averageTuition: runtime.Decimal | null
-  livingCost: runtime.Decimal | null
   currency: string | null
-  visaInfo: string | null
-  admissionInfo: string | null
-  officialUrl: string | null
+  averageTuition: runtime.Decimal | null
+  popularCourses: string | null
   status: $Enums.ContentStatus | null
   createdAt: Date | null
   updatedAt: Date | null
+  admissionInfo: string | null
+  livingCost: runtime.Decimal | null
+  officialUrl: string | null
+  shortName: string | null
+  visaInfo: string | null
 }
 
 export type StudyAbroadDestinationCountAggregateOutputType = {
   id: number
   country: number
   slug: number
-  shortName: number
   description: number
   coverImage: number
-  popularCourses: number
-  averageTuition: number
-  livingCost: number
   currency: number
-  visaInfo: number
-  admissionInfo: number
-  officialUrl: number
+  averageTuition: number
+  popularCourses: number
   status: number
   createdAt: number
   updatedAt: number
+  admissionInfo: number
+  livingCost: number
+  officialUrl: number
+  shortName: number
+  visaInfo: number
   _all: number
 }
 
@@ -109,57 +109,57 @@ export type StudyAbroadDestinationMinAggregateInputType = {
   id?: true
   country?: true
   slug?: true
-  shortName?: true
   description?: true
   coverImage?: true
-  popularCourses?: true
-  averageTuition?: true
-  livingCost?: true
   currency?: true
-  visaInfo?: true
-  admissionInfo?: true
-  officialUrl?: true
+  averageTuition?: true
+  popularCourses?: true
   status?: true
   createdAt?: true
   updatedAt?: true
+  admissionInfo?: true
+  livingCost?: true
+  officialUrl?: true
+  shortName?: true
+  visaInfo?: true
 }
 
 export type StudyAbroadDestinationMaxAggregateInputType = {
   id?: true
   country?: true
   slug?: true
-  shortName?: true
   description?: true
   coverImage?: true
-  popularCourses?: true
-  averageTuition?: true
-  livingCost?: true
   currency?: true
-  visaInfo?: true
-  admissionInfo?: true
-  officialUrl?: true
+  averageTuition?: true
+  popularCourses?: true
   status?: true
   createdAt?: true
   updatedAt?: true
+  admissionInfo?: true
+  livingCost?: true
+  officialUrl?: true
+  shortName?: true
+  visaInfo?: true
 }
 
 export type StudyAbroadDestinationCountAggregateInputType = {
   id?: true
   country?: true
   slug?: true
-  shortName?: true
   description?: true
   coverImage?: true
-  popularCourses?: true
-  averageTuition?: true
-  livingCost?: true
   currency?: true
-  visaInfo?: true
-  admissionInfo?: true
-  officialUrl?: true
+  averageTuition?: true
+  popularCourses?: true
   status?: true
   createdAt?: true
   updatedAt?: true
+  admissionInfo?: true
+  livingCost?: true
+  officialUrl?: true
+  shortName?: true
+  visaInfo?: true
   _all?: true
 }
 
@@ -253,19 +253,19 @@ export type StudyAbroadDestinationGroupByOutputType = {
   id: string
   country: string
   slug: string
-  shortName: string | null
   description: string | null
   coverImage: string | null
-  popularCourses: string | null
-  averageTuition: runtime.Decimal | null
-  livingCost: runtime.Decimal | null
   currency: string | null
-  visaInfo: string | null
-  admissionInfo: string | null
-  officialUrl: string | null
+  averageTuition: runtime.Decimal | null
+  popularCourses: string | null
   status: $Enums.ContentStatus
   createdAt: Date
   updatedAt: Date
+  admissionInfo: string | null
+  livingCost: runtime.Decimal | null
+  officialUrl: string | null
+  shortName: string | null
+  visaInfo: string | null
   _count: StudyAbroadDestinationCountAggregateOutputType | null
   _avg: StudyAbroadDestinationAvgAggregateOutputType | null
   _sum: StudyAbroadDestinationSumAggregateOutputType | null
@@ -295,38 +295,38 @@ export type StudyAbroadDestinationWhereInput = {
   id?: Prisma.StringFilter<"StudyAbroadDestination"> | string
   country?: Prisma.StringFilter<"StudyAbroadDestination"> | string
   slug?: Prisma.StringFilter<"StudyAbroadDestination"> | string
-  shortName?: Prisma.StringNullableFilter<"StudyAbroadDestination"> | string | null
   description?: Prisma.StringNullableFilter<"StudyAbroadDestination"> | string | null
   coverImage?: Prisma.StringNullableFilter<"StudyAbroadDestination"> | string | null
-  popularCourses?: Prisma.StringNullableFilter<"StudyAbroadDestination"> | string | null
-  averageTuition?: Prisma.DecimalNullableFilter<"StudyAbroadDestination"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  livingCost?: Prisma.DecimalNullableFilter<"StudyAbroadDestination"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currency?: Prisma.StringNullableFilter<"StudyAbroadDestination"> | string | null
-  visaInfo?: Prisma.StringNullableFilter<"StudyAbroadDestination"> | string | null
-  admissionInfo?: Prisma.StringNullableFilter<"StudyAbroadDestination"> | string | null
-  officialUrl?: Prisma.StringNullableFilter<"StudyAbroadDestination"> | string | null
+  averageTuition?: Prisma.DecimalNullableFilter<"StudyAbroadDestination"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  popularCourses?: Prisma.StringNullableFilter<"StudyAbroadDestination"> | string | null
   status?: Prisma.EnumContentStatusFilter<"StudyAbroadDestination"> | $Enums.ContentStatus
   createdAt?: Prisma.DateTimeFilter<"StudyAbroadDestination"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"StudyAbroadDestination"> | Date | string
+  admissionInfo?: Prisma.StringNullableFilter<"StudyAbroadDestination"> | string | null
+  livingCost?: Prisma.DecimalNullableFilter<"StudyAbroadDestination"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  officialUrl?: Prisma.StringNullableFilter<"StudyAbroadDestination"> | string | null
+  shortName?: Prisma.StringNullableFilter<"StudyAbroadDestination"> | string | null
+  visaInfo?: Prisma.StringNullableFilter<"StudyAbroadDestination"> | string | null
 }
 
 export type StudyAbroadDestinationOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   country?: Prisma.SortOrder
   slug?: Prisma.SortOrder
-  shortName?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   coverImage?: Prisma.SortOrderInput | Prisma.SortOrder
-  popularCourses?: Prisma.SortOrderInput | Prisma.SortOrder
-  averageTuition?: Prisma.SortOrderInput | Prisma.SortOrder
-  livingCost?: Prisma.SortOrderInput | Prisma.SortOrder
   currency?: Prisma.SortOrderInput | Prisma.SortOrder
-  visaInfo?: Prisma.SortOrderInput | Prisma.SortOrder
-  admissionInfo?: Prisma.SortOrderInput | Prisma.SortOrder
-  officialUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  averageTuition?: Prisma.SortOrderInput | Prisma.SortOrder
+  popularCourses?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  admissionInfo?: Prisma.SortOrderInput | Prisma.SortOrder
+  livingCost?: Prisma.SortOrderInput | Prisma.SortOrder
+  officialUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  shortName?: Prisma.SortOrderInput | Prisma.SortOrder
+  visaInfo?: Prisma.SortOrderInput | Prisma.SortOrder
 }
 
 export type StudyAbroadDestinationWhereUniqueInput = Prisma.AtLeast<{
@@ -336,38 +336,38 @@ export type StudyAbroadDestinationWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.StudyAbroadDestinationWhereInput[]
   NOT?: Prisma.StudyAbroadDestinationWhereInput | Prisma.StudyAbroadDestinationWhereInput[]
   country?: Prisma.StringFilter<"StudyAbroadDestination"> | string
-  shortName?: Prisma.StringNullableFilter<"StudyAbroadDestination"> | string | null
   description?: Prisma.StringNullableFilter<"StudyAbroadDestination"> | string | null
   coverImage?: Prisma.StringNullableFilter<"StudyAbroadDestination"> | string | null
-  popularCourses?: Prisma.StringNullableFilter<"StudyAbroadDestination"> | string | null
-  averageTuition?: Prisma.DecimalNullableFilter<"StudyAbroadDestination"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  livingCost?: Prisma.DecimalNullableFilter<"StudyAbroadDestination"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currency?: Prisma.StringNullableFilter<"StudyAbroadDestination"> | string | null
-  visaInfo?: Prisma.StringNullableFilter<"StudyAbroadDestination"> | string | null
-  admissionInfo?: Prisma.StringNullableFilter<"StudyAbroadDestination"> | string | null
-  officialUrl?: Prisma.StringNullableFilter<"StudyAbroadDestination"> | string | null
+  averageTuition?: Prisma.DecimalNullableFilter<"StudyAbroadDestination"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  popularCourses?: Prisma.StringNullableFilter<"StudyAbroadDestination"> | string | null
   status?: Prisma.EnumContentStatusFilter<"StudyAbroadDestination"> | $Enums.ContentStatus
   createdAt?: Prisma.DateTimeFilter<"StudyAbroadDestination"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"StudyAbroadDestination"> | Date | string
+  admissionInfo?: Prisma.StringNullableFilter<"StudyAbroadDestination"> | string | null
+  livingCost?: Prisma.DecimalNullableFilter<"StudyAbroadDestination"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  officialUrl?: Prisma.StringNullableFilter<"StudyAbroadDestination"> | string | null
+  shortName?: Prisma.StringNullableFilter<"StudyAbroadDestination"> | string | null
+  visaInfo?: Prisma.StringNullableFilter<"StudyAbroadDestination"> | string | null
 }, "id" | "slug">
 
 export type StudyAbroadDestinationOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   country?: Prisma.SortOrder
   slug?: Prisma.SortOrder
-  shortName?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   coverImage?: Prisma.SortOrderInput | Prisma.SortOrder
-  popularCourses?: Prisma.SortOrderInput | Prisma.SortOrder
-  averageTuition?: Prisma.SortOrderInput | Prisma.SortOrder
-  livingCost?: Prisma.SortOrderInput | Prisma.SortOrder
   currency?: Prisma.SortOrderInput | Prisma.SortOrder
-  visaInfo?: Prisma.SortOrderInput | Prisma.SortOrder
-  admissionInfo?: Prisma.SortOrderInput | Prisma.SortOrder
-  officialUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  averageTuition?: Prisma.SortOrderInput | Prisma.SortOrder
+  popularCourses?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  admissionInfo?: Prisma.SortOrderInput | Prisma.SortOrder
+  livingCost?: Prisma.SortOrderInput | Prisma.SortOrder
+  officialUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  shortName?: Prisma.SortOrderInput | Prisma.SortOrder
+  visaInfo?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.StudyAbroadDestinationCountOrderByAggregateInput
   _avg?: Prisma.StudyAbroadDestinationAvgOrderByAggregateInput
   _max?: Prisma.StudyAbroadDestinationMaxOrderByAggregateInput
@@ -382,171 +382,171 @@ export type StudyAbroadDestinationScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"StudyAbroadDestination"> | string
   country?: Prisma.StringWithAggregatesFilter<"StudyAbroadDestination"> | string
   slug?: Prisma.StringWithAggregatesFilter<"StudyAbroadDestination"> | string
-  shortName?: Prisma.StringNullableWithAggregatesFilter<"StudyAbroadDestination"> | string | null
   description?: Prisma.StringNullableWithAggregatesFilter<"StudyAbroadDestination"> | string | null
   coverImage?: Prisma.StringNullableWithAggregatesFilter<"StudyAbroadDestination"> | string | null
-  popularCourses?: Prisma.StringNullableWithAggregatesFilter<"StudyAbroadDestination"> | string | null
-  averageTuition?: Prisma.DecimalNullableWithAggregatesFilter<"StudyAbroadDestination"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  livingCost?: Prisma.DecimalNullableWithAggregatesFilter<"StudyAbroadDestination"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currency?: Prisma.StringNullableWithAggregatesFilter<"StudyAbroadDestination"> | string | null
-  visaInfo?: Prisma.StringNullableWithAggregatesFilter<"StudyAbroadDestination"> | string | null
-  admissionInfo?: Prisma.StringNullableWithAggregatesFilter<"StudyAbroadDestination"> | string | null
-  officialUrl?: Prisma.StringNullableWithAggregatesFilter<"StudyAbroadDestination"> | string | null
+  averageTuition?: Prisma.DecimalNullableWithAggregatesFilter<"StudyAbroadDestination"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  popularCourses?: Prisma.StringNullableWithAggregatesFilter<"StudyAbroadDestination"> | string | null
   status?: Prisma.EnumContentStatusWithAggregatesFilter<"StudyAbroadDestination"> | $Enums.ContentStatus
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"StudyAbroadDestination"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"StudyAbroadDestination"> | Date | string
+  admissionInfo?: Prisma.StringNullableWithAggregatesFilter<"StudyAbroadDestination"> | string | null
+  livingCost?: Prisma.DecimalNullableWithAggregatesFilter<"StudyAbroadDestination"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  officialUrl?: Prisma.StringNullableWithAggregatesFilter<"StudyAbroadDestination"> | string | null
+  shortName?: Prisma.StringNullableWithAggregatesFilter<"StudyAbroadDestination"> | string | null
+  visaInfo?: Prisma.StringNullableWithAggregatesFilter<"StudyAbroadDestination"> | string | null
 }
 
 export type StudyAbroadDestinationCreateInput = {
   id?: string
   country: string
   slug: string
-  shortName?: string | null
   description?: string | null
   coverImage?: string | null
-  popularCourses?: string | null
-  averageTuition?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  livingCost?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currency?: string | null
-  visaInfo?: string | null
-  admissionInfo?: string | null
-  officialUrl?: string | null
+  averageTuition?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  popularCourses?: string | null
   status?: $Enums.ContentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
+  admissionInfo?: string | null
+  livingCost?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  officialUrl?: string | null
+  shortName?: string | null
+  visaInfo?: string | null
 }
 
 export type StudyAbroadDestinationUncheckedCreateInput = {
   id?: string
   country: string
   slug: string
-  shortName?: string | null
   description?: string | null
   coverImage?: string | null
-  popularCourses?: string | null
-  averageTuition?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  livingCost?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currency?: string | null
-  visaInfo?: string | null
-  admissionInfo?: string | null
-  officialUrl?: string | null
+  averageTuition?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  popularCourses?: string | null
   status?: $Enums.ContentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
+  admissionInfo?: string | null
+  livingCost?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  officialUrl?: string | null
+  shortName?: string | null
+  visaInfo?: string | null
 }
 
 export type StudyAbroadDestinationUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  popularCourses?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  averageTuition?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  livingCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  visaInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  admissionInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  officialUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  averageTuition?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  popularCourses?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  admissionInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  livingCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  officialUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visaInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type StudyAbroadDestinationUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  popularCourses?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  averageTuition?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  livingCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  visaInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  admissionInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  officialUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  averageTuition?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  popularCourses?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  admissionInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  livingCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  officialUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visaInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type StudyAbroadDestinationCreateManyInput = {
   id?: string
   country: string
   slug: string
-  shortName?: string | null
   description?: string | null
   coverImage?: string | null
-  popularCourses?: string | null
-  averageTuition?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  livingCost?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currency?: string | null
-  visaInfo?: string | null
-  admissionInfo?: string | null
-  officialUrl?: string | null
+  averageTuition?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  popularCourses?: string | null
   status?: $Enums.ContentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
+  admissionInfo?: string | null
+  livingCost?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  officialUrl?: string | null
+  shortName?: string | null
+  visaInfo?: string | null
 }
 
 export type StudyAbroadDestinationUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  popularCourses?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  averageTuition?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  livingCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  visaInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  admissionInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  officialUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  averageTuition?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  popularCourses?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  admissionInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  livingCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  officialUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visaInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type StudyAbroadDestinationUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  popularCourses?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  averageTuition?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  livingCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  visaInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  admissionInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  officialUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  averageTuition?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  popularCourses?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  admissionInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  livingCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  officialUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visaInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type StudyAbroadDestinationCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   country?: Prisma.SortOrder
   slug?: Prisma.SortOrder
-  shortName?: Prisma.SortOrder
   description?: Prisma.SortOrder
   coverImage?: Prisma.SortOrder
-  popularCourses?: Prisma.SortOrder
-  averageTuition?: Prisma.SortOrder
-  livingCost?: Prisma.SortOrder
   currency?: Prisma.SortOrder
-  visaInfo?: Prisma.SortOrder
-  admissionInfo?: Prisma.SortOrder
-  officialUrl?: Prisma.SortOrder
+  averageTuition?: Prisma.SortOrder
+  popularCourses?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  admissionInfo?: Prisma.SortOrder
+  livingCost?: Prisma.SortOrder
+  officialUrl?: Prisma.SortOrder
+  shortName?: Prisma.SortOrder
+  visaInfo?: Prisma.SortOrder
 }
 
 export type StudyAbroadDestinationAvgOrderByAggregateInput = {
@@ -558,38 +558,38 @@ export type StudyAbroadDestinationMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   country?: Prisma.SortOrder
   slug?: Prisma.SortOrder
-  shortName?: Prisma.SortOrder
   description?: Prisma.SortOrder
   coverImage?: Prisma.SortOrder
-  popularCourses?: Prisma.SortOrder
-  averageTuition?: Prisma.SortOrder
-  livingCost?: Prisma.SortOrder
   currency?: Prisma.SortOrder
-  visaInfo?: Prisma.SortOrder
-  admissionInfo?: Prisma.SortOrder
-  officialUrl?: Prisma.SortOrder
+  averageTuition?: Prisma.SortOrder
+  popularCourses?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  admissionInfo?: Prisma.SortOrder
+  livingCost?: Prisma.SortOrder
+  officialUrl?: Prisma.SortOrder
+  shortName?: Prisma.SortOrder
+  visaInfo?: Prisma.SortOrder
 }
 
 export type StudyAbroadDestinationMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   country?: Prisma.SortOrder
   slug?: Prisma.SortOrder
-  shortName?: Prisma.SortOrder
   description?: Prisma.SortOrder
   coverImage?: Prisma.SortOrder
-  popularCourses?: Prisma.SortOrder
-  averageTuition?: Prisma.SortOrder
-  livingCost?: Prisma.SortOrder
   currency?: Prisma.SortOrder
-  visaInfo?: Prisma.SortOrder
-  admissionInfo?: Prisma.SortOrder
-  officialUrl?: Prisma.SortOrder
+  averageTuition?: Prisma.SortOrder
+  popularCourses?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  admissionInfo?: Prisma.SortOrder
+  livingCost?: Prisma.SortOrder
+  officialUrl?: Prisma.SortOrder
+  shortName?: Prisma.SortOrder
+  visaInfo?: Prisma.SortOrder
 }
 
 export type StudyAbroadDestinationSumOrderByAggregateInput = {
@@ -603,79 +603,79 @@ export type StudyAbroadDestinationSelect<ExtArgs extends runtime.Types.Extension
   id?: boolean
   country?: boolean
   slug?: boolean
-  shortName?: boolean
   description?: boolean
   coverImage?: boolean
-  popularCourses?: boolean
-  averageTuition?: boolean
-  livingCost?: boolean
   currency?: boolean
-  visaInfo?: boolean
-  admissionInfo?: boolean
-  officialUrl?: boolean
+  averageTuition?: boolean
+  popularCourses?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  admissionInfo?: boolean
+  livingCost?: boolean
+  officialUrl?: boolean
+  shortName?: boolean
+  visaInfo?: boolean
 }, ExtArgs["result"]["studyAbroadDestination"]>
 
 export type StudyAbroadDestinationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   country?: boolean
   slug?: boolean
-  shortName?: boolean
   description?: boolean
   coverImage?: boolean
-  popularCourses?: boolean
-  averageTuition?: boolean
-  livingCost?: boolean
   currency?: boolean
-  visaInfo?: boolean
-  admissionInfo?: boolean
-  officialUrl?: boolean
+  averageTuition?: boolean
+  popularCourses?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  admissionInfo?: boolean
+  livingCost?: boolean
+  officialUrl?: boolean
+  shortName?: boolean
+  visaInfo?: boolean
 }, ExtArgs["result"]["studyAbroadDestination"]>
 
 export type StudyAbroadDestinationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   country?: boolean
   slug?: boolean
-  shortName?: boolean
   description?: boolean
   coverImage?: boolean
-  popularCourses?: boolean
-  averageTuition?: boolean
-  livingCost?: boolean
   currency?: boolean
-  visaInfo?: boolean
-  admissionInfo?: boolean
-  officialUrl?: boolean
+  averageTuition?: boolean
+  popularCourses?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  admissionInfo?: boolean
+  livingCost?: boolean
+  officialUrl?: boolean
+  shortName?: boolean
+  visaInfo?: boolean
 }, ExtArgs["result"]["studyAbroadDestination"]>
 
 export type StudyAbroadDestinationSelectScalar = {
   id?: boolean
   country?: boolean
   slug?: boolean
-  shortName?: boolean
   description?: boolean
   coverImage?: boolean
-  popularCourses?: boolean
-  averageTuition?: boolean
-  livingCost?: boolean
   currency?: boolean
-  visaInfo?: boolean
-  admissionInfo?: boolean
-  officialUrl?: boolean
+  averageTuition?: boolean
+  popularCourses?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  admissionInfo?: boolean
+  livingCost?: boolean
+  officialUrl?: boolean
+  shortName?: boolean
+  visaInfo?: boolean
 }
 
-export type StudyAbroadDestinationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "country" | "slug" | "shortName" | "description" | "coverImage" | "popularCourses" | "averageTuition" | "livingCost" | "currency" | "visaInfo" | "admissionInfo" | "officialUrl" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["studyAbroadDestination"]>
+export type StudyAbroadDestinationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "country" | "slug" | "description" | "coverImage" | "currency" | "averageTuition" | "popularCourses" | "status" | "createdAt" | "updatedAt" | "admissionInfo" | "livingCost" | "officialUrl" | "shortName" | "visaInfo", ExtArgs["result"]["studyAbroadDestination"]>
 
 export type $StudyAbroadDestinationPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "StudyAbroadDestination"
@@ -684,19 +684,19 @@ export type $StudyAbroadDestinationPayload<ExtArgs extends runtime.Types.Extensi
     id: string
     country: string
     slug: string
-    shortName: string | null
     description: string | null
     coverImage: string | null
-    popularCourses: string | null
-    averageTuition: runtime.Decimal | null
-    livingCost: runtime.Decimal | null
     currency: string | null
-    visaInfo: string | null
-    admissionInfo: string | null
-    officialUrl: string | null
+    averageTuition: runtime.Decimal | null
+    popularCourses: string | null
     status: $Enums.ContentStatus
     createdAt: Date
     updatedAt: Date
+    admissionInfo: string | null
+    livingCost: runtime.Decimal | null
+    officialUrl: string | null
+    shortName: string | null
+    visaInfo: string | null
   }, ExtArgs["result"]["studyAbroadDestination"]>
   composites: {}
 }
@@ -1123,19 +1123,19 @@ export interface StudyAbroadDestinationFieldRefs {
   readonly id: Prisma.FieldRef<"StudyAbroadDestination", 'String'>
   readonly country: Prisma.FieldRef<"StudyAbroadDestination", 'String'>
   readonly slug: Prisma.FieldRef<"StudyAbroadDestination", 'String'>
-  readonly shortName: Prisma.FieldRef<"StudyAbroadDestination", 'String'>
   readonly description: Prisma.FieldRef<"StudyAbroadDestination", 'String'>
   readonly coverImage: Prisma.FieldRef<"StudyAbroadDestination", 'String'>
-  readonly popularCourses: Prisma.FieldRef<"StudyAbroadDestination", 'String'>
-  readonly averageTuition: Prisma.FieldRef<"StudyAbroadDestination", 'Decimal'>
-  readonly livingCost: Prisma.FieldRef<"StudyAbroadDestination", 'Decimal'>
   readonly currency: Prisma.FieldRef<"StudyAbroadDestination", 'String'>
-  readonly visaInfo: Prisma.FieldRef<"StudyAbroadDestination", 'String'>
-  readonly admissionInfo: Prisma.FieldRef<"StudyAbroadDestination", 'String'>
-  readonly officialUrl: Prisma.FieldRef<"StudyAbroadDestination", 'String'>
+  readonly averageTuition: Prisma.FieldRef<"StudyAbroadDestination", 'Decimal'>
+  readonly popularCourses: Prisma.FieldRef<"StudyAbroadDestination", 'String'>
   readonly status: Prisma.FieldRef<"StudyAbroadDestination", 'ContentStatus'>
   readonly createdAt: Prisma.FieldRef<"StudyAbroadDestination", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"StudyAbroadDestination", 'DateTime'>
+  readonly admissionInfo: Prisma.FieldRef<"StudyAbroadDestination", 'String'>
+  readonly livingCost: Prisma.FieldRef<"StudyAbroadDestination", 'Decimal'>
+  readonly officialUrl: Prisma.FieldRef<"StudyAbroadDestination", 'String'>
+  readonly shortName: Prisma.FieldRef<"StudyAbroadDestination", 'String'>
+  readonly visaInfo: Prisma.FieldRef<"StudyAbroadDestination", 'String'>
 }
     
 
