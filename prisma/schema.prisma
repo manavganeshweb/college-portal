@@ -76,6 +76,7 @@ model College {
   establishedYear Int?
   collegeType     CollegeType
   status          CollegeStatus       @default(ACTIVE)
+  institutionKind InstitutionKind @default(COLLEGE)
   website         String?
   email           String?
   phone           String?
@@ -728,4 +729,10 @@ enum UserApplicationStatus {
 enum UserRole {
   USER
   ADMIN
+}
+
+enum InstitutionKind {
+  UNIVERSITY
+  COLLEGE
+  OTHER
 }

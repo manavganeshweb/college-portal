@@ -1,16 +1,17 @@
 import { prisma } from "@/lib/prisma";
 
-
 export type CollegeFilters = {
   search?: string;
   state?: string;
   city?: string;
-    collegeType?: string;
-verified?: boolean;
+  collegeType?: string;
+  institutionKind?: "UNIVERSITY" | "COLLEGE" | "OTHER";
+  verified?: boolean;
   course?: string;
   page?: number;
   limit?: number;
 };
+
 
 export async function getColleges(filters: CollegeFilters = {}) {
   const page = Math.max(filters.page ?? 1, 1);
@@ -19,6 +20,11 @@ export async function getColleges(filters: CollegeFilters = {}) {
 
   const where = {
     status: "ACTIVE" as const,
+    ...(filters.institutionKind
+  ? {
+      institutionKind: filters.institutionKind,
+    }
+  : {}),
 
     ...(filters.search
       ? {

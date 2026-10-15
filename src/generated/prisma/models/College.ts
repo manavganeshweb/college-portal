@@ -45,6 +45,7 @@ export type CollegeMinAggregateOutputType = {
   establishedYear: number | null
   collegeType: $Enums.CollegeType | null
   status: $Enums.CollegeStatus | null
+  institutionKind: $Enums.InstitutionKind | null
   website: string | null
   email: string | null
   phone: string | null
@@ -76,6 +77,7 @@ export type CollegeMaxAggregateOutputType = {
   establishedYear: number | null
   collegeType: $Enums.CollegeType | null
   status: $Enums.CollegeStatus | null
+  institutionKind: $Enums.InstitutionKind | null
   website: string | null
   email: string | null
   phone: string | null
@@ -107,6 +109,7 @@ export type CollegeCountAggregateOutputType = {
   establishedYear: number
   collegeType: number
   status: number
+  institutionKind: number
   website: number
   email: number
   phone: number
@@ -148,6 +151,7 @@ export type CollegeMinAggregateInputType = {
   establishedYear?: true
   collegeType?: true
   status?: true
+  institutionKind?: true
   website?: true
   email?: true
   phone?: true
@@ -179,6 +183,7 @@ export type CollegeMaxAggregateInputType = {
   establishedYear?: true
   collegeType?: true
   status?: true
+  institutionKind?: true
   website?: true
   email?: true
   phone?: true
@@ -210,6 +215,7 @@ export type CollegeCountAggregateInputType = {
   establishedYear?: true
   collegeType?: true
   status?: true
+  institutionKind?: true
   website?: true
   email?: true
   phone?: true
@@ -328,6 +334,7 @@ export type CollegeGroupByOutputType = {
   establishedYear: number | null
   collegeType: $Enums.CollegeType
   status: $Enums.CollegeStatus
+  institutionKind: $Enums.InstitutionKind
   website: string | null
   email: string | null
   phone: string | null
@@ -382,6 +389,7 @@ export type CollegeWhereInput = {
   establishedYear?: Prisma.IntNullableFilter<"College"> | number | null
   collegeType?: Prisma.EnumCollegeTypeFilter<"College"> | $Enums.CollegeType
   status?: Prisma.EnumCollegeStatusFilter<"College"> | $Enums.CollegeStatus
+  institutionKind?: Prisma.EnumInstitutionKindFilter<"College"> | $Enums.InstitutionKind
   website?: Prisma.StringNullableFilter<"College"> | string | null
   email?: Prisma.StringNullableFilter<"College"> | string | null
   phone?: Prisma.StringNullableFilter<"College"> | string | null
@@ -428,6 +436,7 @@ export type CollegeOrderByWithRelationInput = {
   establishedYear?: Prisma.SortOrderInput | Prisma.SortOrder
   collegeType?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  institutionKind?: Prisma.SortOrder
   website?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -478,6 +487,7 @@ export type CollegeWhereUniqueInput = Prisma.AtLeast<{
   establishedYear?: Prisma.IntNullableFilter<"College"> | number | null
   collegeType?: Prisma.EnumCollegeTypeFilter<"College"> | $Enums.CollegeType
   status?: Prisma.EnumCollegeStatusFilter<"College"> | $Enums.CollegeStatus
+  institutionKind?: Prisma.EnumInstitutionKindFilter<"College"> | $Enums.InstitutionKind
   website?: Prisma.StringNullableFilter<"College"> | string | null
   email?: Prisma.StringNullableFilter<"College"> | string | null
   phone?: Prisma.StringNullableFilter<"College"> | string | null
@@ -523,6 +533,7 @@ export type CollegeOrderByWithAggregationInput = {
   establishedYear?: Prisma.SortOrderInput | Prisma.SortOrder
   collegeType?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  institutionKind?: Prisma.SortOrder
   website?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -562,6 +573,7 @@ export type CollegeScalarWhereWithAggregatesInput = {
   establishedYear?: Prisma.IntNullableWithAggregatesFilter<"College"> | number | null
   collegeType?: Prisma.EnumCollegeTypeWithAggregatesFilter<"College"> | $Enums.CollegeType
   status?: Prisma.EnumCollegeStatusWithAggregatesFilter<"College"> | $Enums.CollegeStatus
+  institutionKind?: Prisma.EnumInstitutionKindWithAggregatesFilter<"College"> | $Enums.InstitutionKind
   website?: Prisma.StringNullableWithAggregatesFilter<"College"> | string | null
   email?: Prisma.StringNullableWithAggregatesFilter<"College"> | string | null
   phone?: Prisma.StringNullableWithAggregatesFilter<"College"> | string | null
@@ -593,6 +605,7 @@ export type CollegeCreateInput = {
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
   status?: $Enums.CollegeStatus
+  institutionKind?: $Enums.InstitutionKind
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -637,6 +650,7 @@ export type CollegeUncheckedCreateInput = {
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
   status?: $Enums.CollegeStatus
+  institutionKind?: $Enums.InstitutionKind
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -681,6 +695,7 @@ export type CollegeUpdateInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
   status?: Prisma.EnumCollegeStatusFieldUpdateOperationsInput | $Enums.CollegeStatus
+  institutionKind?: Prisma.EnumInstitutionKindFieldUpdateOperationsInput | $Enums.InstitutionKind
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -725,6 +740,7 @@ export type CollegeUncheckedUpdateInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
   status?: Prisma.EnumCollegeStatusFieldUpdateOperationsInput | $Enums.CollegeStatus
+  institutionKind?: Prisma.EnumInstitutionKindFieldUpdateOperationsInput | $Enums.InstitutionKind
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -769,6 +785,7 @@ export type CollegeCreateManyInput = {
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
   status?: $Enums.CollegeStatus
+  institutionKind?: $Enums.InstitutionKind
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -800,6 +817,7 @@ export type CollegeUpdateManyMutationInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
   status?: Prisma.EnumCollegeStatusFieldUpdateOperationsInput | $Enums.CollegeStatus
+  institutionKind?: Prisma.EnumInstitutionKindFieldUpdateOperationsInput | $Enums.InstitutionKind
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -829,6 +847,7 @@ export type CollegeUncheckedUpdateManyInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
   status?: Prisma.EnumCollegeStatusFieldUpdateOperationsInput | $Enums.CollegeStatus
+  institutionKind?: Prisma.EnumInstitutionKindFieldUpdateOperationsInput | $Enums.InstitutionKind
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -875,6 +894,7 @@ export type CollegeCountOrderByAggregateInput = {
   establishedYear?: Prisma.SortOrder
   collegeType?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  institutionKind?: Prisma.SortOrder
   website?: Prisma.SortOrder
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
@@ -910,6 +930,7 @@ export type CollegeMaxOrderByAggregateInput = {
   establishedYear?: Prisma.SortOrder
   collegeType?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  institutionKind?: Prisma.SortOrder
   website?: Prisma.SortOrder
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
@@ -941,6 +962,7 @@ export type CollegeMinOrderByAggregateInput = {
   establishedYear?: Prisma.SortOrder
   collegeType?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  institutionKind?: Prisma.SortOrder
   website?: Prisma.SortOrder
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
@@ -1077,6 +1099,10 @@ export type EnumCollegeTypeFieldUpdateOperationsInput = {
 
 export type EnumCollegeStatusFieldUpdateOperationsInput = {
   set?: $Enums.CollegeStatus
+}
+
+export type EnumInstitutionKindFieldUpdateOperationsInput = {
+  set?: $Enums.InstitutionKind
 }
 
 export type CollegeCreateNestedOneWithoutCoursesInput = {
@@ -1258,6 +1284,7 @@ export type CollegeCreateWithoutStateInput = {
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
   status?: $Enums.CollegeStatus
+  institutionKind?: $Enums.InstitutionKind
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -1301,6 +1328,7 @@ export type CollegeUncheckedCreateWithoutStateInput = {
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
   status?: $Enums.CollegeStatus
+  institutionKind?: $Enums.InstitutionKind
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -1373,6 +1401,7 @@ export type CollegeScalarWhereInput = {
   establishedYear?: Prisma.IntNullableFilter<"College"> | number | null
   collegeType?: Prisma.EnumCollegeTypeFilter<"College"> | $Enums.CollegeType
   status?: Prisma.EnumCollegeStatusFilter<"College"> | $Enums.CollegeStatus
+  institutionKind?: Prisma.EnumInstitutionKindFilter<"College"> | $Enums.InstitutionKind
   website?: Prisma.StringNullableFilter<"College"> | string | null
   email?: Prisma.StringNullableFilter<"College"> | string | null
   phone?: Prisma.StringNullableFilter<"College"> | string | null
@@ -1404,6 +1433,7 @@ export type CollegeCreateWithoutCityInput = {
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
   status?: $Enums.CollegeStatus
+  institutionKind?: $Enums.InstitutionKind
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -1447,6 +1477,7 @@ export type CollegeUncheckedCreateWithoutCityInput = {
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
   status?: $Enums.CollegeStatus
+  institutionKind?: $Enums.InstitutionKind
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -1516,6 +1547,7 @@ export type CollegeCreateWithoutNavigationItemsInput = {
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
   status?: $Enums.CollegeStatus
+  institutionKind?: $Enums.InstitutionKind
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -1559,6 +1591,7 @@ export type CollegeUncheckedCreateWithoutNavigationItemsInput = {
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
   status?: $Enums.CollegeStatus
+  institutionKind?: $Enums.InstitutionKind
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -1618,6 +1651,7 @@ export type CollegeUpdateWithoutNavigationItemsInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
   status?: Prisma.EnumCollegeStatusFieldUpdateOperationsInput | $Enums.CollegeStatus
+  institutionKind?: Prisma.EnumInstitutionKindFieldUpdateOperationsInput | $Enums.InstitutionKind
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1661,6 +1695,7 @@ export type CollegeUncheckedUpdateWithoutNavigationItemsInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
   status?: Prisma.EnumCollegeStatusFieldUpdateOperationsInput | $Enums.CollegeStatus
+  institutionKind?: Prisma.EnumInstitutionKindFieldUpdateOperationsInput | $Enums.InstitutionKind
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1704,6 +1739,7 @@ export type CollegeCreateWithoutCoursesInput = {
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
   status?: $Enums.CollegeStatus
+  institutionKind?: $Enums.InstitutionKind
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -1747,6 +1783,7 @@ export type CollegeUncheckedCreateWithoutCoursesInput = {
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
   status?: $Enums.CollegeStatus
+  institutionKind?: $Enums.InstitutionKind
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -1806,6 +1843,7 @@ export type CollegeUpdateWithoutCoursesInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
   status?: Prisma.EnumCollegeStatusFieldUpdateOperationsInput | $Enums.CollegeStatus
+  institutionKind?: Prisma.EnumInstitutionKindFieldUpdateOperationsInput | $Enums.InstitutionKind
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1849,6 +1887,7 @@ export type CollegeUncheckedUpdateWithoutCoursesInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
   status?: Prisma.EnumCollegeStatusFieldUpdateOperationsInput | $Enums.CollegeStatus
+  institutionKind?: Prisma.EnumInstitutionKindFieldUpdateOperationsInput | $Enums.InstitutionKind
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1892,6 +1931,7 @@ export type CollegeCreateWithoutFeesInput = {
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
   status?: $Enums.CollegeStatus
+  institutionKind?: $Enums.InstitutionKind
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -1935,6 +1975,7 @@ export type CollegeUncheckedCreateWithoutFeesInput = {
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
   status?: $Enums.CollegeStatus
+  institutionKind?: $Enums.InstitutionKind
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -1994,6 +2035,7 @@ export type CollegeUpdateWithoutFeesInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
   status?: Prisma.EnumCollegeStatusFieldUpdateOperationsInput | $Enums.CollegeStatus
+  institutionKind?: Prisma.EnumInstitutionKindFieldUpdateOperationsInput | $Enums.InstitutionKind
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2037,6 +2079,7 @@ export type CollegeUncheckedUpdateWithoutFeesInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
   status?: Prisma.EnumCollegeStatusFieldUpdateOperationsInput | $Enums.CollegeStatus
+  institutionKind?: Prisma.EnumInstitutionKindFieldUpdateOperationsInput | $Enums.InstitutionKind
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2080,6 +2123,7 @@ export type CollegeCreateWithoutCutoffsInput = {
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
   status?: $Enums.CollegeStatus
+  institutionKind?: $Enums.InstitutionKind
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -2123,6 +2167,7 @@ export type CollegeUncheckedCreateWithoutCutoffsInput = {
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
   status?: $Enums.CollegeStatus
+  institutionKind?: $Enums.InstitutionKind
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -2182,6 +2227,7 @@ export type CollegeUpdateWithoutCutoffsInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
   status?: Prisma.EnumCollegeStatusFieldUpdateOperationsInput | $Enums.CollegeStatus
+  institutionKind?: Prisma.EnumInstitutionKindFieldUpdateOperationsInput | $Enums.InstitutionKind
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2225,6 +2271,7 @@ export type CollegeUncheckedUpdateWithoutCutoffsInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
   status?: Prisma.EnumCollegeStatusFieldUpdateOperationsInput | $Enums.CollegeStatus
+  institutionKind?: Prisma.EnumInstitutionKindFieldUpdateOperationsInput | $Enums.InstitutionKind
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2268,6 +2315,7 @@ export type CollegeCreateWithoutReviewsInput = {
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
   status?: $Enums.CollegeStatus
+  institutionKind?: $Enums.InstitutionKind
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -2311,6 +2359,7 @@ export type CollegeUncheckedCreateWithoutReviewsInput = {
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
   status?: $Enums.CollegeStatus
+  institutionKind?: $Enums.InstitutionKind
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -2370,6 +2419,7 @@ export type CollegeUpdateWithoutReviewsInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
   status?: Prisma.EnumCollegeStatusFieldUpdateOperationsInput | $Enums.CollegeStatus
+  institutionKind?: Prisma.EnumInstitutionKindFieldUpdateOperationsInput | $Enums.InstitutionKind
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2413,6 +2463,7 @@ export type CollegeUncheckedUpdateWithoutReviewsInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
   status?: Prisma.EnumCollegeStatusFieldUpdateOperationsInput | $Enums.CollegeStatus
+  institutionKind?: Prisma.EnumInstitutionKindFieldUpdateOperationsInput | $Enums.InstitutionKind
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2456,6 +2507,7 @@ export type CollegeCreateWithoutRankingsInput = {
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
   status?: $Enums.CollegeStatus
+  institutionKind?: $Enums.InstitutionKind
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -2499,6 +2551,7 @@ export type CollegeUncheckedCreateWithoutRankingsInput = {
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
   status?: $Enums.CollegeStatus
+  institutionKind?: $Enums.InstitutionKind
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -2558,6 +2611,7 @@ export type CollegeUpdateWithoutRankingsInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
   status?: Prisma.EnumCollegeStatusFieldUpdateOperationsInput | $Enums.CollegeStatus
+  institutionKind?: Prisma.EnumInstitutionKindFieldUpdateOperationsInput | $Enums.InstitutionKind
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2601,6 +2655,7 @@ export type CollegeUncheckedUpdateWithoutRankingsInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
   status?: Prisma.EnumCollegeStatusFieldUpdateOperationsInput | $Enums.CollegeStatus
+  institutionKind?: Prisma.EnumInstitutionKindFieldUpdateOperationsInput | $Enums.InstitutionKind
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2644,6 +2699,7 @@ export type CollegeCreateWithoutDepartmentsInput = {
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
   status?: $Enums.CollegeStatus
+  institutionKind?: $Enums.InstitutionKind
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -2687,6 +2743,7 @@ export type CollegeUncheckedCreateWithoutDepartmentsInput = {
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
   status?: $Enums.CollegeStatus
+  institutionKind?: $Enums.InstitutionKind
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -2746,6 +2803,7 @@ export type CollegeUpdateWithoutDepartmentsInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
   status?: Prisma.EnumCollegeStatusFieldUpdateOperationsInput | $Enums.CollegeStatus
+  institutionKind?: Prisma.EnumInstitutionKindFieldUpdateOperationsInput | $Enums.InstitutionKind
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2789,6 +2847,7 @@ export type CollegeUncheckedUpdateWithoutDepartmentsInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
   status?: Prisma.EnumCollegeStatusFieldUpdateOperationsInput | $Enums.CollegeStatus
+  institutionKind?: Prisma.EnumInstitutionKindFieldUpdateOperationsInput | $Enums.InstitutionKind
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2832,6 +2891,7 @@ export type CollegeCreateWithoutPlacementsInput = {
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
   status?: $Enums.CollegeStatus
+  institutionKind?: $Enums.InstitutionKind
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -2875,6 +2935,7 @@ export type CollegeUncheckedCreateWithoutPlacementsInput = {
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
   status?: $Enums.CollegeStatus
+  institutionKind?: $Enums.InstitutionKind
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -2934,6 +2995,7 @@ export type CollegeUpdateWithoutPlacementsInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
   status?: Prisma.EnumCollegeStatusFieldUpdateOperationsInput | $Enums.CollegeStatus
+  institutionKind?: Prisma.EnumInstitutionKindFieldUpdateOperationsInput | $Enums.InstitutionKind
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2977,6 +3039,7 @@ export type CollegeUncheckedUpdateWithoutPlacementsInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
   status?: Prisma.EnumCollegeStatusFieldUpdateOperationsInput | $Enums.CollegeStatus
+  institutionKind?: Prisma.EnumInstitutionKindFieldUpdateOperationsInput | $Enums.InstitutionKind
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3020,6 +3083,7 @@ export type CollegeCreateWithoutQuestionsInput = {
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
   status?: $Enums.CollegeStatus
+  institutionKind?: $Enums.InstitutionKind
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -3063,6 +3127,7 @@ export type CollegeUncheckedCreateWithoutQuestionsInput = {
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
   status?: $Enums.CollegeStatus
+  institutionKind?: $Enums.InstitutionKind
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -3122,6 +3187,7 @@ export type CollegeUpdateWithoutQuestionsInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
   status?: Prisma.EnumCollegeStatusFieldUpdateOperationsInput | $Enums.CollegeStatus
+  institutionKind?: Prisma.EnumInstitutionKindFieldUpdateOperationsInput | $Enums.InstitutionKind
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3165,6 +3231,7 @@ export type CollegeUncheckedUpdateWithoutQuestionsInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
   status?: Prisma.EnumCollegeStatusFieldUpdateOperationsInput | $Enums.CollegeStatus
+  institutionKind?: Prisma.EnumInstitutionKindFieldUpdateOperationsInput | $Enums.InstitutionKind
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3208,6 +3275,7 @@ export type CollegeCreateWithoutInfrastructureInput = {
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
   status?: $Enums.CollegeStatus
+  institutionKind?: $Enums.InstitutionKind
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -3251,6 +3319,7 @@ export type CollegeUncheckedCreateWithoutInfrastructureInput = {
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
   status?: $Enums.CollegeStatus
+  institutionKind?: $Enums.InstitutionKind
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -3310,6 +3379,7 @@ export type CollegeUpdateWithoutInfrastructureInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
   status?: Prisma.EnumCollegeStatusFieldUpdateOperationsInput | $Enums.CollegeStatus
+  institutionKind?: Prisma.EnumInstitutionKindFieldUpdateOperationsInput | $Enums.InstitutionKind
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3353,6 +3423,7 @@ export type CollegeUncheckedUpdateWithoutInfrastructureInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
   status?: Prisma.EnumCollegeStatusFieldUpdateOperationsInput | $Enums.CollegeStatus
+  institutionKind?: Prisma.EnumInstitutionKindFieldUpdateOperationsInput | $Enums.InstitutionKind
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3396,6 +3467,7 @@ export type CollegeCreateWithoutPhotosInput = {
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
   status?: $Enums.CollegeStatus
+  institutionKind?: $Enums.InstitutionKind
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -3439,6 +3511,7 @@ export type CollegeUncheckedCreateWithoutPhotosInput = {
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
   status?: $Enums.CollegeStatus
+  institutionKind?: $Enums.InstitutionKind
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -3498,6 +3571,7 @@ export type CollegeUpdateWithoutPhotosInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
   status?: Prisma.EnumCollegeStatusFieldUpdateOperationsInput | $Enums.CollegeStatus
+  institutionKind?: Prisma.EnumInstitutionKindFieldUpdateOperationsInput | $Enums.InstitutionKind
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3541,6 +3615,7 @@ export type CollegeUncheckedUpdateWithoutPhotosInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
   status?: Prisma.EnumCollegeStatusFieldUpdateOperationsInput | $Enums.CollegeStatus
+  institutionKind?: Prisma.EnumInstitutionKindFieldUpdateOperationsInput | $Enums.InstitutionKind
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3584,6 +3659,7 @@ export type CollegeCreateWithoutShortlistsInput = {
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
   status?: $Enums.CollegeStatus
+  institutionKind?: $Enums.InstitutionKind
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -3627,6 +3703,7 @@ export type CollegeUncheckedCreateWithoutShortlistsInput = {
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
   status?: $Enums.CollegeStatus
+  institutionKind?: $Enums.InstitutionKind
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -3686,6 +3763,7 @@ export type CollegeUpdateWithoutShortlistsInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
   status?: Prisma.EnumCollegeStatusFieldUpdateOperationsInput | $Enums.CollegeStatus
+  institutionKind?: Prisma.EnumInstitutionKindFieldUpdateOperationsInput | $Enums.InstitutionKind
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3729,6 +3807,7 @@ export type CollegeUncheckedUpdateWithoutShortlistsInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
   status?: Prisma.EnumCollegeStatusFieldUpdateOperationsInput | $Enums.CollegeStatus
+  institutionKind?: Prisma.EnumInstitutionKindFieldUpdateOperationsInput | $Enums.InstitutionKind
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3772,6 +3851,7 @@ export type CollegeCreateWithoutApplicationsInput = {
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
   status?: $Enums.CollegeStatus
+  institutionKind?: $Enums.InstitutionKind
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -3815,6 +3895,7 @@ export type CollegeUncheckedCreateWithoutApplicationsInput = {
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
   status?: $Enums.CollegeStatus
+  institutionKind?: $Enums.InstitutionKind
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -3874,6 +3955,7 @@ export type CollegeUpdateWithoutApplicationsInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
   status?: Prisma.EnumCollegeStatusFieldUpdateOperationsInput | $Enums.CollegeStatus
+  institutionKind?: Prisma.EnumInstitutionKindFieldUpdateOperationsInput | $Enums.InstitutionKind
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3917,6 +3999,7 @@ export type CollegeUncheckedUpdateWithoutApplicationsInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
   status?: Prisma.EnumCollegeStatusFieldUpdateOperationsInput | $Enums.CollegeStatus
+  institutionKind?: Prisma.EnumInstitutionKindFieldUpdateOperationsInput | $Enums.InstitutionKind
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3960,6 +4043,7 @@ export type CollegeCreateManyStateInput = {
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
   status?: $Enums.CollegeStatus
+  institutionKind?: $Enums.InstitutionKind
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -3990,6 +4074,7 @@ export type CollegeUpdateWithoutStateInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
   status?: Prisma.EnumCollegeStatusFieldUpdateOperationsInput | $Enums.CollegeStatus
+  institutionKind?: Prisma.EnumInstitutionKindFieldUpdateOperationsInput | $Enums.InstitutionKind
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4033,6 +4118,7 @@ export type CollegeUncheckedUpdateWithoutStateInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
   status?: Prisma.EnumCollegeStatusFieldUpdateOperationsInput | $Enums.CollegeStatus
+  institutionKind?: Prisma.EnumInstitutionKindFieldUpdateOperationsInput | $Enums.InstitutionKind
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4076,6 +4162,7 @@ export type CollegeUncheckedUpdateManyWithoutStateInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
   status?: Prisma.EnumCollegeStatusFieldUpdateOperationsInput | $Enums.CollegeStatus
+  institutionKind?: Prisma.EnumInstitutionKindFieldUpdateOperationsInput | $Enums.InstitutionKind
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4106,6 +4193,7 @@ export type CollegeCreateManyCityInput = {
   establishedYear?: number | null
   collegeType: $Enums.CollegeType
   status?: $Enums.CollegeStatus
+  institutionKind?: $Enums.InstitutionKind
   website?: string | null
   email?: string | null
   phone?: string | null
@@ -4136,6 +4224,7 @@ export type CollegeUpdateWithoutCityInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
   status?: Prisma.EnumCollegeStatusFieldUpdateOperationsInput | $Enums.CollegeStatus
+  institutionKind?: Prisma.EnumInstitutionKindFieldUpdateOperationsInput | $Enums.InstitutionKind
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4179,6 +4268,7 @@ export type CollegeUncheckedUpdateWithoutCityInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
   status?: Prisma.EnumCollegeStatusFieldUpdateOperationsInput | $Enums.CollegeStatus
+  institutionKind?: Prisma.EnumInstitutionKindFieldUpdateOperationsInput | $Enums.InstitutionKind
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4222,6 +4312,7 @@ export type CollegeUncheckedUpdateManyWithoutCityInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   collegeType?: Prisma.EnumCollegeTypeFieldUpdateOperationsInput | $Enums.CollegeType
   status?: Prisma.EnumCollegeStatusFieldUpdateOperationsInput | $Enums.CollegeStatus
+  institutionKind?: Prisma.EnumInstitutionKindFieldUpdateOperationsInput | $Enums.InstitutionKind
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4382,6 +4473,7 @@ export type CollegeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   establishedYear?: boolean
   collegeType?: boolean
   status?: boolean
+  institutionKind?: boolean
   website?: boolean
   email?: boolean
   phone?: boolean
@@ -4429,6 +4521,7 @@ export type CollegeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   establishedYear?: boolean
   collegeType?: boolean
   status?: boolean
+  institutionKind?: boolean
   website?: boolean
   email?: boolean
   phone?: boolean
@@ -4462,6 +4555,7 @@ export type CollegeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   establishedYear?: boolean
   collegeType?: boolean
   status?: boolean
+  institutionKind?: boolean
   website?: boolean
   email?: boolean
   phone?: boolean
@@ -4495,6 +4589,7 @@ export type CollegeSelectScalar = {
   establishedYear?: boolean
   collegeType?: boolean
   status?: boolean
+  institutionKind?: boolean
   website?: boolean
   email?: boolean
   phone?: boolean
@@ -4515,7 +4610,7 @@ export type CollegeSelectScalar = {
   aisheCode?: boolean
 }
 
-export type CollegeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "slug" | "shortName" | "logo" | "coverImage" | "description" | "establishedYear" | "collegeType" | "status" | "website" | "email" | "phone" | "address" | "stateId" | "cityId" | "verified" | "lastUpdated" | "seoTitle" | "seoDescription" | "createdAt" | "updatedAt" | "canonicalUrl" | "ogDescription" | "ogImage" | "ogTitle" | "seoKeywords" | "aisheCode", ExtArgs["result"]["college"]>
+export type CollegeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "slug" | "shortName" | "logo" | "coverImage" | "description" | "establishedYear" | "collegeType" | "status" | "institutionKind" | "website" | "email" | "phone" | "address" | "stateId" | "cityId" | "verified" | "lastUpdated" | "seoTitle" | "seoDescription" | "createdAt" | "updatedAt" | "canonicalUrl" | "ogDescription" | "ogImage" | "ogTitle" | "seoKeywords" | "aisheCode", ExtArgs["result"]["college"]>
 export type CollegeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   city?: boolean | Prisma.College$cityArgs<ExtArgs>
   state?: boolean | Prisma.StateDefaultArgs<ExtArgs>
@@ -4573,6 +4668,7 @@ export type $CollegePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     establishedYear: number | null
     collegeType: $Enums.CollegeType
     status: $Enums.CollegeStatus
+    institutionKind: $Enums.InstitutionKind
     website: string | null
     email: string | null
     phone: string | null
@@ -5039,6 +5135,7 @@ export interface CollegeFieldRefs {
   readonly establishedYear: Prisma.FieldRef<"College", 'Int'>
   readonly collegeType: Prisma.FieldRef<"College", 'CollegeType'>
   readonly status: Prisma.FieldRef<"College", 'CollegeStatus'>
+  readonly institutionKind: Prisma.FieldRef<"College", 'InstitutionKind'>
   readonly website: Prisma.FieldRef<"College", 'String'>
   readonly email: Prisma.FieldRef<"College", 'String'>
   readonly phone: Prisma.FieldRef<"College", 'String'>

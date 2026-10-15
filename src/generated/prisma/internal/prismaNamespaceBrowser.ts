@@ -161,6 +161,7 @@ export const CollegeScalarFieldEnum = {
   establishedYear: 'establishedYear',
   collegeType: 'collegeType',
   status: 'status',
+  institutionKind: 'institutionKind',
   website: 'website',
   email: 'email',
   phone: 'phone',

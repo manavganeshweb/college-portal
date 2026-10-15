@@ -2841,6 +2841,7 @@ export const CollegeScalarFieldEnum = {
   establishedYear: 'establishedYear',
   collegeType: 'collegeType',
   status: 'status',
+  institutionKind: 'institutionKind',
   website: 'website',
   email: 'email',
   phone: 'phone',
@@ -3406,6 +3407,20 @@ export type EnumCollegeStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$Pr
  * Reference to a field of type 'CollegeStatus[]'
  */
 export type ListEnumCollegeStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CollegeStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'InstitutionKind'
+ */
+export type EnumInstitutionKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InstitutionKind'>
+    
+
+
+/**
+ * Reference to a field of type 'InstitutionKind[]'
+ */
+export type ListEnumInstitutionKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InstitutionKind[]'>
     
 
 

@@ -9,15 +9,20 @@ import {
   Dumbbell,
   GraduationCap,
   Hospital,
+  ImagePlus,
   Library,
   Loader2,
   Plus,
   Save,
   Trash2,
   Utensils,
+  Upload,
   Wifi,
   X,
 } from "lucide-react";
+
+import Image from "next/image";
+import { uploadCollegeImage } from "./uploadCollegeImage";
 
 type FacilityKey =
   | "hostel"
@@ -37,6 +42,14 @@ type Facility = {
   name: string;
   description: string;
   available: boolean;
+  sortOrder: number;
+  isActive: boolean;
+};
+type InfrastructurePhoto = {
+  id?: string;
+  imageUrl: string;
+  title: string;
+  description: string;
   sortOrder: number;
   isActive: boolean;
 };
@@ -173,7 +186,12 @@ export default function InfrastructureEditor({
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [showCustomFacilities, setShowCustomFacilities] = useState(true);
+const [infrastructurePhotos, setInfrastructurePhotos] = useState<
+  InfrastructurePhoto[]
+>([]);
 
+const [uploadingPhoto, setUploadingPhoto] = useState(false);
+const [photoError, setPhotoError] = useState("");
   useEffect(() => {
     void loadInfrastructure();
   }, [collegeId]);
@@ -191,11 +209,22 @@ export default function InfrastructureEditor({
         }
       );
 
-      const result: {
-        success?: boolean;
-        infrastructure?: Partial<InfrastructureData> | null;
-        message?: string;
-      } = await response.json();
+const result: {
+  success?: boolean;
+  infrastructure?: Partial<InfrastructureData> | null;
+  infrastructurePhotos?: Partial<InfrastructurePhoto>[];
+  message?: string;
+} = await response.json();
+setInfrastructurePhotos(
+  (result.infrastructurePhotos ?? []).map((photo, index) => ({
+    id: photo.id,
+    imageUrl: photo.imageUrl ?? "",
+    title: photo.title ?? "",
+    description: photo.description ?? "",
+    sortOrder: photo.sortOrder ?? index + 1,
+    isActive: photo.isActive ?? true,
+  }))
+);
 
       if (!response.ok || !result.success) {
         throw new Error(
@@ -251,7 +280,60 @@ export default function InfrastructureEditor({
       setLoading(false);
     }
   }
+function updateInfrastructurePhoto(
+  index: number,
+  field: keyof InfrastructurePhoto,
+  value: string | boolean | number
+) {
+  setInfrastructurePhotos((previous) =>
+    previous.map((photo, photoIndex) =>
+      photoIndex === index
+        ? { ...photo, [field]: value }
+        : photo
+    )
+  );
 
+  setMessage("");
+  setError("");
+  setPhotoError("");
+}
+
+function removeInfrastructurePhoto(index: number) {
+  setInfrastructurePhotos((previous) =>
+    previous
+      .filter((_, photoIndex) => photoIndex !== index)
+      .map((photo, photoIndex) => ({
+        ...photo,
+        sortOrder: photoIndex + 1,
+      }))
+  );
+
+  setMessage("");
+}
+
+function moveInfrastructurePhoto(
+  index: number,
+  direction: "up" | "down"
+) {
+  setInfrastructurePhotos((previous) => {
+    const photos = [...previous];
+    const newIndex = direction === "up" ? index - 1 : index + 1;
+
+    if (newIndex < 0 || newIndex >= photos.length) {
+      return previous;
+    }
+
+    [photos[index], photos[newIndex]] = [
+      photos[newIndex],
+      photos[index],
+    ];
+
+    return photos.map((photo, photoIndex) => ({
+      ...photo,
+      sortOrder: photoIndex + 1,
+    }));
+  });
+}
   function updateField<K extends keyof InfrastructureData>(
     field: K,
     value: InfrastructureData[K]
@@ -351,6 +433,45 @@ export default function InfrastructureEditor({
       };
     });
   }
+  async function handleInfrastructurePhotoUpload(file?: File) {
+  if (!file) return;
+
+  try {
+    setUploadingPhoto(true);
+    setPhotoError("");
+    setMessage("");
+    setError("");
+
+    const url = await uploadCollegeImage(
+      file,
+      collegeId,
+      "college-infrastructure"
+    );
+
+    setInfrastructurePhotos((previous) => [
+      ...previous,
+      {
+        imageUrl: url,
+        title: "",
+        description: "",
+        sortOrder: previous.length + 1,
+        isActive: true,
+      },
+    ]);
+
+    setMessage(
+      "Image uploaded to Cloudflare R2. Click Save Infrastructure to save its details."
+    );
+  } catch (err) {
+    setPhotoError(
+      err instanceof Error
+        ? err.message
+        : "Failed to upload infrastructure image."
+    );
+  } finally {
+    setUploadingPhoto(false);
+  }
+}
 
   async function saveInfrastructure() {
     try {
@@ -358,34 +479,45 @@ export default function InfrastructureEditor({
       setMessage("");
       setError("");
 
-      const payload = {
-        campusArea: data.campusArea.trim() || null,
-        campusType: data.campusType.trim() || null,
-        description: data.description.trim() || null,
+     const payload = {
+  // Keep all your existing infrastructure fields.
 
-        hostel: data.hostel,
-        library: data.library,
-        laboratories: data.laboratories,
-        sports: data.sports,
-        cafeteria: data.cafeteria,
-        auditorium: data.auditorium,
-        medical: data.medical,
-        wifi: data.wifi,
-        itInfrastructure: data.itInfrastructure,
-        transportation: data.transportation,
-        gym: data.gym,
+  campusArea: data.campusArea.trim() || null,
+  campusType: data.campusType.trim() || null,
+  description: data.description.trim() || null,
 
-        otherFacilities: data.otherFacilities.trim() || null,
+  hostel: data.hostel,
+  library: data.library,
+  laboratories: data.laboratories,
+  sports: data.sports,
+  cafeteria: data.cafeteria,
+  auditorium: data.auditorium,
+  medical: data.medical,
+  wifi: data.wifi,
+  itInfrastructure: data.itInfrastructure,
+  transportation: data.transportation,
+  gym: data.gym,
 
-        facilities: data.facilities.map((facility, index) => ({
-          name: facility.name.trim(),
-          description: facility.description.trim() || null,
-          available: facility.available,
-          sortOrder: index + 1,
-          isActive: facility.isActive,
-        })),
-      };
+  otherFacilities: data.otherFacilities.trim() || null,
 
+  facilities: data.facilities.map((facility, index) => ({
+    name: facility.name.trim(),
+    description: facility.description.trim() || null,
+    available: facility.available,
+    sortOrder: index + 1,
+    isActive: facility.isActive,
+  })),
+
+  infrastructurePhotos: infrastructurePhotos.map(
+    (photo, index) => ({
+      imageUrl: photo.imageUrl.trim(),
+      title: photo.title.trim() || null,
+      description: photo.description.trim() || null,
+      sortOrder: index + 1,
+      isActive: photo.isActive,
+    })
+  ),
+};
       const response = await fetch(
         `/admin/api/admin/colleges/${collegeId}/infrastructure`,
         {
@@ -569,7 +701,256 @@ export default function InfrastructureEditor({
           </div>
         </div>
       </div>
+{/* Infrastructure Photos */}
+<div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+  <div className="mb-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <div>
+      <div className="flex items-center gap-2">
+        <ImagePlus size={20} className="text-[#15945c]" />
 
+        <h3 className="text-base font-semibold text-gray-900">
+          Infrastructure Photos
+        </h3>
+      </div>
+
+      <p className="mt-1 text-sm text-gray-500">
+        Upload campus buildings, classrooms, laboratories, library,
+        hostel, sports facilities, and other infrastructure.
+      </p>
+    </div>
+
+    <label
+      className={`inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-[#15945c] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#117b4c] ${
+        uploadingPhoto ? "pointer-events-none opacity-60" : ""
+      }`}
+    >
+      {uploadingPhoto ? (
+        <Loader2 size={17} className="animate-spin" />
+      ) : (
+        <Upload size={17} />
+      )}
+
+      {uploadingPhoto ? "Uploading..." : "Upload Photos"}
+
+      <input
+        type="file"
+        accept="image/jpeg,image/png,image/webp,image/avif"
+        multiple
+        disabled={uploadingPhoto || saving}
+        className="hidden"
+        onChange={async (event) => {
+          const files = Array.from(event.target.files ?? []);
+
+          event.target.value = "";
+
+          for (const file of files) {
+            await handleInfrastructurePhotoUpload(file);
+          }
+        }}
+      />
+    </label>
+  </div>
+
+  <p className="mb-5 text-xs text-gray-500">
+    Supported formats: JPG, PNG, WebP, and AVIF. Maximum size:
+    5 MB per image. Uploading multiple images may take a little time.
+  </p>
+
+  {photoError && (
+    <div className="mb-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+      {photoError}
+    </div>
+  )}
+
+  {infrastructurePhotos.length === 0 ? (
+    <div className="rounded-xl border border-dashed border-gray-300 px-5 py-12 text-center">
+      <ImagePlus
+        size={32}
+        className="mx-auto text-gray-400"
+      />
+
+      <p className="mt-3 text-sm font-medium text-gray-700">
+        No infrastructure photos yet
+      </p>
+
+      <p className="mt-1 text-xs text-gray-500">
+        Upload images to showcase this college&apos;s campus and facilities.
+      </p>
+    </div>
+  ) : (
+    <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+      {infrastructurePhotos.map((photo, index) => (
+        <div
+          key={photo.id ?? `infrastructure-photo-${index}`}
+          className="min-w-0 overflow-hidden rounded-xl border border-gray-200 bg-white"
+        >
+          <div className="relative aspect-[16/10] bg-gray-100">
+            {photo.imageUrl ? (
+              <Image
+                src={photo.imageUrl}
+                alt={photo.title || "College infrastructure"}
+                fill
+                unoptimized
+                sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                className="object-cover"
+              />
+            ) : (
+              <div className="flex h-full items-center justify-center text-sm text-gray-400">
+                No image URL
+              </div>
+            )}
+
+            <span
+              className={`absolute left-3 top-3 rounded-full px-2.5 py-1 text-xs font-semibold ${
+                photo.isActive
+                  ? "bg-green-100 text-green-700"
+                  : "bg-gray-100 text-gray-600"
+              }`}
+            >
+              {photo.isActive ? "Active" : "Inactive"}
+            </span>
+          </div>
+
+          <div className="space-y-4 p-4">
+            <div>
+              <label
+                htmlFor={`infrastructure-photo-title-${index}`}
+                className="mb-1.5 block text-xs font-medium text-gray-700"
+              >
+                Image Title
+              </label>
+
+              <input
+                id={`infrastructure-photo-title-${index}`}
+                type="text"
+                value={photo.title}
+                onChange={(event) =>
+                  updateInfrastructurePhoto(
+                    index,
+                    "title",
+                    event.target.value
+                  )
+                }
+                placeholder="e.g. Main Campus Building"
+                maxLength={200}
+                className="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm outline-none focus:border-[#15945c] focus:ring-2 focus:ring-[#15945c]/10"
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor={`infrastructure-photo-description-${index}`}
+                className="mb-1.5 block text-xs font-medium text-gray-700"
+              >
+                Description
+              </label>
+
+              <textarea
+                id={`infrastructure-photo-description-${index}`}
+                rows={2}
+                value={photo.description}
+                onChange={(event) =>
+                  updateInfrastructurePhoto(
+                    index,
+                    "description",
+                    event.target.value
+                  )
+                }
+                placeholder="Describe this campus facility..."
+                maxLength={1000}
+                className="w-full resize-y rounded-lg border border-gray-300 px-3 py-2.5 text-sm outline-none focus:border-[#15945c] focus:ring-2 focus:ring-[#15945c]/10"
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor={`infrastructure-photo-url-${index}`}
+                className="mb-1.5 block text-xs font-medium text-gray-700"
+              >
+                Image URL
+              </label>
+
+              <input
+                id={`infrastructure-photo-url-${index}`}
+                type="url"
+                value={photo.imageUrl}
+                onChange={(event) =>
+                  updateInfrastructurePhoto(
+                    index,
+                    "imageUrl",
+                    event.target.value
+                  )
+                }
+                placeholder="https://..."
+                className="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-xs outline-none focus:border-[#15945c] focus:ring-2 focus:ring-[#15945c]/10"
+              />
+            </div>
+
+            <div className="flex flex-wrap items-center justify-between gap-2 border-t border-gray-100 pt-3">
+              <div className="flex items-center gap-1">
+                <button
+                  type="button"
+                  onClick={() =>
+                    moveInfrastructurePhoto(index, "up")
+                  }
+                  disabled={index === 0}
+                  aria-label="Move infrastructure photo up"
+                  className="rounded-lg p-2 text-gray-500 hover:bg-gray-100 disabled:opacity-30"
+                >
+                  <ChevronUp size={17} />
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    moveInfrastructurePhoto(index, "down")
+                  }
+                  disabled={index === infrastructurePhotos.length - 1}
+                  aria-label="Move infrastructure photo down"
+                  className="rounded-lg p-2 text-gray-500 hover:bg-gray-100 disabled:opacity-30"
+                >
+                  <ChevronDown size={17} />
+                </button>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() =>
+                    updateInfrastructurePhoto(
+                      index,
+                      "isActive",
+                      !photo.isActive
+                    )
+                  }
+                  className={`rounded-lg border px-3 py-2 text-xs font-semibold ${
+                    photo.isActive
+                      ? "border-green-200 bg-green-50 text-green-700"
+                      : "border-gray-200 bg-gray-50 text-gray-600"
+                  }`}
+                >
+                  {photo.isActive ? "Active" : "Inactive"}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    removeInfrastructurePhoto(index)
+                  }
+                  aria-label="Remove infrastructure photo"
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-red-200 px-3 py-2 text-xs font-semibold text-red-600 transition hover:bg-red-50"
+                >
+                  <Trash2 size={14} />
+                  Remove
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  )}
+</div>
       {/* Standard Facilities */}
       <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
         <div className="mb-5">

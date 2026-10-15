@@ -160,3 +160,12 @@ export const UserRole = {
 } as const
 
 export type UserRole = (typeof UserRole)[keyof typeof UserRole]
+
+
+export const InstitutionKind = {
+  UNIVERSITY: 'UNIVERSITY',
+  COLLEGE: 'COLLEGE',
+  OTHER: 'OTHER'
+} as const
+
+export type InstitutionKind = (typeof InstitutionKind)[keyof typeof InstitutionKind]

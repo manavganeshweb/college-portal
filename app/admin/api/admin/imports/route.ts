@@ -575,7 +575,22 @@ function parseOptionalDecimal(
     ? normalized
     : null;
 }
+function getInstitutionKind(
+  value: unknown,
+): "UNIVERSITY" | "COLLEGE" | "OTHER" {
+  const institutionType =
+    emptyToNull(value)?.toLowerCase().trim() ?? "";
 
+  if (institutionType.includes("university")) {
+    return "UNIVERSITY";
+  }
+
+  if (institutionType.includes("college")) {
+    return "COLLEGE";
+  }
+
+  return "OTHER";
+}
 function getCourseDuration(
   durationYearsValue: unknown,
   durationMonthsValue: unknown,
@@ -1085,6 +1100,7 @@ const existingColleges = await prisma.college.findMany({
       | "DEEMED"
       | "AUTONOMOUS"
       | "OTHER";
+    institutionKind: "UNIVERSITY" | "COLLEGE" | "OTHER";
   }> = [];
 
   for (const row of rows) {
@@ -1181,17 +1197,20 @@ if (existingCollege) {
 
   usedSlugs.add(slug);
 }
-    preparedRows.push({
-      row,
-      aisheCode,
-      stateId: state.id,
-      cityId,
-      slug,
-      collegeType: getCollegeType(
-        row.institution_type,
-        row.ownership,
-      ),
-    });
+   preparedRows.push({
+  row,
+  aisheCode,
+  stateId: state.id,
+  cityId,
+  slug,
+  collegeType: getCollegeType(
+    row.institution_type,
+    row.ownership,
+  ),
+  institutionKind: getInstitutionKind(
+    row.institution_type,
+  ),
+});
   }
 
   /*
@@ -1236,6 +1255,8 @@ const data = {
   name,
   slug: item.slug,
   collegeType: item.collegeType,
+    institutionKind: item.institutionKind,
+
   aisheCode: item.aisheCode,
 
   logo,
@@ -1262,35 +1283,39 @@ const data = {
     new Date(),
 };
 
-      if (existing) {
-       await prisma.college.update({
-  where: { id: existing.id },
-  data: {
-    name: data.name,
-    slug: data.slug,
-    logo: data.logo,
-    collegeType: data.collegeType,
-    aisheCode: data.aisheCode,
-    website: data.website,
-    email: data.email,
-    phone: data.phone,
-    address: data.address,
-    establishedYear: data.establishedYear,
-    description: data.description,
-    stateId: data.stateId,
-    cityId: data.cityId,
-    lastUpdated: data.lastUpdated,
-  },
-});
+     if (existing) {
+  await prisma.college.update({
+    where: {
+      id: existing.id,
+    },
+    data: {
+      name: data.name,
+      slug: data.slug,
+      logo: data.logo,
+      collegeType: data.collegeType,
+      institutionKind: data.institutionKind,
+      aisheCode: data.aisheCode,
+      website: data.website,
+      email: data.email,
+      phone: data.phone,
+      address: data.address,
+      establishedYear: data.establishedYear,
+      description: data.description,
+      stateId: data.stateId,
+      cityId: data.cityId,
+      lastUpdated: data.lastUpdated,
+    },
+  });
 
-        updated += 1;
-      } else {
+  updated += 1;
+} else {
        const createdCollege = await prisma.college.create({
   data: {
     name: data.name,
     slug: data.slug,
     logo: data.logo,
     collegeType: data.collegeType,
+    institutionKind: data.institutionKind,
     aisheCode: data.aisheCode,
     website: data.website,
     email: data.email,

@@ -11,7 +11,11 @@ import {
   Plus,
   Save,
   Trash2,
+  Upload,
+  Loader2,
 } from "lucide-react";
+
+import { uploadCollegeImage } from "./uploadCollegeImage";
 import InfrastructureEditor from "./InfrastructureEditor";
 import CollegePhotosEditor from "./CollegePhotosEditor";
 import { CollegeType } from "@/src/generated/prisma/enums";
@@ -220,6 +224,51 @@ export default function CollegeEditForm({
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+
+  const [uploadingFields, setUploadingFields] = useState<
+  Record<string, boolean>
+>({});
+
+async function handleImageUpload(
+  field: "logo" | "coverImage" | "ogImage",
+  category: "college-logos" | "college-covers" | "college-seo",
+  file?: File,
+) {
+  if (!file) return;
+
+  try {
+    setUploadingFields((previous) => ({
+      ...previous,
+      [field]: true,
+    }));
+
+    setError("");
+    setSuccess("");
+
+    const url = await uploadCollegeImage(
+      file,
+      college.id,
+      category,
+    );
+
+    updateField(field, url);
+
+    setSuccess(
+      "Image uploaded successfully. Click Save Changes to store its URL.",
+    );
+  } catch (err) {
+    setError(
+      err instanceof Error
+        ? err.message
+        : "Image upload failed.",
+    );
+  } finally {
+    setUploadingFields((previous) => ({
+      ...previous,
+      [field]: false,
+    }));
+  }
+}
 
   const selectedState = useMemo(
     () =>
@@ -563,9 +612,10 @@ export default function CollegeEditForm({
       setLoading(false);
     }
   }
-
-  const isSaving =
-    loading || navigationLoading;
+const isSaving =
+  loading ||
+  navigationLoading ||
+  Object.values(uploadingFields).some(Boolean);
 
   return (
     <div className="min-h-screen bg-[#f7faf8]">
@@ -1009,62 +1059,141 @@ export default function CollegeEditForm({
             </div>
           </section>
 
-          {/* =================================================
-              MEDIA
-          ================================================= */}
+{/* =================================================
+    MEDIA
+================================================= */}
 
-          <section className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
-            <div className="border-b border-gray-100 px-5 py-5 sm:px-6">
-              <h2 className="text-lg font-bold text-gray-900">
-                Media
-              </h2>
+<section className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+  <div className="border-b border-gray-100 px-5 py-5 sm:px-6">
+    <h2 className="text-lg font-bold text-gray-900">
+      Media
+    </h2>
 
-              <p className="mt-1 text-sm text-gray-500">
-                College logo and cover image URLs.
-              </p>
-            </div>
+    <p className="mt-1 text-sm text-gray-500">
+      Upload your college logo and cover image directly to Cloudflare R2.
+    </p>
+  </div>
 
-            <div className="grid gap-5 p-5 sm:grid-cols-2 sm:p-6">
-              <div>
-                <label className="mb-2 block text-sm font-semibold text-gray-700">
-                  Logo URL
-                </label>
+  <div className="grid gap-6 p-5 sm:grid-cols-2 sm:p-6">
+    {/* College Logo */}
+    <div className="min-w-0">
+      <label className="mb-2 block text-sm font-semibold text-gray-700">
+        College Logo
+      </label>
 
-                <input
-                  type="text"
-                  value={form.logo}
-                  onChange={(event) =>
-                    updateField(
-                      "logo",
-                      event.target.value
-                    )
-                  }
-                  placeholder="https://..."
-                  className="h-11 w-full rounded-xl border border-gray-200 px-4 text-sm outline-none focus:border-[#15945c] focus:ring-4 focus:ring-[#15945c]/10"
-                />
-              </div>
+      {form.logo && (
+        <div className="mb-3 flex h-36 items-center justify-center overflow-hidden rounded-xl border border-gray-200 bg-gray-50 p-3">
+          <img
+            src={form.logo}
+            alt="College logo preview"
+            className="h-full max-w-full object-contain"
+          />
+        </div>
+      )}
 
-              <div>
-                <label className="mb-2 block text-sm font-semibold text-gray-700">
-                  Cover Image URL
-                </label>
+      <input
+        type="url"
+        value={form.logo}
+        onChange={(event) =>
+          updateField("logo", event.target.value)
+        }
+        placeholder="Paste an image URL or upload a file"
+        className="h-11 w-full rounded-xl border border-gray-200 px-4 text-sm outline-none focus:border-[#15945c] focus:ring-4 focus:ring-[#15945c]/10"
+      />
 
-                <input
-                  type="text"
-                  value={form.coverImage}
-                  onChange={(event) =>
-                    updateField(
-                      "coverImage",
-                      event.target.value
-                    )
-                  }
-                  placeholder="https://..."
-                  className="h-11 w-full rounded-xl border border-gray-200 px-4 text-sm outline-none focus:border-[#15945c] focus:ring-4 focus:ring-[#15945c]/10"
-                />
-              </div>
-            </div>
-          </section>
+      <label className="mt-3 inline-flex h-10 cursor-pointer items-center justify-center gap-2 rounded-xl border border-[#15945c]/30 bg-[#15945c]/5 px-4 text-sm font-semibold text-[#15945c] transition hover:bg-[#15945c]/10">
+        {uploadingFields.logo ? (
+          <Loader2 className="h-4 w-4 animate-spin" />
+        ) : (
+          <Upload className="h-4 w-4" />
+        )}
 
+        {uploadingFields.logo ? "Uploading..." : "Upload Logo"}
+
+        <input
+          type="file"
+          accept="image/jpeg,image/png,image/webp,image/avif"
+          className="hidden"
+          disabled={uploadingFields.logo}
+          onChange={(event) => {
+            const file = event.target.files?.[0];
+            event.target.value = "";
+
+            void handleImageUpload(
+              "logo",
+              "college-logos",
+              file,
+            );
+          }}
+        />
+      </label>
+
+      <p className="mt-2 text-xs text-gray-500">
+        JPG, PNG, WebP or AVIF. Maximum 5 MB.
+      </p>
+    </div>
+
+    {/* Cover Image */}
+    <div className="min-w-0">
+      <label className="mb-2 block text-sm font-semibold text-gray-700">
+        Cover Image
+      </label>
+
+      {form.coverImage && (
+        <div className="mb-3 aspect-video overflow-hidden rounded-xl border border-gray-200 bg-gray-50">
+          <img
+            src={form.coverImage}
+            alt="College cover preview"
+            className="h-full w-full object-cover"
+          />
+        </div>
+      )}
+
+      <input
+        type="url"
+        value={form.coverImage}
+        onChange={(event) =>
+          updateField("coverImage", event.target.value)
+        }
+        placeholder="Paste an image URL or upload a file"
+        className="h-11 w-full rounded-xl border border-gray-200 px-4 text-sm outline-none focus:border-[#15945c] focus:ring-4 focus:ring-[#15945c]/10"
+      />
+
+      <label className="mt-3 inline-flex h-10 cursor-pointer items-center justify-center gap-2 rounded-xl border border-[#15945c]/30 bg-[#15945c]/5 px-4 text-sm font-semibold text-[#15945c] transition hover:bg-[#15945c]/10">
+        {uploadingFields.coverImage ? (
+          <Loader2 className="h-4 w-4 animate-spin" />
+        ) : (
+          <Upload className="h-4 w-4" />
+        )}
+
+        {uploadingFields.coverImage
+          ? "Uploading..."
+          : "Upload Cover Image"}
+
+        <input
+          type="file"
+          accept="image/jpeg,image/png,image/webp,image/avif"
+          className="hidden"
+          disabled={uploadingFields.coverImage}
+          onChange={(event) => {
+            const file = event.target.files?.[0];
+            event.target.value = "";
+
+            void handleImageUpload(
+              "coverImage",
+              "college-covers",
+              file,
+            );
+          }}
+        />
+      </label>
+
+      <p className="mt-2 text-xs text-gray-500">
+        JPG, PNG, WebP or AVIF. Maximum 5 MB.
+      </p>
+    </div>
+  </div>
+</section>
           {/* =================================================
               COLLEGE NAVIGATION
           ================================================= */}
@@ -1547,26 +1676,66 @@ export default function CollegeEditForm({
                 />
               </div>
 
-              {/* OG Image */}
+{/* OG Image */}
 
-              <div>
-                <label className="mb-2 block text-sm font-semibold text-gray-700">
-                  OG Image
-                </label>
+<div>
+  <label className="mb-2 block text-sm font-semibold text-gray-700">
+    OG Image
+  </label>
 
-                <input
-                  type="text"
-                  value={form.ogImage}
-                  onChange={(event) =>
-                    updateField(
-                      "ogImage",
-                      event.target.value
-                    )
-                  }
-                  placeholder="https://..."
-                  className="h-11 w-full rounded-xl border border-gray-200 px-4 text-sm outline-none focus:border-[#15945c] focus:ring-4 focus:ring-[#15945c]/10"
-                />
-              </div>
+  {form.ogImage && (
+    <div className="mb-3 aspect-video overflow-hidden rounded-xl border border-gray-200 bg-gray-50">
+      <img
+        src={form.ogImage}
+        alt="Social sharing image preview"
+        className="h-full w-full object-cover"
+      />
+    </div>
+  )}
+
+  <input
+    type="url"
+    value={form.ogImage}
+    onChange={(event) =>
+      updateField("ogImage", event.target.value)
+    }
+    placeholder="Paste an image URL or upload a file"
+    className="h-11 w-full rounded-xl border border-gray-200 px-4 text-sm outline-none focus:border-[#15945c] focus:ring-4 focus:ring-[#15945c]/10"
+  />
+
+  <label className="mt-3 inline-flex h-10 cursor-pointer items-center justify-center gap-2 rounded-xl border border-[#15945c]/30 bg-[#15945c]/5 px-4 text-sm font-semibold text-[#15945c] transition hover:bg-[#15945c]/10">
+    {uploadingFields.ogImage ? (
+      <Loader2 className="h-4 w-4 animate-spin" />
+    ) : (
+      <Upload className="h-4 w-4" />
+    )}
+
+    {uploadingFields.ogImage
+      ? "Uploading..."
+      : "Upload SEO Image"}
+
+    <input
+      type="file"
+      accept="image/jpeg,image/png,image/webp,image/avif"
+      className="hidden"
+      disabled={uploadingFields.ogImage}
+      onChange={(event) => {
+        const file = event.target.files?.[0];
+        event.target.value = "";
+
+        void handleImageUpload(
+          "ogImage",
+          "college-seo",
+          file,
+        );
+      }}
+    />
+  </label>
+
+  <p className="mt-2 text-xs text-gray-500">
+    Used for social sharing previews. Maximum 5 MB.
+  </p>
+</div>
 
               {/* OG Description */}
 
