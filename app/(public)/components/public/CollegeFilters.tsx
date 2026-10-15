@@ -99,122 +99,102 @@ export default function CollegeFilters({
 
   return (
     <div className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm">
-      <form
-        onSubmit={handleSearch}
-        className="flex flex-col gap-3 lg:flex-row"
-      >
-        <div className="flex flex-1 items-center rounded-2xl border border-slate-200 bg-slate-50 px-4">
-          <Search className="h-5 w-5 shrink-0 text-slate-400" />
+    {/* Search */}
+<form onSubmit={handleSearch}>
+  <div className="relative">
+    <Search
+      size={17}
+      className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"
+    />
 
-          <input
-            type="text"
-            value={search}
-            onChange={(event) => setSearch(event.target.value)}
-            placeholder="Search colleges by name..."
-            className="w-full bg-transparent px-3 py-3.5 text-sm text-slate-900 outline-none placeholder:text-slate-400"
-          />
-        </div>
+    <input
+      type="search"
+      value={search}
+      onChange={(event) => setSearch(event.target.value)}
+      placeholder="Search colleges..."
+      aria-label="Search colleges"
+      className="h-10 w-full rounded-lg border border-slate-200 bg-white pl-10 pr-4 text-sm text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 sm:h-11"
+    />
+  </div>
+</form>
 
-        <button
-          type="submit"
-          className="inline-flex items-center justify-center gap-2 rounded-2xl bg-emerald-600 px-7 py-3.5 text-sm font-semibold text-white transition hover:bg-emerald-700"
-        >
-          <Search className="h-4 w-4" />
-          Search
-        </button>
-      </form>
+{/* Filters */}
+<div className="mt-3 grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center">
+  <select
+    value={currentStateId}
+    onChange={(event) => handleStateChange(event.target.value)}
+    aria-label="Filter by state"
+    className="h-10 min-w-0 rounded-lg border border-slate-200 bg-white px-3 text-xs font-medium text-slate-700 outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 sm:h-11 sm:min-w-[160px] sm:text-sm"
+  >
+    <option value="">All States</option>
 
-      <div className="mt-4 flex items-center gap-2 border-t border-slate-100 pt-4">
-        <SlidersHorizontal className="h-4 w-4 text-emerald-600" />
+    {states.map((state) => (
+      <option key={state.id} value={state.id}>
+        {state.name}
+      </option>
+    ))}
+  </select>
 
-        <span className="text-sm font-semibold text-slate-700">
-          Filters
-        </span>
+  <select
+    value={currentCityId}
+    onChange={(event) =>
+      updateFilters({ cityId: event.target.value })
+    }
+    disabled={!currentStateId}
+    aria-label="Filter by city"
+    className="h-10 min-w-0 rounded-lg border border-slate-200 bg-white px-3 text-xs font-medium text-slate-700 outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400 sm:h-11 sm:min-w-[150px] sm:text-sm"
+  >
+    <option value="">
+      {currentStateId ? "All Cities" : "Select State First"}
+    </option>
 
-        {hasFilters && (
-          <button
-            type="button"
-            onClick={clearFilters}
-            className="ml-auto inline-flex items-center gap-1 text-xs font-semibold text-rose-600 hover:text-rose-700"
-          >
-            <X className="h-3.5 w-3.5" />
-            Clear all
-          </button>
-        )}
-      </div>
+    {filteredCities.map((city) => (
+      <option key={city.id} value={city.id}>
+        {city.name}
+      </option>
+    ))}
+  </select>
 
-      <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        {/* State */}
-        <select
-          value={currentStateId}
-          onChange={(event) => handleStateChange(event.target.value)}
-          className="rounded-xl border border-slate-200 bg-white px-3 py-3 text-sm text-slate-700 outline-none transition focus:border-emerald-500"
-        >
-          <option value="">All States</option>
+  <select
+    value={currentCollegeType}
+    onChange={(event) =>
+      updateFilters({ collegeType: event.target.value })
+    }
+    aria-label="Filter by college type"
+    className="h-10 min-w-0 rounded-lg border border-slate-200 bg-white px-3 text-xs font-medium text-slate-700 outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 sm:h-11 sm:min-w-[170px] sm:text-sm"
+  >
+    <option value="">All College Types</option>
+    <option value="GOVERNMENT">Government</option>
+    <option value="PRIVATE">Private</option>
+    <option value="PUBLIC">Public</option>
+    <option value="DEEMED">Deemed</option>
+    <option value="AUTONOMOUS">Autonomous</option>
+  </select>
 
-          {states.map((state) => (
-            <option key={state.id} value={state.id}>
-              {state.name}
-            </option>
-          ))}
-        </select>
+  <select
+    value={currentVerified}
+    onChange={(event) =>
+      updateFilters({ verified: event.target.value })
+    }
+    aria-label="Filter by verification status"
+    className="h-10 min-w-0 rounded-lg border border-slate-200 bg-white px-3 text-xs font-medium text-slate-700 outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 sm:h-11 sm:min-w-[150px] sm:text-sm"
+  >
+    <option value="">All Colleges</option>
+    <option value="true">Verified Only</option>
+    <option value="false">Unverified</option>
+  </select>
 
-        {/* City */}
-        <select
-          value={currentCityId}
-          onChange={(event) =>
-            updateFilters({
-              cityId: event.target.value,
-            })
-          }
-          disabled={!currentStateId}
-          className="rounded-xl border border-slate-200 bg-white px-3 py-3 text-sm text-slate-700 outline-none transition focus:border-emerald-500 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
-        >
-          <option value="">
-            {currentStateId ? "All Cities" : "Select State First"}
-          </option>
-
-          {filteredCities.map((city) => (
-            <option key={city.id} value={city.id}>
-              {city.name}
-            </option>
-          ))}
-        </select>
-
-        {/* College Type */}
-        <select
-          value={currentCollegeType}
-          onChange={(event) =>
-            updateFilters({
-              collegeType: event.target.value,
-            })
-          }
-          className="rounded-xl border border-slate-200 bg-white px-3 py-3 text-sm text-slate-700 outline-none transition focus:border-emerald-500"
-        >
-          <option value="">All College Types</option>
-
-          {collegeTypes.map((type) => (
-            <option key={type.value} value={type.value}>
-              {type.label}
-            </option>
-          ))}
-        </select>
-
-        {/* Verification */}
-        <select
-          value={currentVerified}
-          onChange={(event) =>
-            updateFilters({
-              verified: event.target.value,
-            })
-          }
-          className="rounded-xl border border-slate-200 bg-white px-3 py-3 text-sm text-slate-700 outline-none transition focus:border-emerald-500"
-        >
-          <option value="">All Colleges</option>
-          <option value="true">Verified Only</option>
-          <option value="false">Unverified</option>
-        </select>
-      </div>
+  {hasFilters && (
+    <button
+      type="button"
+      onClick={clearFilters}
+      className="col-span-2 inline-flex h-9 items-center justify-center gap-1.5 rounded-lg px-2.5 text-xs font-semibold text-slate-500 transition hover:bg-red-50 hover:text-red-600 sm:col-span-1 sm:ml-auto"
+    >
+      <X size={14} />
+      Clear filters
+    </button>
+  )}
+</div>
     </div>
   );
 }

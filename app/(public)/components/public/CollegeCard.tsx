@@ -20,14 +20,15 @@ type CollegeCardProps = {
     logo: string | null;
     coverImage: string | null;
     collegeType: string;
+    institutionKind?: string | null;
     verified: boolean;
     establishedYear: number | null;
     state: {
       name: string;
     };
     city: {
-  name: string;
-} | null;
+      name: string;
+    } | null;
   };
 };
 
@@ -36,10 +37,16 @@ export default function CollegeCard({ college }: CollegeCardProps) {
     .slice(0, 2)
     .toUpperCase();
 
+  const isUniversity = college.institutionKind === "UNIVERSITY";
+
+  const detailUrl = isUniversity
+    ? `/universities/${college.slug}`
+    : `/colleges/${college.slug}`;
+
   return (
     <article className="group overflow-hidden rounded-2xl border border-slate-200 bg-white transition duration-300 hover:-translate-y-1 hover:border-emerald-200 hover:shadow-xl">
       {/* Cover */}
-      <Link href={`/colleges/${college.slug}`}>
+      <Link href={detailUrl}>
         <div className="relative h-40 overflow-hidden bg-gradient-to-br from-emerald-100 to-slate-100">
           {college.coverImage ? (
             <Image
@@ -85,7 +92,7 @@ export default function CollegeCard({ college }: CollegeCardProps) {
 
       {/* Content */}
       <div className="p-5 pt-8">
-        <Link href={`/colleges/${college.slug}`}>
+        <Link href={detailUrl}>
           <div className="flex items-start justify-between gap-3">
             <h3 className="line-clamp-2 text-lg font-bold text-slate-900 transition group-hover:text-emerald-700">
               {college.name}
@@ -96,10 +103,10 @@ export default function CollegeCard({ college }: CollegeCardProps) {
 
           <div className="mt-3 flex items-center gap-1.5 text-sm text-slate-500">
             <MapPin className="h-4 w-4 text-emerald-600" />
-           <span>
-  {college.city?.name ?? "City not available"},{" "}
-  {college.state?.name ?? "State not available"}
-</span>
+            <span>
+              {college.city?.name ?? "City not available"},{" "}
+              {college.state?.name ?? "State not available"}
+            </span>
           </div>
 
           <div className="mt-4 flex items-center justify-between border-t border-slate-100 pt-4">
@@ -117,16 +124,15 @@ export default function CollegeCard({ college }: CollegeCardProps) {
         </Link>
 
         {/* Compare */}
-       
-  <div className="px-5 pb-5">
-    <CompareCollegeButton
-      college={{
-        id: college.id,
-        name: college.name,
-        slug: college.slug,
-        logo: college.logo,
-      }}
-    />
+        <div className="px-5 pb-5">
+          <CompareCollegeButton
+            college={{
+              id: college.id,
+              name: college.name,
+              slug: college.slug,
+              logo: college.logo,
+            }}
+          />
         </div>
       </div>
     </article>

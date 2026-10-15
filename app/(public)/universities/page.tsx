@@ -1,8 +1,17 @@
 import Link from "next/link";
 import {
+  ArrowLeft,
   ArrowRight,
+  Award,
+  BookOpen,
+  Building2,
   CheckCircle2,
+  GraduationCap,
+  Landmark,
+  Library,
+  MapPin,
   SlidersHorizontal,
+  Sparkles,
 } from "lucide-react";
 
 import CollegeFilters from "../components/public/CollegeFilters";
@@ -124,99 +133,182 @@ getColleges({
 
   return (
     <main className="min-h-screen bg-slate-50">
-      {/* HERO */}
-      <section className="relative overflow-hidden bg-[#e8f7ef]">
-        <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-emerald-200/30 blur-3xl" />
+{/* =====================================================
+    HERO
+====================================================== */}
+<section className="relative overflow-hidden border-b border-emerald-100 bg-gradient-to-br from-emerald-50 via-white to-green-50">
+  {/* Background decoration */}
+  <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-emerald-100/50 blur-3xl" />
 
-        <div className="pointer-events-none absolute -bottom-32 left-1/3 h-72 w-72 rounded-full bg-white/70 blur-3xl" />
+  <div className="pointer-events-none absolute -bottom-32 left-1/3 h-72 w-72 rounded-full bg-green-100/40 blur-3xl" />
 
-        <div className="relative mx-auto max-w-7xl px-6 py-14 lg:px-8 lg:py-16">
-          <div className="max-w-3xl">
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white/70 px-3.5 py-1.5 text-sm font-semibold text-emerald-700 backdrop-blur">
-              <CheckCircle2 className="h-4 w-4" />
-              University Discovery
-            </div>
+  <div className="relative mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-9 lg:px-8 lg:py-10">
+    <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_300px] lg:gap-10">
+      {/* LEFT CONTENT */}
+      <div className="min-w-0 max-w-4xl">
+        {/* Label */}
+        <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-emerald-100 bg-white px-3 py-1.5 text-xs font-semibold text-emerald-700 shadow-sm sm:text-sm">
+          <Building2 size={15} />
+          University Discovery
+        </div>
 
-            <h1 className="text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">
-              Find the right university
-              <span className="block text-emerald-700">
-                for your future
-              </span>
-            </h1>
+        {/* Heading */}
+        <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+          Find the right university
+          <span className="block text-emerald-700">
+            for your future
+          </span>
+        </h1>
 
-            <p className="mt-5 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
-              Explore universities across India, compare
-              institutions, discover courses, and make
-              informed decisions about your education
-              with College Aadhar.
-            </p>
+        {/* Description */}
+        <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-600 sm:text-base sm:leading-7">
+          Explore universities across India, compare
+          institutions, discover courses, and make informed
+          decisions about your education with College Aadhar.
+        </p>
 
-            <div className="mt-7 flex flex-wrap items-center gap-4 text-sm text-slate-600">
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4 text-emerald-600" />
-                University information
-              </div>
+        {/* Trust indicators */}
+        <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-slate-600 sm:text-sm">
+          <div className="flex items-center gap-1.5">
+            <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-600" />
+            University information
+          </div>
 
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4 text-emerald-600" />
-                Course details
-              </div>
+          <div className="flex items-center gap-1.5">
+            <BookOpen className="h-4 w-4 shrink-0 text-emerald-600" />
+            Course details
+          </div>
 
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4 text-emerald-600" />
-                Compare universities
-              </div>
-            </div>
+          <div className="flex items-center gap-1.5">
+            <SlidersHorizontal className="h-4 w-4 shrink-0 text-emerald-600" />
+            Compare universities
           </div>
         </div>
-      </section>
 
+        {/* UNIVERSITY TYPE SHORTCUTS */}
+        <div className="mt-5 flex gap-2 overflow-x-auto pb-1">
+          {[
+            { label: "All Universities", value: "" },
+            { label: "Government", value: "GOVERNMENT" },
+            { label: "Private", value: "PRIVATE" },
+            { label: "Public", value: "PUBLIC" },
+            { label: "Deemed", value: "DEEMED" },
+            { label: "Autonomous", value: "AUTONOMOUS" },
+          ].map((type) => {
+            const isActive =
+              (params.collegeType ?? "") === type.value;
+
+            const query = new URLSearchParams();
+
+            if (search) query.set("search", search);
+            if (stateId) query.set("stateId", stateId);
+            if (cityId) query.set("cityId", cityId);
+
+            if (params.verified) {
+              query.set("verified", params.verified);
+            }
+
+            if (type.value) {
+              query.set("collegeType", type.value);
+            }
+
+            const queryString = query.toString();
+
+            const href = queryString
+              ? `/universities?${queryString}`
+              : "/universities";
+
+            return (
+              <Link
+                key={type.label}
+                href={href}
+                aria-current={isActive ? "page" : undefined}
+                className={[
+                  "shrink-0 rounded-full border px-3.5 py-1.5 text-xs font-medium transition-all duration-200 sm:px-4 sm:py-2 sm:text-sm",
+                  isActive
+                    ? "border-emerald-600 bg-emerald-600 text-white shadow-sm shadow-emerald-200"
+                    : "border-slate-200 bg-white text-slate-700 hover:border-emerald-300 hover:bg-emerald-50 hover:text-emerald-700",
+                ].join(" ")}
+              >
+                {type.label}
+              </Link>
+            );
+          })}
+        </div>
+
+        {/* UNIVERSITY FILTERS */}
+        <CollegeFilters
+          states={locations.states}
+          cities={locations.cities}
+        />
+      </div>
+
+      {/* RIGHT ILLUSTRATION — DESKTOP */}
+      <div className="relative hidden h-[250px] lg:block">
+        {/* Soft glow */}
+        <div className="absolute left-1/2 top-1/2 h-52 w-52 -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-100/60 blur-3xl" />
+
+        {/* Decorative rings */}
+        <div className="absolute left-1/2 top-1/2 h-52 w-52 -translate-x-1/2 -translate-y-1/2 rounded-full border border-emerald-200/70" />
+
+        <div className="absolute left-1/2 top-1/2 h-40 w-40 -translate-x-1/2 -translate-y-1/2 rounded-full border border-emerald-100" />
+
+        {/* Main university icon */}
+        <div className="absolute left-1/2 top-1/2 flex h-32 w-32 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[2rem] border border-emerald-200 bg-white shadow-xl shadow-emerald-900/10">
+          <div className="flex h-24 w-24 items-center justify-center rounded-[1.5rem] bg-emerald-50">
+            <Landmark
+              size={56}
+              strokeWidth={1.5}
+              className="text-emerald-600"
+            />
+          </div>
+        </div>
+
+        {/* Location */}
+        <div className="absolute left-5 top-10 flex h-12 w-12 rotate-[-10deg] items-center justify-center rounded-2xl border border-slate-200 bg-white shadow-md">
+          <MapPin
+            size={23}
+            strokeWidth={1.8}
+            className="text-emerald-600"
+          />
+        </div>
+
+        {/* Library */}
+        <div className="absolute bottom-8 right-5 flex h-12 w-12 rotate-[8deg] items-center justify-center rounded-2xl border border-slate-200 bg-white shadow-md">
+          <Library
+            size={22}
+            strokeWidth={1.8}
+            className="text-emerald-600"
+          />
+        </div>
+
+        {/* Award */}
+        <div className="absolute right-2 top-7 flex h-11 w-11 rotate-[8deg] items-center justify-center rounded-2xl border border-emerald-100 bg-white shadow-md">
+          <Award
+            size={21}
+            strokeWidth={1.8}
+            className="text-emerald-600"
+          />
+        </div>
+
+        {/* Sparkles */}
+        <div className="absolute bottom-10 left-16 flex h-9 w-9 items-center justify-center rounded-full bg-emerald-600 text-white shadow-md">
+          <Sparkles size={17} />
+        </div>
+
+        {/* Decorative dots */}
+        <span className="absolute left-1/2 top-2 h-2 w-2 rounded-full bg-emerald-400" />
+
+        <span className="absolute bottom-3 right-1/3 h-1.5 w-1.5 rounded-full bg-emerald-300" />
+
+        <span className="absolute left-8 top-1/2 h-1.5 w-1.5 rounded-full bg-green-300" />
+      </div>
+    </div>
+  </div>
+</section>
       {/* MAIN CONTENT */}
       <section className="mx-auto max-w-7xl px-6 py-10 lg:px-8 lg:py-12">
-        {/* FILTERS */}
-        <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
-          <div className="mb-5 flex items-center justify-between gap-4">
-            <div>
-              <div className="flex items-center gap-2">
-                <SlidersHorizontal className="h-5 w-5 text-emerald-600" />
 
-                <h2 className="text-lg font-bold text-slate-900">
-                  Find universities
-                </h2>
-              </div>
-
-              <p className="mt-1 text-sm text-slate-500">
-                Search and filter universities based on
-                your preferences.
-              </p>
-            </div>
-
-            {hasActiveFilters && (
-              <Link
-                href="/universities"
-                className="hidden text-sm font-semibold text-emerald-700 transition hover:text-emerald-800 sm:block"
-              >
-                Clear filters
-              </Link>
-            )}
-          </div>
-
-          <CollegeFilters
-            states={locations.states}
-            cities={locations.cities}
-          />
-
-          {hasActiveFilters && (
-            <div className="mt-4 sm:hidden">
-              <Link
-                href="/universities"
-                className="text-sm font-semibold text-emerald-700"
-              >
-                Clear all filters
-              </Link>
-            </div>
-          )}
-        </div>
 
         {/* RESULTS HEADER */}
         <div className="mb-7 mt-12 flex flex-col gap-4 border-b border-slate-200 pb-6 sm:flex-row sm:items-end sm:justify-between">

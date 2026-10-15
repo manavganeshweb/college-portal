@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 import Breadcrumbs from "../shared/Breadcrumbs";
 import { useState } from "react";
-
+import { usePathname } from "next/navigation";
 type CollegeHeroProps = {
   college: {
     id: string;
@@ -54,6 +54,18 @@ export default function CollegeHero({
 
   const reviewCount = college.reviews.length;
   const [isImageOpen, setIsImageOpen] = useState(false);
+  const pathname = usePathname();
+
+const isUniversity = pathname.startsWith("/universities/");
+
+const breadcrumbItems = [
+  { label: "Home", href: "/" },
+  {
+    label: isUniversity ? "Universities" : "Colleges",
+    href: isUniversity ? "/universities" : "/colleges",
+  },
+  { label: college.name },
+];
 
   return (
     <section className="relative overflow-hidden bg-[#087a49] text-white">
@@ -108,11 +120,7 @@ className="absolute bottom-4 right-4 z-20 inline-flex items-center justify-cente
         <div className="mb-6 overflow-x-auto">
    <Breadcrumbs
   variant="hero"
-  items={[
-    { label: "Home", href: "/" },
-    { label: "Colleges", href: "/colleges" },
-    { label: pageTitle },
-  ]}
+  items={breadcrumbItems}
 />
         </div>
 

@@ -23,6 +23,10 @@ const navigation = [
     label: "Colleges",
     href: "/colleges",
   },
+    {
+    label: "Universities",
+    href: "/universities",
+  },
   {
     label: "Courses",
     href: "/courses",
@@ -31,6 +35,7 @@ const navigation = [
     label: "Exams",
     href: "/exams",
   },
+
   {
     label: "Study Abroad",
     href: "/study-abroad",

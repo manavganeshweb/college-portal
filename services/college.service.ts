@@ -115,6 +115,7 @@ export async function getColleges(filters: CollegeFilters = {}) {
         coverImage: true,
         description: true,
         establishedYear: true,
+        institutionKind: true,
         collegeType: true,
         website: true,
         verified: true,
@@ -201,6 +202,7 @@ export async function getColleges(filters: CollegeFilters = {}) {
       coverImage: college.coverImage,
       description: college.description,
       establishedYear: college.establishedYear,
+      institutionKind: college.institutionKind,
       collegeType: college.collegeType,
       website: college.website,
       verified: college.verified,
@@ -360,6 +362,7 @@ export async function getCollegeBySlug(slug: string) {
       coverImage: true,
       description: true,
       establishedYear: true,
+      institutionKind: true,
       collegeType: true,
       website: true,
       email: true,
@@ -620,7 +623,7 @@ photos: {
   },
 },
 
-  questions: {
+questions: {
   where: {
     status: "PUBLISHED",
   },
@@ -632,10 +635,8 @@ photos: {
     question: true,
     slug: true,
     askerName: true,
-    askerEmail: true,
     status: true,
     createdAt: true,
-
     answers: {
       where: {
         status: "PUBLISHED",

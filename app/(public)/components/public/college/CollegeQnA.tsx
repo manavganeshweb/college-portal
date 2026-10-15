@@ -110,25 +110,7 @@ export default function CollegeQnA({
               </div>
             </section>
 
-            {/* Ask Question */}
-            <section className="rounded-xl border border-[#15945c]/20 bg-[#15945c]/5 p-5">
-              <div className="flex items-start gap-3">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white">
-                  <MessageCircleQuestion className="h-5 w-5 text-[#15945c]" />
-                </div>
-
-                <div>
-                  <h3 className="font-semibold text-slate-900">
-                    Have a question about this college?
-                  </h3>
-
-                  <p className="mt-1 text-sm leading-6 text-slate-600">
-                    Ask a question and get useful information from
-                    the College Aadhar community.
-                  </p>
-                </div>
-              </div>
-            </section>
+           
           </>
         )}
       </div>

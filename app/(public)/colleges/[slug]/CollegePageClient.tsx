@@ -232,12 +232,13 @@ export default function CollegePageClient({
             )}
 
             {/* Q&A */}
-            {activeSection === "qna" && (
-              <CollegeQnA
-                collegeName={college.name}
-                questions={college.questions}
-              />
-            )}
+         {/* COLLEGE Q&A — DISPLAY AT THE BOTTOM OF EVERY SECTION */}
+<div className="mt-8">
+  <CollegeQnA
+    collegeName={college.name}
+    questions={college.questions}
+  />
+</div>
           </main>
 
           {/* PERSISTENT SIDEBAR */}

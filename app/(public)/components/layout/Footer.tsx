@@ -38,10 +38,10 @@ const columns = [
       ["News", "/news"],
       ["Q&A", "/qna"],
       ["Counselling", "/counselling"],
+      ["About Us", "/about"],
     ],
   },
 ];
-
 const socialLinks = [
   {
     label: "Facebook",
