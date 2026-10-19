@@ -38,10 +38,10 @@ export default function ExpertCounsellingCard() {
 
           <Link
             href="/qna"
-            className="mt-4 inline-flex items-center gap-2 rounded-lg bg-emerald-700 px-4 py-2.5 text-[11px] font-semibold text-white shadow-sm transition hover:bg-emerald-800"
+            className="mt-4 inline-flex items-center gap-1.5 rounded-lg bg-emerald-700 px-3 py-2 text-[11px] font-semibold text-white shadow-sm transition hover:bg-emerald-800"
           >
-            Book a Counselling Session
-            <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+            Book Counselling
+            <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
           </Link>
         </div>
 
@@ -56,7 +56,7 @@ export default function ExpertCounsellingCard() {
               LEFT PERSON — STUDENT
           ================================================= */}
           <motion.div
-            className="absolute bottom-[8px] left-[22px] h-[125px] w-[90px]"
+            className="absolute bottom-[8px] left-[25px] h-[125px] w-[90px]"
             initial={{ y: 4 }}
             animate={{ y: [4, 0, 4] }}
             transition={{

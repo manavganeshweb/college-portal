@@ -184,7 +184,9 @@ export default function CompareBar() {
 
             {canCompare ? (
               <Link
-                href="/compare"
+               href={`/compare/colleges?ids=${colleges
+    .map((college) => college.id)
+    .join(",")}`}
                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-600 px-5 py-2.5 text-sm font-bold text-white shadow-sm transition hover:bg-emerald-700"
               >
                 <Check className="h-4 w-4" />
