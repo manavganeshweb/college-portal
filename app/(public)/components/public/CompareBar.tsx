@@ -78,8 +78,8 @@ export default function CompareBar() {
     return null;
   }
 
-  const remaining = 3 - colleges.length;
-  const canCompare = colleges.length >= 3;
+  const remaining = 2 - colleges.length;
+  const canCompare = colleges.length >= 2;
 
   return (
     <div className="fixed inset-x-0 bottom-0 z-50 border-t border-slate-200 bg-white/95 shadow-[0_-10px_40px_rgba(15,23,42,0.12)] backdrop-blur-xl">
@@ -161,7 +161,7 @@ export default function CompareBar() {
 
             {/* Empty slots */}
             {Array.from({
-              length: Math.max(0, 3 - colleges.length),
+              length: Math.max(0, 2 - colleges.length),
             }).map((_, index) => (
               <div
                 key={`empty-${index}`}

@@ -5,10 +5,13 @@ import {
   CheckCircle2,
   ExternalLink,
   MapPin,
-  Search,
   ShieldCheck,
+    ArrowUpRight,
+  Building2,
+  Sparkles,
   Trophy,
 } from "lucide-react";
+
 import CompareCollegeButton from "../components/public/college/CompareCollegeButton";
 import {
   getPublicRankingFilters,
@@ -16,6 +19,7 @@ import {
 } from "@/services/ranking.service";
 import { GraduationCap } from "lucide-react";
 import { getColleges } from "@/services/college.service";
+import CollegeFilterBar from "./CollegeFilterBar"
 
 type RankingsPageProps = {
   searchParams: Promise<{
@@ -23,19 +27,30 @@ type RankingsPageProps = {
     year?: string;
     rankingBody?: string;
     category?: string;
+    rankingCategory?: string;
+    stream?: string | string[];
+    programType?: string | string[];
+    collegeType?: string | string[];
+    universityType?: string | string[];
+    courseType?: string | string[];
+    duration?: string | string[];
+    fee?: string | string[];
+    degree?: string | string[];
+    state?: string | string[];
+    city?: string | string[];
+    course?: string | string[];
+    page?: string;
   }>;
 };
 
+
+
+
 function formatScore(score: unknown) {
-  if (score === null || score === undefined) {
-    return null;
-  }
+  if (score === null || score === undefined) return null;
 
   const numericScore = Number(score);
-
-  if (!Number.isFinite(numericScore)) {
-    return null;
-  }
+  if (!Number.isFinite(numericScore)) return null;
 
   return Number.isInteger(numericScore)
     ? numericScore.toString()
@@ -46,41 +61,37 @@ function getRankLabel(rank: number) {
   if (rank === 1) return "1st";
   if (rank === 2) return "2nd";
   if (rank === 3) return "3rd";
-
   return `${rank}th`;
 }
 
 function getRankStyle(rank: number) {
   if (rank === 1) {
     return {
-      wrapper:
-        "border-amber-200 bg-amber-50 text-amber-700",
+      wrapper: "border-amber-200 bg-amber-50 text-amber-700",
       icon: "text-amber-500",
     };
   }
 
   if (rank === 2) {
     return {
-      wrapper:
-        "border-slate-200 bg-slate-50 text-slate-600",
+      wrapper: "border-slate-200 bg-slate-50 text-slate-600",
       icon: "text-slate-400",
     };
   }
 
   if (rank === 3) {
     return {
-      wrapper:
-        "border-orange-200 bg-orange-50 text-orange-700",
+      wrapper: "border-orange-200 bg-orange-50 text-orange-700",
       icon: "text-orange-500",
     };
   }
 
   return {
-    wrapper:
-      "border-gray-200 bg-white text-gray-700",
+    wrapper: "border-gray-200 bg-white text-gray-700",
     icon: "text-[#15945c]",
   };
 }
+
 
 function buildFilterUrl(
   params: {
@@ -124,47 +135,87 @@ export const metadata = {
 export default async function RankingsPage({
   searchParams,
 }: RankingsPageProps) {
-  const params = await searchParams;
+ const params = await searchParams;
 
-  const search = params.search?.trim() || "";
-  const year = params.year
-    ? Number(params.year)
-    : undefined;
+const hasCollegeFilters = Boolean(
+  params.stream ||
+    params.programType ||
+    params.collegeType ||
+    params.universityType ||
+    params.courseType ||
+    params.category ||
+    params.duration ||
+    params.fee ||
+    params.degree ||
+    params.state ||
+    params.city ||
+    params.course,
+);
 
-  const rankingBody =
-    params.rankingBody?.trim() || "";
+const search = params.search?.trim() || "";
+const year = params.year ? Number(params.year) : undefined;
+const rankingBody = params.rankingBody?.trim() || "";
+const rankingCategory = params.rankingCategory?.trim() || "";
 
-  const category =
-    params.category?.trim() || "";
+const validYear =
+  year !== undefined && Number.isFinite(year) ? year : undefined;
+
 const [
   rankings,
   filterOptions,
-  collegeResult,
+  filteredCollegeResult,
+  firstCollegePage,
 ] = await Promise.all([
   getPublicRankings({
     search,
-    year:
-      year && Number.isFinite(year)
-        ? year
-        : undefined,
+    year: validYear,
     rankingBody: rankingBody || undefined,
-    category: category || undefined,
+    category: rankingCategory || undefined,
   }),
 
   getPublicRankingFilters(),
 
-  getColleges({
-    limit: 200,
-  }),
+  hasCollegeFilters
+    ? getColleges({
+        limit: 499,
+        search: search || undefined,
+        state: params.state,
+        city: params.city,
+        collegeType: params.collegeType,
+        institutionKind: params.universityType as
+          | "UNIVERSITY"
+          | "COLLEGE"
+          | "OTHER"
+          | undefined,
+        course: params.course,
+        stream: params.stream,
+        programType: params.programType,
+        courseType: params.courseType,
+        category: params.category,
+        duration: params.duration,
+        fee: params.fee,
+        degree: params.degree,
+      })
+    : Promise.resolve(null),
+
+  getColleges({ page: 1, limit: 499 }),
 ]);
 
-// Data for the Explore All Colleges table.
-const colleges = collegeResult.data;
+const filteredColleges = filteredCollegeResult?.data ?? [];
+const allColleges = firstCollegePage.data;
 
-const selectedYear =
-  year && filterOptions.years.includes(year)
-    ? String(year)
-    : "";
+const selectedYear = validYear ? String(validYear) : "";
+  
+  const remainingPages = Math.max(
+    0,
+    Math.ceil(filteredCollegeResult?.pagination.total ?? 0 / 50) - 1,
+  );
+
+  const remainingCollegeResults = await Promise.all(
+    Array.from({ length: remainingPages }, (_, index) =>
+      getColleges({ page: index + 2, limit: 499, ...params } as any),
+    ),
+  );
 
 
   return (
@@ -384,432 +435,602 @@ const selectedYear =
     </div>
   </div>
 </section>
-
-      {/* FILTERS */}
-      <section className="border-b border-gray-100 bg-white">
-        <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 lg:px-8">
-          <form
-            method="GET"
-            action="/rankings"
-            className="grid gap-3 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr_auto]"
-          >
-            {/* SEARCH */}
-            <div className="relative">
-              <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-
-              <input
-                type="search"
-                name="search"
-                defaultValue={search}
-                placeholder="Search college..."
-                className="h-11 w-full rounded-xl border border-gray-200 bg-white pl-10 pr-4 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-[#15945c] focus:ring-2 focus:ring-[#15945c]/10"
-              />
-            </div>
-
-            {/* RANKING BODY */}
-            <select
-              name="rankingBody"
-              defaultValue={rankingBody}
-              className="h-11 rounded-xl border border-gray-200 bg-white px-3 text-sm text-gray-700 outline-none transition focus:border-[#15945c] focus:ring-2 focus:ring-[#15945c]/10"
-            >
-              <option value="">
-                All Ranking Bodies
-              </option>
-
-              {filterOptions.rankingBodies.map(
-                (body) => (
-                  <option key={body} value={body}>
-                    {body}
-                  </option>
-                ),
-              )}
-            </select>
-
-            {/* YEAR */}
-            <select
-              name="year"
-              defaultValue={selectedYear}
-              className="h-11 rounded-xl border border-gray-200 bg-white px-3 text-sm text-gray-700 outline-none transition focus:border-[#15945c] focus:ring-2 focus:ring-[#15945c]/10"
-            >
-              <option value="">All Years</option>
-
-              {filterOptions.years.map((item) => (
-                <option
-                  key={item}
-                  value={item}
-                >
-                  {item}
-                </option>
-              ))}
-            </select>
-
-            {/* CATEGORY */}
-            <select
-              name="category"
-              defaultValue={category}
-              className="h-11 rounded-xl border border-gray-200 bg-white px-3 text-sm text-gray-700 outline-none transition focus:border-[#15945c] focus:ring-2 focus:ring-[#15945c]/10"
-            >
-              <option value="">
-                All Categories
-              </option>
-
-              {filterOptions.categories.map(
-                (item) => (
-                  <option key={item} value={item}>
-                    {item}
-                  </option>
-                ),
-              )}
-            </select>
-
-            <button
-              type="submit"
-              className="h-11 rounded-xl bg-[#15945c] px-5 text-sm font-semibold text-white transition hover:bg-[#117b4c]"
-            >
-              Search
-            </button>
-          </form>
-
-          {(search ||
-            rankingBody ||
-            category ||
-            selectedYear) && (
-            <div className="mt-3">
-              <Link
-                href="/rankings"
-                className="text-sm font-medium text-[#15945c] hover:underline"
-              >
-                Clear all filters
-              </Link>
-            </div>
-          )}
-        </div>
-      </section>
+<CollegeFilterBar />
 
       {/* CONTENT */}
-{rankings.length === 0 ? (
-  <div className="rounded-2xl border border-dashed border-gray-300 bg-white px-6 py-16 text-center">
-    <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-gray-100">
-      <Award className="h-7 w-7 text-gray-400" />
+{/* RANKING TABLE: DEFAULT VIEW */}
+{hasCollegeFilters && (
+<section
+  id="ranking-results"
+  className="mx-auto mt-8 max-w-[1600px] px-4 pb-12 sm:px-6 lg:px-8"
+>
+  <div className="overflow-hidden border border-gray-200 bg-white">
+    {/* Results toolbar */}
+    <div className="flex flex-wrap items-center justify-between gap-4 border-b border-gray-200 px-5 py-5">
+      <div>
+        <h2 className="text-xl font-bold text-[#333] sm:text-2xl">
+Found {filteredCollegeResult?.pagination.total ?? 0} Colleges
+        </h2>
+        <p className="mt-1 text-sm text-gray-500">
+          Colleges matching your selected filters
+        </p>
+      </div>
+
+      <Link
+        href="/rankings"
+        className="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition hover:border-[#15945c] hover:text-[#15945c]"
+      >
+        Clear filters
+      </Link>
     </div>
 
-    <h3 className="mt-5 text-lg font-semibold text-gray-900">
-      No rankings found
-    </h3>
-
-    <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-gray-500">
-      We couldn't find published rankings matching
-      your selected filters. Try changing your search
-      or removing some filters.
-    </p>
-
-    <Link
-      href="/rankings"
-      className="mt-6 inline-flex items-center gap-2 rounded-xl bg-[#15945c] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#117b4c]"
-    >
-      View all rankings
-      <ArrowRight className="h-4 w-4" />
-    </Link>
-  </div>
-) : (
-<div
-  className="overflow-hidden  p-8 border-gray-200 bg-white"
-  style={{
-    fontFamily: "Roboto, sans-serif",
-    fontSize: "0.875rem",
-    fontWeight: 400,
-    lineHeight: 1.3,
-    color: "#333",
-  }}
->
-    {/* TABLE HEADER - DESKTOP */}
-    <div className="hidden border-b border-gray-200 bg-green-50 lg:grid lg:grid-cols-[minmax(300px,1.8fr)_minmax(150px,0.8fr)_minmax(140px,0.8fr)_minmax(100px,0.55fr)_minmax(100px,0.55fr)]">
-      <div className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-500">
-        College Information
+    {filteredColleges.length === 0 ? (
+      <div className="px-6 py-16 text-center">
+        <GraduationCap className="mx-auto h-12 w-12 text-gray-400" />
+        <h3 className="mt-3 text-lg font-semibold text-gray-900">
+          No matching institutions found
+        </h3>
+        <p className="mt-2 text-sm text-gray-500">
+          Try removing a filter or selecting different options.
+        </p>
+        <Link
+          href="/rankings"
+          className="mt-5 inline-flex rounded-lg bg-[#15945c] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#117a4b]"
+        >
+          Clear filters
+        </Link>
       </div>
+    ) : (
+      <div className="overflow-x-auto">
+        <table
+          className="w-full min-w-[1450px] border-collapse text-left"
+          style={{
+            fontFamily: "Roboto, sans-serif",
+            fontSize: "14px",
+            lineHeight: 1.4,
+            color: "#333",
+          }}
+        >
+          <thead>
+            <tr className="bg-[#5ea787] text-white">
+              <th className="w-[105px] border border-white/40 px-4 py-4 text-base font-bold">
+                CD Rank
+              </th>
+              <th className="w-[545px] border border-white/40 px-4 py-4 text-base font-bold">
+                Colleges
+              </th>
+              <th className="w-[240px] border border-white/40 px-4 py-4 text-base font-bold">
+                Course Fees
+              </th>
+              <th className="w-[240px] border border-white/40 px-4 py-4 text-base font-bold">
+                Placement
+              </th>
+              <th className="w-[200px] border border-white/40 px-4 py-4 text-base font-bold">
+                User Reviews
+              </th>
+              <th className="w-[240px] border border-white/40 px-4 py-4 text-base font-bold">
+                Ranking
+              </th>
+            </tr>
+          </thead>
 
-      <div className="px-4 py-4 text-xs font-semibold uppercase tracking-wide text-gray-500">
-        Ranking Body
-      </div>
-
-      <div className="px-4 py-4 text-xs font-semibold uppercase tracking-wide text-gray-500">
-        Category
-      </div>
-
-      <div className="px-4 py-4 text-xs font-semibold uppercase tracking-wide text-gray-500">
-        Score
-      </div>
-
-      <div className="px-4 py-4 text-xs font-semibold uppercase tracking-wide text-gray-500">
-        Year
-      </div>
-    </div>
-
-    {/* TABLE ROWS */}
-    {rankings.map((ranking) => {
-      const rankStyle = getRankStyle(ranking.rank);
-
-      const score = formatScore(ranking.score);
-
-      return (
-      <article
-  key={ranking.id}
-  className="group border-b border-gray-200 last:border-b-0 transition-colors"
-  style={{
-    backgroundColor:
-      rankings.indexOf(ranking) % 2 === 0
-        ? "#fafafa"
-        : "#ffffff",
-  }}
->
-          <div className="grid gap-4 p-4 sm:p-5 lg:grid-cols-[minmax(300px,1.8fr)_minmax(150px,0.8fr)_minmax(140px,0.8fr)_minmax(100px,0.55fr)_minmax(100px,0.55fr)] lg:items-center lg:gap-0 lg:p-0">
-            {/* COLLEGE INFORMATION */}
-            <div className="min-w-0 lg:px-5 lg:py-5">
-              <div className="flex items-start gap-3">
-                {/* RANK */}
-                <div
-                  className={`flex h-11 w-11 shrink-0 flex-col items-center justify-center rounded-lg border ${rankStyle.wrapper}`}
-                  title={`Rank ${ranking.rank}`}
-                >
-                  <span className="text-[10px] font-medium uppercase tracking-wide opacity-70">
-                    Rank
+          <tbody>
+            {filteredColleges.map((college, index) => (
+              <tr
+                key={college.id}
+                className="align-top transition-colors hover:bg-[#f0f9f6]"
+                style={{
+                  backgroundColor: index % 2 === 0 ? "#ffffff" : "#fafafa",
+                }}
+              >
+                {/* Rank */}
+                <td className="border border-[#dedede] px-4 py-4 align-top">
+                  <span className="text-xl font-semibold text-[#222]">
+                    #{index + 1}
                   </span>
+                </td>
 
-                  <span className="text-sm font-bold leading-4">
-                    #{ranking.rank}
-                  </span>
-                </div>
-
-                {/* COLLEGE LOGO */}
-                <Link
-                  href={`/colleges/${ranking.college.slug}`}
-                  className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-gray-200 bg-white p-1.5"
-                  aria-label={`View ${ranking.college.name}`}
-                >
-                  {ranking.college.logo ? (
-                    <img
-                      src={ranking.college.logo}
-                      alt={`${ranking.college.name} logo`}
-                      className="h-full w-full object-contain"
-                    />
-                  ) : (
-                    <Award className="h-6 w-6 text-gray-400" />
-                  )}
-                </Link>
-
-                {/* COLLEGE NAME AND LOCATION */}
-                <div className="min-w-0 flex-1">
-                  <Link
-                    href={`/colleges/${ranking.college.slug}`}
-                    className="inline-flex max-w-full items-start gap-1.5 text-sm font-bold leading-5 text-gray-900 transition hover:text-[#15945c] sm:text-base"
-                  >
-                    <span className="line-clamp-2">
-                      {ranking.college.name}
-                    </span>
-
-                    {ranking.college.verified && (
-                      <CheckCircle2
-                        className="mt-0.5 h-4 w-4 shrink-0 text-[#15945c]"
-                        aria-label="Verified college"
-                      />
-                    )}
-                  </Link>
-
-                  <div className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-gray-500">
-                    <span className="inline-flex items-center gap-1">
-                      <MapPin className="h-3.5 w-3.5 shrink-0" />
-
-                      <span>
-                        {ranking.college.city?.name ??
-                          "City not available"}
-                        ,{" "}
-                        {ranking.college.city?.state.name ??
-                          "State not available"}
-                      </span>
-                    </span>
-                  </div>
-
-                  {/* MOBILE RANKING DETAILS */}
-                  <div className="mt-3 flex flex-wrap gap-2 lg:hidden">
-                    <span
-                      className={`inline-flex items-center rounded-md border px-2 py-1 text-xs font-medium ${rankStyle.wrapper}`}
-                    >
-                      <Trophy className="mr-1 h-3.5 w-3.5" />
-
-                      {getRankLabel(ranking.rank)}
-                    </span>
-
-                    <span className="inline-flex items-center rounded-md bg-gray-100 px-2 py-1 text-xs font-medium text-gray-600">
-                      {ranking.year}
-                    </span>
-
-                    {score !== null && (
-                      <span className="inline-flex items-center rounded-md bg-[#15945c]/10 px-2 py-1 text-xs font-semibold text-[#15945c]">
-                        Score: {score}
-                      </span>
-                    )}
-                  </div>
-                <div className="mt-3 flex flex-row flex-wrap gap-2 ">
-                    <CompareCollegeButton college={ranking.college} />
+                {/* College details and actions */}
+                <td className="border border-[#dedede] px-4 py-4 align-top">
+                  <div className="flex items-start gap-3">
                     <Link
-                    href={`/colleges/${ranking.college.slug}`}
-                    className="inline-flex items-center gap-1.5  px-3 py-2 text-lg font-semibold text-green-500 transition hover:border-[#15945c]/30 hover:text-[#15945c]"
+                      href={`/colleges/${college.slug}`}
+                      className="flex h-[54px] w-[54px] shrink-0 items-center justify-center border border-gray-100 bg-white p-1"
+                      aria-label={`View ${college.name}`}
                     >
-                    Apply Now <ArrowRight className="h-3.5 w-3.5" />
+                      {college.logo ? (
+                        <img
+                          src={college.logo}
+                          alt={`${college.name} logo`}
+                          className="h-full w-full object-contain"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <GraduationCap className="h-8 w-8 text-[#15945c]" />
+                      )}
                     </Link>
-                   
+
+                    <div className="min-w-0 flex-1">
+                      <Link
+                        href={`/colleges/${college.slug}`}
+                        className="text-lg font-medium leading-6 text-[#32b5e8] hover:text-[#15945c] hover:underline"
+                      >
+                        {college.name}
+                      </Link>
+
+                      <p className="mt-1 text-[13px] text-[#666]">
+                        {[college.city?.name, college.state?.name]
+                          .filter(Boolean)
+                          .join(", ") || "Location unavailable"}
+                        <span className="mx-2 text-gray-400">|</span>
+                        {college.collegeType?.replaceAll("_", " ") ||
+                          college.institutionKind?.replaceAll("_", " ") ||
+                          "Institution"}
+                      </p>
+
+                      <p className="mt-1 text-xs text-gray-500">
+                        {college.institutionKind
+                          ?.replaceAll("_", " ")
+                          .toUpperCase() || "INSTITUTION"}
+                      </p>
                     </div>
-                </div>
-              </div>
-              {/* TOTAL COLLEGES */}
-              {ranking.totalColleges && (
-                <div className="mt-3 flex items-center gap-1.5 text-xs text-gray-500 lg:ml-[104px]">
-                  <ShieldCheck className="h-3.5 w-3.5 shrink-0 text-[#15945c]" />
+                  </div>
 
-                  Ranked among{" "}
-                  <span className="font-semibold text-gray-700">
-                    {ranking.totalColleges.toLocaleString("en-IN")}
-                  </span>{" "}
-                  colleges
-                </div>
-              )}
-            </div>
+                  <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 pl-1">
+                    <Link
+                      href={`/colleges/${college.slug}`}
+                      className="inline-flex items-center gap-1.5 font-medium text-[#f07824] hover:underline"
+                    >
+                      <ArrowRight className="h-4 w-4" />
+                      Apply Now
+                    </Link>
 
-            {/* RANKING BODY */}
-            <div className="grid grid-cols-[110px_minmax(0,1fr)] items-start gap-3 border-t border-gray-100 pt-3 lg:block lg:border-l lg:border-t-0 lg:border-gray-100 lg:px-4 lg:py-5">
-              <span className="text-xs font-medium text-gray-500 lg:hidden">
-                Ranking Body
-              </span>
+                    <span className="hidden h-4 border-l border-gray-300 sm:block" />
 
-              <div className="min-w-0">
-                <p className="text-sm font-semibold text-gray-800">
-                  {ranking.rankingBody}
-                </p>
+                    <Link
+                      href={`/colleges/${college.slug}`}
+                      className="inline-flex items-center gap-1.5 font-medium text-[#15945c] hover:underline"
+                    >
+                      <span className="text-base">↓</span>
+                      View Details
+                    </Link>
 
-                {ranking.sourceUrl && (
-                  <a
-                    href={ranking.sourceUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-1 inline-flex items-center gap-1 text-xs font-medium text-[#15945c] hover:underline"
+                    <span className="hidden h-4 border-l border-gray-300 sm:block" />
+
+
+                      <div className="inline-flex items-center gap-1  font-medium text-gray-700 hover:text-gray-900 hover:underline">
+                          <CompareCollegeButton college={college} />
+                          </div>
+                  </div>
+                </td>
+
+                {/* Course fees */}
+                <td className="border border-[#dedede] px-4 py-4 align-top">
+                  <p className="text-sm font-medium text-gray-400">
+                    Not available
+                  </p>
+                  <p className="mt-2 text-[13px] leading-6 text-gray-500">
+                    Course fee information has not been provided by this
+                    college query.
+                  </p>
+                  <Link
+                    href={`/colleges/${college.slug}`}
+                    className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-[#f07824] hover:underline"
                   >
-                    Official source
-                    <ExternalLink className="h-3 w-3" />
-                  </a>
-                )}
-              </div>
-            </div>
+                    <ArrowRight className="h-3.5 w-3.5" />
+                    Explore Courses & Fees
+                  </Link>
+                </td>
 
-            {/* CATEGORY */}
-            <div className="grid grid-cols-[110px_minmax(0,1fr)] items-start gap-3 border-t border-gray-100 pt-3 lg:block lg:border-l lg:px-4 lg:py-5">
-              <span className="text-xs font-medium text-gray-500 lg:hidden">
-                Category
-              </span>
+                {/* Placement */}
+                <td className="border border-[#dedede] px-4 py-4 align-top">
+                  <p className="text-sm font-medium text-gray-400">
+                    Not available
+                  </p>
+                  <p className="mt-2 text-[13px] leading-5 text-gray-500">
+                    Placement statistics have not been provided.
+                  </p>
+                  <Link
+                    href={`/colleges/${college.slug}`}
+                    className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-[#f07824] hover:underline"
+                  >
+                    <ArrowRight className="h-3.5 w-3.5" />
+                    Placement Details
+                  </Link>
+                </td>
 
-              <div>
-                <span className="inline-flex max-w-full items-center rounded-md border border-gray-200 bg-gray-50 px-2.5 py-1.5 text-xs font-medium text-gray-700">
-                  {ranking.category}
-                </span>
-              </div>
-            </div>
+                {/* User reviews */}
+                <td className="border border-[#dedede] px-4 py-4 align-top">
+                  <p className="text-sm font-medium text-gray-400">
+                    Not rated
+                  </p>
+                  <p className="mt-2 text-[13px] leading-5 text-gray-500">
+                    No review summary is available in this result.
+                  </p>
+                  <Link
+                    href={`/colleges/${college.slug}`}
+                    className="mt-3 inline-flex text-sm font-medium text-[#32b5e8] hover:underline"
+                  >
+                    View College
+                  </Link>
+                </td>
 
-            {/* SCORE */}
-            <div className="hidden lg:block lg:border-l lg:border-gray-100 lg:px-4 lg:py-5">
-              <p className="text-xs text-gray-500">
-                Score
-              </p>
+                {/* Rankings */}
+                <td className="border border-[#dedede] px-4 py-4 align-top">
+                  <p className="text-sm font-medium text-gray-400">
+                    Not ranked
+                  </p>
+                  <p className="mt-2 text-[13px] leading-5 text-gray-500">
+                    Ranking information is not available in this result.
+                  </p>
+                  <Link
+                    href="/rankings"
+                    className="mt-3 inline-flex text-sm font-medium text-[#32b5e8] hover:underline"
+                  >
+                    Explore Rankings
+                  </Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    )}
 
-              <p className="mt-1 text-lg font-bold text-gray-900">
-                {score ?? "—"}
-              </p>
-            </div>
-
-            {/* YEAR */}
-            <div className="hidden lg:block lg:border-l lg:border-gray-100 lg:px-4 lg:py-5">
-              <p className="text-xs text-gray-500">
-                Ranking Year
-              </p>
-
-              <p className="mt-1 text-lg font-bold text-gray-900">
-                {ranking.year}
-              </p>
-            </div>
-          </div>
-
-          {/* FOOTER ACTIONS */}
-          <div className="flex flex-wrap items-center justify-between gap-3 border-t border-gray-100 bg-gray-50/70 px-4 py-3 sm:px-5">
-            <Link
-              href={`/colleges/${ranking.college.slug}`}
-              className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#15945c] transition hover:text-[#117b4c] sm:text-sm"
-            >
-              View College Details
-              <ArrowRight className="h-3.5 w-3.5" />
-            </Link>
-
-            <div className="flex flex-wrap items-center gap-3">
-              <span className="text-xs text-gray-500">
-                {ranking.category} · {ranking.year}
-              </span>
-
-              {ranking.sourceUrl && (
-                <a
-                  href={ranking.sourceUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 rounded-lg border border-gray-200 bg-white px-3 py-2 text-xs font-semibold text-gray-700 transition hover:border-[#15945c]/30 hover:text-[#15945c]"
-                >
-                  Source
-                  <ExternalLink className="h-3.5 w-3.5" />
-                </a>
-              )}
-            </div>
-          </div>
-        </article>
-      );
-    })}
+    {filteredColleges.length > 0 && (
+      <div className="border-t border-gray-200 bg-gray-50 px-5 py-4 text-sm text-gray-500">
+        Showing {filteredColleges.length} colleges · Use the horizontal
+        scrollbar to explore all table columns.
+      </div>
+    )}
   </div>
+</section>
 )}
 
-
-{/* ALL COLLEGES GROUPED BY CATEGORY */}
-<section className="mx-auto mt-12 max-w-12xl px-4 pb-12 sm:px-6 lg:px-8">
-  {/* SECTION HEADER */}
- <div
-  className="overflow-hidden  p-8 border-gray-200 bg-white"
+{!hasCollegeFilters && (
+<section
+  id="ranking-results"
+  className="mx-auto w-full max-w-[1600px] px-4 pb-12 sm:px-6 lg:px-8"
   style={{
     fontFamily: "Roboto, sans-serif",
     fontSize: "0.875rem",
     fontWeight: 400,
-    lineHeight: 1.3,
+    lineHeight: 1.4,
     color: "#333",
   }}
 >
-    <div>
-      <div className="mb-3 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-[#15945c]">
-        <GraduationCap className="h-4 w-4" />
-        Explore Institutions
+  {rankings.length === 0 ? (
+    <div className="border border-dashed border-gray-300 bg-white px-6 py-16 text-center">
+      <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-xl bg-gray-100">
+        <Award className="h-7 w-7 text-gray-400" />
       </div>
 
-      <h2 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-        All Colleges by Category
-      </h2>
+      <h3 className="mt-5 text-lg font-semibold text-gray-900">
+        No rankings found
+      </h3>
 
-      <p className="mt-2 max-w-2xl text-sm leading-6 text-gray-600">
-        Explore government, public, private, deemed, and autonomous
-        institutions in India. Compare college information and visit
-        individual profiles to learn more.
+      <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-gray-500">
+        We couldn't find published rankings matching your selected filters.
+        Try changing your search or removing some filters.
       </p>
+
+      <Link
+        href="/rankings"
+        className="mt-6 inline-flex items-center gap-2 rounded-lg bg-[#15945c] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#117b4c]"
+      >
+        View all rankings
+        <ArrowRight className="h-4 w-4" />
+      </Link>
+    </div>
+  ) : (
+    <div className="overflow-hidden border border-gray-200 bg-white">
+      {/* Results heading */}
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-gray-200 px-5 py-5">
+        <div>
+          <h2 className="text-xl font-bold text-[#333] sm:text-2xl">
+            College Rankings
+          </h2>
+          <p className="mt-1 text-sm text-gray-500">
+            Published rankings by institution, ranking body, category, and year.
+          </p>
+        </div>
+
+        <span className="inline-flex items-center rounded-md bg-[#15945c]/10 px-3 py-2 text-sm font-semibold text-[#15945c]">
+          {rankings.length} rankings
+        </span>
+      </div>
+
+      {/* Scrollable table */}
+      <div className="overflow-x-auto">
+        <table className="w-full min-w-[1250px] border-collapse text-left">
+          <thead>
+            <tr className="bg-[#5ea787] text-white">
+              <th className="w-[100px] border border-white/40 px-4 py-4 text-base font-bold">
+                Rank
+              </th>
+              <th className="min-w-[390px] border border-white/40 px-4 py-4 text-base font-bold">
+                Colleges
+              </th>
+              <th className="w-[190px] border border-white/40 px-4 py-4 text-base font-bold">
+                Ranking Body
+              </th>
+              <th className="w-[190px] border border-white/40 px-4 py-4 text-base font-bold">
+                Category
+              </th>
+              <th className="w-[140px] border border-white/40 px-4 py-4 text-base font-bold">
+                Score
+              </th>
+              <th className="w-[130px] border border-white/40 px-4 py-4 text-base font-bold">
+                Year
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {rankings.map((ranking, index) => {
+              const rankStyle = getRankStyle(ranking.rank);
+              const score = formatScore(ranking.score);
+
+              return (
+                <tr
+                  key={ranking.id}
+                  className="align-top transition-colors hover:bg-[#f0f9f6]"
+                  style={{
+                    backgroundColor: index % 2 === 0 ? "#fafafa" : "#ffffff",
+                  }}
+                >
+                  {/* Rank */}
+                  <td className="border border-[#dedede] px-4 py-5 align-top">
+                    <div className="text-xl font-semibold text-[#222]">
+                      #{ranking.rank}
+                    </div>
+
+                    {ranking.totalColleges != null && (
+                      <p className="mt-2 text-xs leading-5 text-gray-500">
+                        of{" "}
+                        {ranking.totalColleges.toLocaleString("en-IN")}
+                      </p>
+                    )}
+                  </td>
+
+                  {/* College information */}
+                  <td className="border border-[#dedede] px-4 py-5 align-top">
+                    <div className="flex items-start gap-3">
+                      <Link
+                        href={`/colleges/${ranking.college.slug}`}
+                        aria-label={`View ${ranking.college.name}`}
+                        className="flex h-[54px] w-[54px] shrink-0 items-center justify-center border border-gray-200 bg-white p-1.5"
+                      >
+                        {ranking.college.logo ? (
+                          <img
+                            src={ranking.college.logo}
+                            alt={`${ranking.college.name} logo`}
+                            className="h-full w-full object-contain"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <Award className="h-7 w-7 text-gray-400" />
+                        )}
+                      </Link>
+
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-start gap-1.5">
+                          <Link
+                            href={`/colleges/${ranking.college.slug}`}
+                            className="text-base font-medium leading-6 text-[#32b5e8] hover:text-[#15945c] hover:underline"
+                          >
+                            {ranking.college.name}
+                          </Link>
+
+                          {ranking.college.verified && (
+                            <CheckCircle2
+                              className="mt-1 h-4 w-4 shrink-0 text-[#15945c]"
+                              aria-label="Verified college"
+                            />
+                          )}
+                        </div>
+
+                        <p className="mt-1.5 flex flex-wrap items-center gap-1 text-[13px] text-[#666]">
+                          <MapPin className="h-3.5 w-3.5 shrink-0 text-gray-400" />
+                          <span>
+                            {[
+                              ranking.college.city?.name,
+                              ranking.college.city?.state?.name,
+                            ]
+                              .filter(Boolean)
+                              .join(", ") || "Location unavailable"}
+                          </span>
+                        </p>
+
+                        <div className="mt-2 flex flex-wrap items-center gap-2">
+                          <span
+                            className={`inline-flex items-center rounded-md border px-2 py-1 text-xs font-medium ${rankStyle.wrapper}`}
+                          >
+                            <Trophy className="mr-1 h-3.5 w-3.5" />
+                            {getRankLabel(ranking.rank)}
+                          </span>
+
+                        </div>
+                        
+                      </div>
+                    </div>
+
+                    {/* Actions */}
+                    <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2">
+                      <Link
+                        href={`/colleges/${ranking.college.slug}`}
+                        className="inline-flex items-center gap-1.5 text-sm font-medium text-[#f07824] hover:underline"
+                      >
+                        <ArrowRight className="h-4 w-4" />
+                        Apply Now
+                      </Link>
+
+                      <span className="hidden h-4 border-l border-gray-300 sm:block" />
+
+                      <span className="hidden h-4 border-l border-gray-300 sm:block" />
+
+                      <Link
+                        href={`/colleges/${ranking.college.slug}`}
+                        className="text-sm font-medium text-[#15945c] hover:underline"
+                      >
+                        View Details
+                      </Link>
+
+                      <div className="inline-flex items-center gap-1  font-medium text-gray-700 hover:text-gray-900 hover:underline">
+                          <CompareCollegeButton college={ranking.college} />
+                          </div>
+
+                    </div>
+                    
+                  </td>
+
+                  {/* Ranking body */}
+                  <td className="border border-[#dedede] px-4 py-5 align-top">
+                    <p className="font-semibold leading-5 text-gray-800">
+                      {ranking.rankingBody}
+                    </p>
+
+                    {ranking.sourceUrl ? (
+                      <a
+                        href={ranking.sourceUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-[#15945c] hover:underline"
+                      >
+                        Official source
+                        <ExternalLink className="h-3.5 w-3.5" />
+                      </a>
+                    ) : (
+                      <span className="mt-3 block text-xs text-gray-400">
+                        Source unavailable
+                      </span>
+                    )}
+                  </td>
+
+                  {/* Category */}
+                  <td className="border border-[#dedede] px-4 py-5 align-top">
+                    <span className="inline-flex max-w-full items-center rounded-md border border-gray-200 bg-white px-2.5 py-1.5 text-sm font-medium text-gray-700">
+                      {ranking.category}
+                    </span>
+
+                    {ranking.totalColleges != null && (
+                      <p className="mt-3 text-xs leading-5 text-gray-500">
+                        Ranked among{" "}
+                        <span className="font-semibold text-gray-700">
+                          {ranking.totalColleges.toLocaleString("en-IN")}
+                        </span>{" "}
+                        colleges
+                      </p>
+                    )}
+                  </td>
+
+                  {/* Score */}
+                  <td className="border border-[#dedede] px-4 py-5 align-top">
+                    <p className="text-lg font-bold text-[#15945c]">
+                      {score ?? "—"}
+                    </p>
+                    <p className="mt-1 text-xs text-gray-500">
+                      {score !== null ? "Ranking score" : "No score published"}
+                    </p>
+                  </td>
+
+                  {/* Year */}
+                  <td className="border border-[#dedede] px-4 py-5 align-top">
+                    <p className="text-xl font-semibold text-gray-700">
+                      {ranking.year}
+                    </p>
+                    <p className="mt-2 text-xs text-gray-500">
+                      Ranking year
+                    </p>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Table footer */}
+      <div className="flex flex-wrap items-center justify-between gap-3 border-t border-gray-200 bg-gray-50 px-5 py-4">
+        <p className="text-xs text-gray-500">
+          Showing {rankings.length} ranking records.
+        </p>
+
+        <Link
+          href="/rankings"
+          className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#15945c] hover:underline"
+        >
+          View all rankings
+          <ArrowRight className="h-4 w-4" />
+        </Link>
+      </div>
+    </div>
+  )}
+</section>
+)}
+    
+
+{/* PROMOTIONAL BANNERS */}
+<section className="my-8 grid grid-cols-1 gap-4 md:grid-cols-2">
+  {/* COLLEGE PREDICTOR */}
+  <Link
+    href="/college-predictor"
+    className="group relative flex min-h-[150px] items-center justify-between overflow-hidden rounded-xl border border-orange-100 bg-gradient-to-r from-orange-50 via-white to-amber-50 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-orange-200 hover:shadow-lg sm:p-6"
+  >
+    <div className="relative z-10 max-w-[75%]">
+      <span className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-orange-100 px-2.5 py-1 text-xs font-semibold text-orange-700">
+        <Sparkles className="h-3.5 w-3.5" />
+        Admission Predictor
+      </span>
+
+      <h3 className="text-lg font-bold leading-snug text-gray-900 sm:text-xl">
+        Know Your Chances of Admission
+      </h3>
+
+      <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-orange-600 transition-all group-hover:gap-3">
+        Predict Now
+        <ArrowRight className="h-4 w-4" />
+      </span>
     </div>
 
-    <Link
-      href="/colleges"
-      className="inline-flex w-fit shrink-0 items-center gap-2 rounded-lg border border-gray-200 bg-white px-4 py-2.5 text-sm font-semibold text-gray-700 transition hover:border-[#15945c] hover:text-[#15945c]"
-    >
-      View All Colleges
-      <ArrowRight className="h-4 w-4" />
-    </Link>
-  </div>
+    <div className="absolute -right-5 -top-7 h-36 w-36 rounded-full bg-orange-100/70 transition-transform duration-500 group-hover:scale-110 sm:h-44 sm:w-44" />
 
+    <div className="relative z-10 mr-1 flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white text-orange-500 shadow-sm ring-1 ring-orange-100 sm:h-20 sm:w-20">
+      <GraduationCap className="h-9 w-9 sm:h-11 sm:w-11" />
+    </div>
+  </Link>
+
+  {/* AI COURSE FINDER */}
+  <Link
+    href="/courses"
+    className="group relative flex min-h-[150px] items-center justify-between overflow-hidden rounded-xl border border-emerald-100 bg-gradient-to-r from-emerald-50 via-white to-green-50 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-emerald-200 hover:shadow-lg sm:p-6"
+  >
+    <div className="relative z-10 max-w-[75%]">
+      <span className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-emerald-100 px-2.5 py-1 text-xs font-semibold text-emerald-700">
+        <Sparkles className="h-3.5 w-3.5" />
+        Smart Course Discovery
+      </span>
+
+      <h3 className="text-lg font-bold leading-snug text-gray-900 sm:text-xl">
+        Find Courses with the Help of AI
+      </h3>
+
+      <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[#15945c] transition-all group-hover:gap-3">
+        Start Now
+        <ArrowRight className="h-4 w-4" />
+      </span>
+    </div>
+
+    <div className="absolute -right-5 -top-7 h-36 w-36 rounded-full bg-emerald-100/70 transition-transform duration-500 group-hover:scale-110 sm:h-44 sm:w-44" />
+
+    <div className="relative z-10 mr-1 flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white text-[#15945c] shadow-sm ring-1 ring-emerald-100 sm:h-20 sm:w-20">
+      <Sparkles className="h-9 w-9 sm:h-11 sm:w-11" />
+    </div>
+  </Link>
+</section>
+
+{/* ALL COLLEGES GROUPED BY CATEGORY */}
+<section className="mx-auto mt-12 w-full max-w-8xl px-4 pb-12 sm:px-6 lg:px-8">
   {(() => {
     const categoryOrder = [
       "GOVERNMENT",
@@ -829,8 +1050,8 @@ const selectedYear =
       OTHER: "Other Institutions",
     };
 
-    const groupedColleges = colleges.reduce<
-      Record<string, typeof colleges>
+    const groupedColleges = allColleges.reduce<
+      Record<string, typeof allColleges>
     >((groups, college) => {
       const category = college.collegeType || "OTHER";
 
@@ -839,7 +1060,6 @@ const selectedYear =
       }
 
       groups[category].push(college);
-
       return groups;
     }, {});
 
@@ -856,44 +1076,64 @@ const selectedYear =
     );
 
     return (
-      <div className="space-y-8">
+      <div
+        className="space-y-8"
+        style={{
+          fontFamily: "Roboto, sans-serif",
+          fontSize: "0.875rem",
+          fontWeight: 400,
+          lineHeight: 1.4,
+          color: "#333",
+        }}
+      >
+        {/* SECTION HEADER */}
+      
+
+        {/* CATEGORY TABLES */}
         {availableCategories.map((category) => {
           const categoryColleges = groupedColleges[category];
           const categoryLabel =
-            categoryLabels[category] ??
-            category.replaceAll("_", " ");
+            categoryLabels[category] ?? category.replaceAll("_", " ");
 
           return (
             <section
               key={category}
               className="overflow-hidden border border-gray-200 bg-white"
-              style={{
-                fontFamily: "Roboto, sans-serif",
-                fontSize: "0.875rem",
-                fontWeight: 400,
-                lineHeight: 1.3,
-                color: "#333",
-              }}
             >
-              {/* CATEGORY HEADER */}
-              <div className="flex flex-col gap-3 border-b border-gray-200 bg-green-50 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-5">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-[#15945c]/15 bg-white">
-                    <GraduationCap className="h-5 w-5 text-[#15945c]" />
-                  </div>
+                <div className="flex flex-col justify-between gap-4 border border-gray-200 bg-white p-5 sm:flex-row sm:items-center sm:p-6">
+          <div>
+            <div className="mb-2 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-[#15945c]">
+              <GraduationCap className="h-4 w-4" />
+              Explore Institutions
+            </div>
 
-                  <div>
-                    <h3 className="text-base font-bold text-gray-900 sm:text-lg">
-                      {categoryLabel}
-                    </h3>
+            <h2 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+              All Colleges by Category
+            </h2>
 
-                    <p className="mt-1 text-xs text-gray-500">
-                      Explore institutions in this category
-                    </p>
-                  </div>
+          
+          </div>
+
+          <Link
+            href="/colleges"
+            className="inline-flex w-fit shrink-0 items-center gap-2 border border-gray-200 bg-white px-4 py-2.5 text-sm font-semibold text-gray-700 transition hover:border-[#15945c] hover:text-[#15945c]"
+          >
+            View All Colleges
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+              {/* CATEGORY TITLE */}
+              <div className="flex flex-col justify-between gap-3 border-b border-gray-200 bg-[#f8fbfb] px-4 py-4 sm:flex-row sm:items-center sm:px-5">
+                <div>
+                  <h3 className="text-lg font-bold text-gray-900">
+                    {categoryLabel}
+                  </h3>
+                  <p className="mt-1 text-xs text-gray-500">
+                    Browse and compare institutions in this category
+                  </p>
                 </div>
 
-                <span className="inline-flex w-fit items-center rounded-md border border-[#15945c]/20 bg-white px-3 py-1.5 text-xs font-semibold text-[#15945c]">
+                <span className="inline-flex w-fit items-center border border-gray-200 bg-white px-3 py-1.5 text-xs font-semibold text-gray-600">
                   {categoryColleges.length}{" "}
                   {categoryColleges.length === 1
                     ? "Institution"
@@ -901,206 +1141,201 @@ const selectedYear =
                 </span>
               </div>
 
-              {/* DESKTOP TABLE HEADER */}
-              <div className="hidden border-b border-gray-200 bg-white lg:grid lg:grid-cols-[minmax(300px,1.8fr)_minmax(170px,0.9fr)_minmax(130px,0.8fr)_minmax(110px,0.6fr)]">
-                <div className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-500">
-                  College Information
-                </div>
+              {/* TABLE — horizontal scroll on small screens */}
+              <div className="w-full overflow-x-auto">
+                <div className="min-w-[1050px]">
+                  {/* TABLE HEADER */}
+                  <div
+                    className="grid border-b border-white text-white"
+                    style={{
+                      gridTemplateColumns:
+                        "64px minmax(360px, 2.8fr) minmax(180px, 1.2fr) minmax(170px, 1fr) minmax(120px, 0.8fr)",
+                      backgroundColor: "#5ea787",
+                    }}
+                  >
+                    <div className="border-r border-white/60 px-3 py-4 font-bold">
+                      Rank
+                    </div>
 
-                <div className="border-l border-gray-100 px-4 py-4 text-xs font-semibold uppercase tracking-wide text-gray-500">
-                  Location
-                </div>
+                    <div className="border-r border-white/60 px-4 py-4 font-bold">
+                      Colleges
+                    </div>
 
-                <div className="border-l border-gray-100 px-4 py-4 text-xs font-semibold uppercase tracking-wide text-gray-500">
-                  Institution Type
-                </div>
+                    <div className="border-r border-white/60 px-4 py-4 font-bold">
+                      Location
+                    </div>
 
-                <div className="border-l border-gray-100 px-4 py-4 text-xs font-semibold uppercase tracking-wide text-gray-500">
-                  Details
-                </div>
-              </div>
+                    <div className="border-r border-white/60 px-4 py-4 font-bold">
+                      Institution Type
+                    </div>
 
-              {/* COLLEGE ROWS */}
-              {categoryColleges.map((college, index) => (
-                <article
-                  key={college.id}
-                  className="group border-b border-gray-200 last:border-b-0 transition-colors duration-200 hover:bg-[#15945c]/5"
-                  style={{
-                    backgroundColor:
-                      index % 2 === 0 ? "#fafafa" : "#ffffff",
-                  }}
-                >
-                  <div className="grid gap-4 p-4 sm:p-5 lg:grid-cols-[minmax(300px,1.8fr)_minmax(170px,0.9fr)_minmax(130px,0.8fr)_minmax(110px,0.6fr)] lg:items-center lg:gap-0 lg:p-0">
-                    {/* COLLEGE INFORMATION */}
-                    <div className="min-w-0 lg:px-5 lg:py-5">
-                      <div className="flex items-start gap-3">
-                        {/* SERIAL NUMBER */}
-                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-gray-200 bg-white text-sm font-bold text-gray-600">
-                          {String(index + 1).padStart(2, "0")}
-                        </div>
+                    <div className="px-4 py-4 font-bold">Details</div>
+                  </div>
 
-                        {/* COLLEGE LOGO */}
-                        <Link
-                          href={`/colleges/${college.slug}`}
-                          aria-label={`View ${college.name}`}
-                          className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-gray-200 bg-white p-1.5"
-                        >
-                          {college.logo ? (
-                            <img
-                              src={college.logo}
-                              alt={`${college.name} logo`}
-                              loading="lazy"
-                              className="h-full w-full object-contain"
-                            />
-                          ) : (
-                            <GraduationCap className="h-6 w-6 text-gray-400" />
-                          )}
-                        </Link>
+                  {/* TABLE ROWS */}
+                  {categoryColleges.map((college, index) => (
+                    <article
+                      key={college.id}
+                      className="grid border-b border-gray-200 transition-colors last:border-b-0 hover:bg-[#eaf6f6]"
+                      style={{
+                        gridTemplateColumns:
+                          "64px minmax(360px, 2.8fr) minmax(180px, 1.2fr) minmax(170px, 1fr) minmax(120px, 0.8fr)",
+                        backgroundColor:
+                          index % 2 === 0 ? "#fafafa" : "#ffffff",
+                      }}
+                    >
+                      {/* RANK */}
+                      <div className="border-r border-gray-200 px-3 py-5">
+                        <span className="text-lg font-medium text-gray-900">
+                          #{index + 1}
+                        </span>
+                      </div>
 
-                        {/* NAME AND VERIFICATION */}
-                        <div className="min-w-0 flex-1">
+                      {/* COLLEGE INFORMATION */}
+                      <div className="relative min-w-0 border-r border-gray-200 px-4 pb-12 pt-4">
+                        <div className="flex items-start gap-3">
+                          {/* LOGO */}
                           <Link
                             href={`/colleges/${college.slug}`}
-                            className="inline-flex max-w-full items-start gap-1.5 text-sm font-bold leading-5 text-gray-900 transition hover:text-[#15945c] sm:text-base"
+                            aria-label={`View ${college.name}`}
+                            className="flex h-12 w-12 shrink-0 items-center justify-center border border-gray-200 bg-white p-1.5"
                           >
-                            <span className="line-clamp-2">
-                              {college.name}
-                            </span>
-
-                            {college.verified && (
-                              <CheckCircle2
-                                className="mt-0.5 h-4 w-4 shrink-0 text-[#15945c]"
-                                aria-label="Verified institution"
+                            {college.logo ? (
+                              <img
+                                src={college.logo}
+                                alt={`${college.name} logo`}
+                                loading="lazy"
+                                className="h-full w-full object-contain"
                               />
+                            ) : (
+                              <GraduationCap className="h-6 w-6 text-gray-400" />
                             )}
                           </Link>
 
-                          {college.shortName && (
-                            <p className="mt-1 text-xs text-gray-500">
-                              {college.shortName}
-                            </p>
-                          )}
+                          {/* NAME AND LOCATION SUMMARY */}
+                          <div className="min-w-0 flex-1">
+                            <Link
+                              href={`/colleges/${college.slug}`}
+                              className="block text-base font-medium leading-6 text-sky-500 transition hover:text-sky-700 hover:underline"
+                            >
+                              {college.name}
+                              {college.shortName
+                                ? ` [${college.shortName}]`
+                                : ""}
+                            </Link>
 
-                          {/* MOBILE LOCATION */}
-                          <div className="mt-2 flex flex-wrap items-center gap-1.5 text-xs text-gray-500 lg:hidden">
-                            <MapPin className="h-3.5 w-3.5 shrink-0" />
+                            {college.verified && (
+                              <span className="mt-1 inline-flex items-center gap-1 text-xs text-gray-500">
+                                <CheckCircle2 className="h-3.5 w-3.5 text-[#15945c]" />
+                                Verified Institution
+                              </span>
+                            )}
 
-                            <span>
+                            <p className="mt-1 text-xs leading-5 text-gray-600">
                               {[
                                 college.city?.name,
                                 college.state?.name,
                               ]
                                 .filter(Boolean)
-                                .join(", ") || "Location not available"}
-                            </span>
+                                .join(", ") || "Location unavailable"}
+                              {" | "}
+                              {college.collegeType?.replaceAll("_", " ") ??
+                                "Other"}
+                            </p>
                           </div>
+                        </div>
 
-                          {/* MOBILE TYPE */}
-                          <div className="mt-2 lg:hidden">
-                            <span className="inline-flex items-center rounded-md border border-gray-200 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700">
-                              {college.collegeType
-                                ?.replaceAll("_", " ") ?? "Other"}
-                            </span>
+                        {/* ACTION LINKS */}
+                        <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 pl-0.5 text-sm">
+                          <Link
+                            href={`/colleges/${college.slug}`}
+                            className="inline-flex items-center gap-1 font-medium text-orange-600 hover:text-orange-700 hover:underline"
+                          >
+                            <ArrowRight className="h-3.5 w-3.5" />
+                            Apply Now
+                          </Link>
+
+                          <span className="hidden h-4 border-l border-gray-300 sm:block" />
+
+                          <Link
+                            href={`/colleges/${college.slug}`}
+                            className="inline-flex items-center gap-1 font-medium text-emerald-600 hover:text-emerald-700 hover:underline"
+                          >
+                            <ShieldCheck className="h-3.5 w-3.5" />
+                            View Profile
+                          </Link>
+
+                          <span className="hidden h-4 border-l border-gray-300 sm:block" />
+<div className="inline-flex items-center gap-1  font-medium text-gray-700 hover:text-gray-900 hover:underline">
+                          <CompareCollegeButton college={college} />
                           </div>
+                        </div>
 
-                          {/* MOBILE ACTIONS */}
-                          <div className="mt-3 flex flex-wrap items-center gap-3 lg:hidden">
-                            <Link
-                              href={`/colleges/${college.slug}`}
-                              className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#15945c] transition hover:text-[#117b4c]"
-                            >
-                              View Details
-                              <ArrowRight className="h-3.5 w-3.5" />
-                            </Link>
-
-                            <CompareCollegeButton college={college} />
-                          </div>
-
-                          {college.verified && (
-                            <div className="mt-2 hidden items-center gap-1.5 text-xs text-gray-500 lg:flex">
-                              <ShieldCheck className="h-3.5 w-3.5 shrink-0 text-[#15945c]" />
-                              Verified Institution
-                            </div>
-                          )}
+                        {/* COLLEGE SCORE / VERIFIED LABEL */}
+                        <div className="absolute bottom-0 left-0 inline-flex items-center gap-1.5 bg-[#fff8e5] px-2 py-1.5 text-xs text-gray-700">
+                          <ShieldCheck className="h-4 w-4 text-[#15945c]" />
+                          {college.verified
+                            ? "Verified College"
+                            : "College Profile"}
                         </div>
                       </div>
-                    </div>
 
-                    {/* LOCATION */}
-                    <div className="grid grid-cols-[110px_minmax(0,1fr)] items-start gap-3 border-t border-gray-100 pt-3 lg:block lg:border-l lg:border-t-0 lg:px-4 lg:py-5">
-                      <span className="text-xs font-medium text-gray-500 lg:hidden">
-                        Location
-                      </span>
+                      {/* LOCATION */}
+                      <div className="border-r border-gray-200 px-4 py-5">
+                        <div className="flex items-start gap-2 text-sm text-gray-700">
+                          <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gray-400" />
 
-                      <div className="flex items-start gap-1.5 text-sm text-gray-700">
-                        <MapPin className="mt-0.5 hidden h-4 w-4 shrink-0 text-gray-400 lg:block" />
+                          <span className="leading-5">
+                            {college.city?.name ?? "City unavailable"}
+                            {college.state?.name
+                              ? `, ${college.state.name}`
+                              : ""}
+                          </span>
+                        </div>
 
-                        <span>
-                          {college.city?.name ?? "City unavailable"}
-                          <span className="text-gray-400">, </span>
-                          {college.state?.name ?? "State unavailable"}
-                        </span>
+                        {college.establishedYear && (
+                          <p className="mt-3 text-xs text-gray-500">
+                            Established {college.establishedYear}
+                          </p>
+                        )}
                       </div>
-                    </div>
 
-                    {/* INSTITUTION TYPE */}
-                    <div className="grid grid-cols-[110px_minmax(0,1fr)] items-start gap-3 border-t border-gray-100 pt-3 lg:block lg:border-l lg:px-4 lg:py-5">
-                      <span className="text-xs font-medium text-gray-500 lg:hidden">
-                        Institution Type
-                      </span>
-
-                      <div>
-                        <span className="inline-flex max-w-full items-center rounded-md border border-gray-200 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700">
-                          {college.collegeType
-                            ?.replaceAll("_", " ") ?? "Other"}
+                      {/* INSTITUTION TYPE */}
+                      <div className="border-r border-gray-200 px-4 py-5">
+                        <span className="inline-flex max-w-full items-center border border-gray-200 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700">
+                          {college.collegeType?.replaceAll("_", " ") ??
+                            "Other"}
                         </span>
+
+                        {college.verified && (
+                          <p className="mt-3 inline-flex items-center gap-1 text-xs text-emerald-600">
+                            <CheckCircle2 className="h-3.5 w-3.5" />
+                            Verified
+                          </p>
+                        )}
                       </div>
-                    </div>
 
-                    {/* DESKTOP DETAILS ACTION */}
-                    <div className="hidden lg:block lg:border-l lg:border-gray-100 lg:px-4 lg:py-5">
-                      <Link
-                        href={`/colleges/${college.slug}`}
-                        aria-label={`View details for ${college.name}`}
-                        className="inline-flex items-center gap-1.5 whitespace-nowrap text-sm font-semibold text-[#15945c] transition hover:text-[#117b4c]"
-                      >
-                        View Details
-                        <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-                      </Link>
+                      {/* DETAILS */}
+                      <div className="px-4 py-5">
+                        <Link
+                          href={`/colleges/${college.slug}`}
+                          className="inline-flex items-center gap-1.5 whitespace-nowrap text-sm font-semibold text-[#15945c] hover:underline"
+                        >
+                          View Details
+                          <ArrowRight className="h-3.5 w-3.5" />
+                        </Link>
 
-                      <div className="mt-3">
-                        <CompareCollegeButton college={college} />
+                        <Link
+                          href={`/colleges/${college.slug}`}
+                          className="mt-3 block text-xs text-gray-500 hover:text-[#15945c] hover:underline"
+                        >
+                          Explore profile
+                        </Link>
                       </div>
-                    </div>
-                  </div>
-
-                  {/* ROW FOOTER */}
-                  <div className="flex flex-wrap items-center justify-between gap-3 border-t border-gray-100 bg-gray-50/70 px-4 py-3 sm:px-5">
-                    <Link
-                      href={`/colleges/${college.slug}`}
-                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#15945c] transition hover:text-[#117b4c] sm:text-sm"
-                    >
-                      Explore College Profile
-                      <ArrowRight className="h-3.5 w-3.5" />
-                    </Link>
-
-                    <div className="flex flex-wrap items-center gap-2">
-                      {college.establishedYear && (
-                        <span className="text-xs text-gray-500">
-                          Est. {college.establishedYear}
-                        </span>
-                      )}
-
-                      {college.verified && (
-                        <span className="inline-flex items-center gap-1 rounded-md border border-[#15945c]/15 bg-white px-2 py-1 text-xs font-medium text-[#15945c]">
-                          <ShieldCheck className="h-3.5 w-3.5" />
-                          Verified
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </article>
-              ))}
+                    </article>
+                  ))}
+                </div>
+              </div>
 
               {/* CATEGORY FOOTER */}
               <div className="flex flex-wrap items-center justify-between gap-3 border-t border-gray-200 bg-white px-4 py-3 sm:px-5">
@@ -1113,88 +1348,32 @@ const selectedYear =
 
                 <Link
                   href={`/colleges?category=${encodeURIComponent(category)}`}
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#15945c] transition hover:text-[#117b4c] sm:text-sm"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#15945c] hover:underline"
                 >
                   Explore Category
-                  <ArrowRight className="h-3.5 w-3.5" />
+                  <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
             </section>
           );
         })}
+
+        {/* EMPTY STATE */}
+        {allColleges.length === 0 && (
+          <div className="border border-dashed border-gray-300 bg-white px-6 py-12 text-center">
+            <GraduationCap className="mx-auto h-10 w-10 text-gray-400" />
+            <h3 className="mt-3 text-lg font-semibold text-gray-900">
+              No colleges found
+            </h3>
+            <p className="mt-1 text-sm text-gray-500">
+              There are currently no colleges available to display.
+            </p>
+          </div>
+        )}
       </div>
     );
   })()}
-
-  {/* EMPTY STATE */}
-  {colleges.length === 0 && (
-    <div className="border border-dashed border-gray-300 bg-white px-6 py-12 text-center">
-      <GraduationCap className="mx-auto h-10 w-10 text-gray-400" />
-
-      <h3 className="mt-3 text-lg font-semibold text-gray-900">
-        No colleges found
-      </h3>
-
-      <p className="mt-1 text-sm text-gray-500">
-        There are currently no colleges available to display.
-      </p>
-    </div>
-  )}
 </section>
-
-
-
-      {/* INFORMATION SECTION */}
-      <section className="border-t border-gray-100 bg-white">
-        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-          <div className="grid gap-6 md:grid-cols-3">
-            <div className="rounded-2xl border border-gray-100 bg-[#f7faf8] p-6">
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#15945c]/10">
-                <Trophy className="h-5 w-5 text-[#15945c]" />
-              </div>
-
-              <h3 className="mt-4 font-semibold text-gray-900">
-                Compare Rankings
-              </h3>
-
-              <p className="mt-2 text-sm leading-6 text-gray-600">
-                Explore how colleges are positioned across
-                different ranking bodies and years.
-              </p>
-            </div>
-
-            <div className="rounded-2xl border border-gray-100 bg-[#f7faf8] p-6">
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#15945c]/10">
-                <ShieldCheck className="h-5 w-5 text-[#15945c]" />
-              </div>
-
-              <h3 className="mt-4 font-semibold text-gray-900">
-                Published Information
-              </h3>
-
-              <p className="mt-2 text-sm leading-6 text-gray-600">
-                Rankings shown here are limited to records
-                published through the College Aadhar platform.
-              </p>
-            </div>
-
-            <div className="rounded-2xl border border-gray-100 bg-[#f7faf8] p-6">
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#15945c]/10">
-                <Award className="h-5 w-5 text-[#15945c]" />
-              </div>
-
-              <h3 className="mt-4 font-semibold text-gray-900">
-                Explore Colleges
-              </h3>
-
-              <p className="mt-2 text-sm leading-6 text-gray-600">
-                Open a college profile to explore courses,
-                admissions, placements, cutoffs and more.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
     </main>
   );
 }

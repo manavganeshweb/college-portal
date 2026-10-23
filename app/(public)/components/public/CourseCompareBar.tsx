@@ -84,8 +84,8 @@ export default function CourseCompareBar() {
     return null;
   }
 
-  const remaining = 3 - courses.length;
-  const canCompare = courses.length >= 3;
+  const remaining = 2 - courses.length;
+  const canCompare = courses.length >= 2;
 
   return (
     <div className="fixed inset-x-0 bottom-0 z-50 border-t border-slate-200 bg-white/95 shadow-[0_-10px_40px_rgba(15,23,42,0.12)] backdrop-blur-xl">
@@ -162,7 +162,7 @@ export default function CourseCompareBar() {
 
             {/* Empty slots */}
             {Array.from({
-              length: Math.max(0, 3 - courses.length),
+              length: Math.max(0, 2 - courses.length),
             }).map((_, index) => (
               <div
                 key={`empty-${index}`}

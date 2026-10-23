@@ -1,12 +1,12 @@
+
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { getPopularColleges } from "@/services/college.service";
-
 import PopularCollegeCard from "./PopularCollegeCard";
 
 export default async function PopularColleges() {
-  const colleges = await getPopularColleges(4);
+  const colleges = await getPopularColleges(6);
+
 
   return (
     <section className="bg-white px-4 py-12 sm:px-6 lg:px-8">
@@ -33,7 +33,6 @@ export default async function PopularColleges() {
             className="group inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-emerald-700"
           >
             View All Colleges
-
             <ArrowRight
               size={16}
               className="transition-transform group-hover:translate-x-1"
@@ -41,15 +40,26 @@ export default async function PopularColleges() {
           </Link>
         </div>
 
-        {/* College cards */}
+        {/* Horizontal carousel */}
         {colleges.length > 0 ? (
-          <div className="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {colleges.map((college) => (
-              <PopularCollegeCard
-                key={college.id}
-                college={college}
-              />
-            ))}
+          <div className="relative mt-7">
+            {/* Left arrow */}
+    
+
+            {/* Cards stay in a single row */}
+<div className="mt-7 flex gap-4 overflow-x-auto scroll-smooth px-1 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:gap-5">
+  {colleges.map((college) => (
+    <div
+      key={college.id}
+      className="w-[260px] min-w-[260px] sm:w-[280px] sm:min-w-[280px] lg:w-[265px] lg:min-w-[265px]"
+    >
+      <PopularCollegeCard college={college} />
+    </div>
+  ))}
+</div>
+
+            {/* Right arrow */}
+
           </div>
         ) : (
           <div className="mt-7 rounded-2xl border border-dashed border-slate-200 bg-slate-50 px-6 py-14 text-center">
@@ -62,11 +72,7 @@ export default async function PopularColleges() {
               className="mt-3 inline-flex items-center text-sm font-semibold text-emerald-700"
             >
               Explore Colleges
-
-              <ArrowRight
-                size={15}
-                className="ml-1"
-              />
+              <ArrowRight size={15} className="ml-1" />
             </Link>
           </div>
         )}

@@ -102,8 +102,7 @@ export default function PopularCollegeCard({
         duration: 0.25,
         ease: "easeOut",
       }}
-      className="group overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition-shadow duration-300 hover:border-emerald-200 hover:shadow-xl hover:shadow-emerald-100/30"
-    >
+className="group h-full w-full overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition-shadow duration-300 hover:border-emerald-200 hover:shadow-xl hover:shadow-emerald-100/30"    >
       {/* Cover */}
       <Link
         href={`/colleges/${college.slug}`}

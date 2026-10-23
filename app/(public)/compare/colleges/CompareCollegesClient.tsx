@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
+import { Plus } from "lucide-react";
 type ComparisonCourse = {
   id: string;
   fees: number | null;
@@ -270,9 +271,9 @@ export default function CompareCollegesClient() {
       setError("");
       setColleges([]);
 
-      if (ids.length < 3 || ids.length > 4) {
+      if (ids.length < 2 || ids.length > 4) {
         setError(
-          "Please select between 3 and 4 colleges to compare."
+          "Please select between 2 and 4 colleges to compare."
         );
         setLoading(false);
         return;
@@ -376,7 +377,7 @@ export default function CompareCollegesClient() {
 
           <p className="mt-3 text-sm leading-6 text-slate-600">
             {error ||
-              "Select at least three colleges to compare their details."}
+              "Select at least two colleges to compare their details."}
           </p>
 
           <Link
@@ -746,67 +747,93 @@ export default function CompareCollegesClient() {
           </div>
         </div>
 
-        <div className="mt-8 overflow-hidden rounded-2xl border border-slate-200 bg-white">
-          <div className="grid grid-cols-1 divide-y divide-slate-200 md:grid-cols-3 md:divide-x md:divide-y-0 lg:grid-cols-4">
-            {colleges.map((college) => (
-              <div
-                key={college.id}
-                className="p-5 sm:p-6"
-              >
-                <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border border-slate-200 bg-white">
-                  {college.logo ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={college.logo}
-                      alt={`${college.name} logo`}
-                      className="h-full w-full object-contain p-2"
-                    />
-                  ) : (
-                    <Building2 className="h-7 w-7 text-slate-400" />
-                  )}
-                </div>
-
-                <div className="mt-4 flex items-start gap-2">
-                  <h2 className="font-bold leading-6 text-slate-900">
-                    {college.name}
-                  </h2>
-
-                  {college.verified && (
-                    <CheckCircle2
-                      className="mt-1 h-4 w-4 shrink-0 text-emerald-600"
-                      aria-label="Verified college"
-                    />
-                  )}
-                </div>
-
-                <p className="mt-2 flex items-center gap-1.5 text-sm text-slate-500">
-                  <MapPin className="h-4 w-4 shrink-0" />
-                  {[college.city?.name, college.state?.name]
-                    .filter(Boolean)
-                    .join(", ") || "Location unavailable"}
-                </p>
-
-                <p className="mt-3 text-sm font-semibold text-emerald-700">
-                  {college.averageRating != null
-                    ? `${college.averageRating.toFixed(1)} / 5`
-                    : "Not rated"}
-
-                  <span className="ml-1 font-normal text-slate-500">
-                    ({college.reviewCount} reviews)
-                  </span>
-                </p>
-
-                <Link
-                  href={`/colleges/${college.slug}`}
-                  className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-slate-700 transition hover:text-emerald-700"
-                >
-                  View college
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </div>
-            ))}
-          </div>
+   
+<div className="mt-8 overflow-hidden rounded-2xl border border-slate-200 bg-white">
+  <div className="grid grid-cols-1 divide-y divide-slate-200 md:grid-cols-3 md:divide-x md:divide-y-0 lg:grid-cols-4">
+    {colleges.map((college) => (
+      <div
+        key={college.id}
+        className="p-5 transition-colors hover:bg-slate-50/70 sm:p-6"
+      >
+        <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border border-slate-200 bg-white">
+          {college.logo ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={college.logo}
+              alt={`${college.name} logo`}
+              className="h-full w-full object-contain p-2"
+            />
+          ) : (
+            <Building2 className="h-7 w-7 text-slate-400" />
+          )}
         </div>
+
+        <div className="mt-4 flex items-start gap-2">
+          <h2 className="font-bold leading-6 text-slate-900">
+            {college.name}
+          </h2>
+
+          {college.verified && (
+            <CheckCircle2
+              className="mt-1 h-4 w-4 shrink-0 text-emerald-600"
+              aria-label="Verified college"
+            />
+          )}
+        </div>
+
+        <p className="mt-2 flex items-center gap-1.5 text-sm text-slate-500">
+          <MapPin className="h-4 w-4 shrink-0" />
+          {[college.city?.name, college.state?.name]
+            .filter(Boolean)
+            .join(", ") || "Location unavailable"}
+        </p>
+
+        <p className="mt-3 text-sm font-semibold text-emerald-700">
+          {college.averageRating != null
+            ? `${college.averageRating.toFixed(1)} / 5`
+            : "Not rated"}
+
+          <span className="ml-1 font-normal text-slate-500">
+            ({college.reviewCount} reviews)
+          </span>
+        </p>
+
+        <Link
+          href={`/colleges/${college.slug}`}
+          className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-slate-700 transition hover:text-emerald-700"
+        >
+          View college
+          <ArrowRight className="h-4 w-4" />
+        </Link>
+      </div>
+    ))}
+
+    {/* Add another college */}
+    <Link
+      href="/colleges"
+      className="group flex min-h-64 flex-col items-center justify-center p-6 text-center transition-all hover:bg-emerald-50/60"
+      aria-label="Add another college to compare"
+    >
+      <div className="flex h-16 w-16 items-center justify-center rounded-2xl border-2 border-dashed border-emerald-300 bg-emerald-50 transition-all group-hover:scale-105 group-hover:border-emerald-500 group-hover:bg-emerald-100">
+        <Plus className="h-7 w-7 text-emerald-700" />
+      </div>
+
+      <h3 className="mt-4 font-bold text-slate-900 transition-colors group-hover:text-emerald-700">
+        Add College to Compare
+      </h3>
+
+      <p className="mt-2 max-w-48 text-sm leading-6 text-slate-500">
+        Explore more colleges and compare fees, courses, ratings and facilities.
+      </p>
+
+      <span className="mt-4 inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white transition group-hover:bg-emerald-700">
+        Add College
+        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+      </span>
+    </Link>
+  </div>
+</div>
+
 
         <div className="mt-8 space-y-6">
           {sections.map((section) => (

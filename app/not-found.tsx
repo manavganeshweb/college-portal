@@ -10,10 +10,12 @@ import {
   Home,
   Search,
 } from "lucide-react";
-
+import Header from "./(public)/components/layout/Header";
 export default function NotFound() {
-  return (
+  return (<>
+  <Header />
     <main className="relative flex min-h-[calc(100vh-80px)] items-center justify-center overflow-hidden bg-white px-6 py-20">
+    
       {/* Background decoration */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute left-1/2 top-10 h-72 w-72 -translate-x-1/2 rounded-full bg-emerald-100/50 blur-3xl" />
@@ -181,5 +183,6 @@ export default function NotFound() {
         </motion.div>
       </div>
     </main>
+    </>
   );
 }

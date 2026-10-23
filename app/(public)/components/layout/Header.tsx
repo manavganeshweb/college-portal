@@ -24,7 +24,7 @@ const navigation = [
     href: "/colleges",
   },
     {
-    label: "Universities",
+    label: "University",
     href: "/universities",
   },
   {

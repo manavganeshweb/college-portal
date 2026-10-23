@@ -65,6 +65,8 @@ const breadcrumbItems = [
     href: isUniversity ? "/universities" : "/colleges",
   },
   { label: college.name },
+  { label: pathname   .split("/")   .filter(Boolean)
+    .pop() || "" },
 ];
 
   return (

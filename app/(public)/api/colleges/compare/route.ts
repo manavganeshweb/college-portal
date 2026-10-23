@@ -21,11 +21,11 @@ export async function GET(request: NextRequest) {
       .map((id) => id.trim())
       .filter(Boolean);
 
-    if (ids.length < 3) {
+    if (ids.length < 2) {
       return NextResponse.json(
         {
           success: false,
-          message: "At least 3 colleges are required for comparison.",
+          message: "At least 2 colleges are required for comparison.",
         },
         { status: 400 }
       );

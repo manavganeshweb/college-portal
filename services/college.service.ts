@@ -2,12 +2,21 @@ import { prisma } from "@/lib/prisma";
 
 export type CollegeFilters = {
   search?: string;
-  state?: string;
-  city?: string;
-  collegeType?: string;
+  state?: string | string[];
+  city?: string | string[];
+  collegeType?: string | string[];
   institutionKind?: "UNIVERSITY" | "COLLEGE" | "OTHER";
   verified?: boolean;
-  course?: string;
+  course?: string | string[];
+minFee?: number;
+  maxFee?: number;
+  stream?: string | string[];
+  programType?: string | string[];
+  category?: string | string[];
+  degree?: string | string[];
+  duration?: string | string[];
+  fee?: string | string[];
+courseType?: string | string[];
   page?: number;
   limit?: number;
 };
@@ -15,81 +24,311 @@ export type CollegeFilters = {
 
 export async function getColleges(filters: CollegeFilters = {}) {
   const page = Math.max(filters.page ?? 1, 1);
-  const limit = Math.min(Math.max(filters.limit ?? 12, 1), 50);
+  const limit = Math.min(Math.max(filters.limit ?? 12, 1), 499);
   const skip = (page - 1) * limit;
 
-  const where = {
-    status: "ACTIVE" as const,
-    ...(filters.institutionKind
-  ? {
-      institutionKind: filters.institutionKind,
-    }
-  : {}),
+ 
+const toArray = (value?: string | string[]) =>
+  (Array.isArray(value) ? value : value ? [value] : []).filter(Boolean);
 
-    ...(filters.search
-      ? {
+const toSlug = (value: string) =>
+  value
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+
+const states = toArray(filters.state);
+const cities = toArray(filters.city);
+
+const types = toArray(filters.collegeType).map((value) =>
+  value.trim().toUpperCase().replace(/[\s-]+/g, "_")
+);
+
+const kinds = toArray(filters.institutionKind).map((value) =>
+  value.trim().toUpperCase()
+);
+
+const feeRanges = toArray(filters.fee);
+const courses = toArray(filters.course);
+const streams = toArray(filters.stream);
+const categories = toArray(filters.category);
+
+const normalizedEnum = (value: string) =>
+  value.trim().toUpperCase().replace(/[\s-]+/g, "_");
+
+const programTypes = toArray(filters.programType).map(normalizedEnum);
+
+const levelMap: Record<string, string> = {
+  UG: "UG",
+  PG: "PG",
+  DIPLOMA: "DIPLOMA",
+  PHD: "PHD",
+  CERTIFICATE: "CERTIFICATE",
+  INTEGRATED: "INTEGRATED",
+};
+
+const levels = programTypes.filter(
+  (value) => Object.prototype.hasOwnProperty.call(levelMap, value)
+);
+
+const degrees = toArray(filters.degree);
+const durations = toArray(filters.duration)
+  .map((value) => Number(value))
+  .filter((value) => Number.isFinite(value) && value > 0);
+
+const minFee = filters.minFee;
+const maxFee = filters.maxFee;
+
+const feeConditions = feeRanges
+  .map((range) => {
+    switch (range) {
+      case "Below ₹50,000":
+        return { lt: 50000 };
+      case "₹50,000–₹1 Lakh":
+        return { gte: 50000, lte: 100000 };
+      case "₹1–3 Lakh":
+        return { gt: 100000, lte: 300000 };
+      case "₹3–5 Lakh":
+        return { gt: 300000, lte: 500000 };
+      case "Above ₹5 Lakh":
+        return { gt: 500000 };
+      default:
+        return null;
+    }
+  })
+  .filter((range): range is NonNullable<typeof range> => range !== null);
+
+
+const hasCourseFilters =
+  courses.length > 0 ||
+  streams.length > 0 ||
+  categories.length > 0 ||
+  programTypes.length > 0 ||
+  degrees.length > 0 ||
+  durations.length > 0 ||
+  minFee !== undefined ||
+  maxFee !== undefined;
+
+const where = {
+  status: "ACTIVE" as const,
+
+  ...(kinds.length
+    ? {
+        institutionKind: {
+          in: kinds as ("UNIVERSITY" | "COLLEGE" | "OTHER")[],
+        },
+      }
+    : {}),
+
+  ...(filters.search
+    ? {
+        OR: [
+          {
+            name: {
+              contains: filters.search,
+              mode: "insensitive" as const,
+            },
+          },
+          {
+            shortName: {
+              contains: filters.search,
+              mode: "insensitive" as const,
+            },
+          },
+        ],
+      }
+    : {}),
+
+  ...(states.length
+    ? {
+        state: {
           OR: [
+            { slug: { in: states.map(toSlug) } },
             {
               name: {
-                contains: filters.search,
-                mode: "insensitive" as const,
-              },
-            },
-            {
-              shortName: {
-                contains: filters.search,
+                in: states,
                 mode: "insensitive" as const,
               },
             },
           ],
-        }
-      : {}),
+        },
+      }
+    : {}),
 
-    ...(filters.state
-      ? {
-          state: {
-            slug: filters.state,
-          },
-        }
-      : {}),
+  ...(cities.length
+    ? {
+        city: {
+          OR: [
+            { slug: { in: cities.map(toSlug) } },
+            {
+              name: {
+                in: cities,
+                mode: "insensitive" as const,
+              },
+            },
+          ],
+        },
+      }
+    : {}),
 
-    ...(filters.city
-      ? {
-          city: {
-            slug: filters.city,
-          },
-        }
-      : {}),
-
-    ...(filters.collegeType
-      ? {
-          collegeType: filters.collegeType as
+  ...(types.length
+    ? {
+        collegeType: {
+          in: types as (
             | "GOVERNMENT"
             | "PRIVATE"
             | "PUBLIC"
             | "DEEMED"
-            | "AUTONOMOUS",
-        }
-      : {}),
+            | "AUTONOMOUS"
+            | "OTHER"
+          )[],
+        },
+      }
+    : {}),
 
-    ...(filters.verified
-      ? {
-          verified: filters.verified === true,
-        }
-      : {}),
+  ...(filters.verified ? { verified: true } : {}),
 
-    ...(filters.course
-      ? {
-          courses: {
-            some: {
-              course: {
-                slug: filters.course,
-              },
+...(hasCourseFilters
+  ? {
+      courses: {
+        some: {
+          AND: [
+            // Match the selected course names or slugs.
+           ...(durations.length
+  ? [
+      {
+        OR: [
+          { duration: { in: durations } },
+          {
+            course: {
+              durationYears: { in: durations },
             },
           },
-        }
-      : {}),
-  };
+        ],
+      },
+    ]
+  : []),
+            // Match the selected stream/category.
+            ...(streams.length || categories.length
+              ? [
+                  {
+                    course: {
+                      category: {
+                        OR: [
+                          ...(streams.length
+                            ? [
+                                { slug: { in: streams.map(toSlug) } },
+                                {
+                                  name: {
+                                    in: streams,
+                                    mode: "insensitive" as const,
+                                  },
+                                },
+                              ]
+                            : []),
+                          ...(categories.length
+                            ? [
+                                {
+                                  slug: {
+                                    in: categories.map(toSlug),
+                                  },
+                                },
+                                {
+                                  name: {
+                                    in: categories,
+                                    mode: "insensitive" as const,
+                                  },
+                                },
+                              ]
+                            : []),
+                        ],
+                      },
+                    },
+                  },
+                ]
+              : []),
+
+            // Only use valid course levels.
+            ...(levels.length
+              ? [
+                  {
+                    course: {
+                      level: {
+                        in: levels as (
+                          | "UG"
+                          | "PG"
+                          | "DIPLOMA"
+                          | "PHD"
+                          | "CERTIFICATE"
+                          | "INTEGRATED"
+                        )[],
+                      },
+                    },
+                  },
+                ]
+              : []),
+
+            ...(degrees.length
+              ? [
+                  {
+                    course: {
+                      degree: {
+                        in: degrees,
+                        mode: "insensitive" as const,
+                      },
+                    },
+                  },
+                ]
+              : []),
+
+            // Duration can be stored on the college-course record
+            // or on the related course.
+            ...(durations.length
+              ? [
+                  {
+                    OR: [
+                      { duration: { in: durations } },
+                      {
+                        course: {
+                          durationYears: { in: durations },
+                        },
+                      },
+                    ],
+                  },
+                ]
+              : []),
+
+            // A selected fee range must match the college-course fee.
+            ...(feeConditions.length
+              ? [
+                  {
+                    OR: feeConditions.map((condition) => ({
+                      fees: condition,
+                    })),
+                  },
+                ]
+              : []),
+
+            // Preserve support for explicit numeric fee bounds.
+            ...(minFee !== undefined || maxFee !== undefined
+              ? [
+                  {
+                    fees: {
+                      ...(minFee !== undefined ? { gte: minFee } : {}),
+                      ...(maxFee !== undefined ? { lte: maxFee } : {}),
+                    },
+                  },
+                ]
+              : []),
+          ],
+        },
+      },
+    }
+  : {}),
+
+};
+  
 
   const [colleges, total] = await Promise.all([
     prisma.college.findMany({
@@ -949,6 +1188,124 @@ export async function getCollegesForComparison(ids: string[]) {
             ? Number(placement.highestPackage)
             : null,
       })),
+    };
+  });
+}
+
+
+export async function getPopularUniversities(limit = 4) {
+  const universities = await prisma.college.findMany({
+    where: {
+      status: "ACTIVE",
+      institutionKind: "UNIVERSITY",
+    },
+    orderBy: [
+      {
+        verified: "desc",
+      },
+      {
+        reviews: {
+          _count: "desc",
+        },
+      },
+      {
+        name: "asc",
+      },
+    ],
+    take: Math.max(1, Math.min(limit, 20)),
+    select: {
+      id: true,
+      name: true,
+      slug: true,
+      shortName: true,
+      logo: true,
+      coverImage: true,
+      collegeType: true,
+      verified: true,
+      establishedYear: true,
+
+      state: {
+        select: {
+          name: true,
+        },
+      },
+
+      city: {
+        select: {
+          name: true,
+        },
+      },
+
+      courses: {
+        select: {
+          fees: true,
+          course: {
+            select: {
+              name: true,
+              shortName: true,
+              category: {
+                select: {
+                  name: true,
+                },
+              },
+            },
+          },
+        },
+      },
+
+      reviews: {
+        where: {
+          isPublished: true,
+        },
+        select: {
+          rating: true,
+        },
+      },
+    },
+  });
+
+  return universities.map((university) => {
+    const ratings = university.reviews.map(
+      (review) => review.rating
+    );
+
+    const averageRating =
+      ratings.length > 0
+        ? ratings.reduce((sum, rating) => sum + rating, 0) /
+          ratings.length
+        : null;
+
+    const fees = university.courses
+      .map((item) =>
+        item.fees !== null ? Number(item.fees) : null
+      )
+      .filter((fee): fee is number => fee !== null);
+
+    return {
+      id: university.id,
+      name: university.name,
+      slug: university.slug,
+      shortName: university.shortName,
+      logo: university.logo,
+      coverImage: university.coverImage,
+      collegeType: university.collegeType,
+      verified: university.verified,
+      establishedYear: university.establishedYear,
+
+      state: university.state,
+      city: university.city,
+
+      courses: university.courses.map((item) => ({
+        fees: item.fees !== null ? Number(item.fees) : null,
+        course: item.course,
+      })),
+
+      averageRating,
+      reviewCount: ratings.length,
+      minimumFee:
+        fees.length > 0 ? Math.min(...fees) : null,
+      maximumFee:
+        fees.length > 0 ? Math.max(...fees) : null,
     };
   });
 }

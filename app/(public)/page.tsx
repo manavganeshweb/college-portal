@@ -9,6 +9,7 @@ import CollegeRankingSection from "./components/public/home/CollegeRankingSectio
 import TopStudyPlaces from "./components/public/home/TopStudyPlaces";
 import BoardExamSection from "./components/public/home/BoardExamSection";
 import LatestNews from "./components/public/home/LatestNews";
+import PopularUniversities from "./components/public/home/PopularUniversities";
 export default async function HomePage() {
   const courses = await getHomepageCourses(3);
 
@@ -19,6 +20,7 @@ export default async function HomePage() {
       <HomeFeatureStrip />
 
       <PopularColleges />
+      <PopularUniversities />
 
           <TopStudyPlaces />
 
