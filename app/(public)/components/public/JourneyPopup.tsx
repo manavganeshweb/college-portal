@@ -221,21 +221,21 @@ export default function JourneyPopup({
   // Automatically show popup for logged-out users
   // --------------------------------------------------
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      setIsOpen(false);
-      return;
-    }
+// Automatically show popup for logged-out users
+useEffect(() => {
+  if (isAuthenticated) {
+    setIsOpen(false);
+    return;
+  }
 
-    const timer = window.setInterval(() => {
-      setIsOpen(true);
-    }, 10000);
+  const timer = window.setTimeout(() => {
+    setIsOpen(true);
+  }, 10_000); // Initial popup delay: 10 seconds
 
-    return () => {
-      window.clearInterval(timer);
-    };
-  }, [isAuthenticated]);
-
+  return () => {
+    window.clearTimeout(timer);
+  };
+}, [isAuthenticated]);
   // --------------------------------------------------
   // Close popup when authentication changes
   // --------------------------------------------------
@@ -286,11 +286,19 @@ export default function JourneyPopup({
   // Close popup
   // --------------------------------------------------
 
-  function closePopup() {
-    setIsOpen(false);
-    setCoursesExpanded(false);
-  }
+function closePopup() {
+  setIsOpen(false);
+  setCoursesExpanded(false);
 
+  if (isAuthenticated) return;
+
+  // Reopen the popup after one minute if the user is still logged out.
+  window.setTimeout(() => {
+    if (!isAuthenticated) {
+      setIsOpen(true);
+    }
+  }, 60_000);
+}
   // --------------------------------------------------
   // Switch authentication mode
   // --------------------------------------------------

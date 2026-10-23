@@ -9,7 +9,7 @@ export default async function PopularUniversities() {
   const universities = await getPopularUniversities(4);
 
   return (
-    <section className="bg-white py-12 sm:px-6 lg:px-8">
+    <section className="bg-white px-4 py-12 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
